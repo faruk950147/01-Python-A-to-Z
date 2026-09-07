@@ -1,526 +1,376 @@
 """
-  What is Insertion Sort?
-  Insertion Sort is a simple, comparison-based, in-place sorting algorithm.
-  It builds the sorted array one element at a time by taking an element
-  from the unsorted part and inserting it into its correct position
-  in the sorted part.
+# Insertion Sort
 
-  Core Idea
-  The array is conceptually divided into two parts:
+## 1. What is Insertion Sort?
 
-  - Sorted subarray — elements already sorted (on the left).
-  - Unsorted subarray — remaining elements that still need to be sorted (on the right).
+**Insertion Sort** is a simple comparison-based sorting algorithm.
 
-  In each pass:
-  1. Take the first element from the unsorted subarray.
-  2. Store it in a variable called item.
-  3. Compare item with elements in the sorted subarray.
-  4. Shift larger elements one position to the right.
-  5. Insert item into its correct position.
-  6. Extend the sorted subarray by one position.
+It works similarly to the way we arrange **playing cards in our hand**.
 
-  This process continues until the entire array is sorted.
+The array is divided into two parts:
 
+* **Sorted portion** → left side
+* **Unsorted portion** → right side
 
-  Algorithm (Step-by-Step)
-  Given an array A of size n:
+At each step, we take one element from the unsorted portion and insert it into its correct position in the sorted portion.
 
-  1. Start from index 1 because the first element is already considered sorted.
-  2. Set item = A[i].
-  3. Set pos = i - 1.
-  4. While pos >= 0 and A[pos] > item:
-      - Move A[pos] one position to the right.
-      - Decrease pos by 1.
-  5. Insert item at A[pos + 1].
-  6. Repeat until i reaches n - 1.
+---
 
+## 2. Basic Idea
 
-  Pseudocode
+Suppose we have:
 
-  INSERTION-SORT(A):
-      n = length(A)
+```text
+[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+```
 
-      for i = 1 to n - 1:
-          item = A[i]
-          pos = i - 1
+Initially:
 
-          while pos >= 0 and A[pos] > item:
-              A[pos + 1] = A[pos]
-              pos = pos - 1
+```text
+Sorted:   [3]
+Unsorted: [44, 38, 5, 15, 26, 27, 2, 46, 4]
+```
 
-          A[pos + 1] = item
+Take `44`.
 
+Since `44 > 3`, it stays after `3`.
 
-  Python Implementation
+```text
+[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+```
 
-  class InsertionSort:
-      # Python program for implementation of Insertion Sort
+Now take `38`.
 
-      def insertion_sort(self, arr):
-          n = len(arr)
-          shifts = 0 # Count the number of shifts that occur during the sorting process
+`38 < 44`, so shift `44` to the right and insert `38` before it:
 
-          for i in range(1, n):
-              # Store the current element
-              item = arr[i]
+```text
+[3, 38, 44, 5, 15, 26, 27, 2, 46, 4]
+```
 
-              # Position of the previous element
-              pos = i - 1
+This process continues until the entire array is sorted.
 
-              # Shift larger elements to the right
-              while pos >= 0 and arr[pos] > item:
-                  arr[pos + 1] = arr[pos]
-                  pos -= 1
-                  shifts += 1
+---
 
-              # Insert item into its correct position
-              arr[pos + 1] = item
+## 3. How Insertion Sort Works
 
-              print(f"After pass {i}: {arr} " f"(shifts: {shifts})")
+For every element:
 
-          return arr
+1. Select the current element as `key`.
+2. Compare `key` with elements on its left.
+3. Shift larger elements one position to the right.
+4. Insert `key` into its correct position.
+5. Repeat until the array is sorted.
 
+### Important terms
 
-  Example Walkthrough
+```text
+key
+```
 
-  Initial array:
+The element currently being inserted.
 
-  [64, 34, 25, 12, 22, 11, 90]
+```text
+j
+```
 
+The index used to compare elements to the left of the key.
 
-  Pass 1
+---
 
-  Sorted part:
-  [64]
+# 4. Step-by-Step Example
 
-  Unsorted part:
-  [34, 25, 12, 22, 11, 90]
+Given:
 
-  item = 34
-  pos = 0
+```text
+[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+```
 
-  Compare:
-  64 > 34
+### Pass 1
 
-  Shift 64 to the right:
+Key:
 
-  [64, 64, 25, 12, 22, 11, 90]
+```text
+44
+```
 
-  pos = -1
+Compare with `3`.
 
-  Insert item at pos + 1:
+```text
+44 > 3
+```
 
-  [34, 64, 25, 12, 22, 11, 90]
+No shifting is required.
 
+```text
+[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+```
 
-  Pass 2
+---
 
-  Sorted part:
-  [34, 64]
+### Pass 2
 
-  Unsorted part:
-  [25, 12, 22, 11, 90]
+Key:
 
-  item = 25
-  pos = 1
+```text
+38
+```
 
-  Compare:
-  64 > 25
-  Shift 64:
+Compare:
 
-  [34, 64, 64, 12, 22, 11, 90]
+```text
+38 < 44
+```
 
-  pos = 0
+Shift `44` right:
 
-  Compare:
-  34 > 25
-  Shift 34:
+```text
+[3, 44, 44, 5, 15, 26, 27, 2, 46, 4]
+```
 
-  [34, 34, 64, 12, 22, 11, 90]
+Now compare with `3`:
 
-  pos = -1
+```text
+38 > 3
+```
 
-  Insert 25:
+Insert `38`:
 
-  [25, 34, 64, 12, 22, 11, 90]
+```text
+[3, 38, 44, 5, 15, 26, 27, 2, 46, 4]
+```
 
+---
 
-  Pass 3
+### Pass 3
 
-  Sorted part:
-  [25, 34, 64]
+Key:
 
-  Unsorted part:
-  [12, 22, 11, 90]
+```text
+5
+```
 
-  item = 12
-  pos = 2
+Compare with `44`:
 
-  Compare:
-  64 > 12
-  Shift 64
+```text
+5 < 44
+```
 
-  34 > 12
-  Shift 34
+Shift `44`.
 
-  25 > 12
-  Shift 25
+Compare with `38`:
 
-  Insert 12:
+```text
+5 < 38
+```
 
-  [12, 25, 34, 64, 22, 11, 90]
+Shift `38`.
 
+Compare with `3`:
 
-  Pass 4
+```text
+5 > 3
+```
 
-  Sorted part:
-  [12, 25, 34, 64]
+Insert `5`:
 
-  Unsorted part:
-  [22, 11, 90]
+```text
+[3, 5, 38, 44, 15, 26, 27, 2, 46, 4]
+```
 
-  item = 22
-  pos = 3
+---
 
-  Compare:
-  64 > 22
-  Shift 64
+### Pass 4
 
-  34 > 22
-  Shift 34
+Key:
 
-  25 > 22
-  Shift 25
+```text
+15
+```
 
-  12 < 22
-  Stop shifting.
+Shift:
 
-  Insert 22:
+```text
+44 → right
+38 → right
+```
 
-  [12, 22, 25, 34, 64, 11, 90]
+`15 > 5`, so insert after `5`.
 
+```text
+[3, 5, 15, 38, 44, 26, 27, 2, 46, 4]
+```
 
-  Pass 5
+---
 
-  Sorted part:
-  [12, 22, 25, 34, 64]
+### Pass 5
 
-  Unsorted part:
-  [11, 90]
+Key:
 
-  item = 11
-  pos = 4
+```text
+26
+```
 
-  Compare:
-  64 > 11
-  Shift 64
+`26 < 44` → shift
 
-  34 > 11
-  Shift 34
+`26 < 38` → shift
 
-  25 > 11
-  Shift 25
+`26 > 15` → stop
 
-  22 > 11
-  Shift 22
+Result:
 
-  12 > 11
-  Shift 12
+```text
+[3, 5, 15, 26, 38, 44, 27, 2, 46, 4]
+```
 
-  Insert 11:
+---
 
-  [11, 12, 22, 25, 34, 64, 90]
+### Pass 6
 
+Key:
 
-  Pass 6
+```text
+27
+```
 
-  Sorted part:
-  [11, 12, 22, 25, 34, 64]
+`27 < 44` → shift
 
-  Unsorted part:
-  [90]
+`27 < 38` → shift
 
-  item = 90
-  pos = 5
+`27 > 26` → stop
 
-  Compare:
-  64 > 90 → False
+Result:
 
-  No shifting is required.
+```text
+[3, 5, 15, 26, 27, 38, 44, 2, 46, 4]
+```
 
-  Insert 90 at its current position:
+---
 
-  [11, 12, 22, 25, 34, 64, 90]
+### Pass 7
 
+Key:
 
-  Final sorted array:
+```text
+2
+```
 
-  [11, 12, 22, 25, 34, 64, 90]
+`2 < 44` → shift
 
+`2 < 38` → shift
 
-  Number of Comparisons
+`2 < 27` → shift
 
-  The number of comparisons depends on the input order.
+`2 < 26` → shift
 
+`2 < 15` → shift
 
-  Best Case
+`2 < 5` → shift
 
-  When the array is already sorted:
+`2 < 3` → shift
 
-  [11, 12, 22, 25, 34, 64, 90]
+Insert `2` at the beginning:
 
-  Each item only needs one comparison with the previous element.
+```text
+[2, 3, 5, 15, 26, 27, 38, 44, 46, 4]
+```
 
-  Total comparisons:
+---
 
-  n - 1
+### Pass 8
 
-  Time Complexity:
+Key:
 
-  O(n)
+```text
+46
+```
 
+`46 > 44`
 
-  Worst Case
+So no shifting is required.
 
-  When the array is sorted in reverse order:
+```text
+[2, 3, 5, 15, 26, 27, 38, 44, 46, 4]
+```
 
-  [90, 64, 34, 25, 22, 12, 11]
+---
 
-  Every item must be compared with all elements
-  in the sorted portion.
+### Pass 9
 
-  Total comparisons:
+Key:
 
-  1 + 2 + 3 + ... + (n - 1)
+```text
+4
+```
 
-  = n(n - 1) / 2
+`4 < 46` → shift
 
-  Time Complexity:
+`4 < 44` → shift
 
-  O(n²)
+`4 < 38` → shift
 
+`4 < 27` → shift
 
-  Average Case
+`4 < 26` → shift
 
-  On average, each item moves through approximately
-  half of the sorted portion.
+`4 < 15` → shift
 
-  Time Complexity:
+`4 < 5` → shift
 
-  O(n²)
+`4 > 3` → stop
 
+Insert `4`:
 
-  Time Complexity
+```text
+[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+```
 
-  - Best case: O(n)
-  - Average case: O(n²)
-  - Worst case: O(n²)
+### Final Sorted Array
 
-  Important:
+```text
+[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+```
 
-  Insertion Sort is different from Selection Sort because
-  Insertion Sort can take advantage of an already sorted
-  or nearly sorted array.
+# 5. Pseudocode
 
+```text
+InsertionSort(arr):
 
-  Space Complexity
+    for i = 1 to n - 1:
 
-  - Space: O(1)
+        key = arr[i]
+        j = i - 1
 
-  Insertion Sort is an in-place sorting algorithm.
+        while j >= 0 and arr[j] > key:
 
-  It only uses a few extra variables:
+            arr[j + 1] = arr[j]
+            j = j - 1
 
-  - i
-  - item
-  - pos
-  - shifts
+        arr[j + 1] = key
+```
 
-  Therefore, auxiliary space is O(1).
+---
 
+# 6. Python Implementation
 
-  Number of Shifts
-
-  Insertion Sort mainly performs shifts instead of swaps.
-
-  Best case:
-
-  0 shifts
-
-  Worst case:
-
-  n(n - 1) / 2 shifts
-
-
-  Advantages
-
-  - Very easy to understand and implement.
-  - In-place sorting algorithm.
-  - Requires O(1) extra space.
-  - Stable sorting algorithm.
-  - Efficient for small arrays.
-  - Very efficient for nearly sorted arrays.
-  - Can sort data while new elements arrive.
-  - Usually performs well when the array is almost sorted.
-
-
-  Disadvantages
-
-  - Inefficient for large datasets.
-  - Average-case time complexity is O(n²).
-  - Worst-case time complexity is O(n²).
-  - Not suitable for large random datasets when performance matters.
-
-
-  Stability
-
-  - Insertion Sort is stable by default.
-
-  The condition is:
-
-      arr[pos] > item
-
-  Notice that we use > instead of >=.
-
-  Because equal elements are not shifted, their relative
-  order remains unchanged.
-
-
-  Example:
-
-  [2a, 2b, 1]
-
-  After sorting:
-
-  [1, 2a, 2b]
-
-  2a remains before 2b.
-
-  Therefore, Insertion Sort is stable.
-
-
-  When to Use Insertion Sort
-
-  - Small datasets.
-  - Nearly sorted arrays.
-  - When stable sorting is required.
-  - When memory usage must be minimal.
-  - When O(1) extra space is required.
-  - When data arrives one element at a time.
-  - Educational purposes.
-
-
-  When NOT to Use Insertion Sort
-
-  - Very large datasets.
-  - Large random arrays.
-  - When O(n log n) performance is required.
-
-  Better alternatives include:
-
-  - Merge Sort
-  - Quick Sort
-  - Heap Sort
-
-
-  Variants / Notes
-
-  1. Ascending Order
-
-     Select smaller values by using:
-
-         arr[pos] > item
-
-
-  2. Descending Order
-
-     Change the comparison to:
-
-         arr[pos] < item
-
-
-  3. Stable Sorting
-
-     Keep:
-
-         arr[pos] > item
-
-     Do not use:
-
-         arr[pos] >= item
-
-     because equal elements should not be shifted.
-
-
-  4. Online Algorithm
-
-     Insertion Sort can process elements one at a time.
-
-     This makes it useful when new data arrives continuously.
-
-
-  Selection Sort vs Insertion Sort
-
-  Selection Sort:
-
-  - Best: O(n²)
-  - Average: O(n²)
-  - Worst: O(n²)
-  - Stable: No
-  - In-place: Yes
-  - Swaps: At most n - 1
-  - Good when writes/swaps are expensive
-
-
-  Insertion Sort:
-
-  - Best: O(n)
-  - Average: O(n²)
-  - Worst: O(n²)
-  - Stable: Yes
-  - In-place: Yes
-  - Extra space: O(1)
-  - Uses shifts instead of repeated swaps
-  - Excellent for nearly sorted arrays
-
-
-  Final Sorted Array
-
-  Input:
-
-  [64, 34, 25, 12, 22, 11, 90]
-
-  Output:
-
-  [11, 12, 22, 25, 34, 64, 90]
-
-"""
-
-
+```python
 class InsertionSort:
-    # Python program for implementation of Insertion Sort
 
     def insertion_sort(self, arr):
         n = len(arr)
-        shifts = 0
 
         for i in range(1, n):
-            # Store the current element
-            item = arr[i]
-
-            # Position of the previous element
-            pos = i - 1
+            key = arr[i]
+            j = i - 1
 
             # Shift larger elements to the right
-            while pos >= 0 and arr[pos] > item:
-                arr[pos + 1] = arr[pos]
-                pos -= 1
-                shifts += 1
+            while j >= 0 and arr[j] > key:
+                arr[j + 1] = arr[j]
+                j -= 1
 
-            # Insert item into its correct position
-            arr[pos + 1] = item
+            # Insert key into its correct position
+            arr[j + 1] = key
 
-            print(f"After pass {i}: {arr} " f"(shifts: {shifts})")
+            print(f"After pass {i}: {arr}")
 
         return arr
 
@@ -528,50 +378,461 @@ class InsertionSort:
 if __name__ == "__main__":
     insertion_sort = InsertionSort()
 
-    arr = [64, 34, 25, 12, 22, 11, 90]
+    arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
     print(f"Original array: {arr}")
+    print(f"Insertion Sort result: {insertion_sort.insertion_sort(arr)}")
+```
 
-    print(
-        f"Insertion Sort result: "
-        f"{insertion_sort.insertion_sort(arr)}"
-    )
+---
 
+# 7. Output
 
+```text
+Original array:
+[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+
+After pass 1:
+[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+
+After pass 2:
+[3, 38, 44, 5, 15, 26, 27, 2, 46, 4]
+
+After pass 3:
+[3, 5, 38, 44, 15, 26, 27, 2, 46, 4]
+
+After pass 4:
+[3, 5, 15, 38, 44, 26, 27, 2, 46, 4]
+
+After pass 5:
+[3, 5, 15, 26, 38, 44, 27, 2, 46, 4]
+
+After pass 6:
+[3, 5, 15, 26, 27, 38, 44, 2, 46, 4]
+
+After pass 7:
+[2, 3, 5, 15, 26, 27, 38, 44, 46, 4]
+
+After pass 8:
+[2, 3, 5, 15, 26, 27, 38, 44, 46, 4]
+
+After pass 9:
+[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+
+Insertion Sort result:
+[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+```
+
+---
+
+# 8. Time Complexity
+
+| Case         | Time Complexity |
+| ------------ | --------------- |
+| Best Case    | **O(n)**        |
+| Average Case | **O(n²)**       |
+| Worst Case   | **O(n²)**       |
+
+### Best Case
+
+If the array is already sorted:
+
+```text
+[1, 2, 3, 4, 5]
+```
+
+Each element only needs one comparison.
+
+Therefore:
+
+```text
+O(n)
+```
+
+### Worst Case
+
+If the array is reverse sorted:
+
+```text
+[5, 4, 3, 2, 1]
+```
+
+Almost every element must be shifted.
+
+Therefore:
+
+```text
+O(n²)
+```
+
+---
+
+# 9. Space Complexity
+
+Insertion Sort requires only a few extra variables such as:
+
+```python
+key
+j
+i
+```
+
+Therefore:
+
+```text
+Space Complexity = O(1)
+```
+
+It is an **in-place sorting algorithm**.
+
+---
+
+# 10. Is Insertion Sort Stable?
+
+Yes.
+
+**Insertion Sort is a stable sorting algorithm.**
+
+Equal elements maintain their original relative order because the condition normally uses:
+
+```python
+arr[j] > key
+```
+
+rather than:
+
+```python
+arr[j] >= key
+```
+
+---
+
+# 11. Is Insertion Sort In-Place?
+
+Yes.
+
+Insertion Sort modifies the original array and does not require another array.
+
+```text
+Space = O(1)
+```
+
+---
+
+# 12. Advantages
+
+* Simple to understand.
+* Easy to implement.
+* Requires **O(1)** extra space.
+* Stable sorting algorithm.
+* In-place algorithm.
+* Very efficient for small arrays.
+* Very efficient when data is already or almost sorted.
+* Can sort data while receiving elements one at a time.
+
+---
+
+# 13. Disadvantages
+
+* Slow for large unsorted arrays.
+* Worst-case time complexity is **O(n²)**.
+* Not suitable for large datasets compared with efficient algorithms such as Merge Sort or Quick Sort.
+
+---
+
+# 14. When Should You Use Insertion Sort?
+
+Insertion Sort is useful when:
+
+* The array is small.
+* The array is almost sorted.
+* You need a simple implementation.
+* Stability is important.
+* You want an in-place algorithm.
+* Data arrives gradually and needs to remain sorted.
+
+Example:
+
+```text
+[1, 2, 3, 4, 5, 7, 6]
+```
+
+Only a small amount of work is required to insert `6` into the correct position.
+
+---
+
+# 15. When Should You NOT Use It?
+
+Avoid Insertion Sort when:
+
+* The dataset is very large.
+* The data is highly unsorted.
+* You need guaranteed efficient performance for large inputs.
+
+For those situations, consider:
+
+```text
+Merge Sort
+Quick Sort
+Heap Sort
+```
+
+---
+
+# 16. Ascending Order
+
+The standard condition is:
+
+```python
+while j >= 0 and arr[j] > key:
+```
+
+This produces:
+
+```text
+[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+```
+
+---
+
+# 17. Descending Order
+
+For descending order, change:
+
+```python
+arr[j] > key
+```
+
+to:
+
+```python
+arr[j] < key
+```
+
+Example:
+
+```python
 class InsertionSort:
 
-    def insertion_sort(self, arr):
-        n = len(arr)
-        shifts = 0
+    def insertion_sort_descending(self, arr):
+        for i in range(1, len(arr)):
+            key = arr[i]
+            j = i - 1
 
-        for i in range(1, n):
-            item = arr[i]
-            # Find the position where item should be inserted in the sorted part of the array
-            # We start from the end of the sorted part and move backwards
-            # i - 1 is the last index of the sorted part
-            # -1 is the stopping condition for the loop (when we reach the beginning of the array)
-            # -1 is used to indicate that we want to go backwards in the array
-            for j in range(i - 1, -1, -1): 
-                if arr[j] > item:
-                    arr[j + 1] = arr[j]
-                    shifts += 1
-                else:
-                    break
+            while j >= 0 and arr[j] < key:
+                arr[j + 1] = arr[j]
+                j -= 1
 
-            arr[j + 1] = item
-
-            print(f"After pass {i}: {arr} " f"(shifts: {shifts})")
+            arr[j + 1] = key
 
         return arr
+```
 
+Output:
 
-if __name__ == "__main__":
-    insertion_sort = InsertionSort()
+```text
+[46, 44, 38, 27, 26, 15, 5, 4, 3, 2]
+```
 
-    arr = [64, 34, 25, 12, 22, 11, 90]
+---
 
-    print(f"Original array: {arr}")
-    print(
-        f"Insertion Sort result: "
-        f"{insertion_sort.insertion_sort(arr)}"
-    )
+# 18. Insertion Sort vs Selection Sort vs Bubble Sort
+
+| Feature       | Insertion Sort | Selection Sort | Bubble Sort    |
+| ------------- | -------------- | -------------- | -------------- |
+| Best Case     | O(n)           | O(n²)          | O(n) optimized |
+| Average       | O(n²)          | O(n²)          | O(n²)          |
+| Worst         | O(n²)          | O(n²)          | O(n²)          |
+| Space         | O(1)           | O(1)           | O(1)           |
+| Stable        | Yes            | No*            | Yes            |
+| In-place      | Yes            | Yes            | Yes            |
+| Adaptive      | Yes            | No             | Yes*           |
+| Small Data    | Good           | Good           | Good           |
+| Nearly Sorted | Excellent      | Poor           | Good           |
+
+`*` Standard Selection Sort is not stable, and optimized Bubble Sort is adaptive.
+
+---
+
+# 19. Key Difference: Insertion vs Selection
+
+### Selection Sort
+
+Selection Sort searches for the minimum:
+
+```text
+Find minimum → Swap
+```
+
+### Insertion Sort
+
+Insertion Sort takes the current element and places it correctly:
+
+```text
+Take key → Shift → Insert
+```
+
+For example:
+
+```text
+Selection Sort:
+[3, 44, 38, 5]
+ ↓
+Find minimum
+ ↓
+Swap
+```
+
+```text
+Insertion Sort:
+[3, 44, 38, 5]
+       ↓
+      key
+       ↓
+Shift larger elements
+       ↓
+Insert key
+```
+
+---
+
+# 20. Key Difference: Insertion vs Bubble
+
+### Bubble Sort
+
+Moves larger elements toward the end:
+
+```text
+Compare → Swap → Compare → Swap
+```
+
+### Insertion Sort
+
+Moves larger elements to the right and inserts the key:
+
+```text
+Select key → Shift → Insert
+```
+
+Insertion Sort usually performs very well on **nearly sorted data**.
+
+---
+
+# 21. Interview Questions
+
+### Q1. What is Insertion Sort?
+
+Insertion Sort is a comparison-based sorting algorithm that builds the sorted array one element at a time.
+
+### Q2. What is its best-case complexity?
+
+```text
+O(n)
+```
+
+When the array is already sorted.
+
+### Q3. What is its worst-case complexity?
+
+```text
+O(n²)
+```
+
+When the array is reverse sorted.
+
+### Q4. Is Insertion Sort stable?
+
+Yes.
+
+### Q5. Is Insertion Sort in-place?
+
+Yes.
+
+### Q6. What is its space complexity?
+
+```text
+O(1)
+```
+
+### Q7. Why is Insertion Sort good for nearly sorted arrays?
+
+Because elements that are already close to their correct positions require very few shifts.
+
+### Q8. Does Insertion Sort use swapping?
+
+The standard implementation does **not need swapping**.
+
+Instead, it uses:
+
+```text
+Shifting + Insertion
+```
+
+### Q9. How many passes are required for n elements?
+
+```text
+n - 1
+```
+
+Because the first element is considered already sorted.
+
+### Q10. What is the main idea of Insertion Sort?
+
+> Take one element at a time and insert it into the correct position in the already sorted portion.
+
+---
+
+# 22. Important Code Pattern
+
+Remember this pattern for interviews:
+
+```python
+for i in range(1, len(arr)):
+    key = arr[i]
+    j = i - 1
+
+    while j >= 0 and arr[j] > key:
+        arr[j + 1] = arr[j]
+        j -= 1
+
+    arr[j + 1] = key
+```
+
+The most important three steps are:
+
+```text
+1. key = arr[i]
+2. Shift larger elements
+3. arr[j + 1] = key
+```
+
+---
+
+# 23. Final Summary
+
+```text
+Insertion Sort
+│
+├── Comparison-based
+├── In-place
+├── Stable
+├── Adaptive
+│
+├── Best Case      → O(n)
+├── Average Case   → O(n²)
+├── Worst Case     → O(n²)
+│
+└── Space          → O(1)
+```
+
+### One-line definition
+
+**Insertion Sort builds the sorted portion of an array one element at a time by shifting larger elements and inserting the current element into its correct position.**
+
+### Main formula to remember
+
+```text
+Key → Compare → Shift → Insert
+```
+
+"""
