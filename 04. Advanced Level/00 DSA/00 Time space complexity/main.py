@@ -2,12 +2,9 @@
     ============================= Time and Space Complexity =============================
 
     Time Complexity & Space Complexity
-        Time Complexity measures how the execution time of an algorithm grows as the input size (n) increases.
-        It does not measure the actual time in seconds; instead, it describes the growth rate.
-        
+        Time Complexity measures how the running time of an algorithm grows as the input size (n) increases.
+               
         Space Complexity measures how the memory usage of an algorithm grows as the input size (n) increases.
-        It does not measure the actual memory in bytes; instead, it describes the growth rate.
-
     Time Complexity Notation
 
         Time Complexity Notation is a mathematical way to describe how the running time of an algorithm changes as the input size (n) increases. It helps compare algorithms based on efficiency rather than actual execution time.
