@@ -694,7 +694,6 @@ class SelectionSort:
         n = len(arr)
 
         for i in range(n - 1):
-
             # Assume current position contains minimum
             min_index = i
 
@@ -1536,3 +1535,40 @@ Repeat
 > **Selection Sort repeatedly selects the smallest element from the unsorted portion and places it at the beginning of that portion. It is simple, in-place, and uses at most `n - 1` swaps, but it always takes `O(n²)` time.**
 
 """
+
+class SelectionSort:
+
+    def selection_sort(self, arr):
+        n = len(arr)
+
+        for i in range(n - 1):
+            # Assume current position contains minimum
+            min_index = i
+
+            # Search minimum in the unsorted portion
+            for j in range(i + 1, n):
+                if arr[j] < arr[min_index]:
+                    min_index = j
+
+            # Swap only if minimum is not already in place
+            # (it's a good practice to avoid unnecessary swaps)
+            if i != min_index:
+                arr[i], arr[min_index] = arr[min_index], arr[i]
+
+            print(f"After pass {i + 1}: {arr}")
+
+        return arr
+
+if __name__ == "__main__":
+
+    selection_sort = SelectionSort()
+
+    arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+
+    print(f"Original array: {arr}")
+
+    result = selection_sort.selection_sort(arr)
+
+    print(f"Selection Sort result: {result}")
+
+  
