@@ -1,1538 +1,1538 @@
 """
-# Selection Sort
+    # Selection Sort
 
-## 1. What is Selection Sort?
+    ## 1. What is Selection Sort?
 
-**Selection Sort** is a simple, comparison-based, in-place sorting algorithm.
+    **Selection Sort** is a simple, comparison-based, in-place sorting algorithm.
 
-It repeatedly selects the **smallest element** from the unsorted part of the array and places it at the beginning of the unsorted part.
+    It repeatedly selects the **smallest element** from the unsorted part of the array and places it at the beginning of the unsorted part.
 
-For **ascending order**, Selection Sort selects the minimum element.
+    For **ascending order**, Selection Sort selects the minimum element.
 
-For **descending order**, it selects the maximum element.
+    For **descending order**, it selects the maximum element.
 
-### One-Line Definition
+    ### One-Line Definition
 
-> Selection Sort repeatedly selects the minimum element from the unsorted portion and places it in its correct position.
+    > Selection Sort repeatedly selects the minimum element from the unsorted portion and places it in its correct position.
 
----
+    ---
 
-# 2. Core Idea
+    # 2. Core Idea
 
-The array is conceptually divided into two parts:
+    The array is conceptually divided into two parts:
 
-### Sorted Subarray
+    ### Sorted Subarray
 
-Elements that are already in their correct positions.
+    Elements that are already in their correct positions.
 
-### Unsorted Subarray
+    ### Unsorted Subarray
 
-Elements that still need to be processed.
+    Elements that still need to be processed.
 
-Initially:
+    Initially:
 
-```text
-Sorted:   []
-Unsorted: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    Sorted:   []
+    Unsorted: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-After Pass 1:
+    After Pass 1:
 
-```text
-Sorted:   [2]
-Unsorted: [44, 38, 5, 15, 26, 27, 3, 46, 4]
-```
+    ```text
+    Sorted:   [2]
+    Unsorted: [44, 38, 5, 15, 26, 27, 3, 46, 4]
+    ```
 
-After Pass 2:
+    After Pass 2:
 
-```text
-Sorted:   [2, 3]
-Unsorted: [38, 5, 15, 26, 27, 44, 46, 4]
-```
+    ```text
+    Sorted:   [2, 3]
+    Unsorted: [38, 5, 15, 26, 27, 44, 46, 4]
+    ```
 
-The sorted portion grows by one position after every pass.
+    The sorted portion grows by one position after every pass.
 
----
+    ---
 
-# 3. How Selection Sort Works
+    # 3. How Selection Sort Works
 
-For every position `i`:
+    For every position `i`:
 
-1. Assume `arr[i]` is the minimum element.
-2. Store its index in `min_index`.
-3. Search the remaining unsorted elements.
-4. If a smaller element is found, update `min_index`.
-5. Swap `arr[i]` with `arr[min_index]`.
-6. Move to the next position.
-7. Repeat until the array is sorted.
+    1. Assume `arr[i]` is the minimum element.
+    2. Store its index in `min_index`.
+    3. Search the remaining unsorted elements.
+    4. If a smaller element is found, update `min_index`.
+    5. Swap `arr[i]` with `arr[min_index]`.
+    6. Move to the next position.
+    7. Repeat until the array is sorted.
 
----
+    ---
 
-# 4. Example Array
+    # 4. Example Array
 
-We will use the same array throughout these notes:
+    We will use the same array throughout these notes:
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-Array size:
+    Array size:
 
-```text
-n = 10
-```
+    ```text
+    n = 10
+    ```
 
-Therefore, number of passes:
+    Therefore, number of passes:
 
-```text
-n - 1 = 9
-```
+    ```text
+    n - 1 = 9
+    ```
 
----
+    ---
 
-# 5. Pass 1
+    # 5. Pass 1
 
-Initial array:
+    Initial array:
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
- ↑
- i = 0
-```
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ↑
+    i = 0
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 0
-minimum = 3
-```
+    ```text
+    min_index = 0
+    minimum = 3
+    ```
 
-Now search the unsorted portion.
+    Now search the unsorted portion.
 
-### Comparisons
+    ### Comparisons
 
-```text
-44 < 3
-→ No
+    ```text
+    44 < 3
+    → No
 
-38 < 3
-→ No
+    38 < 3
+    → No
 
-5 < 3
-→ No
+    5 < 3
+    → No
 
-15 < 3
-→ No
+    15 < 3
+    → No
 
-26 < 3
-→ No
+    26 < 3
+    → No
 
-27 < 3
-→ No
+    27 < 3
+    → No
 
-2 < 3
-→ min_index = 7
+    2 < 3
+    → min_index = 7
 
-46 < 2
-→ No
+    46 < 2
+    → No
 
-4 < 2
-→ No
-```
+    4 < 2
+    → No
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-Minimum = 2
-Minimum index = 7
-```
+    ```text
+    Minimum = 2
+    Minimum index = 7
+    ```
 
-Swap:
+    Swap:
 
-```text
-3 ↔ 2
-```
+    ```text
+    3 ↔ 2
+    ```
 
-Result:
+    Result:
 
-```text
-[2, 44, 38, 5, 15, 26, 27, 3, 46, 4]
-```
+    ```text
+    [2, 44, 38, 5, 15, 26, 27, 3, 46, 4]
+    ```
 
-Sorted part:
+    Sorted part:
 
-```text
-[2]
-```
+    ```text
+    [2]
+    ```
 
----
+    ---
 
-# 6. Pass 2
+    # 6. Pass 2
 
-Sorted part:
+    Sorted part:
 
-```text
-[2]
-```
+    ```text
+    [2]
+    ```
 
-Unsorted part:
+    Unsorted part:
 
-```text
-[44, 38, 5, 15, 26, 27, 3, 46, 4]
-```
+    ```text
+    [44, 38, 5, 15, 26, 27, 3, 46, 4]
+    ```
 
-Current position:
+    Current position:
 
-```text
-i = 1
-```
+    ```text
+    i = 1
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 1
-minimum = 44
-```
+    ```text
+    min_index = 1
+    minimum = 44
+    ```
 
-### Comparisons
+    ### Comparisons
 
-```text
-38 < 44
-→ min_index = 2
+    ```text
+    38 < 44
+    → min_index = 2
 
-5 < 38
-→ min_index = 3
+    5 < 38
+    → min_index = 3
 
-15 < 5
-→ No
+    15 < 5
+    → No
 
-26 < 5
-→ No
+    26 < 5
+    → No
 
-27 < 5
-→ No
+    27 < 5
+    → No
 
-3 < 5
-→ min_index = 7
+    3 < 5
+    → min_index = 7
 
-46 < 3
-→ No
+    46 < 3
+    → No
 
-4 < 3
-→ No
-```
+    4 < 3
+    → No
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-Minimum = 3
-Minimum index = 7
-```
+    ```text
+    Minimum = 3
+    Minimum index = 7
+    ```
 
-Swap:
+    Swap:
 
-```text
-44 ↔ 3
-```
+    ```text
+    44 ↔ 3
+    ```
 
-Result:
+    Result:
 
-```text
-[2, 3, 38, 5, 15, 26, 27, 44, 46, 4]
-```
+    ```text
+    [2, 3, 38, 5, 15, 26, 27, 44, 46, 4]
+    ```
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3]
-```
+    ```text
+    [2, 3]
+    ```
 
----
+    ---
 
-# 7. Pass 3
+    # 7. Pass 3
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3]
-```
+    ```text
+    [2, 3]
+    ```
 
-Unsorted part:
+    Unsorted part:
 
-```text
-[38, 5, 15, 26, 27, 44, 46, 4]
-```
+    ```text
+    [38, 5, 15, 26, 27, 44, 46, 4]
+    ```
 
-Current position:
+    Current position:
 
-```text
-i = 2
-```
+    ```text
+    i = 2
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 2
-minimum = 38
-```
+    ```text
+    min_index = 2
+    minimum = 38
+    ```
 
-### Comparisons
+    ### Comparisons
 
-```text
-5 < 38
-→ min_index = 3
+    ```text
+    5 < 38
+    → min_index = 3
 
-15 < 5
-→ No
+    15 < 5
+    → No
 
-26 < 5
-→ No
+    26 < 5
+    → No
 
-27 < 5
-→ No
+    27 < 5
+    → No
 
-44 < 5
-→ No
+    44 < 5
+    → No
 
-46 < 5
-→ No
+    46 < 5
+    → No
 
-4 < 5
-→ min_index = 9
-```
+    4 < 5
+    → min_index = 9
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-Minimum = 4
-Minimum index = 9
-```
+    ```text
+    Minimum = 4
+    Minimum index = 9
+    ```
 
-Swap:
+    Swap:
 
-```text
-38 ↔ 4
-```
+    ```text
+    38 ↔ 4
+    ```
 
-Result:
+    Result:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3, 4]
-```
+    ```text
+    [2, 3, 4]
+    ```
 
----
+    ---
 
-# 8. Pass 4
+    # 8. Pass 4
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3, 4]
-```
+    ```text
+    [2, 3, 4]
+    ```
 
-Unsorted part:
+    Unsorted part:
 
-```text
-[5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [5, 15, 26, 27, 44, 46, 38]
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 3
-minimum = 5
-```
+    ```text
+    min_index = 3
+    minimum = 5
+    ```
 
-Compare:
+    Compare:
 
-```text
-15 < 5
-→ No
+    ```text
+    15 < 5
+    → No
 
-26 < 5
-→ No
+    26 < 5
+    → No
 
-27 < 5
-→ No
+    27 < 5
+    → No
 
-44 < 5
-→ No
+    44 < 5
+    → No
 
-46 < 5
-→ No
+    46 < 5
+    → No
 
-38 < 5
-→ No
-```
+    38 < 5
+    → No
+    ```
 
-`5` is already the minimum.
+    `5` is already the minimum.
 
-No swap is required.
+    No swap is required.
 
-Result:
+    Result:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3, 4, 5]
-```
+    ```text
+    [2, 3, 4, 5]
+    ```
 
----
+    ---
 
-# 9. Pass 5
+    # 9. Pass 5
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3, 4, 5]
-```
+    ```text
+    [2, 3, 4, 5]
+    ```
 
-Unsorted part:
+    Unsorted part:
 
-```text
-[15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [15, 26, 27, 44, 46, 38]
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 4
-minimum = 15
-```
+    ```text
+    min_index = 4
+    minimum = 15
+    ```
 
-Compare:
+    Compare:
 
-```text
-26 < 15
-→ No
+    ```text
+    26 < 15
+    → No
 
-27 < 15
-→ No
+    27 < 15
+    → No
 
-44 < 15
-→ No
+    44 < 15
+    → No
 
-46 < 15
-→ No
+    46 < 15
+    → No
 
-38 < 15
-→ No
-```
+    38 < 15
+    → No
+    ```
 
-`15` is already the minimum.
+    `15` is already the minimum.
 
-No swap.
+    No swap.
 
-Result:
+    Result:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
----
+    ---
 
-# 10. Pass 6
+    # 10. Pass 6
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3, 4, 5, 15]
-```
+    ```text
+    [2, 3, 4, 5, 15]
+    ```
 
-Unsorted part:
+    Unsorted part:
 
-```text
-[26, 27, 44, 46, 38]
-```
+    ```text
+    [26, 27, 44, 46, 38]
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 5
-minimum = 26
-```
+    ```text
+    min_index = 5
+    minimum = 26
+    ```
 
-Compare:
+    Compare:
 
-```text
-27 < 26
-→ No
+    ```text
+    27 < 26
+    → No
 
-44 < 26
-→ No
+    44 < 26
+    → No
 
-46 < 26
-→ No
+    46 < 26
+    → No
 
-38 < 26
-→ No
-```
+    38 < 26
+    → No
+    ```
 
-`26` is already in the correct position.
+    `26` is already in the correct position.
 
-No swap.
+    No swap.
 
-Result:
+    Result:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
----
+    ---
 
-# 11. Pass 7
+    # 11. Pass 7
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3, 4, 5, 15, 26]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26]
+    ```
 
-Unsorted part:
+    Unsorted part:
 
-```text
-[27, 44, 46, 38]
-```
+    ```text
+    [27, 44, 46, 38]
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 6
-minimum = 27
-```
+    ```text
+    min_index = 6
+    minimum = 27
+    ```
 
-Compare:
+    Compare:
 
-```text
-44 < 27
-→ No
+    ```text
+    44 < 27
+    → No
 
-46 < 27
-→ No
+    46 < 27
+    → No
 
-38 < 27
-→ No
-```
+    38 < 27
+    → No
+    ```
 
-`27` is already in the correct position.
+    `27` is already in the correct position.
 
-No swap.
+    No swap.
 
-Result:
+    Result:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
----
+    ---
 
-# 12. Pass 8
+    # 12. Pass 8
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3, 4, 5, 15, 26, 27]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27]
+    ```
 
-Unsorted part:
+    Unsorted part:
 
-```text
-[44, 46, 38]
-```
+    ```text
+    [44, 46, 38]
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 7
-minimum = 44
-```
+    ```text
+    min_index = 7
+    minimum = 44
+    ```
 
-Compare:
+    Compare:
 
-```text
-46 < 44
-→ No
+    ```text
+    46 < 44
+    → No
 
-38 < 44
-→ min_index = 9
-```
+    38 < 44
+    → min_index = 9
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-Minimum = 38
-Minimum index = 9
-```
+    ```text
+    Minimum = 38
+    Minimum index = 9
+    ```
 
-Swap:
+    Swap:
 
-```text
-44 ↔ 38
-```
+    ```text
+    44 ↔ 38
+    ```
 
-Result:
+    Result:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 46, 44]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 46, 44]
+    ```
 
----
+    ---
 
-# 13. Pass 9
+    # 13. Pass 9
 
-Sorted part:
+    Sorted part:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38]
+    ```
 
-Unsorted part:
+    Unsorted part:
 
-```text
-[46, 44]
-```
+    ```text
+    [46, 44]
+    ```
 
-Assume:
+    Assume:
 
-```text
-min_index = 8
-minimum = 46
-```
+    ```text
+    min_index = 8
+    minimum = 46
+    ```
 
-Compare:
+    Compare:
 
-```text
-44 < 46
-→ min_index = 9
-```
+    ```text
+    44 < 46
+    → min_index = 9
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-Minimum = 44
-Minimum index = 9
-```
+    ```text
+    Minimum = 44
+    Minimum index = 9
+    ```
 
-Swap:
+    Swap:
 
-```text
-46 ↔ 44
-```
+    ```text
+    46 ↔ 44
+    ```
 
-Result:
+    Result:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
----
+    ---
 
-# 14. Final Sorted Array
+    # 14. Final Sorted Array
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
----
+    ---
 
-# 15. Complete Pass Summary
+    # 15. Complete Pass Summary
 
-| Pass | Minimum | Index | Array After Pass                       |
-| ---- | ------: | ----: | -------------------------------------- |
-| 1    |       2 |     7 | `[2, 44, 38, 5, 15, 26, 27, 3, 46, 4]` |
-| 2    |       3 |     7 | `[2, 3, 38, 5, 15, 26, 27, 44, 46, 4]` |
-| 3    |       4 |     9 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
-| 4    |       5 |     3 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
-| 5    |      15 |     4 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
-| 6    |      26 |     5 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
-| 7    |      27 |     6 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
-| 8    |      38 |     9 | `[2, 3, 4, 5, 15, 26, 27, 38, 46, 44]` |
-| 9    |      44 |     9 | `[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]` |
+    | Pass | Minimum | Index | Array After Pass                       |
+    | ---- | ------: | ----: | -------------------------------------- |
+    | 1    |       2 |     7 | `[2, 44, 38, 5, 15, 26, 27, 3, 46, 4]` |
+    | 2    |       3 |     7 | `[2, 3, 38, 5, 15, 26, 27, 44, 46, 4]` |
+    | 3    |       4 |     9 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
+    | 4    |       5 |     3 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
+    | 5    |      15 |     4 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
+    | 6    |      26 |     5 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
+    | 7    |      27 |     6 | `[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]` |
+    | 8    |      38 |     9 | `[2, 3, 4, 5, 15, 26, 27, 38, 46, 44]` |
+    | 9    |      44 |     9 | `[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]` |
 
----
+    ---
 
-# 16. Pseudocode
+    # 16. Pseudocode
 
-```text
-SELECTION-SORT(A):
+    ```text
+    SELECTION-SORT(A):
 
-    n = length(A)
+        n = length(A)
 
-    for i = 0 to n - 2:
+        for i = 0 to n - 2:
 
-        min_index = i
-
-        for j = i + 1 to n - 1:
-
-            if A[j] < A[min_index]:
-
-                min_index = j
-
-        if i != min_index:
-
-            swap A[i] and A[min_index]
-```
-
----
-
-# 17. Python Implementation
-
-```python
-class SelectionSort:
-
-    def selection_sort(self, arr):
-        n = len(arr)
-
-        for i in range(n - 1):
-            # Assume current position contains minimum
             min_index = i
 
-            # Search minimum in the unsorted portion
-            for j in range(i + 1, n):
-                if arr[j] < arr[min_index]:
+            for j = i + 1 to n - 1:
+
+                if A[j] < A[min_index]:
+
                     min_index = j
 
-            # Swap only if minimum is not already in place
             if i != min_index:
-                arr[i], arr[min_index] = arr[min_index], arr[i]
 
-            print(f"After pass {i + 1}: {arr}")
+                swap A[i] and A[min_index]
+    ```
 
-        return arr
+    ---
 
+    # 17. Python Implementation
 
-if __name__ == "__main__":
+    ```python
+    class SelectionSort:
 
-    selection_sort = SelectionSort()
+        def selection_sort(self, arr):
+            n = len(arr)
 
-    arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+            for i in range(n - 1):
+                # Assume current position contains minimum
+                min_index = i
 
-    print(f"Original array: {arr}")
+                # Search minimum in the unsorted portion
+                for j in range(i + 1, n):
+                    if arr[j] < arr[min_index]:
+                        min_index = j
 
-    result = selection_sort.selection_sort(arr)
+                # Swap only if minimum is not already in place
+                if i != min_index:
+                    arr[i], arr[min_index] = arr[min_index], arr[i]
 
-    print(f"Selection Sort result: {result}")
-```
+                print(f"After pass {i + 1}: {arr}")
 
----
+            return arr
 
-# 18. Output
 
-```text
-Original array: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    if __name__ == "__main__":
 
-After pass 1: [2, 44, 38, 5, 15, 26, 27, 3, 46, 4]
-After pass 2: [2, 3, 38, 5, 15, 26, 27, 44, 46, 4]
-After pass 3: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-After pass 4: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-After pass 5: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-After pass 6: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-After pass 7: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-After pass 8: [2, 3, 4, 5, 15, 26, 27, 38, 46, 44]
-After pass 9: [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+        selection_sort = SelectionSort()
 
-Selection Sort result: [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+        arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
----
+        print(f"Original array: {arr}")
 
-# 19. Number of Passes
+        result = selection_sort.selection_sort(arr)
 
-For an array containing `n` elements:
+        print(f"Selection Sort result: {result}")
+    ```
 
-```text
-Number of passes = n - 1
-```
+    ---
 
-Our array:
+    # 18. Output
 
-```text
-n = 10
-```
+    ```text
+    Original array: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
-Therefore:
+    After pass 1: [2, 44, 38, 5, 15, 26, 27, 3, 46, 4]
+    After pass 2: [2, 3, 38, 5, 15, 26, 27, 44, 46, 4]
+    After pass 3: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    After pass 4: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    After pass 5: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    After pass 6: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    After pass 7: [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    After pass 8: [2, 3, 4, 5, 15, 26, 27, 38, 46, 44]
+    After pass 9: [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
 
-```text
-10 - 1 = 9 passes
-```
+    Selection Sort result: [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
----
+    ---
 
-# 20. Number of Comparisons
+    # 19. Number of Passes
 
-For an array of `n` elements:
+    For an array containing `n` elements:
 
-### Pass 1
+    ```text
+    Number of passes = n - 1
+    ```
 
-```text
-n - 1
-```
+    Our array:
 
-### Pass 2
+    ```text
+    n = 10
+    ```
 
-```text
-n - 2
-```
+    Therefore:
 
-### Pass 3
+    ```text
+    10 - 1 = 9 passes
+    ```
 
-```text
-n - 3
-```
+    ---
 
-...
+    # 20. Number of Comparisons
 
-### Last Pass
+    For an array of `n` elements:
 
-```text
-1
-```
+    ### Pass 1
 
-Therefore:
+    ```text
+    n - 1
+    ```
 
-```text
-Total comparisons
-= (n - 1) + (n - 2) + ... + 2 + 1
-```
+    ### Pass 2
 
-Formula:
+    ```text
+    n - 2
+    ```
 
-```text
-n(n - 1) / 2
-```
+    ### Pass 3
 
-For our array:
+    ```text
+    n - 3
+    ```
 
-```text
-n = 10
+    ...
 
-Comparisons
-= 10 × 9 / 2
-= 45
-```
+    ### Last Pass
 
-Therefore:
+    ```text
+    1
+    ```
 
-```text
-Total comparisons = 45
-```
+    Therefore:
 
----
+    ```text
+    Total comparisons
+    = (n - 1) + (n - 2) + ... + 2 + 1
+    ```
 
-# 21. Time Complexity
+    Formula:
 
-## Best Case
+    ```text
+    n(n - 1) / 2
+    ```
 
-```text
-O(n²)
-```
+    For our array:
 
-Even if the array is already sorted, Selection Sort still searches the entire unsorted portion.
+    ```text
+    n = 10
 
-Example:
+    Comparisons
+    = 10 × 9 / 2
+    = 45
+    ```
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    Therefore:
 
-It still performs:
+    ```text
+    Total comparisons = 45
+    ```
 
-```text
-9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1
-= 45 comparisons
-```
+    ---
 
-Therefore:
+    # 21. Time Complexity
 
-```text
-Best Case = O(n²)
-```
+    ## Best Case
 
----
+    ```text
+    O(n²)
+    ```
 
-## Average Case
+    Even if the array is already sorted, Selection Sort still searches the entire unsorted portion.
 
-```text
-O(n²)
-```
+    Example:
 
-Therefore:
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-```text
-Average Case = O(n²)
-```
+    It still performs:
 
----
+    ```text
+    9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1
+    = 45 comparisons
+    ```
 
-## Worst Case
+    Therefore:
 
-```text
-O(n²)
-```
+    ```text
+    Best Case = O(n²)
+    ```
 
-Therefore:
+    ---
 
-```text
-Worst Case = O(n²)
-```
+    ## Average Case
 
----
+    ```text
+    O(n²)
+    ```
 
-# 22. Time Complexity Summary
+    Therefore:
 
-| Case         | Complexity |
-| ------------ | ---------- |
-| Best Case    | O(n²)      |
-| Average Case | O(n²)      |
-| Worst Case   | O(n²)      |
+    ```text
+    Average Case = O(n²)
+    ```
 
----
+    ---
 
-# 23. Why is Best Case O(n²)?
+    ## Worst Case
 
-Selection Sort does not stop early.
+    ```text
+    O(n²)
+    ```
 
-Even if the array is already sorted:
+    Therefore:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    Worst Case = O(n²)
+    ```
 
-It still searches every remaining element.
+    ---
 
-Number of comparisons:
+    # 22. Time Complexity Summary
 
-```text
-9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1
-= 45
-```
+    | Case         | Complexity |
+    | ------------ | ---------- |
+    | Best Case    | O(n²)      |
+    | Average Case | O(n²)      |
+    | Worst Case   | O(n²)      |
 
-Therefore:
+    ---
 
-```text
-Best Case = O(n²)
-```
+    # 23. Why is Best Case O(n²)?
 
----
+    Selection Sort does not stop early.
 
-# 24. Space Complexity
+    Even if the array is already sorted:
 
-Selection Sort is an **in-place sorting algorithm**.
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-It does not require another array.
+    It still searches every remaining element.
 
-It uses only a few extra variables:
+    Number of comparisons:
 
-```text
-i
-j
-min_index
-temporary value during swapping
-```
+    ```text
+    9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1
+    = 45
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-Space Complexity = O(1)
-```
+    ```text
+    Best Case = O(n²)
+    ```
 
----
+    ---
 
-# 25. Number of Swaps
+    # 24. Space Complexity
 
-Selection Sort performs at most:
+    Selection Sort is an **in-place sorting algorithm**.
 
-```text
-n - 1 swaps
-```
+    It does not require another array.
 
-For our array:
+    It uses only a few extra variables:
 
-```text
-n = 10
+    ```text
+    i
+    j
+    min_index
+    temporary value during swapping
+    ```
 
-Maximum swaps = 9
-```
+    Therefore:
 
-However, the actual number of swaps depends on the input.
+    ```text
+    Space Complexity = O(1)
+    ```
 
-Our example has swaps in:
+    ---
 
-```text
-Pass 1 → Swap
-Pass 2 → Swap
-Pass 3 → Swap
-Pass 4 → No swap
-Pass 5 → No swap
-Pass 6 → No swap
-Pass 7 → No swap
-Pass 8 → Swap
-Pass 9 → Swap
-```
+    # 25. Number of Swaps
 
-Total:
+    Selection Sort performs at most:
 
-```text
-5 swaps
-```
+    ```text
+    n - 1 swaps
+    ```
 
----
+    For our array:
 
-# 26. Stability
+    ```text
+    n = 10
 
-Selection Sort is **not stable by default**.
+    Maximum swaps = 9
+    ```
 
-A sorting algorithm is stable if equal elements maintain their original relative order.
+    However, the actual number of swaps depends on the input.
 
-Example:
+    Our example has swaps in:
 
-```text
-[2a, 2b, 1]
-```
+    ```text
+    Pass 1 → Swap
+    Pass 2 → Swap
+    Pass 3 → Swap
+    Pass 4 → No swap
+    Pass 5 → No swap
+    Pass 6 → No swap
+    Pass 7 → No swap
+    Pass 8 → Swap
+    Pass 9 → Swap
+    ```
 
-Initially:
+    Total:
 
-```text
-2a comes before 2b
-```
+    ```text
+    5 swaps
+    ```
 
-Selection Sort finds `1` and swaps it with `2a`.
+    ---
 
-Result:
+    # 26. Stability
 
-```text
-[1, 2b, 2a]
-```
+    Selection Sort is **not stable by default**.
 
-Now:
+    A sorting algorithm is stable if equal elements maintain their original relative order.
 
-```text
-2b comes before 2a
-```
+    Example:
 
-The relative order has changed.
+    ```text
+    [2a, 2b, 1]
+    ```
 
-Therefore:
+    Initially:
 
-```text
-Selection Sort = Not Stable
-```
+    ```text
+    2a comes before 2b
+    ```
 
----
+    Selection Sort finds `1` and swaps it with `2a`.
 
-# 27. In-Place Sorting
+    Result:
 
-Selection Sort is an **in-place algorithm**.
+    ```text
+    [1, 2b, 2a]
+    ```
 
-It modifies the original array instead of creating a separate array.
+    Now:
 
-Therefore:
+    ```text
+    2b comes before 2a
+    ```
 
-```text
-Auxiliary Space = O(1)
-```
+    The relative order has changed.
 
----
+    Therefore:
 
-# 28. Descending Order
+    ```text
+    Selection Sort = Not Stable
+    ```
 
-For descending order, select the **maximum element** instead of the minimum.
+    ---
 
-Example:
+    # 27. In-Place Sorting
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    Selection Sort is an **in-place algorithm**.
 
-First, find the maximum:
+    It modifies the original array instead of creating a separate array.
 
-```text
-46
-```
+    Therefore:
 
-Swap it with the first element:
+    ```text
+    Auxiliary Space = O(1)
+    ```
 
-```text
-[46, 44, 38, 5, 15, 26, 27, 2, 3, 4]
-```
+    ---
 
-Continue the same process.
+    # 28. Descending Order
 
-Final descending order:
+    For descending order, select the **maximum element** instead of the minimum.
 
-```text
-[46, 44, 38, 27, 26, 15, 5, 4, 3, 2]
-```
+    Example:
 
----
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-# 29. Descending Order Condition
+    First, find the maximum:
 
-Ascending:
+    ```text
+    46
+    ```
 
-```python
-if arr[j] < arr[min_index]:
-    min_index = j
-```
+    Swap it with the first element:
 
-Descending:
+    ```text
+    [46, 44, 38, 5, 15, 26, 27, 2, 3, 4]
+    ```
 
-```python
-if arr[j] > arr[max_index]:
-    max_index = j
-```
+    Continue the same process.
 
----
+    Final descending order:
 
-# 30. Advantages
+    ```text
+    [46, 44, 38, 27, 26, 15, 5, 4, 3, 2]
+    ```
 
-* Very easy to understand.
-* Very easy to implement.
-* Simple control flow.
-* In-place sorting algorithm.
-* Requires `O(1)` extra space.
-* Performs at most `n - 1` swaps.
-* Useful when swapping/writing data is expensive.
-* Good for educational purposes.
-* Does not require an additional array.
+    ---
 
----
+    # 29. Descending Order Condition
 
-# 31. Disadvantages
+    Ascending:
 
-* `O(n²)` time complexity in all cases.
-* Not efficient for large datasets.
-* Does not benefit significantly from an already sorted array.
-* Usually slower than `O(n log n)` algorithms.
-* Not stable by default.
-* Not suitable for performance-sensitive applications.
+    ```python
+    if arr[j] < arr[min_index]:
+        min_index = j
+    ```
 
----
+    Descending:
 
-# 32. When to Use Selection Sort
+    ```python
+    if arr[j] > arr[max_index]:
+        max_index = j
+    ```
 
-Use Selection Sort when:
+    ---
 
-* The dataset is very small.
-* Simplicity is important.
-* Memory is extremely limited.
-* `O(1)` extra space is required.
-* The number of swaps should be minimized.
-* You are learning sorting algorithms.
-* You need a simple in-place sorting algorithm.
+    # 30. Advantages
 
----
+    * Very easy to understand.
+    * Very easy to implement.
+    * Simple control flow.
+    * In-place sorting algorithm.
+    * Requires `O(1)` extra space.
+    * Performs at most `n - 1` swaps.
+    * Useful when swapping/writing data is expensive.
+    * Good for educational purposes.
+    * Does not require an additional array.
 
-# 33. When NOT to Use Selection Sort
+    ---
 
-Do not use Selection Sort when:
+    # 31. Disadvantages
 
-* The dataset is large.
-* Performance is important.
-* You need `O(n log n)` performance.
-* Stable sorting is required.
-* The array is frequently updated.
-* A more efficient sorting algorithm is available.
+    * `O(n²)` time complexity in all cases.
+    * Not efficient for large datasets.
+    * Does not benefit significantly from an already sorted array.
+    * Usually slower than `O(n log n)` algorithms.
+    * Not stable by default.
+    * Not suitable for performance-sensitive applications.
 
----
+    ---
 
-# 34. Better Alternatives
+    # 32. When to Use Selection Sort
 
-For larger datasets, consider:
+    Use Selection Sort when:
 
-### Merge Sort
+    * The dataset is very small.
+    * Simplicity is important.
+    * Memory is extremely limited.
+    * `O(1)` extra space is required.
+    * The number of swaps should be minimized.
+    * You are learning sorting algorithms.
+    * You need a simple in-place sorting algorithm.
 
-```text
-Best:    O(n log n)
-Average: O(n log n)
-Worst:   O(n log n)
-Stable:  Yes
-```
+    ---
 
-### Quick Sort
+    # 33. When NOT to Use Selection Sort
 
-```text
-Best:    O(n log n)
-Average: O(n log n)
-Worst:   O(n²)
-```
+    Do not use Selection Sort when:
 
-### Heap Sort
+    * The dataset is large.
+    * Performance is important.
+    * You need `O(n log n)` performance.
+    * Stable sorting is required.
+    * The array is frequently updated.
+    * A more efficient sorting algorithm is available.
 
-```text
-Best:    O(n log n)
-Average: O(n log n)
-Worst:   O(n log n)
-Space:   O(1)
-```
+    ---
 
-### Insertion Sort
+    # 34. Better Alternatives
 
-```text
-Best:    O(n)
-Average: O(n²)
-Worst:   O(n²)
-```
+    For larger datasets, consider:
 
-Insertion Sort is especially good for **small or nearly sorted arrays**.
+    ### Merge Sort
 
----
+    ```text
+    Best:    O(n log n)
+    Average: O(n log n)
+    Worst:   O(n log n)
+    Stable:  Yes
+    ```
 
-# 35. Selection Sort vs Bubble Sort vs Insertion Sort
+    ### Quick Sort
 
-| Feature       | Selection Sort | Bubble Sort    | Insertion Sort |
-| ------------- | -------------- | -------------- | -------------- |
-| Best          | O(n²)          | O(n) optimized | O(n)           |
-| Average       | O(n²)          | O(n²)          | O(n²)          |
-| Worst         | O(n²)          | O(n²)          | O(n²)          |
-| Stable        | No             | Yes            | Yes            |
-| In-place      | Yes            | Yes            | Yes            |
-| Extra Space   | O(1)           | O(1)           | O(1)           |
-| Maximum swaps | n - 1          | Can be O(n²)   | Uses shifts    |
-| Nearly sorted | Not ideal      | Can be good    | Excellent      |
+    ```text
+    Best:    O(n log n)
+    Average: O(n log n)
+    Worst:   O(n²)
+    ```
 
----
+    ### Heap Sort
 
-# 36. Selection Sort vs Bubble Sort
+    ```text
+    Best:    O(n log n)
+    Average: O(n log n)
+    Worst:   O(n log n)
+    Space:   O(1)
+    ```
 
-### Selection Sort
+    ### Insertion Sort
 
-```text
-Find minimum
-      ↓
-Swap
-      ↓
-Next position
-      ↓
-Repeat
-```
+    ```text
+    Best:    O(n)
+    Average: O(n²)
+    Worst:   O(n²)
+    ```
 
-### Bubble Sort
+    Insertion Sort is especially good for **small or nearly sorted arrays**.
 
-```text
-Compare adjacent elements
-      ↓
-Swap if necessary
-      ↓
-Repeat
-```
+    ---
 
-The major advantage of Selection Sort is that it performs at most:
+    # 35. Selection Sort vs Bubble Sort vs Insertion Sort
 
-```text
-n - 1 swaps
-```
+    | Feature       | Selection Sort | Bubble Sort    | Insertion Sort |
+    | ------------- | -------------- | -------------- | -------------- |
+    | Best          | O(n²)          | O(n) optimized | O(n)           |
+    | Average       | O(n²)          | O(n²)          | O(n²)          |
+    | Worst         | O(n²)          | O(n²)          | O(n²)          |
+    | Stable        | No             | Yes            | Yes            |
+    | In-place      | Yes            | Yes            | Yes            |
+    | Extra Space   | O(1)           | O(1)           | O(1)           |
+    | Maximum swaps | n - 1          | Can be O(n²)   | Uses shifts    |
+    | Nearly sorted | Not ideal      | Can be good    | Excellent      |
 
-while Bubble Sort can perform many more swaps.
+    ---
 
----
+    # 36. Selection Sort vs Bubble Sort
 
-# 37. Selection Sort vs Insertion Sort
+    ### Selection Sort
 
-### Selection Sort
+    ```text
+    Find minimum
+        ↓
+    Swap
+        ↓
+    Next position
+        ↓
+    Repeat
+    ```
 
-```text
-Find minimum → Swap
-```
+    ### Bubble Sort
 
-### Insertion Sort
+    ```text
+    Compare adjacent elements
+        ↓
+    Swap if necessary
+        ↓
+    Repeat
+    ```
 
-```text
-Take element → Shift elements → Insert
-```
+    The major advantage of Selection Sort is that it performs at most:
 
-Insertion Sort is usually better for nearly sorted arrays because its best-case complexity is:
+    ```text
+    n - 1 swaps
+    ```
 
-```text
-O(n)
-```
+    while Bubble Sort can perform many more swaps.
 
-Selection Sort remains:
+    ---
 
-```text
-O(n²)
-```
+    # 37. Selection Sort vs Insertion Sort
 
----
+    ### Selection Sort
 
-# 38. Stable Selection Sort
+    ```text
+    Find minimum → Swap
+    ```
 
-Standard Selection Sort is not stable.
+    ### Insertion Sort
 
-It can be modified to become stable.
+    ```text
+    Take element → Shift elements → Insert
+    ```
 
-Instead of directly swapping the minimum element:
+    Insertion Sort is usually better for nearly sorted arrays because its best-case complexity is:
 
-```text
-A[i] ↔ A[min_index]
-```
+    ```text
+    O(n)
+    ```
 
-we can shift the elements between `i` and `min_index` one position to the right.
+    Selection Sort remains:
 
-Example:
+    ```text
+    O(n²)
+    ```
 
-```text
-[2a, 2b, 1]
-```
+    ---
 
-Stable result:
+    # 38. Stable Selection Sort
 
-```text
-[1, 2a, 2b]
-```
+    Standard Selection Sort is not stable.
 
-The relative order of `2a` and `2b` is preserved.
+    It can be modified to become stable.
 
-However, this requires additional shifting operations.
+    Instead of directly swapping the minimum element:
 
----
+    ```text
+    A[i] ↔ A[min_index]
+    ```
 
-# 39. Important Properties
+    we can shift the elements between `i` and `min_index` one position to the right.
 
-```text
-Selection Sort
-│
-├── Comparison-based
-├── In-place
-├── O(1) extra space
-├── Best = O(n²)
-├── Average = O(n²)
-├── Worst = O(n²)
-├── Not stable by default
-├── Maximum swaps = n - 1
-└── Comparisons = n(n - 1)/2
-```
+    Example:
 
----
+    ```text
+    [2a, 2b, 1]
+    ```
 
-# 40. Interview Questions
+    Stable result:
 
-### Q1. What is Selection Sort?
+    ```text
+    [1, 2a, 2b]
+    ```
 
-Selection Sort repeatedly finds the minimum element from the unsorted portion and places it in its correct position.
+    The relative order of `2a` and `2b` is preserved.
 
-### Q2. What is the best-case complexity?
+    However, this requires additional shifting operations.
 
-```text
-O(n²)
-```
+    ---
 
-### Q3. What is the average-case complexity?
+    # 39. Important Properties
 
-```text
-O(n²)
-```
+    ```text
+    Selection Sort
+    │
+    ├── Comparison-based
+    ├── In-place
+    ├── O(1) extra space
+    ├── Best = O(n²)
+    ├── Average = O(n²)
+    ├── Worst = O(n²)
+    ├── Not stable by default
+    ├── Maximum swaps = n - 1
+    └── Comparisons = n(n - 1)/2
+    ```
 
-### Q4. What is the worst-case complexity?
+    ---
 
-```text
-O(n²)
-```
+    # 40. Interview Questions
 
-### Q5. Why is the best case O(n²)?
+    ### Q1. What is Selection Sort?
 
-Because Selection Sort still scans the entire unsorted portion even if the array is already sorted.
+    Selection Sort repeatedly finds the minimum element from the unsorted portion and places it in its correct position.
 
-### Q6. Is Selection Sort stable?
+    ### Q2. What is the best-case complexity?
 
-No. Standard Selection Sort is not stable.
+    ```text
+    O(n²)
+    ```
 
-### Q7. Is Selection Sort in-place?
+    ### Q3. What is the average-case complexity?
 
-Yes.
+    ```text
+    O(n²)
+    ```
 
-```text
-Space = O(1)
-```
+    ### Q4. What is the worst-case complexity?
 
-### Q8. What is the maximum number of swaps?
+    ```text
+    O(n²)
+    ```
 
-```text
-n - 1
-```
+    ### Q5. Why is the best case O(n²)?
 
-### Q9. How many comparisons are performed?
+    Because Selection Sort still scans the entire unsorted portion even if the array is already sorted.
 
-```text
-n(n - 1) / 2
-```
+    ### Q6. Is Selection Sort stable?
 
-### Q10. How many passes are required?
+    No. Standard Selection Sort is not stable.
 
-```text
-n - 1
-```
+    ### Q7. Is Selection Sort in-place?
 
-### Q11. How do you sort in descending order?
+    Yes.
 
-Find the maximum element instead of the minimum element.
+    ```text
+    Space = O(1)
+    ```
 
-### Q12. Is Selection Sort good for large datasets?
+    ### Q8. What is the maximum number of swaps?
 
-No. Its `O(n²)` time complexity makes it inefficient for large datasets.
+    ```text
+    n - 1
+    ```
 
----
+    ### Q9. How many comparisons are performed?
 
-# 41. Easy Way to Remember
+    ```text
+    n(n - 1) / 2
+    ```
 
-The name tells you the main idea:
+    ### Q10. How many passes are required?
 
-```text
-SELECTION SORT
-      ↓
-SELECT
-      ↓
-Minimum
-      ↓
-Put it in correct position
-      ↓
-Repeat
-```
+    ```text
+    n - 1
+    ```
 
-For ascending order:
+    ### Q11. How do you sort in descending order?
 
-```text
-SELECT MINIMUM → MOVE LEFT
-```
+    Find the maximum element instead of the minimum element.
 
-For descending order:
+    ### Q12. Is Selection Sort good for large datasets?
 
-```text
-SELECT MAXIMUM → MOVE LEFT
-```
+    No. Its `O(n²)` time complexity makes it inefficient for large datasets.
 
----
+    ---
 
-# 42. Final Example
+    # 41. Easy Way to Remember
 
-Input:
+    The name tells you the main idea:
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    SELECTION SORT
+        ↓
+    SELECT
+        ↓
+    Minimum
+        ↓
+    Put it in correct position
+        ↓
+    Repeat
+    ```
 
-After Pass 1:
+    For ascending order:
 
-```text
-[2, 44, 38, 5, 15, 26, 27, 3, 46, 4]
-```
+    ```text
+    SELECT MINIMUM → MOVE LEFT
+    ```
 
-After Pass 2:
+    For descending order:
 
-```text
-[2, 3, 38, 5, 15, 26, 27, 44, 46, 4]
-```
+    ```text
+    SELECT MAXIMUM → MOVE LEFT
+    ```
 
-After Pass 3:
+    ---
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    # 42. Final Example
 
-After Pass 4:
+    Input:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-After Pass 5:
+    After Pass 1:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [2, 44, 38, 5, 15, 26, 27, 3, 46, 4]
+    ```
 
-After Pass 6:
+    After Pass 2:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [2, 3, 38, 5, 15, 26, 27, 44, 46, 4]
+    ```
 
-After Pass 7:
+    After Pass 3:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
-After Pass 8:
+    After Pass 4:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 46, 44]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
-After Pass 9:
+    After Pass 5:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
-Final:
+    After Pass 6:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
----
+    After Pass 7:
 
-# 43. Final Summary
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 44, 46, 38]
+    ```
 
-| Property      | Selection Sort                           |
-| ------------- | ---------------------------------------- |
-| Type          | Comparison-based                         |
-| Technique     | Select minimum and swap                  |
-| Best Case     | O(n²)                                    |
-| Average Case  | O(n²)                                    |
-| Worst Case    | O(n²)                                    |
-| Space         | O(1)                                     |
-| In-place      | Yes                                      |
-| Stable        | No                                       |
-| Passes        | n - 1                                    |
-| Comparisons   | n(n - 1) / 2                             |
-| Maximum Swaps | n - 1                                    |
-| Good for      | Small datasets, learning, limited memory |
-| Not good for  | Large/performance-sensitive datasets     |
+    After Pass 8:
 
-## Most Important Formula
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 46, 44]
+    ```
 
-```text
-Comparisons = n(n - 1) / 2
-```
+    After Pass 9:
 
-For our array:
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-```text
-n = 10
+    Final:
 
-Comparisons = 10 × 9 / 2
-             = 45
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-## Most Important Concept
+    ---
 
-```text
-Unsorted Array
-      ↓
-Find Minimum
-      ↓
-Swap with First Unsorted Element
-      ↓
-Sorted Portion Grows
-      ↓
-Repeat
-```
+    # 43. Final Summary
 
-### Final Takeaway
+    | Property      | Selection Sort                           |
+    | ------------- | ---------------------------------------- |
+    | Type          | Comparison-based                         |
+    | Technique     | Select minimum and swap                  |
+    | Best Case     | O(n²)                                    |
+    | Average Case  | O(n²)                                    |
+    | Worst Case    | O(n²)                                    |
+    | Space         | O(1)                                     |
+    | In-place      | Yes                                      |
+    | Stable        | No                                       |
+    | Passes        | n - 1                                    |
+    | Comparisons   | n(n - 1) / 2                             |
+    | Maximum Swaps | n - 1                                    |
+    | Good for      | Small datasets, learning, limited memory |
+    | Not good for  | Large/performance-sensitive datasets     |
 
-> **Selection Sort repeatedly selects the smallest element from the unsorted portion and places it at the beginning of that portion. It is simple, in-place, and uses at most `n - 1` swaps, but it always takes `O(n²)` time.**
+    ## Most Important Formula
+
+    ```text
+    Comparisons = n(n - 1) / 2
+    ```
+
+    For our array:
+
+    ```text
+    n = 10
+
+    Comparisons = 10 × 9 / 2
+                = 45
+    ```
+
+    ## Most Important Concept
+
+    ```text
+    Unsorted Array
+        ↓
+    Find Minimum
+        ↓
+    Swap with First Unsorted Element
+        ↓
+    Sorted Portion Grows
+        ↓
+    Repeat
+    ```
+
+    ### Final Takeaway
+
+    > **Selection Sort repeatedly selects the smallest element from the unsorted portion and places it at the beginning of that portion. It is simple, in-place, and uses at most `n - 1` swaps, but it always takes `O(n²)` time.**
 
 """
 
