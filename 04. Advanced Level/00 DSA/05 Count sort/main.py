@@ -1,727 +1,729 @@
 """
-# Counting Sort
+    # Counting Sort
 
-## 1. What is Counting Sort?
+    ## 1. What is Counting Sort?
 
-**Counting Sort** is a **non-comparison-based sorting algorithm**.
+    **Counting Sort** is a **non-comparison-based sorting algorithm**.
 
-Instead of comparing elements like:
+    Instead of comparing elements like:
 
-```text
-3 < 44
-38 > 5
-```
+    ```text
+    3 < 44
+    38 > 5
+    ```
 
-Counting Sort counts how many times each value occurs and uses those counts to build the sorted array.
+    Counting Sort counts how many times each value occurs and uses those counts to build the sorted array.
 
-### Main idea
+    ### Main idea
 
-```text
-Count → Calculate Positions → Place Elements
-```
+    ```text
+    Count → Calculate Positions → Place Elements
+    ```
 
----
+    ---
 
-# 2. Basic Idea
+    # 2. Basic Idea
 
-Given:
+    Given:
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-Minimum value:
+    Minimum value:
 
-```text
-2
-```
+    ```text
+    2
+    ```
 
-Maximum value:
+    Maximum value:
 
-```text
-46
-```
+    ```text
+    46
+    ```
 
-So we create a count array covering the range:
+    So we create a count array covering the range:
 
-```text
-2 → 46
-```
+    ```text
+    2 → 46
+    ```
 
-Then count how many times each number appears.
+    Then count how many times each number appears.
 
-For this array, every value appears once:
+    For this array, every value appears once:
 
-```text
-2  → 1
-3  → 1
-4  → 1
-5  → 1
-15 → 1
-26 → 1
-27 → 1
-38 → 1
-44 → 1
-46 → 1
-```
+    ```text
+    2  → 1
+    3  → 1
+    4  → 1
+    5  → 1
+    15 → 1
+    26 → 1
+    27 → 1
+    38 → 1
+    44 → 1
+    46 → 1
+    ```
 
-Finally, reconstruct the array in increasing order:
+    Finally, reconstruct the array in increasing order:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
----
+    ---
 
-# 3. How Counting Sort Works
+    # 3. How Counting Sort Works
 
-Counting Sort generally follows these steps:
+    Counting Sort generally follows these steps:
 
-### Step 1 — Find minimum and maximum
+    ### Step 1 — Find minimum and maximum
 
-```python
-minimum = min(arr)
-maximum = max(arr)
-```
-
-### Step 2 — Create a count array
-
-The size is based on the value range:
-
-```text
-maximum - minimum + 1
-```
-
-### Step 3 — Count occurrences
-
-For every element:
-
-```text
-count[value] += 1
-```
-
-### Step 4 — Reconstruct the sorted array
-
-Visit the count array from left to right and write each value according to its frequency.
-
----
-
-# 4. Example
-
-Given:
-
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
-
-Minimum:
-
-```text
-2
-```
-
-Maximum:
-
-```text
-46
-```
-
-Range:
-
-```text
-46 - 2 + 1 = 45
-```
-
-So we need a count array of size `45`.
-
-Conceptually:
-
-```text
-Value:  2  3  4  5  6  7 ... 15 ... 26 27 ... 38 ... 44 ... 46
-Count:  1  1  1  1  0  0 ...  1 ...  1  1 ...  1 ...  1 ...  1
-```
-
-Then read the count array:
-
-```text
-2
-3
-4
-5
-15
-26
-27
-38
-44
-46
-```
-
-Final:
-
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
-
----
-
-# 5. Simple Counting Sort
-
-For non-negative integers, the basic version is:
-
-```python
-def counting_sort(arr):
+    ```python
+    minimum = min(arr)
     maximum = max(arr)
+    ```
 
-    count = [0] * (maximum + 1)
+    ### Step 2 — Create a count array
 
-    # Count each value
-    for num in arr:
-        count[num] += 1
+    The size is based on the value range:
 
-    # Reconstruct sorted array
-    result = []
+    ```text
+    maximum - minimum + 1
+    ```
 
-    for value in range(len(count)):
-        for _ in range(count[value]):
-            result.append(value)
+    ### Step 3 — Count occurrences
 
-    return result
+    For every element:
 
+    ```text
+    count[value] += 1
+    ```
 
-arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ### Step 4 — Reconstruct the sorted array
 
-print("Original array:", arr)
-print("Sorted array:", counting_sort(arr))
-```
+    Visit the count array from left to right and write each value according to its frequency.
 
-Output:
+    ---
 
-```text
-Original array:
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    # 4. Example
 
-Sorted array:
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    Given:
 
----
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-# 6. Counting Array Example
+    Minimum:
 
-Take a smaller array:
+    ```text
+    2
+    ```
 
-```text
-[4, 2, 2, 8, 3, 3, 1]
-```
+    Maximum:
 
-Maximum:
+    ```text
+    46
+    ```
 
-```text
-8
-```
+    Range:
 
-Count array:
+    ```text
+    46 - 2 + 1 = 45
+    ```
 
-```text
-Index:  0 1 2 3 4 5 6 7 8
-Count:  0 1 2 2 1 0 0 0 1
-```
+    So we need a count array of size `45`.
 
-Meaning:
+    Conceptually:
 
-```text
-1 appears 1 time
-2 appears 2 times
-3 appears 2 times
-4 appears 1 time
-8 appears 1 time
-```
+    ```text
+    Value:  2  3  4  5  6  7 ... 15 ... 26 27 ... 38 ... 44 ... 46
+    Count:  1  1  1  1  0  0 ...  1 ...  1  1 ...  1 ...  1 ...  1
+    ```
 
-So:
+    Then read the count array:
 
-```text
-[1, 2, 2, 3, 3, 4, 8]
-```
+    ```text
+    2
+    3
+    4
+    5
+    15
+    26
+    27
+    38
+    44
+    46
+    ```
 
----
+    Final:
 
-# 7. Counting Sort with Negative Numbers
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-The simple implementation does not directly handle negative values.
+    ---
 
-For example:
+    # 5. Simple Counting Sort
 
-```text
-[-5, -2, 0, 3, -1, 2]
-```
+    For non-negative integers, the basic version is:
 
-We can solve this using the minimum value as an offset.
-
-The key formula is:
-
-```text
-index = value - minimum
-```
-
-Example:
-
-```text
-minimum = -5
-```
-
-For value `-5`:
-
-```text
--5 - (-5) = 0
-```
-
-For value `-2`:
-
-```text
--2 - (-5) = 3
-```
-
-For value `3`:
-
-```text
-3 - (-5) = 8
-```
-
----
-
-# 8. Python Counting Sort — Supports Negative Numbers
-
-```python
-class CountingSort:
-
-    def counting_sort(self, arr):
-        if not arr:
-            return arr
-
-        minimum = min(arr)
+    ```python
+    def counting_sort(arr):
         maximum = max(arr)
 
-        # Create count array
-        count = [0] * (maximum - minimum + 1)
+        count = [0] * (maximum + 1)
 
-        # Count occurrences
+        # Count each value
         for num in arr:
-            count[num - minimum] += 1
+            count[num] += 1
 
         # Reconstruct sorted array
         result = []
 
-        for i in range(len(count)):
-            for _ in range(count[i]):
-                result.append(i + minimum)
+        for value in range(len(count)):
+            for _ in range(count[value]):
+                result.append(value)
 
         return result
 
 
-if __name__ == "__main__":
-    counting_sort = CountingSort()
-
     arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
     print("Original array:", arr)
-    print("Counting Sort result:", counting_sort.counting_sort(arr))
-```
+    print("Sorted array:", counting_sort(arr))
+    ```
 
-Output:
+    Output:
 
-```text
-Original array:
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```text
+    Original array:
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
-Counting Sort result:
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    Sorted array:
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
----
+    ---
 
-# 9. Time Complexity
+    # 6. Counting Array Example
 
-Counting Sort has a different complexity from comparison-based sorting algorithms.
+    Take a smaller array:
 
-Let:
+    ```text
+    [4, 2, 2, 8, 3, 3, 1]
+    ```
 
-```text
-n = number of elements
-k = range of values
-```
+    Maximum:
 
-Then:
+    ```text
+    8
+    ```
 
-```text
-Time Complexity = O(n + k)
-```
+    Count array:
 
-### Best Case
+    ```text
+    Index:  0 1 2 3 4 5 6 7 8
+    Count:  0 1 2 2 1 0 0 0 1
+    ```
 
-```text
-O(n + k)
-```
+    Meaning:
 
-### Average Case
+    ```text
+    1 appears 1 time
+    2 appears 2 times
+    3 appears 2 times
+    4 appears 1 time
+    8 appears 1 time
+    ```
 
-```text
-O(n + k)
-```
+    So:
 
-### Worst Case
+    ```text
+    [1, 2, 2, 3, 3, 4, 8]
+    ```
 
-```text
-O(n + k)
-```
+    ---
 
-This is one of the major advantages of Counting Sort.
+    # 7. Counting Sort with Negative Numbers
 
----
+    The simple implementation does not directly handle negative values.
 
-# 10. Space Complexity
+    For example:
 
-Counting Sort needs a count array.
+    ```text
+    [-5, -2, 0, 3, -1, 2]
+    ```
 
-Therefore:
+    We can solve this using the minimum value as an offset.
 
-```text
-Space Complexity = O(n + k)
-```
+    The key formula is:
 
-Depending on the implementation, the output array may contribute `O(n)` additional space.
+    ```text
+    index = value - minimum
+    ```
 
----
+    Example:
 
-# 11. Why is Counting Sort Fast?
+    ```text
+    minimum = -5
+    ```
 
-Comparison-based sorting algorithms such as:
+    For value `-5`:
 
-```text
-Bubble Sort
-Selection Sort
-Insertion Sort
-Merge Sort
-Quick Sort
-```
+    ```text
+    -5 - (-5) = 0
+    ```
 
-generally determine order by comparing elements.
+    For value `-2`:
 
-Counting Sort avoids element-to-element comparisons.
+    ```text
+    -2 - (-5) = 3
+    ```
 
-Instead:
+    For value `3`:
 
-```text
-Value → Count
-```
+    ```text
+    3 - (-5) = 8
+    ```
 
-For a small range of integers, this can be extremely efficient.
+    ---
 
----
+    # 8. Python Counting Sort — Supports Negative Numbers
 
-# 12. Important Condition
+    ```python
+    class CountingSort:
 
-Counting Sort works best when:
+        def counting_sort(self, arr):
+            if not arr:
+                return arr
 
-```text
-Range of values (k) is not very large.
-```
+            minimum = min(arr)
+            maximum = max(arr)
 
-For example:
+            # Create count array
+            count = [0] * (maximum - minimum + 1)
 
-```text
-[2, 5, 1, 4, 3]
-```
+            # Count occurrences
+            for num in arr:
+                count[num - minimum] += 1
 
-Excellent.
+            # Reconstruct sorted array
+            result = []
 
-But consider:
+            for i in range(len(count)):
+                for _ in range(count[i]):
+                    result.append(i + minimum)
 
-```text
-[2, 1000000000]
-```
+            return result
 
-The range is enormous:
 
-```text
-1,000,000,000 - 2 + 1
-```
+    if __name__ == "__main__":
+        counting_sort = CountingSort()
 
-Creating a count array that large would be highly inefficient.
+        arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
----
+        print("Original array:", arr)
+        print("Counting Sort result:", counting_sort.counting_sort(arr))
+    ```
 
-# 13. Counting Sort vs Merge Sort
+    Output:
 
-| Feature   | Counting Sort       | Merge Sort              |
-| --------- | ------------------- | ----------------------- |
-| Type      | Non-comparison      | Comparison              |
-| Best      | O(n + k)            | O(n log n)              |
-| Average   | O(n + k)            | O(n log n)              |
-| Worst     | O(n + k)            | O(n log n)              |
-| Space     | O(n + k)            | O(n)                    |
-| Stable    | Can be              | Yes                     |
-| Data Type | Mainly integers     | General comparable data |
-| Best For  | Small integer range | General large datasets  |
+    ```text
+    Original array:
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
----
+    Counting Sort result:
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-# 14. Counting Sort vs Insertion Sort
+    ---
 
-| Feature  | Counting Sort | Insertion Sort |
-| -------- | ------------- | -------------- |
-| Approach | Counting      | Comparison     |
-| Best     | O(n + k)      | O(n)           |
-| Average  | O(n + k)      | O(n²)          |
-| Worst    | O(n + k)      | O(n²)          |
-| Space    | O(n + k)      | O(1)           |
-| Stable   | Can be        | Yes            |
-| In-place | No            | Yes            |
+    # 9. Time Complexity
 
----
+    Counting Sort has a different complexity from comparison-based sorting algorithms.
 
-# 15. Counting Sort vs Selection Sort
+    Let:
 
-| Feature     | Counting Sort | Selection Sort |
-| ----------- | ------------- | -------------- |
-| Approach    | Counting      | Comparison     |
-| Best        | O(n + k)      | O(n²)          |
-| Average     | O(n + k)      | O(n²)          |
-| Worst       | O(n + k)      | O(n²)          |
-| Space       | O(n + k)      | O(1)           |
-| Stable      | Can be        | Usually No     |
-| Large Range | Poor          | Better         |
+    ```text
+    n = number of elements
+    k = range of values
+    ```
 
----
+    Then:
 
-# 16. Is Counting Sort Stable?
+    ```text
+    Time Complexity = O(n + k)
+    ```
 
-**Counting Sort can be stable**, but the simple reconstruction version is not the typical stable implementation.
+    ### Best Case
 
-A stable Counting Sort uses **cumulative counts** and places elements into an output array while processing the input in the appropriate order.
+    ```text
+    O(n + k)
+    ```
 
-This version is commonly used when Counting Sort is a subroutine of **Radix Sort**.
+    ### Average Case
 
----
+    ```text
+    O(n + k)
+    ```
 
-# 17. Is Counting Sort In-Place?
+    ### Worst Case
 
-The standard implementation is:
+    ```text
+    O(n + k)
+    ```
 
-```text
-No
-```
+    This is one of the major advantages of Counting Sort.
 
-because it requires additional memory for the count array and often an output array.
+    ---
 
-Typical space:
+    # 10. Space Complexity
 
-```text
-O(n + k)
-```
+    Counting Sort needs a count array.
 
----
+    Therefore:
 
-# 18. Advantages
+    ```text
+    Space Complexity = O(n + k)
+    ```
 
-* Very fast when the value range is small.
-* `O(n + k)` time.
-* Does not use element comparisons.
-* Can be stable.
-* Useful as a subroutine in Radix Sort.
-* Simple for integer data with a limited range.
+    Depending on the implementation, the output array may contribute `O(n)` additional space.
 
----
+    ---
 
-# 19. Disadvantages
+    # 11. Why is Counting Sort Fast?
 
-* Mainly suitable for integer or discrete values.
-* Requires extra memory.
-* Can be inefficient when the value range is very large.
-* Not suitable for arbitrary objects without a suitable key/range representation.
+    Comparison-based sorting algorithms such as:
 
----
+    ```text
+    Bubble Sort
+    Selection Sort
+    Insertion Sort
+    Merge Sort
+    Quick Sort
+    ```
 
-# 20. When Should You Use Counting Sort?
+    generally determine order by comparing elements.
 
-Use Counting Sort when:
+    Counting Sort avoids element-to-element comparisons.
 
-* Data consists of integers.
-* The range of values is reasonably small.
-* You need very fast sorting.
-* Memory for a count array is available.
-* You are implementing Radix Sort.
+    Instead:
 
-Example:
+    ```text
+    Value → Count
+    ```
 
-```text
-[4, 2, 2, 8, 3, 3, 1]
-```
+    For a small range of integers, this can be extremely efficient.
 
-Excellent candidate.
+    ---
 
----
+    # 12. Important Condition
 
-# 21. When Should You NOT Use Counting Sort?
+    Counting Sort works best when:
 
-Avoid it when:
+    ```text
+    Range of values (k) is not very large.
+    ```
 
-* Values have a huge range.
-* Data contains arbitrary objects.
-* Values are floating-point numbers without a suitable discrete key.
-* Memory is limited.
+    For example:
 
-Example:
+    ```text
+    [2, 5, 1, 4, 3]
+    ```
 
-```text
-[5, 1000000000]
-```
+    Excellent.
 
-Counting Sort is a poor choice because the range is extremely large compared with `n`.
+    But consider:
 
----
+    ```text
+    [2, 1000000000]
+    ```
 
-# 22. Interview Questions
+    The range is enormous:
 
-### Q1. What is Counting Sort?
+    ```text
+    1,000,000,000 - 2 + 1
+    ```
 
-Counting Sort is a non-comparison sorting algorithm that sorts elements by counting the frequency of each value.
+    Creating a count array that large would be highly inefficient.
 
-### Q2. What is its time complexity?
+    ---
 
-```text
-O(n + k)
-```
+    # 13. Counting Sort vs Merge Sort
 
-where `n` is the number of elements and `k` is the range of values.
+    | Feature   | Counting Sort       | Merge Sort              |
+    | --------- | ------------------- | ----------------------- |
+    | Type      | Non-comparison      | Comparison              |
+    | Best      | O(n + k)            | O(n log n)              |
+    | Average   | O(n + k)            | O(n log n)              |
+    | Worst     | O(n + k)            | O(n log n)              |
+    | Space     | O(n + k)            | O(n)                    |
+    | Stable    | Can be              | Yes                     |
+    | Data Type | Mainly integers     | General comparable data |
+    | Best For  | Small integer range | General large datasets  |
 
-### Q3. What is its space complexity?
+    ---
 
-```text
-O(n + k)
-```
+    # 14. Counting Sort vs Insertion Sort
 
-depending on the implementation.
+    | Feature  | Counting Sort | Insertion Sort |
+    | -------- | ------------- | -------------- |
+    | Approach | Counting      | Comparison     |
+    | Best     | O(n + k)      | O(n)           |
+    | Average  | O(n + k)      | O(n²)          |
+    | Worst    | O(n + k)      | O(n²)          |
+    | Space    | O(n + k)      | O(1)           |
+    | Stable   | Can be        | Yes            |
+    | In-place | No            | Yes            |
 
-### Q4. Is Counting Sort a comparison-based algorithm?
+    ---
 
-No.
+    # 15. Counting Sort vs Selection Sort
 
-It is a **non-comparison-based** sorting algorithm.
+    | Feature     | Counting Sort | Selection Sort |
+    | ----------- | ------------- | -------------- |
+    | Approach    | Counting      | Comparison     |
+    | Best        | O(n + k)      | O(n²)          |
+    | Average     | O(n + k)      | O(n²)          |
+    | Worst       | O(n + k)      | O(n²)          |
+    | Space       | O(n + k)      | O(1)           |
+    | Stable      | Can be        | Usually No     |
+    | Large Range | Poor          | Better         |
 
-### Q5. Can Counting Sort handle negative numbers?
+    ---
 
-Yes, with an offset based on the minimum value.
+    # 16. Is Counting Sort Stable?
 
-### Q6. Is Counting Sort stable?
+    **Counting Sort can be stable**, but the simple reconstruction version is not the typical stable implementation.
 
-It can be stable when implemented using cumulative counts and an output array.
+    A stable Counting Sort uses **cumulative counts** and places elements into an output array while processing the input in the appropriate order.
 
-### Q7. Is Counting Sort in-place?
+    This version is commonly used when Counting Sort is a subroutine of **Radix Sort**.
 
-The standard implementation is not in-place.
+    ---
 
-### Q8. When is Counting Sort efficient?
+    # 17. Is Counting Sort In-Place?
 
-When the range `k` is relatively small compared with the number of elements `n`.
+    The standard implementation is:
 
-### Q9. What is the main disadvantage?
+    ```text
+    No
+    ```
 
-It can require a large amount of memory when the value range is large.
+    because it requires additional memory for the count array and often an output array.
 
-### Q10. Is Counting Sort faster than Merge Sort?
+    Typical space:
 
-It can be, when `k` is small, because its complexity is `O(n + k)` instead of `O(n log n)`.
+    ```text
+    O(n + k)
+    ```
 
----
+    ---
 
-# 23. Counting Sort Formula
+    # 18. Advantages
 
-The most important formula is:
+    * Very fast when the value range is small.
+    * `O(n + k)` time.
+    * Does not use element comparisons.
+    * Can be stable.
+    * Useful as a subroutine in Radix Sort.
+    * Simple for integer data with a limited range.
 
-```text
-k = maximum - minimum + 1
-```
+    ---
 
-For your array:
+    # 19. Disadvantages
 
-```text
-maximum = 46
-minimum = 2
+    * Mainly suitable for integer or discrete values.
+    * Requires extra memory.
+    * Can be inefficient when the value range is very large.
+    * Not suitable for arbitrary objects without a suitable key/range representation.
 
-k = 46 - 2 + 1
-  = 45
-```
+    ---
 
-So the count array needs `45` positions.
+    # 20. When Should You Use Counting Sort?
 
----
+    Use Counting Sort when:
 
-# 24. Key Concept
+    * Data consists of integers.
+    * The range of values is reasonably small.
+    * You need very fast sorting.
+    * Memory for a count array is available.
+    * You are implementing Radix Sort.
 
-Remember:
+    Example:
 
-```text
-Counting Sort
-      ↓
-Find min/max
-      ↓
-Create count array
-      ↓
-Count occurrences
-      ↓
-Reconstruct sorted array
-```
+    ```text
+    [4, 2, 2, 8, 3, 3, 1]
+    ```
 
-### One-line definition
+    Excellent candidate.
 
-**Counting Sort sorts integer values by counting how many times each value occurs instead of comparing elements with one another.**
+    ---
 
-### Main formula
+    # 21. When Should You NOT Use Counting Sort?
 
-```text
-Time = O(n + k)
-Space = O(n + k)
-```
+    Avoid it when:
 
-Where:
+    * Values have a huge range.
+    * Data contains arbitrary objects.
+    * Values are floating-point numbers without a suitable discrete key.
+    * Memory is limited.
 
-```text
-n = number of elements
-k = range of values
-```
+    Example:
 
----
+    ```text
+    [5, 1000000000]
+    ```
 
-# 25. Final Summary
+    Counting Sort is a poor choice because the range is extremely large compared with `n`.
 
-```text
-Counting Sort
-│
-├── Non-comparison based
-├── Mainly for integers
-│
-├── Find Minimum / Maximum
-├── Create Count Array
-├── Count Frequencies
-└── Reconstruct Sorted Array
-│
-├── Best       → O(n + k)
-├── Average    → O(n + k)
-├── Worst      → O(n + k)
-│
-├── Space      → O(n + k)
-├── Stable     → Can be
-└── In-place   → No (standard)
-```
+    ---
 
-**Remember:**
+    # 22. Interview Questions
 
-```text
-Selection Sort → Select minimum
-Bubble Sort    → Swap adjacent elements
-Insertion Sort → Shift and insert
-Merge Sort     → Divide and merge
-Counting Sort  → Count frequencies
-```
+    ### Q1. What is Counting Sort?
+
+    Counting Sort is a non-comparison sorting algorithm that sorts elements by counting the frequency of each value.
+
+    ### Q2. What is its time complexity?
+
+    ```text
+    O(n + k)
+    ```
+
+    where `n` is the number of elements and `k` is the range of values.
+
+    ### Q3. What is its space complexity?
+
+    ```text
+    O(n + k)
+    ```
+
+    depending on the implementation.
+
+    ### Q4. Is Counting Sort a comparison-based algorithm?
+
+    No.
+
+    It is a **non-comparison-based** sorting algorithm.
+
+    ### Q5. Can Counting Sort handle negative numbers?
+
+    Yes, with an offset based on the minimum value.
+
+    ### Q6. Is Counting Sort stable?
+
+    It can be stable when implemented using cumulative counts and an output array.
+
+    ### Q7. Is Counting Sort in-place?
+
+    The standard implementation is not in-place.
+
+    ### Q8. When is Counting Sort efficient?
+
+    When the range `k` is relatively small compared with the number of elements `n`.
+
+    ### Q9. What is the main disadvantage?
+
+    It can require a large amount of memory when the value range is large.
+
+    ### Q10. Is Counting Sort faster than Merge Sort?
+
+    It can be, when `k` is small, because its complexity is `O(n + k)` instead of `O(n log n)`.
+
+    ---
+
+    # 23. Counting Sort Formula
+
+    The most important formula is:
+
+    ```text
+    k = maximum - minimum + 1
+    ```
+
+    For your array:
+
+    ```text
+    maximum = 46
+    minimum = 2
+
+    k = 46 - 2 + 1
+    = 45
+    ```
+
+    So the count array needs `45` positions.
+
+    ---
+
+    # 24. Key Concept
+
+    Remember:
+
+    ```text
+    Counting Sort
+        ↓
+    Find min/max
+        ↓
+    Create count array
+        ↓
+    Count occurrences
+        ↓
+    Reconstruct sorted array
+    ```
+
+    ### One-line definition
+
+    **Counting Sort sorts integer values by counting how many times each value occurs instead of comparing elements with one another.**
+
+    ### Main formula
+
+    ```text
+    Time = O(n + k)
+    Space = O(n + k)
+    ```
+
+    Where:
+
+    ```text
+    n = number of elements
+    k = range of values
+    ```
+
+    ---
+
+    # 25. Final Summary
+
+    ```text
+    Counting Sort
+    │
+    ├── Non-comparison based
+    ├── Mainly for integers
+    │
+    ├── Find Minimum / Maximum
+    ├── Create Count Array
+    ├── Count Frequencies
+    └── Reconstruct Sorted Array
+    │
+    ├── Best       → O(n + k)
+    ├── Average    → O(n + k)
+    ├── Worst      → O(n + k)
+    │
+    ├── Space      → O(n + k)
+    ├── Stable     → Can be
+    └── In-place   → No (standard)
+    ```
+
+    **Remember:**
+
+    ```text
+    Selection Sort → Select minimum
+    Bubble Sort    → Swap adjacent elements
+    Insertion Sort → Shift and insert
+    Merge Sort     → Divide and merge
+    Counting Sort  → Count frequencies
+    ```
 
 """
+
+

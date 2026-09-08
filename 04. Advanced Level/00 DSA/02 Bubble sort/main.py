@@ -1,1309 +1,1309 @@
 """
-# Bubble Sort
+    # Bubble Sort
 
-## 1. What is Bubble Sort?
+    ## 1. What is Bubble Sort?
 
-**Bubble Sort** is a simple, comparison-based, in-place sorting algorithm.
+    **Bubble Sort** is a simple, comparison-based, in-place sorting algorithm.
 
-It repeatedly compares **adjacent elements** and swaps them if they are in the wrong order.
+    It repeatedly compares **adjacent elements** and swaps them if they are in the wrong order.
 
-In ascending order, the **largest element gradually moves to the end** of the unsorted portion after each pass.
+    In ascending order, the **largest element gradually moves to the end** of the unsorted portion after each pass.
 
-This is why it is called **Bubble Sort** — larger elements "bubble" toward the end of the array.
+    This is why it is called **Bubble Sort** — larger elements "bubble" toward the end of the array.
 
-### One-Line Definition
+    ### One-Line Definition
 
-> Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order.
+    > Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order.
 
----
+    ---
 
-# 2. Core Idea
+    # 2. Core Idea
 
-Bubble Sort works by comparing neighboring elements:
+    Bubble Sort works by comparing neighboring elements:
 
-```text
-A[j] and A[j + 1]
-```
+    ```text
+    A[j] and A[j + 1]
+    ```
 
-If:
+    If:
 
-```text
-A[j] > A[j + 1]
-```
+    ```text
+    A[j] > A[j + 1]
+    ```
 
-then swap them.
+    then swap them.
 
-For ascending order:
+    For ascending order:
 
-```text
-Larger → moves right
-Smaller → moves left
-```
+    ```text
+    Larger → moves right
+    Smaller → moves left
+    ```
 
-After every complete pass, the largest unsorted element reaches its correct position at the end.
+    After every complete pass, the largest unsorted element reaches its correct position at the end.
 
----
+    ---
 
-# 3. How Bubble Sort Works
+    # 3. How Bubble Sort Works
 
-For ascending order:
+    For ascending order:
 
-1. Start from the first element.
-2. Compare two adjacent elements.
-3. If the left element is greater than the right element, swap them.
-4. Move to the next pair.
-5. Continue until reaching the end of the unsorted portion.
-6. After one pass, the largest unsorted element is placed at the end.
-7. Repeat for the remaining unsorted portion.
-8. Continue until the array is sorted.
+    1. Start from the first element.
+    2. Compare two adjacent elements.
+    3. If the left element is greater than the right element, swap them.
+    4. Move to the next pair.
+    5. Continue until reaching the end of the unsorted portion.
+    6. After one pass, the largest unsorted element is placed at the end.
+    7. Repeat for the remaining unsorted portion.
+    8. Continue until the array is sorted.
 
----
+    ---
 
-# 4. Example Array
+    # 4. Example Array
 
-We will use the same array throughout:
+    We will use the same array throughout:
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-Array size:
+    Array size:
 
-```text
-n = 10
-```
+    ```text
+    n = 10
+    ```
 
-Maximum number of passes:
+    Maximum number of passes:
 
-```text
-n - 1 = 9
-```
+    ```text
+    n - 1 = 9
+    ```
 
----
+    ---
 
-# 5. Pass 1
+    # 5. Pass 1
 
-Initial array:
+    Initial array:
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-Compare adjacent elements.
+    Compare adjacent elements.
 
-### Comparison 1
+    ### Comparison 1
 
-```text
-3 and 44
+    ```text
+    3 and 44
 
-3 < 44
-→ No swap
-```
+    3 < 44
+    → No swap
+    ```
 
-Array:
+    Array:
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-### Comparison 2
+    ### Comparison 2
 
-```text
-44 and 38
+    ```text
+    44 and 38
 
-44 > 38
-→ Swap
-```
+    44 > 38
+    → Swap
+    ```
 
-```text
-[3, 38, 44, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 38, 44, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-### Comparison 3
+    ### Comparison 3
 
-```text
-44 and 5
+    ```text
+    44 and 5
 
-44 > 5
-→ Swap
-```
+    44 > 5
+    → Swap
+    ```
 
-```text
-[3, 38, 5, 44, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 38, 5, 44, 15, 26, 27, 2, 46, 4]
+    ```
 
-### Comparison 4
+    ### Comparison 4
 
-```text
-44 and 15
+    ```text
+    44 and 15
 
-44 > 15
-→ Swap
-```
+    44 > 15
+    → Swap
+    ```
 
-```text
-[3, 38, 5, 15, 44, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 38, 5, 15, 44, 26, 27, 2, 46, 4]
+    ```
 
-### Comparison 5
+    ### Comparison 5
 
-```text
-44 and 26
+    ```text
+    44 and 26
 
-44 > 26
-→ Swap
-```
+    44 > 26
+    → Swap
+    ```
 
-```text
-[3, 38, 5, 15, 26, 44, 27, 2, 46, 4]
-```
+    ```text
+    [3, 38, 5, 15, 26, 44, 27, 2, 46, 4]
+    ```
 
-### Comparison 6
+    ### Comparison 6
 
-```text
-44 and 27
+    ```text
+    44 and 27
 
-44 > 27
-→ Swap
-```
+    44 > 27
+    → Swap
+    ```
 
-```text
-[3, 38, 5, 15, 26, 27, 44, 2, 46, 4]
-```
+    ```text
+    [3, 38, 5, 15, 26, 27, 44, 2, 46, 4]
+    ```
 
-### Comparison 7
+    ### Comparison 7
 
-```text
-44 and 2
+    ```text
+    44 and 2
 
-44 > 2
-→ Swap
-```
+    44 > 2
+    → Swap
+    ```
 
-```text
-[3, 38, 5, 15, 26, 27, 2, 44, 46, 4]
-```
+    ```text
+    [3, 38, 5, 15, 26, 27, 2, 44, 46, 4]
+    ```
 
-### Comparison 8
+    ### Comparison 8
 
-```text
-44 and 46
+    ```text
+    44 and 46
 
-44 < 46
-→ No swap
-```
+    44 < 46
+    → No swap
+    ```
 
-### Comparison 9
+    ### Comparison 9
 
-```text
-46 and 4
+    ```text
+    46 and 4
 
-46 > 4
-→ Swap
-```
+    46 > 4
+    → Swap
+    ```
 
-Result:
+    Result:
 
-```text
-[3, 38, 5, 15, 26, 27, 2, 44, 4, 46]
-```
+    ```text
+    [3, 38, 5, 15, 26, 27, 2, 44, 4, 46]
+    ```
 
-Largest element `46` is now in its correct position.
+    Largest element `46` is now in its correct position.
 
-Sorted portion:
+    Sorted portion:
 
-```text
-[46]
-```
+    ```text
+    [46]
+    ```
 
----
+    ---
 
-# 6. Pass 2
+    # 6. Pass 2
 
-Unsorted portion:
+    Unsorted portion:
 
-```text
-[3, 38, 5, 15, 26, 27, 2, 44, 4]
-```
+    ```text
+    [3, 38, 5, 15, 26, 27, 2, 44, 4]
+    ```
 
-Compare adjacent elements.
+    Compare adjacent elements.
 
-```text
-3 < 38
-→ No swap
-```
+    ```text
+    3 < 38
+    → No swap
+    ```
 
-```text
-38 > 5
-→ Swap
+    ```text
+    38 > 5
+    → Swap
 
-[3, 5, 38, 15, 26, 27, 2, 44, 4, 46]
-```
+    [3, 5, 38, 15, 26, 27, 2, 44, 4, 46]
+    ```
 
-```text
-38 > 15
-→ Swap
+    ```text
+    38 > 15
+    → Swap
 
-[3, 5, 15, 38, 26, 27, 2, 44, 4, 46]
-```
+    [3, 5, 15, 38, 26, 27, 2, 44, 4, 46]
+    ```
 
-```text
-38 > 26
-→ Swap
+    ```text
+    38 > 26
+    → Swap
 
-[3, 5, 15, 26, 38, 27, 2, 44, 4, 46]
-```
+    [3, 5, 15, 26, 38, 27, 2, 44, 4, 46]
+    ```
 
-```text
-38 > 27
-→ Swap
+    ```text
+    38 > 27
+    → Swap
 
-[3, 5, 15, 26, 27, 38, 2, 44, 4, 46]
-```
+    [3, 5, 15, 26, 27, 38, 2, 44, 4, 46]
+    ```
 
-```text
-38 > 2
-→ Swap
+    ```text
+    38 > 2
+    → Swap
 
-[3, 5, 15, 26, 27, 2, 38, 44, 4, 46]
-```
+    [3, 5, 15, 26, 27, 2, 38, 44, 4, 46]
+    ```
 
-```text
-38 < 44
-→ No swap
-```
+    ```text
+    38 < 44
+    → No swap
+    ```
 
-```text
-44 > 4
-→ Swap
+    ```text
+    44 > 4
+    → Swap
 
-[3, 5, 15, 26, 27, 2, 38, 4, 44, 46]
-```
+    [3, 5, 15, 26, 27, 2, 38, 4, 44, 46]
+    ```
 
-Now `44` is in its correct position.
+    Now `44` is in its correct position.
 
----
+    ---
 
-# 7. Pass 3
+    # 7. Pass 3
 
-Start:
+    Start:
 
-```text
-[3, 5, 15, 26, 27, 2, 38, 4, 44, 46]
-```
+    ```text
+    [3, 5, 15, 26, 27, 2, 38, 4, 44, 46]
+    ```
 
-Comparisons:
+    Comparisons:
 
-```text
-3 < 5
-→ No swap
+    ```text
+    3 < 5
+    → No swap
 
-5 < 15
-→ No swap
+    5 < 15
+    → No swap
 
-15 < 26
-→ No swap
+    15 < 26
+    → No swap
 
-26 < 27
-→ No swap
+    26 < 27
+    → No swap
 
-27 > 2
-→ Swap
+    27 > 2
+    → Swap
 
-[3, 5, 15, 26, 2, 27, 38, 4, 44, 46]
+    [3, 5, 15, 26, 2, 27, 38, 4, 44, 46]
 
-27 < 38
-→ No swap
+    27 < 38
+    → No swap
 
-38 > 4
-→ Swap
+    38 > 4
+    → Swap
 
-[3, 5, 15, 26, 2, 27, 4, 38, 44, 46]
-```
+    [3, 5, 15, 26, 2, 27, 4, 38, 44, 46]
+    ```
 
-Now `38` is in its correct position.
+    Now `38` is in its correct position.
 
----
+    ---
 
-# 8. Pass 4
+    # 8. Pass 4
 
-Start:
+    Start:
 
-```text
-[3, 5, 15, 26, 2, 27, 4, 38, 44, 46]
-```
+    ```text
+    [3, 5, 15, 26, 2, 27, 4, 38, 44, 46]
+    ```
 
-Comparisons:
+    Comparisons:
 
-```text
-3 < 5
-→ No swap
+    ```text
+    3 < 5
+    → No swap
 
-5 < 15
-→ No swap
+    5 < 15
+    → No swap
 
-15 < 26
-→ No swap
+    15 < 26
+    → No swap
 
-26 > 2
-→ Swap
+    26 > 2
+    → Swap
 
-[3, 5, 15, 2, 26, 27, 4, 38, 44, 46]
+    [3, 5, 15, 2, 26, 27, 4, 38, 44, 46]
 
-26 < 27
-→ No swap
+    26 < 27
+    → No swap
 
-27 > 4
-→ Swap
+    27 > 4
+    → Swap
 
-[3, 5, 15, 2, 26, 4, 27, 38, 44, 46]
-```
+    [3, 5, 15, 2, 26, 4, 27, 38, 44, 46]
+    ```
 
-Now `27` is in its correct position.
+    Now `27` is in its correct position.
 
----
+    ---
 
-# 9. Pass 5
+    # 9. Pass 5
 
-Start:
+    Start:
 
-```text
-[3, 5, 15, 2, 26, 4, 27, 38, 44, 46]
-```
+    ```text
+    [3, 5, 15, 2, 26, 4, 27, 38, 44, 46]
+    ```
 
-Comparisons:
+    Comparisons:
 
-```text
-3 < 5
-→ No swap
+    ```text
+    3 < 5
+    → No swap
 
-5 < 15
-→ No swap
+    5 < 15
+    → No swap
 
-15 > 2
-→ Swap
+    15 > 2
+    → Swap
 
-[3, 5, 2, 15, 26, 4, 27, 38, 44, 46]
+    [3, 5, 2, 15, 26, 4, 27, 38, 44, 46]
 
-15 < 26
-→ No swap
+    15 < 26
+    → No swap
 
-26 > 4
-→ Swap
+    26 > 4
+    → Swap
 
-[3, 5, 2, 15, 4, 26, 27, 38, 44, 46]
-```
+    [3, 5, 2, 15, 4, 26, 27, 38, 44, 46]
+    ```
 
-Now `26` is in its correct position.
+    Now `26` is in its correct position.
 
----
+    ---
 
-# 10. Pass 6
+    # 10. Pass 6
 
-Start:
+    Start:
 
-```text
-[3, 5, 2, 15, 4, 26, 27, 38, 44, 46]
-```
+    ```text
+    [3, 5, 2, 15, 4, 26, 27, 38, 44, 46]
+    ```
 
-Comparisons:
+    Comparisons:
 
-```text
-3 < 5
-→ No swap
+    ```text
+    3 < 5
+    → No swap
 
-5 > 2
-→ Swap
+    5 > 2
+    → Swap
 
-[3, 2, 5, 15, 4, 26, 27, 38, 44, 46]
+    [3, 2, 5, 15, 4, 26, 27, 38, 44, 46]
 
-5 < 15
-→ No swap
+    5 < 15
+    → No swap
 
-15 > 4
-→ Swap
+    15 > 4
+    → Swap
 
-[3, 2, 5, 4, 15, 26, 27, 38, 44, 46]
-```
+    [3, 2, 5, 4, 15, 26, 27, 38, 44, 46]
+    ```
 
-Now `15` is in its correct position.
+    Now `15` is in its correct position.
 
----
+    ---
 
-# 11. Pass 7
+    # 11. Pass 7
 
-Start:
+    Start:
 
-```text
-[3, 2, 5, 4, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [3, 2, 5, 4, 15, 26, 27, 38, 44, 46]
+    ```
 
-Comparisons:
+    Comparisons:
 
-```text
-3 > 2
-→ Swap
+    ```text
+    3 > 2
+    → Swap
 
-[2, 3, 5, 4, 15, 26, 27, 38, 44, 46]
+    [2, 3, 5, 4, 15, 26, 27, 38, 44, 46]
 
-3 < 5
-→ No swap
+    3 < 5
+    → No swap
 
-5 > 4
-→ Swap
+    5 > 4
+    → Swap
 
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-Now the array is sorted.
+    Now the array is sorted.
 
----
+    ---
 
-# 12. Pass 8
+    # 12. Pass 8
 
-The array is already sorted:
+    The array is already sorted:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-If using the **optimized Bubble Sort**, no swaps occur.
+    If using the **optimized Bubble Sort**, no swaps occur.
 
-Therefore, we can stop early.
+    Therefore, we can stop early.
 
-```text
-No swaps → Array is already sorted
-```
+    ```text
+    No swaps → Array is already sorted
+    ```
 
-So Pass 9 is not required in the optimized version.
+    So Pass 9 is not required in the optimized version.
 
----
+    ---
 
-# 13. Final Sorted Array
+    # 13. Final Sorted Array
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
----
+    ---
 
-# 14. Pass Summary
+    # 14. Pass Summary
 
-| Pass | Largest Element Fixed | Array After Pass                       |
-| ---- | --------------------: | -------------------------------------- |
-| 1    |                    46 | `[3, 38, 5, 15, 26, 27, 2, 44, 4, 46]` |
-| 2    |                    44 | `[3, 5, 15, 26, 27, 2, 38, 4, 44, 46]` |
-| 3    |                    38 | `[3, 5, 15, 26, 2, 27, 4, 38, 44, 46]` |
-| 4    |                    27 | `[3, 5, 15, 2, 26, 4, 27, 38, 44, 46]` |
-| 5    |                    26 | `[3, 5, 2, 15, 4, 26, 27, 38, 44, 46]` |
-| 6    |                    15 | `[3, 2, 5, 4, 15, 26, 27, 38, 44, 46]` |
-| 7    |                     5 | `[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]` |
-| 8    |               No swap | Already sorted                         |
+    | Pass | Largest Element Fixed | Array After Pass                       |
+    | ---- | --------------------: | -------------------------------------- |
+    | 1    |                    46 | `[3, 38, 5, 15, 26, 27, 2, 44, 4, 46]` |
+    | 2    |                    44 | `[3, 5, 15, 26, 27, 2, 38, 4, 44, 46]` |
+    | 3    |                    38 | `[3, 5, 15, 26, 2, 27, 4, 38, 44, 46]` |
+    | 4    |                    27 | `[3, 5, 15, 2, 26, 4, 27, 38, 44, 46]` |
+    | 5    |                    26 | `[3, 5, 2, 15, 4, 26, 27, 38, 44, 46]` |
+    | 6    |                    15 | `[3, 2, 5, 4, 15, 26, 27, 38, 44, 46]` |
+    | 7    |                     5 | `[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]` |
+    | 8    |               No swap | Already sorted                         |
 
----
+    ---
 
-# 15. Pseudocode — Basic Bubble Sort
+    # 15. Pseudocode — Basic Bubble Sort
 
-```text
-BUBBLE-SORT(A):
+    ```text
+    BUBBLE-SORT(A):
 
-    n = length(A)
+        n = length(A)
 
-    for i = 0 to n - 2:
+        for i = 0 to n - 2:
 
-        for j = 0 to n - i - 2:
+            for j = 0 to n - i - 2:
 
-            if A[j] > A[j + 1]:
+                if A[j] > A[j + 1]:
 
-                swap A[j] and A[j + 1]
-```
+                    swap A[j] and A[j + 1]
+    ```
 
----
+    ---
 
-# 16. Python Implementation
+    # 16. Python Implementation
 
-```python
-class BubbleSort:
+    ```python
+    class BubbleSort:
 
-    def bubble_sort(self, arr):
-        n = len(arr)
+        def bubble_sort(self, arr):
+            n = len(arr)
 
-        for i in range(n - 1):
+            for i in range(n - 1):
 
-            for j in range(n - i - 1):
+                for j in range(n - i - 1):
 
-                if arr[j] > arr[j + 1]:
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                    if arr[j] > arr[j + 1]:
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
-            print(f"After pass {i + 1}: {arr}")
+                print(f"After pass {i + 1}: {arr}")
 
-        return arr
+            return arr
 
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
 
-    bubble_sort = BubbleSort()
+        bubble_sort = BubbleSort()
 
-    arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+        arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
-    print(f"Original array: {arr}")
+        print(f"Original array: {arr}")
 
-    result = bubble_sort.bubble_sort(arr)
+        result = bubble_sort.bubble_sort(arr)
 
-    print(f"Bubble Sort result: {result}")
-```
+        print(f"Bubble Sort result: {result}")
+    ```
 
----
+    ---
 
-# 17. Optimized Bubble Sort
+    # 17. Optimized Bubble Sort
 
-The basic Bubble Sort always performs all possible passes.
+    The basic Bubble Sort always performs all possible passes.
 
-We can improve it by checking whether any swap occurred during a pass.
+    We can improve it by checking whether any swap occurred during a pass.
 
-If **no swap occurs**, the array is already sorted.
+    If **no swap occurs**, the array is already sorted.
 
-Then we can stop early.
+    Then we can stop early.
 
-```python
-class BubbleSort:
+    ```python
+    class BubbleSort:
 
-    def bubble_sort(self, arr):
-        n = len(arr)
+        def bubble_sort(self, arr):
+            n = len(arr)
 
-        for i in range(n - 1):
+            for i in range(n - 1):
 
-            swapped = False
+                swapped = False
 
-            for j in range(n - i - 1):
+                for j in range(n - i - 1):
 
-                if arr[j] > arr[j + 1]:
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
-                    swapped = True
+                    if arr[j] > arr[j + 1]:
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                        swapped = True
 
-            print(f"After pass {i + 1}: {arr}")
+                print(f"After pass {i + 1}: {arr}")
 
-            if not swapped:
-                break
+                if not swapped:
+                    break
 
-        return arr
+            return arr
 
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
 
-    bubble_sort = BubbleSort()
+        bubble_sort = BubbleSort()
 
-    arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+        arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
 
-    print(f"Original array: {arr}")
+        print(f"Original array: {arr}")
 
-    result = bubble_sort.bubble_sort(arr)
+        result = bubble_sort.bubble_sort(arr)
 
-    print(f"Bubble Sort result: {result}")
-```
+        print(f"Bubble Sort result: {result}")
+    ```
 
----
+    ---
 
-# 18. Why Use `swapped`?
+    # 18. Why Use `swapped`?
 
-Consider an already sorted array:
+    Consider an already sorted array:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-During the first pass:
+    During the first pass:
 
-```text
-2 < 3
-3 < 4
-4 < 5
-...
-44 < 46
-```
+    ```text
+    2 < 3
+    3 < 4
+    4 < 5
+    ...
+    44 < 46
+    ```
 
-No elements need to be swapped.
+    No elements need to be swapped.
 
-Therefore:
+    Therefore:
 
-```text
-swapped = False
-```
+    ```text
+    swapped = False
+    ```
 
-This tells us:
+    This tells us:
 
-> The array is already sorted.
+    > The array is already sorted.
 
-So the algorithm can stop.
+    So the algorithm can stop.
 
-This optimization improves the **best-case complexity from O(n²) to O(n)**.
+    This optimization improves the **best-case complexity from O(n²) to O(n)**.
 
----
+    ---
 
-# 19. Time Complexity
+    # 19. Time Complexity
 
-## Basic Bubble Sort
+    ## Basic Bubble Sort
 
-### Best Case
+    ### Best Case
 
-```text
-O(n²)
-```
+    ```text
+    O(n²)
+    ```
 
-Without optimization, even an already sorted array still goes through all passes.
+    Without optimization, even an already sorted array still goes through all passes.
 
-### Average Case
+    ### Average Case
 
-```text
-O(n²)
-```
+    ```text
+    O(n²)
+    ```
 
-### Worst Case
+    ### Worst Case
 
-```text
-O(n²)
-```
+    ```text
+    O(n²)
+    ```
 
----
+    ---
 
-# 20. Optimized Bubble Sort Complexity
+    # 20. Optimized Bubble Sort Complexity
 
-With the `swapped` optimization:
+    With the `swapped` optimization:
 
-### Best Case
+    ### Best Case
 
-```text
-O(n)
-```
+    ```text
+    O(n)
+    ```
 
-If the array is already sorted, only one pass is needed.
+    If the array is already sorted, only one pass is needed.
 
-### Average Case
+    ### Average Case
 
-```text
-O(n²)
-```
+    ```text
+    O(n²)
+    ```
 
-### Worst Case
+    ### Worst Case
 
-```text
-O(n²)
-```
+    ```text
+    O(n²)
+    ```
 
----
+    ---
 
-# 21. Complexity Summary
+    # 21. Complexity Summary
 
-| Version               | Best  | Average | Worst |
-| --------------------- | ----- | ------- | ----- |
-| Basic Bubble Sort     | O(n²) | O(n²)   | O(n²) |
-| Optimized Bubble Sort | O(n)  | O(n²)   | O(n²) |
+    | Version               | Best  | Average | Worst |
+    | --------------------- | ----- | ------- | ----- |
+    | Basic Bubble Sort     | O(n²) | O(n²)   | O(n²) |
+    | Optimized Bubble Sort | O(n)  | O(n²)   | O(n²) |
 
----
+    ---
 
-# 22. Why is the Worst Case O(n²)?
+    # 22. Why is the Worst Case O(n²)?
 
-Consider a reverse-sorted array:
+    Consider a reverse-sorted array:
 
-```text
-[46, 44, 38, 27, 26, 15, 5, 4, 3, 2]
-```
+    ```text
+    [46, 44, 38, 27, 26, 15, 5, 4, 3, 2]
+    ```
 
-Almost every adjacent comparison requires a swap.
+    Almost every adjacent comparison requires a swap.
 
-The number of comparisons is approximately:
+    The number of comparisons is approximately:
 
-```text
-(n - 1) + (n - 2) + ... + 1
-```
+    ```text
+    (n - 1) + (n - 2) + ... + 1
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-n(n - 1) / 2
-```
+    ```text
+    n(n - 1) / 2
+    ```
 
-So:
+    So:
 
-```text
-Worst Case = O(n²)
-```
+    ```text
+    Worst Case = O(n²)
+    ```
 
----
+    ---
 
-# 23. Number of Comparisons
+    # 23. Number of Comparisons
 
-For `n` elements:
+    For `n` elements:
 
-```text
-Pass 1 → n - 1
-Pass 2 → n - 2
-Pass 3 → n - 3
-...
-Last   → 1
-```
+    ```text
+    Pass 1 → n - 1
+    Pass 2 → n - 2
+    Pass 3 → n - 3
+    ...
+    Last   → 1
+    ```
 
-Total:
+    Total:
 
-```text
-(n - 1) + (n - 2) + ... + 1
-```
+    ```text
+    (n - 1) + (n - 2) + ... + 1
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-Comparisons = n(n - 1) / 2
-```
+    ```text
+    Comparisons = n(n - 1) / 2
+    ```
 
-For our array:
+    For our array:
 
-```text
-n = 10
+    ```text
+    n = 10
 
-Comparisons
-= 10 × 9 / 2
-= 45
-```
+    Comparisons
+    = 10 × 9 / 2
+    = 45
+    ```
 
-So the maximum number of comparisons is:
+    So the maximum number of comparisons is:
 
-```text
-45
-```
+    ```text
+    45
+    ```
 
----
+    ---
 
-# 24. Space Complexity
+    # 24. Space Complexity
 
-Bubble Sort sorts the array in-place.
+    Bubble Sort sorts the array in-place.
 
-It only uses a few extra variables such as:
+    It only uses a few extra variables such as:
 
-```text
-i
-j
-swapped
-temporary value during swapping
-```
+    ```text
+    i
+    j
+    swapped
+    temporary value during swapping
+    ```
 
-Therefore:
+    Therefore:
 
-```text
-Space Complexity = O(1)
-```
+    ```text
+    Space Complexity = O(1)
+    ```
 
----
+    ---
 
-# 25. Stability
+    # 25. Stability
 
-Bubble Sort is **stable** by default.
+    Bubble Sort is **stable** by default.
 
-Why?
+    Why?
 
-It only swaps elements when:
+    It only swaps elements when:
 
-```text
-A[j] > A[j + 1]
-```
+    ```text
+    A[j] > A[j + 1]
+    ```
 
-It does not swap equal elements.
+    It does not swap equal elements.
 
-Example:
+    Example:
 
-```text
-[2a, 2b, 1]
-```
+    ```text
+    [2a, 2b, 1]
+    ```
 
-After sorting:
+    After sorting:
 
-```text
-[1, 2a, 2b]
-```
+    ```text
+    [1, 2a, 2b]
+    ```
 
-The relative order of `2a` and `2b` remains unchanged.
+    The relative order of `2a` and `2b` remains unchanged.
 
-Therefore:
+    Therefore:
 
-```text
-Bubble Sort = Stable
-```
+    ```text
+    Bubble Sort = Stable
+    ```
 
----
+    ---
 
-# 26. In-Place
+    # 26. In-Place
 
-Bubble Sort is an **in-place sorting algorithm**.
+    Bubble Sort is an **in-place sorting algorithm**.
 
-It modifies the original array and does not require another array.
+    It modifies the original array and does not require another array.
 
-Therefore:
+    Therefore:
 
-```text
-Auxiliary Space = O(1)
-```
+    ```text
+    Auxiliary Space = O(1)
+    ```
 
----
+    ---
 
-# 27. Ascending Order
+    # 27. Ascending Order
 
-For ascending order:
+    For ascending order:
 
-```python
-if arr[j] > arr[j + 1]:
-    arr[j], arr[j + 1] = arr[j + 1], arr[j]
-```
+    ```python
+    if arr[j] > arr[j + 1]:
+        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    ```
 
-Larger elements move toward the right.
+    Larger elements move toward the right.
 
-Example:
+    Example:
 
-```text
-[5, 3]
-```
+    ```text
+    [5, 3]
+    ```
 
-Since:
+    Since:
 
-```text
-5 > 3
-```
+    ```text
+    5 > 3
+    ```
 
-swap:
+    swap:
 
-```text
-[3, 5]
-```
+    ```text
+    [3, 5]
+    ```
 
----
+    ---
 
-# 28. Descending Order
+    # 28. Descending Order
 
-For descending order, reverse the comparison:
+    For descending order, reverse the comparison:
 
-```python
-if arr[j] < arr[j + 1]:
-    arr[j], arr[j + 1] = arr[j + 1], arr[j]
-```
+    ```python
+    if arr[j] < arr[j + 1]:
+        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    ```
 
-Example:
+    Example:
 
-```text
-[3, 5]
-```
+    ```text
+    [3, 5]
+    ```
 
-Since:
+    Since:
 
-```text
-3 < 5
-```
+    ```text
+    3 < 5
+    ```
 
-swap:
+    swap:
 
-```text
-[5, 3]
-```
+    ```text
+    [5, 3]
+    ```
 
-Final descending order for our array:
+    Final descending order for our array:
 
-```text
-[46, 44, 38, 27, 26, 15, 5, 4, 3, 2]
-```
+    ```text
+    [46, 44, 38, 27, 26, 15, 5, 4, 3, 2]
+    ```
 
----
+    ---
 
-# 29. Advantages
+    # 29. Advantages
 
-* Very easy to understand.
-* Very easy to implement.
-* Simple control flow.
-* In-place sorting algorithm.
-* Requires `O(1)` extra space.
-* Stable sorting algorithm.
-* Optimized version performs well on already sorted data.
-* Good for educational purposes.
-* Useful for understanding adjacent comparisons and swapping.
+    * Very easy to understand.
+    * Very easy to implement.
+    * Simple control flow.
+    * In-place sorting algorithm.
+    * Requires `O(1)` extra space.
+    * Stable sorting algorithm.
+    * Optimized version performs well on already sorted data.
+    * Good for educational purposes.
+    * Useful for understanding adjacent comparisons and swapping.
 
----
+    ---
 
-# 30. Disadvantages
+    # 30. Disadvantages
 
-* `O(n²)` average-case complexity.
-* `O(n²)` worst-case complexity.
-* Very slow for large datasets.
-* Performs many swaps in the worst case.
-* Not suitable for performance-sensitive applications.
-* Usually slower than efficient `O(n log n)` sorting algorithms.
+    * `O(n²)` average-case complexity.
+    * `O(n²)` worst-case complexity.
+    * Very slow for large datasets.
+    * Performs many swaps in the worst case.
+    * Not suitable for performance-sensitive applications.
+    * Usually slower than efficient `O(n log n)` sorting algorithms.
 
----
+    ---
 
-# 31. When to Use Bubble Sort
+    # 31. When to Use Bubble Sort
 
-Bubble Sort can be useful when:
+    Bubble Sort can be useful when:
 
-* The dataset is very small.
-* Simplicity is important.
-* You are learning sorting algorithms.
-* You need a stable in-place algorithm.
-* The data is already or nearly sorted and the optimized version is used.
-* You want to demonstrate adjacent comparisons and swapping.
+    * The dataset is very small.
+    * Simplicity is important.
+    * You are learning sorting algorithms.
+    * You need a stable in-place algorithm.
+    * The data is already or nearly sorted and the optimized version is used.
+    * You want to demonstrate adjacent comparisons and swapping.
 
----
+    ---
 
-# 32. When NOT to Use Bubble Sort
+    # 32. When NOT to Use Bubble Sort
 
-Avoid Bubble Sort when:
+    Avoid Bubble Sort when:
 
-* The dataset is large.
-* Performance is important.
-* You need efficient `O(n log n)` sorting.
-* The algorithm will run frequently on large arrays.
-* A better sorting algorithm is available.
+    * The dataset is large.
+    * Performance is important.
+    * You need efficient `O(n log n)` sorting.
+    * The algorithm will run frequently on large arrays.
+    * A better sorting algorithm is available.
 
----
+    ---
 
-# 33. Better Alternatives
+    # 33. Better Alternatives
 
-### Insertion Sort
+    ### Insertion Sort
 
-Good for:
+    Good for:
 
-```text
-Small or nearly sorted arrays
-```
+    ```text
+    Small or nearly sorted arrays
+    ```
 
-Complexity:
+    Complexity:
 
-```text
-Best    = O(n)
-Average = O(n²)
-Worst   = O(n²)
-```
+    ```text
+    Best    = O(n)
+    Average = O(n²)
+    Worst   = O(n²)
+    ```
 
-### Merge Sort
+    ### Merge Sort
 
-```text
-Best    = O(n log n)
-Average = O(n log n)
-Worst   = O(n log n)
-```
+    ```text
+    Best    = O(n log n)
+    Average = O(n log n)
+    Worst   = O(n log n)
+    ```
 
-### Quick Sort
+    ### Quick Sort
 
-```text
-Best    = O(n log n)
-Average = O(n log n)
-Worst   = O(n²)
-```
+    ```text
+    Best    = O(n log n)
+    Average = O(n log n)
+    Worst   = O(n²)
+    ```
 
-### Heap Sort
+    ### Heap Sort
 
-```text
-Best    = O(n log n)
-Average = O(n log n)
-Worst   = O(n log n)
-```
+    ```text
+    Best    = O(n log n)
+    Average = O(n log n)
+    Worst   = O(n log n)
+    ```
 
----
+    ---
 
-# 34. Bubble Sort vs Selection Sort vs Insertion Sort
+    # 34. Bubble Sort vs Selection Sort vs Insertion Sort
 
-| Feature       | Bubble Sort            | Selection Sort | Insertion Sort |
-| ------------- | ---------------------- | -------------- | -------------- |
-| Best          | O(n) optimized         | O(n²)          | O(n)           |
-| Average       | O(n²)                  | O(n²)          | O(n²)          |
-| Worst         | O(n²)                  | O(n²)          | O(n²)          |
-| Stable        | Yes                    | No             | Yes            |
-| In-place      | Yes                    | Yes            | Yes            |
-| Space         | O(1)                   | O(1)           | O(1)           |
-| Swaps         | Can be O(n²)           | At most n - 1  | Uses shifts    |
-| Nearly sorted | Good with optimization | Not ideal      | Excellent      |
+    | Feature       | Bubble Sort            | Selection Sort | Insertion Sort |
+    | ------------- | ---------------------- | -------------- | -------------- |
+    | Best          | O(n) optimized         | O(n²)          | O(n)           |
+    | Average       | O(n²)                  | O(n²)          | O(n²)          |
+    | Worst         | O(n²)                  | O(n²)          | O(n²)          |
+    | Stable        | Yes                    | No             | Yes            |
+    | In-place      | Yes                    | Yes            | Yes            |
+    | Space         | O(1)                   | O(1)           | O(1)           |
+    | Swaps         | Can be O(n²)           | At most n - 1  | Uses shifts    |
+    | Nearly sorted | Good with optimization | Not ideal      | Excellent      |
 
----
+    ---
 
-# 35. Bubble Sort vs Selection Sort
+    # 35. Bubble Sort vs Selection Sort
 
-### Bubble Sort
+    ### Bubble Sort
 
-```text
-Compare adjacent elements
+    ```text
+    Compare adjacent elements
+            ↓
+    Swap if necessary
+            ↓
+    Largest moves right
+            ↓
+    Repeat
+    ```
+
+    ### Selection Sort
+
+    ```text
+    Find minimum
         ↓
-Swap if necessary
+    Swap with first unsorted element
         ↓
-Largest moves right
+    Sorted portion grows
         ↓
-Repeat
-```
+    Repeat
+    ```
 
-### Selection Sort
+    Main difference:
 
-```text
-Find minimum
-      ↓
-Swap with first unsorted element
-      ↓
-Sorted portion grows
-      ↓
-Repeat
-```
+    ```text
+    Bubble Sort → Adjacent comparisons
+    Selection Sort → Find minimum
+    ```
 
-Main difference:
+    ---
 
-```text
-Bubble Sort → Adjacent comparisons
-Selection Sort → Find minimum
-```
+    # 36. Bubble Sort vs Insertion Sort
 
----
+    Bubble Sort:
 
-# 36. Bubble Sort vs Insertion Sort
+    ```text
+    Compare adjacent elements
+    → Swap
+    → Repeat
+    ```
 
-Bubble Sort:
+    Insertion Sort:
 
-```text
-Compare adjacent elements
-→ Swap
-→ Repeat
-```
+    ```text
+    Take an element
+    → Shift larger elements
+    → Insert element
+    ```
 
-Insertion Sort:
+    For nearly sorted data, Insertion Sort is generally more efficient.
 
-```text
-Take an element
-→ Shift larger elements
-→ Insert element
-```
+    ---
 
-For nearly sorted data, Insertion Sort is generally more efficient.
+    # 37. Important Properties
 
----
+    ```text
+    Bubble Sort
+    │
+    ├── Comparison-based
+    ├── In-place
+    ├── Stable
+    ├── Space = O(1)
+    ├── Basic Best = O(n²)
+    ├── Optimized Best = O(n)
+    ├── Average = O(n²)
+    ├── Worst = O(n²)
+    └── Adjacent elements are compared
+    ```
 
-# 37. Important Properties
+    ---
 
-```text
-Bubble Sort
-│
-├── Comparison-based
-├── In-place
-├── Stable
-├── Space = O(1)
-├── Basic Best = O(n²)
-├── Optimized Best = O(n)
-├── Average = O(n²)
-├── Worst = O(n²)
-└── Adjacent elements are compared
-```
+    # 38. Key Interview Questions
 
----
+    ### Q1. What is Bubble Sort?
 
-# 38. Key Interview Questions
+    Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order.
 
-### Q1. What is Bubble Sort?
+    ### Q2. Why is it called Bubble Sort?
 
-Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order.
+    Because larger elements gradually "bubble" toward the end of the array in ascending order.
 
-### Q2. Why is it called Bubble Sort?
+    ### Q3. What is the best-case complexity?
 
-Because larger elements gradually "bubble" toward the end of the array in ascending order.
+    Basic:
 
-### Q3. What is the best-case complexity?
+    ```text
+    O(n²)
+    ```
 
-Basic:
+    Optimized:
 
-```text
-O(n²)
-```
+    ```text
+    O(n)
+    ```
 
-Optimized:
+    ### Q4. What is the average-case complexity?
 
-```text
-O(n)
-```
+    ```text
+    O(n²)
+    ```
 
-### Q4. What is the average-case complexity?
+    ### Q5. What is the worst-case complexity?
 
-```text
-O(n²)
-```
+    ```text
+    O(n²)
+    ```
 
-### Q5. What is the worst-case complexity?
+    ### Q6. Is Bubble Sort stable?
 
-```text
-O(n²)
-```
+    Yes.
 
-### Q6. Is Bubble Sort stable?
+    ### Q7. Is Bubble Sort in-place?
 
-Yes.
+    Yes.
 
-### Q7. Is Bubble Sort in-place?
+    ### Q8. What is its space complexity?
 
-Yes.
+    ```text
+    O(1)
+    ```
 
-### Q8. What is its space complexity?
+    ### Q9. How does optimized Bubble Sort improve the algorithm?
 
-```text
-O(1)
-```
+    It stops early when a complete pass produces no swaps.
 
-### Q9. How does optimized Bubble Sort improve the algorithm?
+    ### Q10. How do you sort in descending order?
 
-It stops early when a complete pass produces no swaps.
+    Change:
 
-### Q10. How do you sort in descending order?
+    ```python
+    arr[j] > arr[j + 1]
+    ```
 
-Change:
+    to:
 
-```python
-arr[j] > arr[j + 1]
-```
+    ```python
+    arr[j] < arr[j + 1]
+    ```
 
-to:
+    ### Q11. What is the main difference between Bubble Sort and Selection Sort?
 
-```python
-arr[j] < arr[j + 1]
-```
+    Bubble Sort repeatedly compares adjacent elements, while Selection Sort searches for the minimum element and swaps it into position.
 
-### Q11. What is the main difference between Bubble Sort and Selection Sort?
+    ---
 
-Bubble Sort repeatedly compares adjacent elements, while Selection Sort searches for the minimum element and swaps it into position.
+    # 39. Easy Way to Remember
 
----
+    Remember Bubble Sort like this:
 
-# 39. Easy Way to Remember
+    ```text
+    COMPARE
+    ↓
+    ADJACENT ELEMENTS
+    ↓
+    WRONG ORDER?
+    ↓
+    SWAP
+    ↓
+    LARGEST BUBBLES RIGHT
+    ↓
+    REPEAT
+    ```
 
-Remember Bubble Sort like this:
+    For ascending order:
 
-```text
-COMPARE
-   ↓
-ADJACENT ELEMENTS
-   ↓
-WRONG ORDER?
-   ↓
-SWAP
-   ↓
-LARGEST BUBBLES RIGHT
-   ↓
-REPEAT
-```
+    ```text
+    Larger → Right
+    Smaller → Left
+    ```
 
-For ascending order:
+    For descending order:
 
-```text
-Larger → Right
-Smaller → Left
-```
+    ```text
+    Smaller → Right
+    Larger → Left
+    ```
 
-For descending order:
+    ---
 
-```text
-Smaller → Right
-Larger → Left
-```
+    # 40. Final Example
 
----
+    Input:
 
-# 40. Final Example
+    ```text
+    [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    ```
 
-Input:
+    After Pass 1:
 
-```text
-[3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
-```
+    ```text
+    [3, 38, 5, 15, 26, 27, 2, 44, 4, 46]
+    ```
 
-After Pass 1:
+    After Pass 2:
 
-```text
-[3, 38, 5, 15, 26, 27, 2, 44, 4, 46]
-```
+    ```text
+    [3, 5, 15, 26, 27, 2, 38, 4, 44, 46]
+    ```
 
-After Pass 2:
+    After Pass 3:
 
-```text
-[3, 5, 15, 26, 27, 2, 38, 4, 44, 46]
-```
+    ```text
+    [3, 5, 15, 26, 2, 27, 4, 38, 44, 46]
+    ```
 
-After Pass 3:
+    After Pass 4:
 
-```text
-[3, 5, 15, 26, 2, 27, 4, 38, 44, 46]
-```
+    ```text
+    [3, 5, 15, 2, 26, 4, 27, 38, 44, 46]
+    ```
 
-After Pass 4:
+    After Pass 5:
 
-```text
-[3, 5, 15, 2, 26, 4, 27, 38, 44, 46]
-```
+    ```text
+    [3, 5, 2, 15, 4, 26, 27, 38, 44, 46]
+    ```
 
-After Pass 5:
+    After Pass 6:
 
-```text
-[3, 5, 2, 15, 4, 26, 27, 38, 44, 46]
-```
+    ```text
+    [3, 2, 5, 4, 15, 26, 27, 38, 44, 46]
+    ```
 
-After Pass 6:
+    After Pass 7:
 
-```text
-[3, 2, 5, 4, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-After Pass 7:
+    Final:
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    ```text
+    [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
+    ```
 
-Final:
+    ---
 
-```text
-[2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-```
+    # 41. Final Summary
 
----
+    | Property       | Bubble Sort                        |
+    | -------------- | ---------------------------------- |
+    | Type           | Comparison-based                   |
+    | Technique      | Adjacent comparison and swapping   |
+    | Best Case      | O(n) optimized                     |
+    | Average Case   | O(n²)                              |
+    | Worst Case     | O(n²)                              |
+    | Space          | O(1)                               |
+    | In-place       | Yes                                |
+    | Stable         | Yes                                |
+    | Maximum Passes | n - 1                              |
+    | Good for       | Small/nearly sorted data, learning |
+    | Not good for   | Large datasets                     |
 
-# 41. Final Summary
+    ## Most Important Concept
 
-| Property       | Bubble Sort                        |
-| -------------- | ---------------------------------- |
-| Type           | Comparison-based                   |
-| Technique      | Adjacent comparison and swapping   |
-| Best Case      | O(n) optimized                     |
-| Average Case   | O(n²)                              |
-| Worst Case     | O(n²)                              |
-| Space          | O(1)                               |
-| In-place       | Yes                                |
-| Stable         | Yes                                |
-| Maximum Passes | n - 1                              |
-| Good for       | Small/nearly sorted data, learning |
-| Not good for   | Large datasets                     |
+    ```text
+    Compare Adjacent Elements
+            ↓
+    Are They in Wrong Order?
+            ↓
+        Yes → Swap
+            ↓
+    Largest Element Moves Right
+            ↓
+    Repeat
+    ```
 
-## Most Important Concept
+    ## Most Important Formula
 
-```text
-Compare Adjacent Elements
-          ↓
-Are They in Wrong Order?
-          ↓
-       Yes → Swap
-          ↓
-Largest Element Moves Right
-          ↓
-Repeat
-```
+    ```text
+    Maximum Comparisons = n(n - 1) / 2
+    ```
 
-## Most Important Formula
+    For `n = 10`:
 
-```text
-Maximum Comparisons = n(n - 1) / 2
-```
+    ```text
+    10 × 9 / 2 = 45
+    ```
 
-For `n = 10`:
+    ### Final Takeaway
 
-```text
-10 × 9 / 2 = 45
-```
-
-### Final Takeaway
-
-> **Bubble Sort repeatedly compares adjacent elements and swaps them when they are in the wrong order. In ascending order, the largest unsorted element bubbles to the end after each pass. It is simple, stable, in-place, but generally inefficient for large datasets.**
+    > **Bubble Sort repeatedly compares adjacent elements and swaps them when they are in the wrong order. In ascending order, the largest unsorted element bubbles to the end after each pass. It is simple, stable, in-place, but generally inefficient for large datasets.**
 
 """
