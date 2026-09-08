@@ -1,0 +1,82 @@
+Fraction Rules
+
+====================
+
+Fraction সংজ্ঞা:
+ভগ্নাংশ হলো দুইটি সংখ্যার অনুপাত, যেখানে উপরের সংখ্যা numerator এবং নিচের সংখ্যা denominator।
+উদাহরণ: 3/4, 7/2, 5/1
+
+Fraction এর ধরন:
+
+Proper fraction: numerator < denominator (উদাহরণ: 3/4)
+
+Improper fraction: numerator ≥ denominator (উদাহরণ: 7/4)
+
+Mixed fraction: পূর্ণসংখ্যা + proper fraction (উদাহরণ: 1 3/4)
+
+Equivalent fraction: একই মান কিন্তু ভিন্ন আকার (উদাহরণ: 2/4 = 1/2)
+
+Fraction এর সাধারণ নিয়ম:
+
+i) Addition (যোগ):
+
+Denominator সমান থাকলে: a/c + b/c = (a+b)/c
+উদাহরণ: 3/5 + 1/5 = 4/5
+
+Denominator আলাদা হলে: LCM নাও, a/b + c/d = (ad + bc)/(bd)
+উদাহরণ: 2/3 + 1/4 = (24 + 3*1)/12 = 11/12
+
+ii) Subtraction (বিয়োগ):
+
+Denominator সমান থাকলে: a/c - b/c = (a-b)/c
+উদাহরণ: 4/5 - 1/5 = 3/5
+
+Denominator আলাদা হলে: a/b - c/d = (ad - bc)/(bd)
+উদাহরণ: 3/4 - 1/6 = (36 - 4*1)/24 = 14/24 = 7/12
+
+iii) Multiplication (গুণ):
+
+a/b * c/d = (ac)/(bd)
+উদাহরণ: 2/3 * 4/5 = 8/15
+
+iv) Division (ভাগ):
+
+a/b ÷ c/d = a/b * d/c = (ad)/(bc)
+উদাহরণ: 2/3 ÷ 4/5 = 2/3 * 5/4 = 10/12 = 5/6
+
+v) Simplifying / Reducing:
+
+Fraction কে সর্বনিম্ন আকারে আনো: a/b → (a/gcd(a,b)) / (b/gcd(a,b))
+উদাহরণ: 8/12 → 2/3
+
+vi) Converting Mixed Fraction ↔ Improper Fraction:
+
+Mixed → Improper: n a/b = (n*b + a)/b
+উদাহরণ: 1 3/4 = 7/4
+
+Improper → Mixed: a/b = n a'/b (যেখানে n পূর্ণসংখ্যা, a' বাকি)
+উদাহরণ: 7/4 = 1 3/4
+
+vii) Comparing Fractions:
+
+Denominator এক করলে numerator তুলনা করো
+উদাহরণ: 3/4 > 2/4
+
+Cross-multiplication ব্যবহার করো: a/b > c/d ⇔ ad > bc
+
+viii) Reciprocal:
+
+Reciprocal of a/b = b/a
+
+Division এর জন্য প্রয়োজন হয়।
+
+Short Examples (সহজ উদাহরণ):
+
+Addition: 1/2 + 1/3 = 3/6 + 2/6 = 5/6
+
+Subtraction: 3/4 - 1/2 = 3/4 - 2/4 = 1/4
+
+Multiplication: 2/5 * 3/4 = 6/20 = 3/10
+
+Division: 3/4 ÷ 2/5 = 3/4 * 5/2 = 15/8 = 1 7/8
+

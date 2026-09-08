@@ -1,0 +1,322 @@
+# Tense (Full Details)
+
+Tense হলো verb-এর এমন একটি form যা কাজের সময় বোঝায়।
+
+ইংরেজিতে প্রধানত ৩ ধরনের tense আছে:
+
+1. Present Tense (বর্তমান)
+2. Past Tense (অতীত)
+3. Future Tense (ভবিষ্যৎ)
+
+প্রতিটি আবার ৪ ভাগে বিভক্ত।
+
+মোট = 12 Tense
+
+==================================================
+
+12 Tense Chart
+
+Present:
+- Present Simple
+- Present Continuous
+- Present Perfect
+- Present Perfect Continuous
+
+Past:
+- Past Simple
+- Past Continuous
+- Past Perfect
+- Past Perfect Continuous
+
+Future:
+- Future Simple
+- Future Continuous
+- Future Perfect
+- Future Perfect Continuous
+
+==================================================
+
+1. Present Indefinite / Simple Present
+
+Structure:
+Positive:
+Subject + Verb1 + Object
+
+Negative:
+Subject + do/does not + Verb1
+
+Question:
+Do/Does + Subject + Verb1?
+
+Uses:
+- Habit
+- Universal truth
+- Daily routine
+
+Examples:
+- I play football.
+- She goes to school.
+- The sun rises in the east.
+
+==================================================
+
+2. Present Continuous
+
+Structure:
+Positive:
+Subject + am/is/are + Verb+ing
+
+Negative:
+Subject + am/is/are not + Verb+ing
+
+Question:
+Am/Is/Are + Subject + Verb+ing?
+
+Uses:
+- এখন কাজ চলছে
+
+Examples:
+- I am reading.
+- They are playing.
+- She is cooking.
+
+==================================================
+
+3. Present Perfect
+
+Structure:
+Positive:
+Subject + have/has + Verb3
+
+Negative:
+Subject + have/has not + Verb3
+
+Question:
+Have/Has + Subject + Verb3?
+
+Uses:
+- কাজ শেষ হয়েছে
+- Experience
+
+Examples:
+- I have completed the work.
+- She has gone home.
+
+==================================================
+
+4. Present Perfect Continuous
+
+Structure:
+Positive:
+Subject + have/has been + Verb+ing + since/for
+
+Negative:
+Subject + have/has not been + Verb+ing
+
+Question:
+Have/Has + Subject + been + Verb+ing?
+
+Uses:
+- কাজ কিছু সময় ধরে চলছে
+
+Examples:
+- I have been studying for two hours.
+- She has been working since morning.
+
+==================================================
+
+5. Past Indefinite / Simple Past
+
+Structure:
+Positive:
+Subject + Verb2
+
+Negative:
+Subject + did not + Verb1
+
+Question:
+Did + Subject + Verb1?
+
+Uses:
+- অতীতে কাজ হয়েছে
+
+Examples:
+- I played cricket.
+- She went home.
+
+==================================================
+
+6. Past Continuous
+
+Structure:
+Positive:
+Subject + was/were + Verb+ing
+
+Negative:
+Subject + was/were not + Verb+ing
+
+Question:
+Was/Were + Subject + Verb+ing?
+
+Uses:
+- অতীতে কোনো কাজ চলছিল
+
+Examples:
+- I was reading.
+- They were playing.
+
+==================================================
+
+7. Past Perfect
+
+Structure:
+Positive:
+Subject + had + Verb3
+
+Negative:
+Subject + had not + Verb3
+
+Question:
+Had + Subject + Verb3?
+
+Uses:
+- অতীতে একটি কাজ আরেকটির আগে শেষ হয়েছিল
+
+Examples:
+- I had finished the work before he came.
+- She had left before sunset.
+
+==================================================
+
+8. Past Perfect Continuous
+
+Structure:
+Positive:
+Subject + had been + Verb+ing + since/for
+
+Negative:
+Subject + had not been + Verb+ing
+
+Question:
+Had + Subject + been + Verb+ing?
+
+Uses:
+- অতীতে কিছু সময় ধরে কাজ চলছিল
+
+Examples:
+- I had been studying for three hours.
+- They had been playing since morning.
+
+==================================================
+
+9. Future Indefinite / Simple Future
+
+Structure:
+Positive:
+Subject + will + Verb1
+
+Negative:
+Subject + will not + Verb1
+
+Question:
+Will + Subject + Verb1?
+
+Uses:
+- ভবিষ্যতে কাজ হবে
+
+Examples:
+- I will go there.
+- She will help me.
+
+==================================================
+
+10. Future Continuous
+
+Structure:
+Positive:
+Subject + will be + Verb+ing
+
+Negative:
+Subject + will not be + Verb+ing
+
+Question:
+Will + Subject + be + Verb+ing?
+
+Uses:
+- ভবিষ্যতে কোনো কাজ চলতে থাকবে
+
+Examples:
+- I will be studying.
+- They will be traveling.
+
+==================================================
+
+11. Future Perfect
+
+Structure:
+Positive:
+Subject + will have + Verb3
+
+Negative:
+Subject + will not have + Verb3
+
+Question:
+Will + Subject + have + Verb3?
+
+Uses:
+- ভবিষ্যতে নির্দিষ্ট সময়ের আগে কাজ শেষ হবে
+
+Examples:
+- I will have completed the work.
+- She will have arrived by 5 PM.
+
+==================================================
+
+12. Future Perfect Continuous
+
+Structure:
+Positive:
+Subject + will have been + Verb+ing + since/for
+
+Negative:
+Subject + will not have been + Verb+ing
+
+Question:
+Will + Subject + have been + Verb+ing?
+
+Uses:
+- ভবিষ্যতে কিছু সময় ধরে কাজ চলতে থাকবে
+
+Examples:
+- I will have been studying for two hours.
+- They will have been working since morning.
+
+==================================================
+
+Verb Forms
+
+Verb1 = go
+Verb2 = went
+Verb3 = gone
+Verb+ing = going
+
+==================================================
+
+Since vs For
+
+Since:
+- since 2020
+- since morning
+
+For:
+- for 2 years
+- for 5 hours
+
+==================================================
+
+Shortcut Formula
+
+Simple = Verb
+Continuous = be + ing
+Perfect = have + V3
+Perfect Continuous = have been + ing

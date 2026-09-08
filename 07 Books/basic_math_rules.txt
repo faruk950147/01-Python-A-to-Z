@@ -1,0 +1,384 @@
+📌 1. Four Basic Operations 
+ 
+Addition (+): 
+- a + b = b + a (Commutative) 
+- (a+b)+c = a+(b+c) (Associative) 
+Example: 5+3 = 3+5, (2+4)+6 = 2+(4+6) 
+ 
+Subtraction (−): 
+- Changing the order changes the result 
+Example: 7-5 ≠ 5-7 
+ 
+Multiplication (×): 
+- a × b = b × a 
+- (a×b)×c = a×(b×c) 
+- Distributive: a×(b+c) = a×b + a×c 
+Example: 4×3 = 3×4, 2×(3+5) = 2×3 + 2×5 
+ 
+Division (÷): 
+- Changing the order changes the result 
+- Cannot divide by zero 
+Example: 12÷4 ≠ 4÷12, a÷0 ❌ 
+
+
+📌 2. Rules for Positive and Negative Numbers
+
++ × + = +
++ × - = -
+- × + = -
+- × - = +
+
+(Same rules for division)
+
+
+📌 3. Rules of Zero and One
+
+a + 0 = a
+a - 0 = a
+a × 0 = 0
+a ÷ 1 = a
+a × 1 = a
+
+
+📌 4. Rules of Exponents (Powers)
+
+aᵐ × aⁿ = aᵐ⁺ⁿ
+
+aᵐ ÷ aⁿ = aᵐ⁻ⁿ
+
+(aᵐ)ⁿ = aᵐⁿ
+
+(ab)ⁿ = aⁿbⁿ
+
+(a/b)ⁿ = aⁿ/bⁿ
+
+a⁰ = 1  (a ≠ 0)
+
+a⁻ⁿ = 1/aⁿ
+
+a¹/ⁿ = ⁿ√a
+
+aᵐ/ⁿ = ⁿ√(aᵐ)
+
+
+📌 5. Fraction Rules
+
+(a/b) + (c/b) = (a+c)/b
+
+(a/b) × (c/d) = (a×c)/(b×d)
+
+(a/b) ÷ (c/d) = (a/b) × (d/c)
+
+a/b + c/d = (ad+bc)/bd
+
+a/b - c/d = (ad-bc)/bd
+
+
+📌 6. BODMAS Rule
+
+Bracket → Order (powers/roots) → Division → Multiplication → Addition → Subtraction
+
+Example:
+
+6 + 2 × (3 + 1)²
+= 6 + 2 × 16
+= 6 + 32
+= 38
+
+
+📌 7. Basic Algebraic Identities
+
+(a+b)² = a² + 2ab + b²
+
+(a-b)² = a² - 2ab + b²
+
+(a+b)(a-b) = a² - b²
+
+(a+b)² - (a-b)² = 4ab
+
+(a+b)² + (a-b)² = 2(a²+b²)
+
+================= Explain ===============
+We have:
+
+(a+b)² - 2ab
+
+Step 1: Expand (a+b)²
+
+We know:
+
+(a+b)² = a² + 2ab + b²
+
+Now substitute it into the expression:
+
+(a+b)² - 2ab
+= a² + 2ab + b² - 2ab
+
+Step 2: +2ab and -2ab cancel each other
+
++2ab - 2ab = 0
+
+So, what remains is:
+
+a² + b²
+
+Therefore,
+
+(a+b)² - 2ab = a² + b²
+
+
+📌 8. Cube Formulas
+
+(a+b)³ = a³ + 3a²b + 3ab² + b³
+
+(a-b)³ = a³ - 3a²b + 3ab² - b³
+
+(a+b)³ = a³ + b³ + 3ab(a+b)
+
+(a-b)³ = a³ - b³ - 3ab(a-b)
+
+a³+b³ = (a+b)(a²-ab+b²)
+
+a³-b³ = (a-b)(a²+ab+b²)
+
+
+📌 9. Three Variable Identities
+
+(a+b+c)²
+= a²+b²+c²+2ab+2bc+2ca
+
+a³+b³+c³-3abc
+= (a+b+c)(a²+b²+c²-ab-bc-ca)
+
+If a+b+c = 0,
+
+a³+b³+c³ = 3abc
+
+
+📌 10. Factorization Rules
+
+ax + ay = a(x+y)
+
+ax - ay = a(x-y)
+
+a²-b² = (a+b)(a-b)
+
+a²+2ab+b² = (a+b)²
+
+a²-2ab+b² = (a-b)²
+
+a³+b³ = (a+b)(a²-ab+b²)
+
+a³-b³ = (a-b)(a²+ab+b²)
+
+
+📌 11. Quadratic Equation
+
+General form:
+
+ax² + bx + c = 0
+
+Quadratic Formula:
+
+x = (-b ± √(b²-4ac)) / 2a
+
+Discriminant:
+
+D = b² - 4ac
+
+If D > 0 → Two distinct real roots
+
+If D = 0 → Two equal real roots
+
+If D < 0 → No real roots
+
+
+📌 12. Roots of Quadratic Equation
+
+If the roots are α and β:
+
+α + β = -b/a
+
+αβ = c/a
+
+(α-β)² = (α+β)² - 4αβ
+
+(α-β)² = (b²-4ac)/a²
+
+
+📌 13. Surd / Root Rules
+
+√(ab) = √a × √b
+
+√(a/b) = √a/√b
+
+(√a)² = a
+
+√(a²) = |a|
+
+(√a+√b)(√a-√b) = a-b
+
+
+📌 14. Ratio and Proportion
+
+a/b = c/d
+
+Then:
+
+ad = bc
+
+Componendo:
+
+If a/b = c/d,
+
+(a+b)/b = (c+d)/d
+
+Dividendo:
+
+(a-b)/b = (c-d)/d
+
+Componendo & Dividendo:
+
+(a+b)/(a-b) = (c+d)/(c-d)
+
+
+📌 15. Logarithm Rules
+
+logₐ(xy) = logₐx + logₐy
+
+logₐ(x/y) = logₐx - logₐy
+
+logₐ(xⁿ) = n logₐx
+
+logₐ1 = 0
+
+logₐa = 1
+
+logₐb = 1/log_ba
+
+Change of Base:
+
+logₐb = log_cb/log_ca
+
+
+📌 16. AP (Arithmetic Progression)
+
+n-th term:
+
+Tₙ = a + (n-1)d
+
+Sum of n terms:
+
+Sₙ = n/2 [2a+(n-1)d]
+
+Or,
+
+Sₙ = n/2 (a+l)
+
+
+📌 17. GP (Geometric Progression)
+
+n-th term:
+
+Tₙ = arⁿ⁻¹
+
+Sum of n terms:
+
+Sₙ = a(rⁿ-1)/(r-1)
+
+Or,
+
+Sₙ = a(1-rⁿ)/(1-r)
+
+Infinite GP:
+
+S∞ = a/(1-r),  |r| < 1
+
+
+📌 18. Some Shortcut Tips
+
+1. Multiply by 5:
+
+number × 5 = (number × 10) ÷ 2
+
+Example:
+
+28×5 = (28×10) ÷ 2 = 140
+
+
+2. Multiply by 25:
+
+number × 25 = (number × 100) ÷ 4
+
+Example:
+
+36×25 = (36×100) ÷ 4 = 900
+
+
+3. Multiply by 9:
+
+number × 9 = (number × 10) - number
+
+Example:
+
+47×9 = (47×10) - 47 = 423
+
+
+4. Multiply by 11:
+
+For a two-digit number ab:
+
+ab × 11 = a(a+b)b
+
+Example:
+
+23×11 = 253
+
+
+5. Square of a number ending in 5:
+
+(10n+5)² = 100n(n+1)+25
+
+Example:
+
+35² = 3×4×100 + 25
+= 1225
+
+
+📌 19. Important Algebra Rules
+
+a(b+c) = ab+ac
+
+a(b-c) = ab-ac
+
+(a+b)/c = a/c + b/c
+
+(a-b)/c = a/c - b/c
+
+If ax = b,
+
+x = b/a
+
+If x/a = b,
+
+x = ab
+
+
+📌 20. Quick Sign Rules
+
+(+)+(+)=+
+(-)+(-)=-
+
+(+)-(-)=(+)+(+)
+
+(-)-(+)=(-)+(-)
+
+(+)(+) = +
+(+)(-) = -
+(-)(+) = -
+(-)(-) = +
+
+(+)/(+) = +
+(+)/(-) = -
+(-)/(+) = -
+(-)/(-) = +

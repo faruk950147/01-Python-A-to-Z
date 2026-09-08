@@ -1,0 +1,136 @@
+Parts of Speech (শব্দের পদ) কী?
+
+English grammar-এ একটি word বাক্যে কী কাজ করছে তার উপর ভিত্তি করে তাকে যে category-তে রাখা হয় তাকে Parts of Speech বলে।
+
+মোট ৮টি প্রধান Parts of Speech আছে।
+
+1. Noun (বিশেষ্য)
+যে word কোনো ব্যক্তি, বস্তু, স্থান, প্রাণী বা ধারণার নাম বোঝায় তাকে Noun বলে।
+
+Examples:
+- Rahim
+- School
+- Book
+- Dhaka
+- Honesty
+
+Sentence:
+Rahim reads a book.
+
+এখানে Rahim এবং book হলো noun।
+
+2. Pronoun (সর্বনাম)
+যে word noun-এর পরিবর্তে ব্যবহার হয় তাকে Pronoun বলে।
+
+Examples:
+- He
+- She
+- They
+- We
+- It
+
+Sentence:
+Rahim is a student. He reads daily.
+
+এখানে He হলো pronoun কারণ এটি Rahim-এর পরিবর্তে এসেছে।
+
+3. Verb (ক্রিয়া)
+যে word কাজ, অবস্থা বা ঘটনার কথা বোঝায় তাকে Verb বলে।
+
+Examples:
+- Go
+- Eat
+- Write
+- Sleep
+- Is
+
+Sentence:
+They play football.
+
+এখানে play হলো verb।
+
+4. Adjective (বিশেষণ)
+যে word noun বা pronoun-এর গুণ, অবস্থা বা সংখ্যা প্রকাশ করে তাকে Adjective বলে।
+
+Examples:
+- Beautiful
+- Tall
+- Good
+- Five
+- Red
+
+Sentence:
+She has a red bag.
+
+এখানে red adjective কারণ এটি bag-এর বর্ণনা দিয়েছে।
+
+5. Adverb (ক্রিয়া বিশেষণ)
+যে word verb, adjective বা অন্য adverb-এর বর্ণনা দেয় তাকে Adverb বলে।
+
+Examples:
+- Slowly
+- Very
+- Quickly
+- Well
+- Yesterday
+
+Sentence:
+He runs quickly.
+
+এখানে quickly adverb কারণ এটি runs কিভাবে হচ্ছে তা বোঝাচ্ছে।
+
+6. Preposition (পদান্বয়ী অব্যয়)
+যে word noun/pronoun-এর সাথে অন্য word-এর সম্পর্ক দেখায় তাকে Preposition বলে।
+
+Examples:
+- In
+- On
+- Under
+- Between
+- With
+
+Sentence:
+The book is on the table.
+
+এখানে on preposition।
+
+7. Conjunction (সংযোজক)
+যে word দুইটি word, phrase বা sentence যুক্ত করে তাকে Conjunction বলে।
+
+Examples:
+- And
+- But
+- Or
+- Because
+- Although
+
+Sentence:
+I tried hard but failed.
+
+এখানে but conjunction।
+
+8. Interjection (আবেগসূচক অব্যয়)
+যে word হঠাৎ আবেগ প্রকাশ করে তাকে Interjection বলে।
+
+Examples:
+- Wow!
+- Hurrah!
+- Alas!
+- Oh!
+- Oops!
+
+Sentence:
+Wow! It is amazing.
+
+এখানে Wow! interjection।
+
+সহজে মনে রাখার টেবিল
+
+Noun = নাম বোঝায়
+Pronoun = Noun-এর বদলে বসে
+Verb = কাজ বোঝায়
+Adjective = Noun-এর গুণ বোঝায়
+Adverb = Verb/Adjective-এর বর্ণনা দেয়
+Preposition = সম্পর্ক বোঝায়
+Conjunction = যুক্ত করে
+Interjection = আবেগ প্রকাশ করে

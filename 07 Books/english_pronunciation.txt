@@ -1,0 +1,57 @@
+English Pronunciation (উচ্চারণ) - Details
+
+English pronunciation means how English words are spoken correctly. It
+is different from spelling.
+
+1.  English Sounds Vowels: A, E, I, O, U Examples: cat -> /æ/ bed -> /e/
+    sit -> /ɪ/ hot -> /ɒ/ cup -> /ʌ/
+
+Consonants: b, c, d, f, g, h etc.
+
+2.  IPA (International Phonetic Alphabet) It shows exact pronunciation.
+    car -> /kɑːr/ cinema -> /ˈsɪnəmə/
+
+3.  Why pronunciation is confusing English spelling and sound are often
+    different.
+
+Example: cinema -> /ˈsɪnəmə/
+
+4.  c rule c + a/o/u = /k/ (cat, cup) c + e/i/y = /s/ (city, cent)
+
+5.  Silent letters knife (k silent) hour (h silent)
+
+6.  Stress Some syllables are pronounced with more stress: CIN-e-ma
+    a-BOUT
+
+7.  Summary English pronunciation is a sound system, not spelling based.
+    Practice and listening are important.
+
+
+| Character | Normal word | IPA                   | Bangla   |
+| --------- | ----------- | --------------------- | -------- |
+| A         | A           | eɪ                    | এই       |
+| B         | B           | biː                   | বি       |
+| C         | C           | siː                   | সি       |
+| D         | D           | diː                   | ডি       |
+| E         | E           | iː                    | ই        |
+| F         | F           | ef                    | এফ       |
+| G         | G           | dʒiː                  | জি       |
+| H         | H           | eɪtʃ                  | এইচ      |
+| I         | I           | aɪ                    | আই       |
+| J         | J           | dʒeɪ                  | জে       |
+| K         | K           | keɪ                   | কে       |
+| L         | L           | el                    | এল       |
+| M         | M           | em                    | এম       |
+| N         | N           | en                    | এন       |
+| O         | O           | əʊ                    | ও        |
+| P         | P           | piː                   | পি       |
+| Q         | Q           | kjuː                  | কিউ      |
+| R         | R           | ɑː                    | আর       |
+| S         | S           | es                    | এস       |
+| T         | T           | tiː                   | টি       |
+| U         | U           | juː                   | ইউ       |
+| V         | V           | viː                   | ভি       |
+| W         | W           | ˈdʌbljuː              | ডাব্লিউ  |
+| X         | X           | eks                   | এক্স     |
+| Y         | Y           | waɪ                   | ওয়াই     |
+| Z         | Z           | zed (UK) /ziː/ (US)   | জেড / জি |

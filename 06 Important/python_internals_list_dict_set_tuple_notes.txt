@@ -1,0 +1,326 @@
+list, dict, set, tuple—এই ৪টা core data structure-এর deep internals (Bangla notes)
+
+Python Internals Notes (List, Dict, Set, Tuple)
+1. List Internals
+কী?
+Ordered collection
+
+Mutable (change করা যায়)
+
+Duplicate allowed
+
+Internals (Inside Python)
+
+Python list আসলে Dynamic Array
+
+C language-এ implement করা (PyListObject)
+
+Memory Behavior
+
+Extra space allocate করে (over-allocation)
+
+তাই append fast হয়
+
+lst = []
+lst.append(10)
+
+Worst case: O(n)
+Average: O(1)
+
+Time Complexity
+Operation	Complexity
+Access	O(1)
+Append	O(1)
+Insert	O(n)
+Delete	O(n)
+
+Key Points
+
+Continuous memory
+
+Fast indexing
+
+Insert/Delete slow (shift করতে হয়)
+
+2. Dictionary Internals
+কী?
+
+Key-Value pair
+
+Unordered (Python 3.7+ → insertion ordered)
+
+Mutable
+
+Internals
+
+Implemented using Hash Table
+
+Uses hash(key)
+
+d = {"name": "Faruk"}
+Hash Process
+
+key → hash value
+
+hash → index
+
+value stored
+
+Collision Handling
+
+Open Addressing
+
+Probing (linear/quadratic)
+
+Time Complexity
+Operation	Complexity
+Get	O(1)
+Set	O(1)
+Delete	O(1)
+
+Worst case: O(n)
+
+Key Points
+
+Fast lookup
+
+Key must be immutable (str, int, tuple)
+
+3. Set Internals
+কী?
+
+Unordered
+
+Unique values only
+
+Mutable
+
+Internals
+
+Same as dictionary (hash table)
+
+Only keys, no values
+
+s = {1, 2, 3}
+Behind the Scene
+set ≈ dict with only keys
+Time Complexity
+Operation	Complexity
+Add	O(1)
+Remove	O(1)
+Search	O(1)
+Key Points
+
+Duplicate auto remove
+
+Fast membership check
+
+if 5 in s:
+4. Tuple Internals
+কী?
+
+Ordered
+
+Immutable
+
+Faster than list
+
+Internals
+
+Fixed size array
+
+Implemented as PyTupleObject
+
+Memory Advantage
+
+No resizing → faster
+
+Less memory than list
+
+Time Complexity
+Operation	Complexity
+Access	O(1)
+Search	O(n)
+Key Points
+
+Hashable (if elements immutable)
+
+Can be used as dict key
+
+d = {(1, 2): "value"}
+Comparison (Most Important)
+Feature	List	Tuple	Set	Dict
+Ordered	✅	✅	❌	✅
+Mutable	✅	❌	✅	✅
+Unique	❌	❌	✅	Key unique
+Speed	Medium	Fast	Fast	Very Fast
+Interview Tips
+কখন কোনটা use করবে?
+
+List → order + modify দরকার
+
+Tuple → fixed data
+
+Set → unique + fast search
+
+Dict → key-value lookup
+
+Pro Level Insight
+
+Python dict & set internally:
+
+Uses compact hash table
+
+Memory optimization (Python 3.6+)
+
+List:
+
+Over-allocation strategy → performance boost
+
+Tuple:
+
+Immutable → thread-safe
+
+Final Shortcut মনে রাখো
+List  = Dynamic Array
+Dict  = Hash Table
+Set   = Hash Table (keys only)
+Tuple = Fixed Array
+
+=============================================================
+1. List = Dynamic Array
+
+ধরো তোমার কাছে একটা array box আছে 
+
+ভিতরে data রাখো: [10, 20, 30]
+
+এটা ordered → sequence ঠিক থাকে
+
+mutable → change করা যায়
+
+ভিতরে কী হয়?
+
+Python আগে থেকেই extra জায়গা রাখে:
+
+Example:
+
+[10, 20, _ , _ , _]
+
+তুমি append করলে:
+
+lst.append(30)
+
+নতুন memory লাগেনা → তাই fast 🚀
+
+সমস্যা কোথায়?
+lst.insert(1, 99)
+
+সব element shift করতে হয়:
+
+[10, 20, 30]
+→ [10, 99, 20, 30]
+
+তাই slow (O(n))
+
+2. Dict = Hash Table
+
+এটা key → value store করে
+
+d = {"name": "Faruk"}
+ভিতরে কী হয়?
+
+Step by step:
+
+"name" → hash বানায়
+
+hash → index বের করে
+
+সেই index-এ value রাখে
+
+Real Example
+
+ধরো:
+
+"name" → hash → index 5
+
+memory slot 5-এ value store
+
+Collision কী?
+
+দুইটা key same index এ গেলে 
+
+Python handle করে:
+
+probing (next empty slot খোঁজা)
+
+কেন fast?
+
+direct index access → O(1)
+
+3. Set = Dict without value
+s = {1, 2, 3}
+
+আসলে এটা internally:
+
+{1: None, 2: None, 3: None}
+কাজ কী?
+
+duplicate remove
+
+fast search
+
+if 5 in s:
+
+instantly check (O(1))
+
+4. Tuple = Fixed Array
+t = (10, 20, 30)
+কেন fast?
+
+change করা যায় না 
+
+size fix
+
+তাই Python optimize করতে পারে
+
+Use case
+
+dict key হিসেবে use করা যায়
+
+constant data
+
+সবচেয়ে গুরুত্বপূর্ণ পার্থক্য
+Type	সহজভাবে বুঝো
+List	changeable array
+Tuple	fixed array
+Dict	smart lookup table
+Set	unique checker
+Real Life Example
+
+ধরো:
+
+List
+
+Shopping list:
+
+["apple", "banana", "milk"]
+Dict
+
+Student info:
+
+{"name": "Faruk", "age": 20}
+Set
+
+Unique ID:
+
+{101, 102, 103}
+Tuple
+
+Coordinates:
+
+(23.7, 90.4)
+Short Memory Trick
+List  → changeable list
+Tuple → fixed list
+Dict  → key-value brain
+Set   → unique filter

@@ -1,0 +1,18 @@
+sorted() এর প্রধান parameters:
+iterable (প্রয়োজনীয়)
+
+যেটা তোমার তালিকা বা অন্য কোনো iterable (list, tuple, string ইত্যাদি)
+
+যেমন: people
+
+key (ঐচ্ছিক)
+
+একটি function যা iterable এর প্রতিটি element থেকে sorting এর জন্য একটি মান বের করে দেয়
+
+যেমন: key=lambda person: int(person[2])
+
+reverse (ঐচ্ছিক)
+
+True বা False (ডিফল্ট False)
+
+True দিলে list কে descending order এ sort করবে
