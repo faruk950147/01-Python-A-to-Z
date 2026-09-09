@@ -19,7 +19,7 @@
 
     # 2. Core Idea
 
-    Bubble Sort works by comparing neighboring elements:
+    Bubble Sort works by comparing adjacent elements:
 
     ```text
     A[j] and A[j + 1]
