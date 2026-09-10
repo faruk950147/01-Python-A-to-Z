@@ -708,6 +708,8 @@
 
     ```18. Selection Sort - Python Optimized
     class SelectionSort:
+        def __init__(self):
+                pass
 
         def selection_sort(self, arr):
             n = len(arr)
@@ -1556,6 +1558,8 @@
 """
 
 class SelectionSort:
+    def __init__(self):
+        pass
 
     def selection_sort(self, arr):
         n = len(arr)
