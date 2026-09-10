@@ -524,6 +524,8 @@
 
     ```python
     class BubbleSort:
+        def __init__(self):
+            pass
 
         def bubble_sort(self, arr):
             n = len(arr)
@@ -567,6 +569,9 @@
 
     ```python
     class BubbleSort:
+
+        def __init__(self):
+            pass
 
         def bubble_sort(self, arr):
             n = len(arr)
