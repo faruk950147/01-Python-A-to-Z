@@ -1315,3 +1315,42 @@
 
 
 
+class BubbleSort:
+
+    def __init__(self):
+        pass
+
+    def bubble_sort(self, arr):
+        # Initialize the length of the array
+        n = len(arr)
+
+        # Iterate through the array
+        for i in range(n - 1):
+            # Initialize a flag to track if any swaps occurred during this pass
+            swapped = False
+
+            # Last i elements are already in place
+            for j in range(n - i - 1):
+                if arr[j] > arr[j + 1]:
+                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                    swapped = True
+
+            print(f"After pass {i + 1}: {arr}")
+
+            if not swapped:
+                break
+
+        return arr
+
+
+if __name__ == "__main__":
+
+    bubble_sort = BubbleSort()
+
+    arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+
+    print(f"Original array: {arr}")
+
+    result = bubble_sort.bubble_sort(arr)
+
+    print(f"Bubble Sort result: {result}")
