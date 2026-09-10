@@ -686,8 +686,27 @@
     ---
 
     # 17. Python Implementation
+    class SelectionSort:
+        def __init__(self):
+            pass
+        
+        def selection_sort(self, arr):
+            n = len(arr)
+            for i in range(n - 1):
+                for j in range(i + 1, n):
+                    if arr[j] < arr[i]:
+                        arr[i], arr[j] = arr[j], arr[i]
+                print(f"After pass {i + 1}: {arr}")
+                
+            return arr
+            
+    if __name__ == "__main__":  
+        selection_sort = SelectionSort()
+        arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+        
+    
 
-    ```python
+    ```18. Selection Sort - Python Optimized
     class SelectionSort:
 
         def selection_sort(self, arr):
@@ -726,7 +745,7 @@
 
     ---
 
-    # 18. Output
+    # 19. Output
 
     ```text
     Original array: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
@@ -746,7 +765,7 @@
 
     ---
 
-    # 19. Number of Passes
+    # 20. Number of Passes
 
     For an array containing `n` elements:
 
@@ -768,7 +787,7 @@
 
     ---
 
-    # 20. Number of Comparisons
+    # 21. Number of Comparisons
 
     For an array of `n` elements:
 
@@ -829,7 +848,7 @@
 
     ---
 
-    # 21. Time Complexity
+    # 22. Time Complexity
 
     ## Best Case
 
@@ -888,7 +907,7 @@
 
     ---
 
-    # 22. Time Complexity Summary
+    # 23. Time Complexity Summary
 
     | Case         | Complexity |
     | ------------ | ---------- |
@@ -898,7 +917,7 @@
 
     ---
 
-    # 23. Why is Best Case O(n²)?
+    # 24. Why is Best Case O(n²)?
 
     Selection Sort does not stop early.
 
@@ -925,7 +944,7 @@
 
     ---
 
-    # 24. Space Complexity
+    # 25. Space Complexity
 
     Selection Sort is an **in-place sorting algorithm**.
 
@@ -948,7 +967,7 @@
 
     ---
 
-    # 25. Number of Swaps
+    # 26. Number of Swaps
 
     Selection Sort performs at most:
 
@@ -988,7 +1007,7 @@
 
     ---
 
-    # 26. Stability
+    # 27. Stability
 
     Selection Sort is **not stable by default**.
 
@@ -1030,7 +1049,7 @@
 
     ---
 
-    # 27. In-Place Sorting
+    # 28. In-Place Sorting
 
     Selection Sort is an **in-place algorithm**.
 
@@ -1044,7 +1063,7 @@
 
     ---
 
-    # 28. Descending Order
+    # 29. Descending Order
 
     For descending order, select the **maximum element** instead of the minimum.
 
