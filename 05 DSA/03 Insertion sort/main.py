@@ -55,7 +55,7 @@
 
     For every element:
 
-    1. Select the current element as `key`.
+    1. Select the current element as `key` is first element in array.
     2. Compare `key` with elements on its left.
     3. Shift larger elements one position to the right.
     4. Insert `key` into its correct position.
