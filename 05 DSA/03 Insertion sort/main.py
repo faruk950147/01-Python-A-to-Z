@@ -55,11 +55,15 @@
 
     For every element:
 
-    1. Select the current element as `key` is first element in array.
-    2. Compare `key` with elements on its left.
-    3. Shift larger elements one position to the right.
-    4. Insert `key` into its correct position.
-    5. Repeat until the array is sorted.
+    Consider the first element as the sorted portion.
+    Select the second element as the key.
+    Compare the key with the elements on its left.
+    Shift larger elements one position to the right.
+    Insert the key into its correct position.
+    Select the next element as the key and repeat the process.
+    Continue until the entire array is sorted.
+
+    Important: In Insertion Sort, the first element is not usually selected as the key. It is considered already sorted, and the key starts from the second element.
 
     ### Important terms
 
