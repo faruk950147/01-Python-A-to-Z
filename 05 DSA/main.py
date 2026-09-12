@@ -61,7 +61,13 @@
          
     What is Searching?
          ## 1. Searching is the process of finding a specific element or value within a collection of data. It is a fundamental operation in computer science and is used to locate information quickly and efficiently.    
-         
-         
 
+
+     Non-decreasing Order: A sequence of numbers is said to be in non-decreasing order if each number is greater than or equal to the previous number. In other words, the sequence does not decrease as you move from left to right. For example, the sequence [1, 2, 2, 3, 4] is in non-decreasing order because each number is greater than or equal to the one before it.
+     
+     Non-increasing Order: A sequence of numbers is said to be in non-increasing order if each number is less than or equal to the previous number. In other words, the sequence does not increase as you move from left to right. For example, the sequence [5, 4, 4, 3, 2] is in non-increasing order because each number is less than or equal to the one before it.
+     
+     Ascending Order: A sequence of numbers is said to be in ascending order if each number is strictly greater than the previous number. In other words, the sequence increases as you move from left to right. For example, the sequence [1, 2, 3, 4, 5] is in ascending order because each number is greater than the one before it.
+
+     Descending Order: A sequence of numbers is said to be in descending order if each number is strictly less than the previous number. In other words, the sequence decreases as you move from left to right. For example, the sequence [5, 4, 3, 2, 1] is in descending order because each number is less than the one before it.
 """
