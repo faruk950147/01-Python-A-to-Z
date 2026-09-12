@@ -65,6 +65,8 @@
     5. Swap `arr[i]` with `arr[min_index]`.
     6. Move to the next position.
     7. Repeat until the array is sorted.
+    
+    Important: In selection sort, if the minimum element is already in its correct position, no swap is needed. and the first element is already sorted.
 
     ---
 

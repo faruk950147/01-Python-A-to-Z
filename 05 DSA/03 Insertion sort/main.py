@@ -31,6 +31,7 @@
     Unsorted: [44, 38, 5, 15, 26, 27, 2, 46, 4]
     key is the first element of the unsorted portion. and we will insert it into the sorted portion.
     and hold the sorted portion in place.
+    key = 44 
     ```
 
     Take `44`.
@@ -70,7 +71,7 @@
     ### Important terms
 
     ```text
-    key
+    key in holding the current element being inserted.
     ```
 
     The element currently being inserted.

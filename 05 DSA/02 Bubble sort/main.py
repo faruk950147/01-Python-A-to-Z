@@ -16,6 +16,7 @@
     > Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order.
 
     ---
+    Important In Bubble Sort: Compare Adjacent Elements → Swap if Necessary → Repeat and Largest Element Moves Right
 
     # 2. Core Idea
 
