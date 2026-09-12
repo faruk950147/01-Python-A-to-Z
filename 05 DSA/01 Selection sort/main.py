@@ -32,22 +32,21 @@
     Initially:
 
     ```text
-    Sorted:   []
-    Unsorted: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    arr: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
     ```
 
     After Pass 1:
 
     ```text
-    Sorted:   [2]
-    Unsorted: [44, 38, 5, 15, 26, 27, 3, 46, 4]
+    Sorted Part:   [2]
+    Unsorted Part: [44, 38, 5, 15, 26, 27, 3, 46, 4]
     ```
 
     After Pass 2:
 
     ```text
-    Sorted:   [2, 3]
-    Unsorted: [38, 5, 15, 26, 27, 44, 46, 4]
+    Sorted Part:   [2, 3]
+    Unsorted Part: [38, 5, 15, 26, 27, 44, 46, 4]
     ```
 
     The sorted portion grows by one position after every pass.
