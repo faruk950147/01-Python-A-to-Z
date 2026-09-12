@@ -29,10 +29,12 @@
     ```text
     Sorted:   [3]
     Unsorted: [44, 38, 5, 15, 26, 27, 2, 46, 4]
+    key is the first element of the unsorted portion. and we will insert it into the sorted portion.
+    and hold the sorted portion in place.
     ```
 
     Take `44`.
-
+    key = `44`
     Since `44 > 3`, it stays after `3`.
 
     ```text
@@ -40,7 +42,7 @@
     ```
 
     Now take `38`.
-
+    key = `38`
     `38 < 44`, so shift `44` to the right and insert `38` before it:
 
     ```text
