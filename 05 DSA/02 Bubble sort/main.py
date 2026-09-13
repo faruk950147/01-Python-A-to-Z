@@ -1315,7 +1315,7 @@
 """
 
 
-
+'''
 class BubbleSort:
 
     def __init__(self):
@@ -1335,6 +1335,39 @@ class BubbleSort:
                 if arr[j] > arr[j + 1]:
                     arr[j], arr[j + 1] = arr[j + 1], arr[j]
                     swapped = True
+
+            print(f"After pass {i + 1}: {arr}")
+
+            if not swapped:
+                break
+
+        return arr
+'''
+
+class BubbleSort:
+
+    def __init__(self):
+        pass
+
+    def bubble_sort(self, arr):
+
+        n = len(arr)
+
+        for i in range(n - 1):
+
+            swapped = False
+            j = 0
+
+            while j < n - i - 1:
+
+                if arr[j] > arr[j + 1]:
+
+                    # Swap
+                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+                    swapped = True
+
+                j += 1
 
             print(f"After pass {i + 1}: {arr}")
 

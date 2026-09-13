@@ -1557,7 +1557,7 @@
     > **Selection Sort repeatedly selects the smallest element from the unsorted portion and places it at the beginning of that portion. It is simple, in-place, and uses at most `n - 1` swaps, but it always takes `O(n²)` time.**
 
 """
-
+'''
 class SelectionSort:
     def __init__(self):
         pass
@@ -1576,6 +1576,32 @@ class SelectionSort:
 
             # Swap only if minimum is not already in place
             # (it's a good practice to avoid unnecessary swaps)
+            if i != min_index:
+                arr[i], arr[min_index] = arr[min_index], arr[i]
+
+            print(f"After pass {i + 1}: {arr}")
+
+        return arr
+'''
+
+class SelectionSort:
+    def __init__(self):
+        pass
+
+    def selection_sort(self, arr):
+        n = len(arr)
+
+        for i in range(n - 1):
+            # Assume current position contains minimum
+            min_index = i
+
+            # Search minimum in the unsorted portion
+            j = i + 1
+            while j < n and arr[j] < arr[min_index]:
+                min_index = j
+                j += 1
+
+            # Swap only if minimum is not already in place
             if i != min_index:
                 arr[i], arr[min_index] = arr[min_index], arr[i]
 
