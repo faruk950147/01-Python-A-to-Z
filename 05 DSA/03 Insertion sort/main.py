@@ -368,7 +368,13 @@
             n = len(arr)
 
             for i in range(1, n):
+                # Select the element to be inserted
                 key = arr[i]
+                
+                # Find the position where key should be inserted
+                # thats why we start j from i - 1
+                Since j = i - 1, j points to the element immediately before key.
+                thats mean we are comparing key with the elements in the sorted portion of the array.
                 j = i - 1
 
                 # Shift larger elements to the right
