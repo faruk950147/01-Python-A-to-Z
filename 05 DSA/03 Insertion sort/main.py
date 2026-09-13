@@ -361,6 +361,8 @@
 
     ```python
     class InsertionSort:
+        def __init__(self):
+            pass
 
         def insertion_sort(self, arr):
             n = len(arr)
