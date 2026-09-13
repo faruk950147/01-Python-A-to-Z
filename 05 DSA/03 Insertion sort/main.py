@@ -359,31 +359,7 @@
 
     # 6. Python Implementation
 
-    ```python
-    class InsertionSort:
-        def __init__(self):
-            pass
-
-        def insertion_sort(self, arr):
-            n = len(arr)
-
-            for i in range(1, n):
-                key = arr[i]
-
-                # Shift larger elements to the right
-                for j in range(i - 1, -1, -1):
-                    if arr[j] > key:
-                        arr[j + 1] = arr[j]
-                    else:
-                        break
-
-                # Find correct position and insert key
-                arr[j + 1] = key
-
-                print(f"After pass {i}: {arr}")
-
-            return arr
-    
+    ```python    
     class InsertionSort:
         def __init__(self):
             pass
