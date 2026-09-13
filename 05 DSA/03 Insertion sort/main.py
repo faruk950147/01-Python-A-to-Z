@@ -620,6 +620,8 @@
 
     ```python
     class InsertionSort:
+        def __init__(self):
+            pass
 
         def insertion_sort_descending(self, arr):
             for i in range(1, len(arr)):
