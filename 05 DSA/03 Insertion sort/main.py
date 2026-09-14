@@ -388,12 +388,12 @@
                     
                     # Decrement j to move to the previous element 
                     # that means we are comparing the key with the next element on the left side of the sorted portion.
-                    # i=1
+                    # i = 1
                     # j = i - 1 = 0
                     # arr[j] = arr[0] = 3 j points to the element immediately before key or previous element of key.
                     # arr[j] > key → 3 > 44 → False
                     
-                    # i=2
+                    # i = 2
                     # j = i - 1 = 1
                     # arr[j] = arr[1] = 44 j points to the element immediately before key or previous element of key.
                     # arr[j] > key → 44 > 38 → True
@@ -926,12 +926,12 @@ class InsertionSort:
                 
                 # Decrement j to move to the previous element 
                 # that means we are comparing the key with the next element on the left side of the sorted portion.
-                # i=1
+                # i = 1
                 # j = i - 1 = 0
                 # arr[j] = arr[0] = 3 j points to the element immediately before key or previous element of key.
                 # arr[j] > key → 3 > 44 → False
                 
-                # i=2
+                # i = 2
                 # j = i - 1 = 1
                 # arr[j] = arr[1] = 44 j points to the element immediately before key or previous element of key.
                 # arr[j] > key → 44 > 38 → True
