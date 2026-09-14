@@ -381,6 +381,8 @@
 
                 # Shift larger elements to the right
                 while j >= 0 and arr[j] > key:
+                    # Shift the element to the right
+                    # that means we are moving the larger element to the right to make space for the key.
                     arr[j + 1] = arr[j]
                     j -= 1
 
@@ -903,6 +905,8 @@ class InsertionSort:
 
             # Shift larger elements to the right
             while j >= 0 and arr[j] > key:
+                # Shift the element to the right
+                # that means we are moving the larger element to the right to make space for the key
                 arr[j + 1] = arr[j]
                 j -= 1
 
