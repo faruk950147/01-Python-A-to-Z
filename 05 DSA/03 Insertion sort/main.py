@@ -366,7 +366,9 @@
 
         def insertion_sort(self, arr):
             n = len(arr)
-
+            
+            # Iterate through the array starting from the second element
+            # because the first element is considered sorted
             for i in range(1, n):
                 # Select the element to be inserted
                 key = arr[i]
@@ -886,7 +888,8 @@ class InsertionSort:
 
     def insertion_sort(self, arr):
         n = len(arr)
-
+        # Iterate through the array starting from the second element
+        # because the first element is considered sorted
         for i in range(1, n):
             
             # Select the element to be inserted
