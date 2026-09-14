@@ -361,32 +361,43 @@
 
     ```python    
     class InsertionSort:
+
         def __init__(self):
             pass
 
         def insertion_sort(self, arr):
             n = len(arr)
-            
             # Iterate through the array starting from the second element
             # because the first element is considered sorted
             for i in range(1, n):
+                
                 # Select the element to be inserted
                 key = arr[i]
                 
                 # Find the position where key should be inserted
                 # thats why we start j from i - 1
-                Since j = i - 1, j points to the element immediately before key or previous element of key.
-                thats mean we are comparing key with the elements in the sorted portion of the array.
+                # Since j = i - 1, j points to the element immediately before key or previous element of key.
+                # thats mean we are comparing key with the elements in the sorted portion of the array.
                 j = i - 1
 
                 # Shift larger elements to the right
                 while j >= 0 and arr[j] > key:
                     # Shift the element to the right
-                    # that means we are moving the larger element to the right to make space for the key.
+                    # that means we are moving the larger element to the right to make space for the key
                     arr[j + 1] = arr[j]
                     
                     # Decrement j to move to the previous element 
                     # that means we are comparing the key with the next element on the left side of the sorted portion.
+                    # i=1
+                    # j = i - 1 = 0
+                    # arr[j] = arr[0] = 3 j points to the element immediately before key or previous element of key.
+                    # arr[j] > key → 3 > 44 → False
+                    
+                    # i=2
+                    # j = i - 1 = 1
+                    # arr[j] = arr[1] = 44 j points to the element immediately before key or previous element of key.
+                    # arr[j] > key → 44 > 38 → True
+                    
                     j -= 1
 
                 # Insert key into its correct position
@@ -395,6 +406,7 @@
                 print(f"After pass {i}: {arr}")
 
             return arr
+
 
 
     if __name__ == "__main__":
@@ -914,6 +926,16 @@ class InsertionSort:
                 
                 # Decrement j to move to the previous element 
                 # that means we are comparing the key with the next element on the left side of the sorted portion.
+                # i=1
+                # j = i - 1 = 0
+                # arr[j] = arr[0] = 3 j points to the element immediately before key or previous element of key.
+                # arr[j] > key → 3 > 44 → False
+                
+                # i=2
+                # j = i - 1 = 1
+                # arr[j] = arr[1] = 44 j points to the element immediately before key or previous element of key.
+                # arr[j] > key → 44 > 38 → True
+                
                 j -= 1
 
             # Insert key into its correct position
