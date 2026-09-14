@@ -32,7 +32,8 @@
     Initially:
 
     ```text
-    arr: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+    Sorted Part:   []
+    Unsorted Part: [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
     ```
 
     After Pass 1:
