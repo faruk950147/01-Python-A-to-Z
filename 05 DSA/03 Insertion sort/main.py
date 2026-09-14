@@ -919,7 +919,7 @@ class InsertionSort:
             # Insert key into its correct position
             arr[j + 1] = key
 
-            print(f"After pass {i}: {arr}")
+            print(f"After pass {i} {key}: {arr}")
 
         return arr
 
