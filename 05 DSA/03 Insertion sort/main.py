@@ -915,7 +915,7 @@ class InsertionSort:
                 # Decrement j to move to the previous element 
                 # that means we are comparing the key with the next element on the left side of the sorted portion.
                 j -= 1
-
+                print(f"Shifting {arr[j + 1]} to the right, j = {j}")
             # Insert key into its correct position
             arr[j + 1] = key
 
