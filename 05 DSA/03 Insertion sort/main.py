@@ -386,7 +386,6 @@
                     arr[j + 1] = arr[j]
                     
                     # Decrement j to move to the previous element 
-                    # that is on the left side of the key in the sorted portion of the array.
                     # that means we are comparing the key with the next element on the left side of the sorted portion.
                     j -= 1
 
@@ -914,7 +913,6 @@ class InsertionSort:
                 arr[j + 1] = arr[j]
                 
                 # Decrement j to move to the previous element 
-                # that is on the left side of the key in the sorted portion of the array.
                 # that means we are comparing the key with the next element on the left side of the sorted portion.
                 j -= 1
 
