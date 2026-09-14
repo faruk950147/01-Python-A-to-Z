@@ -71,7 +71,4 @@
 
      Descending Order: A sequence of numbers is said to be in descending order if each number is strictly less than the previous number. In other words, the sequence decreases as you move from left to right. For example, the sequence [5, 4, 3, 2, 1] is in descending order because each number is less than the one before it.
 """
-arr = [2, 3, 4, 5, 15, 26, 27, 38, 44, 46]
-n = len(arr)
-for i in range(1, n):
-    print(arr[i], end=" ")
+
