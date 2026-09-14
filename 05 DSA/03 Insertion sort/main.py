@@ -384,6 +384,10 @@
                     # Shift the element to the right
                     # that means we are moving the larger element to the right to make space for the key.
                     arr[j + 1] = arr[j]
+                    
+                    # Decrement j to move to the previous element 
+                    # that is on the left side of the key in the sorted portion of the array.
+                    # that means we are comparing the key with the next element on the left side of the sorted portion.
                     j -= 1
 
                 # Insert key into its correct position
@@ -908,6 +912,10 @@ class InsertionSort:
                 # Shift the element to the right
                 # that means we are moving the larger element to the right to make space for the key
                 arr[j + 1] = arr[j]
+                
+                # Decrement j to move to the previous element 
+                # that is on the left side of the key in the sorted portion of the array.
+                # that means we are comparing the key with the next element on the left side of the sorted portion.
                 j -= 1
 
             # Insert key into its correct position
