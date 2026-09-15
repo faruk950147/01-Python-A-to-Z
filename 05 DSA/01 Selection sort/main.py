@@ -1598,8 +1598,9 @@ class SelectionSort:
 
             # Search minimum in the unsorted portion
             j = i + 1
-            while j < n and arr[j] < arr[min_index]:
-                min_index = j
+            while j < n:
+                if arr[j] < arr[min_index]:
+                    min_index = j
                 j += 1
 
             # Swap only if minimum is not already in place
