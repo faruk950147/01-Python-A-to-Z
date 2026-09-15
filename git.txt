@@ -1,6 +1,6 @@
 git init
 git add .
-git commit -m "I have some changes insertion sort"
+git commit -m "I have some changes sort"
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 git push
