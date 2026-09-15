@@ -763,6 +763,63 @@
     ```
 
 """
+class MergeSort:
 
+    def merge_sort(self, arr):
+        # Base case
+        if len(arr) <= 1:
+            return arr
+
+        # Find middle
+        mid = len(arr) // 2
+
+        # Divide into two halves
+        left = arr[:mid]
+        right = arr[mid:]
+
+        # Recursively sort both halves
+        left = self.merge_sort(left)
+        right = self.merge_sort(right)
+
+        # Merge sorted halves
+        return self.merge(left, right)
+
+    def merge(self, left, right):
+        result = []
+
+        i = 0
+        j = 0
+
+        # Compare elements from both arrays
+        while i < len(left) and j < len(right):
+
+            if left[i] <= right[j]:
+                result.append(left[i])
+                i += 1
+
+            else:
+                result.append(right[j])
+                j += 1
+
+        # Add remaining elements from left
+        while i < len(left):
+            result.append(left[i])
+            i += 1
+
+        # Add remaining elements from right
+        while j < len(right):
+            result.append(right[j])
+            j += 1
+
+        return result
+
+
+if __name__ == "__main__":
+    merge_sort = MergeSort()
+
+    arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+
+    print(f"Original array: {arr}")
+    print(f"Merge Sort result: {merge_sort.merge_sort(arr)}")
 
 
