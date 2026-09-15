@@ -774,7 +774,9 @@ class MergeSort:
         mid = len(arr) // 2
 
         # Divide into two halves
-        left = arr[:mid]
+        # left = arr[:mid] thats meaning from 0 to mid-1
+        # right = arr[mid:] thats meaning from mid to end
+        left = arr[:mid] 
         right = arr[mid:]
 
         # Recursively sort both halves
