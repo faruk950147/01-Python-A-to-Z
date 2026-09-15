@@ -778,6 +778,10 @@ class MergeSort:
         # right = arr[mid:] thats meaning from mid to end
         left = arr[:mid] 
         right = arr[mid:]
+        
+        # Just for display purpose
+        print(f"Left: {left} == Right: {right}")
+
 
         # Recursively sort both halves
         left = self.merge_sort(left)
