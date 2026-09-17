@@ -345,6 +345,8 @@
 
     ```python
     class QuickSort:
+        def __init__(self):
+            pass
 
         def quick_sort(self, arr, low, high):
 
@@ -861,3 +863,58 @@
     ```
 
 """
+
+class QuickSort:
+    def __init__(self):
+        pass
+
+    def quick_sort(self, arr, low, high):
+
+        # Base case
+        if low < high:
+
+            # Partition the array
+            pivot_index = self.partition(arr, low, high)
+
+            # Sort left side
+            self.quick_sort(arr, low, pivot_index - 1)
+
+            # Sort right side
+            self.quick_sort(arr, pivot_index + 1, high)
+
+
+    def partition(self, arr, low, high):
+
+        # Choose last element as pivot
+        pivot = arr[high]
+
+        # Index of smaller element
+        i = low - 1
+
+        # Compare elements with pivot
+        for j in range(low, high):
+
+            if arr[j] <= pivot:
+
+                i += 1
+
+                # Swap
+                arr[i], arr[j] = arr[j], arr[i]
+
+        # Put pivot in correct position
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+
+        return i + 1
+
+
+if __name__ == "__main__":
+
+    quick_sort = QuickSort()
+
+    arr = [3, 44, 38, 5, 15, 26, 27, 2, 46, 4]
+
+    print(f"Original array: {arr}")
+
+    quick_sort.quick_sort(arr, 0, len(arr) - 1)
+
+    print(f"Quick Sort result: {arr}")
