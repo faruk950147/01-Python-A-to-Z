@@ -352,7 +352,6 @@
 
             # Base case
             if low < high:
-
                 # Partition the array
                 pivot_index = self.partition(arr, low, high)
 
