@@ -22,46 +22,41 @@ print("Reversed:",reverseString2("blue"))
 
 # 2. Question: Count the Occurrences of Each Character in a String
 # str1 = "a,a,a,b,b,c,c,c"
-# output = a:3, b:2, c:3
+# output = {'a': 3, 'b': 2, 'c': 3}
 def count_characters(s):
-    # remove comma and space
-    chars = s.replace(",", "")
-    result = {}
-    for ch in chars:
-        result[ch] = result.get(ch, 0) + 1 # count the occurrences of each character
+    count = {}
 
-    # generate output
-    output = ", ".join([f"{k}:{v}" for k, v in result.items()])
-    return output
+    for char in s.split(","):
+        # get the current count of the character, defaulting to 0 if it doesn't exist, and increment it by 1
+        count[char] = count.get(char, 0) + 1 
+
+    return count
 
 str1 = "a,a,a,b,b,c,c,c"
 print(count_characters(str1))
 
-# output: a:3, b:2, c:3
+# output: {'a': 3, 'b': 2, 'c': 3}
 
 # 3. Question: Find the Longest Common Prefix
 # strs = ["flower", "flow", "flight"]
 # output = "fl"
 def longestCommonPrefix(strs):
-    '''
-    Find the longest common prefix among an array of strings
-    '''
     if not strs:
         return ""
-    
-    # sort the list to make comparison easier
-    strs.sort()
-    
-    # compare first and last strings
-    first = strs[0]
-    last = strs[-1]
-    
-    # find the common prefix
-    for i in range(len(first)):
-        if i >= len(last) or first[i] != last[i]:
-            return first[:i]
-    
-    return first
+
+    for i in range(len(strs[0])):
+        char = strs[0][i]
+
+        for word in strs[1:]:
+            if i >= len(word) or word[i] != char:
+                return strs[0][:i]
+
+    return strs[0]
+
+
+strs = ["flower", "flow", "flight"]
+
+print(longestCommonPrefix(strs))
 
 strs = ["flower", "flow", "flight"]
 print(longestCommonPrefix(strs))
