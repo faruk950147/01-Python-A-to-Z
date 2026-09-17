@@ -69,6 +69,28 @@ class Armstrong:
             num //= 10
 
         return original == total
+    
+    def is_armstrong1(self, num):
+        original = num
+
+        # Count digits
+        digits = 0
+        temp = num
+
+        while temp:
+            digits += 1
+            temp //= 10
+
+        # Calculate Armstrong sum
+        total = 0
+        temp = num
+
+        while temp:
+            digit = temp % 10
+            total += digit ** digits
+            temp //= 10
+
+        return total == original
 
 
 a = Armstrong()
