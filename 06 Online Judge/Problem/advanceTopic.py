@@ -26,9 +26,9 @@ print("Reversed:",reverseString2("blue"))
 def count_characters(s):
     count = {}
 
-    for char in s.split(","):
+    for chr in s.split(","):
         # get the current count of the character, defaulting to 0 if it doesn't exist, and increment it by 1
-        count[char] = count.get(char, 0) + 1 
+        count[chr] = count.get(chr, 0) + 1 
 
     return count
 
