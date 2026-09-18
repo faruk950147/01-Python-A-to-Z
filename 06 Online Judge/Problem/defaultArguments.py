@@ -1,32 +1,11 @@
-class EvenStream(object):
-    def __init__(self):
-        self.current = 0
+class Vehicle:
 
-    def get_next(self):
-        to_return = self.current
-        self.current += 2
-        return to_return
+    def __init__(self, brand="Toyota"):
+        self.brand = brand
 
-class OddStream(object):
-    def __init__(self):
-        self.current = 1
+    def show(self):
+        print("Brand:", self.brand)
 
-    def get_next(self):
-        to_return = self.current
-        self.current += 2
-        return to_return
-
-def print_from_stream(n, stream=None):
-    if stream is None:
-        stream = EvenStream()
-    for _ in range(n):
-        print(stream.get_next())
-
-queries = int(input())
-for _ in range(queries):
-    stream_name, n = input().split()
-    n = int(n)
-    if stream_name == "even":
-        print_from_stream(n)
-    else:
-        print_from_stream(n, OddStream())
+if __name__ == '__main__':
+    v1 = Vehicle()
+    v1.show()
