@@ -127,16 +127,16 @@ class Armstrong:
 
         while num > 0:
 
-            # Get the last digit that remainder of division 
+            # Get the last digit using the remainder of division
             digit = num % 10
             print(f'Extract: {digit}')
 
-            # Add digit raised to the power of total digits
+            # Add the digit raised to the power of the total number of digits
             total += digit ** digits
 
-            # Keep the quotient to remove the last digit
+            # Keep the quotient the remainder (last digit) is discarded
             num //= 10
-            print(f'Keep the quotient to remove the last digit: {num}')
+            print(f'Keep the quotient the remainder (last digit) is discarded: {num}')
 
         return original == total
     
