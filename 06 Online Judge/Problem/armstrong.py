@@ -134,9 +134,9 @@ class Armstrong:
             # Add digit raised to the power of total digits
             total += digit ** digits
 
-            # Remove the last digit
+            # Keep the quotient to remove the last digit
             num //= 10
-            print(f'Removed the last digit: {num}')
+            print(f'Keep the quotient to remove the last digit: {num}')
 
         return original == total
     
