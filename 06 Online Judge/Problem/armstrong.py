@@ -48,6 +48,74 @@ class Armstrong:
 
         Therefore:
             153 is an Armstrong number.
+            
+            153 Armstrong Number — Math Wise
+
+            Given:
+
+            Number = 153
+
+            Number of digits = 3
+
+
+            Step 1:
+
+            153 ÷ 10
+
+            Quotient  = 15
+            Remainder = 3
+
+            Last digit = 3
+
+            3³
+            = 3 × 3 × 3
+            = 27
+
+
+            Step 2:
+
+            15 ÷ 10
+
+            Quotient  = 1
+            Remainder = 5
+
+            Last digit = 5
+
+            5³
+            = 5 × 5 × 5
+            = 125
+
+
+            Step 3:
+
+            1 ÷ 10
+
+            Quotient  = 0
+            Remainder = 1
+
+            Last digit = 1
+
+            1³
+            = 1 × 1 × 1
+            = 1
+
+
+            Final Calculation:
+
+            3³ + 5³ + 1³
+
+            = 27 + 125 + 1
+
+            = 153
+
+
+            Original Number = 153
+            Calculated Number = 153
+
+            153 = 153
+
+            ∴ 153 is an Armstrong Number
+            
         """
 
         original = num
@@ -59,14 +127,16 @@ class Armstrong:
 
         while num > 0:
 
-            # Get the last digit
+            # Get the last digit that remainder of division 
             digit = num % 10
+            print(f'Extract: {digit}')
 
             # Add digit raised to the power of total digits
-            total = total + digit ** digits
+            total += digit ** digits
 
             # Remove the last digit
             num //= 10
+            print(f'Removed the last digit: {num}')
 
         return original == total
     
