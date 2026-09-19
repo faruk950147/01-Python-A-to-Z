@@ -129,14 +129,12 @@ class Armstrong:
 
             # Get the last digit using the remainder of division
             digit = num % 10
-            print(f'Extract: {digit}')
 
             # Add the digit raised to the power of the total number of digits
             total += digit ** digits
 
             # Keep the quotient the remainder (last digit) is discarded
             num //= 10
-            print(f'Keep the quotient the remainder (last digit) is discarded: {num}')
 
         return original == total
     
