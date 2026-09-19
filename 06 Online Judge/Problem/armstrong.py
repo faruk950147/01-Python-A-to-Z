@@ -128,37 +128,16 @@ class Armstrong:
         while num > 0:
 
             # Get the last digit using the remainder of division
-            digit = num % 10
+            rem = num % 10
 
             # Add the digit raised to the power of the total number of digits
-            total += digit ** digits
+            total += rem ** digits
 
             # Keep the quotient the remainder (last digit) is discarded
             num //= 10
 
         return original == total
     
-    def is_armstrong1(self, num):
-        original = num
-
-        # Count digits
-        digits = 0
-        temp = num
-
-        while temp:
-            digits += 1
-            temp //= 10
-
-        # Calculate Armstrong sum
-        total = 0
-        temp = num
-
-        while temp:
-            digit = temp % 10
-            total += digit ** digits
-            temp //= 10
-
-        return total == original
 
 
 a = Armstrong()
