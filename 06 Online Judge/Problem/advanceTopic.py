@@ -54,6 +54,16 @@ def longest_common_prefix(strs):
 
     return prefix
 
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
+
+    for i, chars in enumerate(zip(*strs)):
+        if len(set(chars)) != 1:
+            return strs[0][:i]
+
+    return strs[0][:i + 1]
+
 strs = ["flower", "flow", "flight"]
 print(longest_common_prefix(strs))
 
