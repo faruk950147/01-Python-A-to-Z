@@ -15,6 +15,50 @@ class Solution:
         Function to move all zeros in the array to the end
         while maintaining the relative order of non-zero elements.
         Operates in-place using efficient swapping.
+        Initial:
+        [0, 1, 0, 3, 12]
+        ↑
+        pos = 0
+
+
+        i = 0
+        0 → zero, skip
+
+        [0, 1, 0, 3, 12]
+
+
+        i = 1
+        1 → non-zero
+
+        swap index 0 and 1
+
+        [1, 0, 0, 3, 12]
+            ↑
+        pos = 1
+
+
+        i = 2
+        0 → zero, skip
+
+        [1, 0, 0, 3, 12]
+
+
+        i = 3
+        3 → non-zero
+
+        swap index 1 and 3
+
+        [1, 3, 0, 0, 12]
+            ↑
+            pos = 2
+
+
+        i = 4
+        12 → non-zero
+
+        swap index 2 and 4
+
+        [1, 3, 12, 0, 0]
         """
         pos = 0  # Index to place the next non-zero element
         for i in range(len(arr)):
