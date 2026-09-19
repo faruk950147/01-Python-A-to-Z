@@ -40,23 +40,24 @@ print(count_characters(str1))
 # 3. Question: Find the Longest Common Prefix
 # strs = ["flower", "flow", "flight"]
 # output = "fl"
-def longestCommonPrefix(strs):
+def longest_common_prefix(strs):
     if not strs:
         return ""
-
-    for i in range(len(strs[0])):
-        for word in strs[1:]:
-            if i >= len(word) or strs[0][i] != word[i]:
-                return strs[0][:i]
-
-    return strs[0]
+    
+    prefix = strs[0]
+    
+    for i in range(1, len(strs)):
+        while strs[i].find(prefix) != 0:
+            prefix = prefix[:-1]
+            if not prefix:
+                return ""
+    
+    return prefix
+strs = ["flower", "flow", "flight"]
+print(longest_common_prefix(strs))
 
 
 strs = ["flower", "flow", "flight"]
-
-print(longestCommonPrefix(strs))
-
-strs = ["flower", "flow", "flight"]
-print(longestCommonPrefix(strs))
+print(longest_common_prefix(strs))
 
 # output: fl
