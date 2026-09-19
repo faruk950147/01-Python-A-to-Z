@@ -49,6 +49,7 @@ def longest_common_prefix(strs):
     for i in range(1, len(strs)):
         while strs[i].find(prefix) != 0:
             prefix = prefix[:-1]
+            print(f'Prefix: {prefix}')
             if not prefix:
                 return ""
     
