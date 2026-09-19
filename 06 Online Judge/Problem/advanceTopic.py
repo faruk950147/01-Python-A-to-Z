@@ -54,7 +54,7 @@ def longest_common_prefix(strs):
 
     return prefix
 
-def longest_common_prefix(strs):
+def longest_common_prefix1(strs):
     if not strs:
         return ""
 
