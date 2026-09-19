@@ -45,12 +45,8 @@ def longestCommonPrefix(strs):
         return ""
 
     for i in range(len(strs[0])):
-        char = strs[0][i]
-        print(f"Characters: {char}")
-
         for word in strs[1:]:
-            if i >= len(word) or word[i] != char:
-                print(f"Word: {word}")
+            if i >= len(word) or strs[0][i] != word[i]:
                 return strs[0][:i]
 
     return strs[0]
