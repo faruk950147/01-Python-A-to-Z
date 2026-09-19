@@ -66,5 +66,5 @@ def longest_common_prefix1(strs):
 
 strs = ["flower", "flow", "flight"]
 print(longest_common_prefix(strs))
-
+print(longest_common_prefix1(strs))
 # output: fl
