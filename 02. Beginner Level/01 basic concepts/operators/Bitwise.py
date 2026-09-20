@@ -1,21 +1,19 @@
 """
     # Python Bitwise Operators
 
-    Your examples are correct. Here’s a clean explanation of **Python Bitwise Operators** in Bangla, including why `~12` becomes `-13`.
-
-    ---
-
     ## 1. Right Shift `>>`
 
-    Right shift moves all bits to the right.
+    Right shift moves all bits to the **right**.
 
     For positive integers:
 
     ```text
-    a >> n = a / 2^n
+    a >> n = a ÷ 2ⁿ
     ```
 
-    (integer division)
+    This is a mathematical shortcut for understanding right shift.
+
+    ### Example
 
     ```python
     print(8 >> 1)   # 4
@@ -23,34 +21,155 @@
     print(8 >> 3)   # 1
     ```
 
-    ### Example
+    ### How does `8 >> 1` work?
+
+    First, convert `8` to binary:
 
     ```text
     8 = 1000
-
-    1000 >> 1 = 0100 = 4
-    1000 >> 2 = 0010 = 2
-    1000 >> 3 = 0001 = 1
     ```
 
-    So:
+    Move the bits **1 position to the right**:
 
     ```text
-    8 >> 1 → 8 / 2¹ = 4
-    8 >> 2 → 8 / 2² = 2
-    8 >> 3 → 8 / 2³ = 1
+    1000 >> 1
+        ↓
+    0100
+    ```
+
+    ```text
+    0100 = 4
+    ```
+
+    Therefore:
+
+    ```text
+    8 >> 1 = 4
+    ```
+
+    Using the formula:
+
+    ```text
+    8 >> 1
+    = 8 ÷ 2¹
+    = 8 ÷ 2
+    = 4
+    ```
+
+    ### How does `8 >> 2` work?
+
+    ```text
+    8 = 1000
+    ```
+
+    Move the bits **2 positions to the right**:
+
+    ```text
+    1000 >> 2
+        ↓↓
+    0010
+    ```
+
+    ```text
+    0010 = 2
+    ```
+
+    Therefore:
+
+    ```text
+    8 >> 2 = 2
+    ```
+
+    Using the formula:
+
+    ```text
+    8 >> 2
+    = 8 ÷ 2²
+    = 8 ÷ 4
+    = 2
+    ```
+
+    ### How does `8 >> 3` work?
+
+    ```text
+    8 = 1000
+    ```
+
+    Move the bits **3 positions to the right**:
+
+    ```text
+    1000 >> 3
+            ↓↓↓
+    0001
+    ```
+
+    ```text
+    0001 = 1
+    ```
+
+    Therefore:
+
+    ```text
+    8 >> 3 = 1
+    ```
+
+    Using the formula:
+
+    ```text
+    8 >> 3
+    = 8 ÷ 2³
+    = 8 ÷ 8
+    = 1
+    ```
+
+    ### Easy Table
+
+    | Operation | Meaning  | Result |
+    | --------- | -------- | -----: |
+    | `8 >> 1`  | `8 ÷ 2¹` |    `4` |
+    | `8 >> 2`  | `8 ÷ 2²` |    `2` |
+    | `8 >> 3`  | `8 ÷ 2³` |    `1` |
+
+    ### Easy Way to Remember
+
+    ```text
+    >> 1 → ÷ 2
+    >> 2 → ÷ 4
+    >> 3 → ÷ 8
+    >> 4 → ÷ 16
+    ```
+
+    Because:
+
+    ```text
+    2¹ = 2
+    2² = 4
+    2³ = 8
+    2⁴ = 16
+    ```
+
+    **Key Point:**
+
+    ```text
+    >> = Right Shift
+
+    Right Shift → Move bits to the right
+
+    For positive integers:
+
+    a >> n = a ÷ 2ⁿ
     ```
 
     ---
 
     ## 2. Left Shift `<<`
 
-    Left shift moves all bits to the left.
+    Left shift moves all bits to the **left**.
 
     For positive integers:
 
     ```text
-    a << n = a × 2^n
+    a << n = a × 2ⁿ
     ```
 
     ```python
@@ -312,6 +431,7 @@
     ```
 
     ---
+
     ## Easy Way to Remember
 
     ```text
@@ -323,9 +443,6 @@
     << → Shifts left  → × 2ⁿ
     >> → Shifts right → ÷ 2ⁿ
     ```
-
-
-```
 
 """
 print(8 >> 1)   # 4 (8 divided by 2^1 = 4)
