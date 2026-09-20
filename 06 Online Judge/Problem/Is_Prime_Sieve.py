@@ -327,6 +327,3 @@ else:
     print("Not Prime")
     
 
-
-
-print(sieve(30))
