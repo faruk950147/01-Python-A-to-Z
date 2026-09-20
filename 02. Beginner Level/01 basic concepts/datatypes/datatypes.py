@@ -1,5 +1,11 @@
 """
 # =================== Python Datatypes ===================
+What is a Datatype?
+-------------------
+In Python, a datatype defines what kind of value a variable holds.
+
+Python is a dynamically typed language, meaning you don’t need to explicitly declare the datatype — it is decided automatically based on the assigned value.
+
 
 1. Primitive Datatypes
    It has unlimited length of digits, only limited by memory.
