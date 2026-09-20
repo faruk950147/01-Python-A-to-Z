@@ -24,3 +24,8 @@ def triangle_area(base, height):
     return 0.5 * base * height
 
 print(triangle_area(10, 20))
+
+def rectangle_area(length, width):
+    return length * width
+
+print(rectangle_area(10, 20))
