@@ -1,5 +1,14 @@
 
 class FindMax:
+    def find_max_in_lst(self, lst):
+        max_value = lst[0]
+
+        for x in range(len(lst)):
+            if lst[x] > max_value:
+                max_value = lst[x]
+
+        return max_value
+                
 
     # efficient / simple
     def find_max(self, num1, num2, num3):
