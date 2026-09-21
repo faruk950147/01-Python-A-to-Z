@@ -1,53 +1,26 @@
 {
   "files.autoSave": "afterDelay",
-
   "workbench.iconTheme": "material-icon-theme",
-
   "database-client.autoSync": true,
-
   "redhat.telemetry.enabled": true,
-
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-
   "git.openRepositoryInParentFolders": "always",
-
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
-
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
       "source": "PowerShell",
       "icon": "terminal-powershell"
-    },
-    "Command Prompt": {
-      "path": "C:\\Windows\\System32\\cmd.exe",
-      "args": []
-    },
-    "Git Bash": {
-      "source": "Git Bash",
-      "icon": "terminal-git-bash"
-    },
-    "Cmder": {
-      "path": "C:\\Windows\\System32\\cmd.exe",
-      "args": [
-        "/K",
-        "C:\\cmder\\vendor\\bin\\vscode_init.cmd"
-      ]
     }
   },
-
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
-
   "totalTypeScript.hideAllTips": false,
   "totalTypeScript.hideBasicTips": false,
-
   "editor.largeFileOptimizations": false,
-
   "workbench.editorAssociations": {
     "*.jar": "default"
   },
-
   "[dockercompose]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
@@ -56,22 +29,13 @@
       "other": true,
       "comments": false,
       "strings": true
-    },
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    }
   },
-
-  "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-
   "editor.fontSize": 21,
-
   "cSpell.userWords": [
-    "Faruk"
+    "Omar-Faruk"
   ],
-
   "workbench.colorTheme": "Shades of Purple",
-
   "workbench.colorCustomizations": {
     "editor.foreground": "#fff",
     "editor.background": "#2e2e4a",
@@ -81,19 +45,27 @@
     "sideBarTitle.foreground": "#2e2e4a",
     "sideBarSectionHeader.background": "#2e2e4a"
   },
-
   "editor.tokenColorCustomizations": {
     "comments": "#A3CB38",
     "keywords": "#ffa801",
     "strings": "#05c46b",
     "numbers": "#0fbcf9",
     "functions": "#c494f1",
-    "variables": "#b951e2"
+    "variables": "#b951e2",
+    "textMateRules": [
+      {
+        "scope": "string.quoted.docstring.multi.python",
+        "settings": {
+          "foreground": "#05c46b"
+        }
+      }
+    ]
   },
-
   "gitlens.mode.active": "review",
-
   "editor.minimap.enabled": false,
-
-  "python.defaultInterpreterPath": "C:\\Python 3\\python.exe"
+  "python.defaultInterpreterPath": "C:\\Python-3",
+  "emmet.includeLanguages": {
+    "javascript": "javascript",
+    "django-html": "html"
+  }
 }
