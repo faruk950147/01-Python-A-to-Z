@@ -1,0 +1,928 @@
+# CHANGING SENTENCE / TRANSFORMATION OF SENTENCES
+
+Changing Sentence means changing the form or structure of a sentence without changing its মূল meaning.
+
+Main types:
+
+1. Affirmative ↔ Negative
+2. Assertive ↔ Interrogative
+3. Assertive ↔ Exclamatory
+4. Assertive ↔ Imperative
+5. Degree Change
+6. Active ↔ Passive
+7. Direct ↔ Indirect Speech
+8. Simple ↔ Complex ↔ Compound
+9. Positive ↔ Comparative ↔ Superlative
+
+
+==================================================
+1. AFFIRMATIVE → NEGATIVE
+==================================================
+
+Meaning should remain the same.
+
+Example:
+
+Affirmative:
+He is an honest man.
+
+Negative:
+He is not a dishonest man.
+
+
+Another:
+
+Affirmative:
+Everyone loves flowers.
+
+Negative:
+There is nobody who does not love flowers.
+
+
+Another:
+
+Affirmative:
+Only Rahim can do this.
+
+Negative:
+None but Rahim can do this.
+
+
+Important words:
+
+only → none but
+everybody → nobody ... not
+always → never ... not
+too → so ... that ... not
+both → not ... either
+
+
+Example:
+
+He always tells the truth.
+
+→ He never tells a lie.
+
+
+==================================================
+2. NEGATIVE → AFFIRMATIVE
+==================================================
+
+Example:
+
+Negative:
+He is not a dishonest man.
+
+Affirmative:
+He is an honest man.
+
+
+Negative:
+Nobody hates flowers.
+
+Affirmative:
+Everybody loves flowers.
+
+
+Negative:
+He never tells a lie.
+
+Affirmative:
+He always tells the truth.
+
+
+==================================================
+3. ASSERTIVE → INTERROGATIVE
+==================================================
+
+Assertive = Statement.
+
+Interrogative = Question.
+
+The meaning should remain the same.
+
+Example:
+
+Assertive:
+Everybody loves flowers.
+
+Interrogative:
+Who does not love flowers?
+
+
+Another:
+
+Assertive:
+Nobody can deny this.
+
+Interrogative:
+Who can deny this?
+
+
+Another:
+
+Assertive:
+It is a beautiful place.
+
+Interrogative:
+Isn't it a beautiful place?
+
+
+==================================================
+4. INTERROGATIVE → ASSERTIVE
+==================================================
+
+Example:
+
+Interrogative:
+Who does not love freedom?
+
+Assertive:
+Everybody loves freedom.
+
+
+Interrogative:
+Can anyone deny the truth?
+
+Assertive:
+Nobody can deny the truth.
+
+
+Interrogative:
+Isn't he a good student?
+
+Assertive:
+He is a good student.
+
+
+==================================================
+5. ASSERTIVE → EXCLAMATORY
+==================================================
+
+Exclamatory sentence expresses strong emotion.
+
+Common words:
+
+What
+How
+
+Example:
+
+Assertive:
+It is a very beautiful flower.
+
+Exclamatory:
+What a beautiful flower it is!
+
+
+Assertive:
+She is very beautiful.
+
+Exclamatory:
+How beautiful she is!
+
+
+Assertive:
+It is a very nice day.
+
+Exclamatory:
+What a nice day it is!
+
+
+Structure:
+
+What + a/an + adjective + noun + subject + verb!
+
+
+Example:
+
+He is a great man.
+
+→ What a great man he is!
+
+
+For adjective only:
+
+How + adjective + subject + verb!
+
+She is very beautiful.
+
+→ How beautiful she is!
+
+
+==================================================
+6. EXCLAMATORY → ASSERTIVE
+==================================================
+
+Example:
+
+Exclamatory:
+What a beautiful flower it is!
+
+Assertive:
+It is a very beautiful flower.
+
+
+Exclamatory:
+How beautiful she is!
+
+Assertive:
+She is very beautiful.
+
+
+Exclamatory:
+What a great man he is!
+
+Assertive:
+He is a very great man.
+
+
+==================================================
+7. ASSERTIVE → IMPERATIVE
+==================================================
+
+Imperative expresses:
+
+- Command
+- Request
+- Advice
+- Instruction
+
+Example:
+
+Assertive:
+You should obey your parents.
+
+Imperative:
+Obey your parents.
+
+
+Assertive:
+You should always speak the truth.
+
+Imperative:
+Always speak the truth.
+
+
+Assertive:
+You should not waste your time.
+
+Imperative:
+Do not waste your time.
+
+
+Request:
+
+Assertive:
+You are requested to help me.
+
+Imperative:
+Please help me.
+
+
+==================================================
+8. IMPERATIVE → ASSERTIVE
+==================================================
+
+Example:
+
+Imperative:
+Obey your parents.
+
+Assertive:
+You should obey your parents.
+
+
+Imperative:
+Do not waste your time.
+
+Assertive:
+You should not waste your time.
+
+
+Imperative:
+Please help me.
+
+Assertive:
+You are requested to help me.
+
+
+==================================================
+9. DEGREE CHANGE
+==================================================
+
+There are 3 degrees:
+
+1. Positive
+2. Comparative
+3. Superlative
+
+
+# Positive → Comparative
+
+Positive:
+
+No other boy in the class is as tall as Rahim.
+
+Comparative:
+
+Rahim is taller than any other boy in the class.
+
+
+# Comparative → Superlative
+
+Comparative:
+
+Rahim is taller than any other boy in the class.
+
+Superlative:
+
+Rahim is the tallest boy in the class.
+
+
+# Superlative → Positive
+
+Superlative:
+
+Rahim is the tallest boy in the class.
+
+Positive:
+
+No other boy in the class is as tall as Rahim.
+
+
+Basic Pattern:
+
+Positive:
+No other + noun + is as + adjective + as + subject.
+
+Comparative:
+Subject + is + comparative + than any other + noun.
+
+Superlative:
+Subject + is + the + superlative + noun.
+
+
+==================================================
+10. ACTIVE → PASSIVE
+==================================================
+
+Active:
+
+Subject + Verb + Object
+
+Passive:
+
+Object + be + V3 + by + Subject
+
+
+Example:
+
+Active:
+Rahim writes a letter.
+
+Passive:
+A letter is written by Rahim.
+
+
+Another:
+
+Active:
+They built the house.
+
+Passive:
+The house was built by them.
+
+
+Another:
+
+Active:
+He will do the work.
+
+Passive:
+The work will be done by him.
+
+
+==================================================
+11. PASSIVE → ACTIVE
+==================================================
+
+Example:
+
+Passive:
+A letter is written by Rahim.
+
+Active:
+Rahim writes a letter.
+
+
+Passive:
+The house was built by them.
+
+Active:
+They built the house.
+
+
+Passive:
+The work will be done by him.
+
+Active:
+He will do the work.
+
+
+==================================================
+12. DIRECT → INDIRECT SPEECH
+==================================================
+
+Direct Speech:
+
+He said, "I am busy."
+
+
+Indirect Speech:
+
+He said that he was busy.
+
+
+Basic changes:
+
+Present Simple → Past Simple
+Present Continuous → Past Continuous
+Present Perfect → Past Perfect
+Past Simple → Past Perfect
+will → would
+can → could
+may → might
+
+
+Examples:
+
+"I am happy."
+→ He said that he was happy.
+
+
+"I am reading."
+→ He said that he was reading.
+
+
+"I have finished."
+→ He said that he had finished.
+
+
+"I will go."
+→ He said that he would go.
+
+
+Pronoun and time expressions may also change.
+
+now → then
+today → that day
+tomorrow → the next day
+yesterday → the previous day
+here → there
+this → that
+these → those
+
+
+==================================================
+13. SIMPLE → COMPOUND
+==================================================
+
+Simple sentence has one main clause.
+
+Compound sentence has two or more independent clauses joined by:
+
+and
+but
+or
+so
+yet
+for
+
+
+Example:
+
+Simple:
+Being tired, he went to bed.
+
+Compound:
+He was tired, so he went to bed.
+
+
+Simple:
+In spite of his poverty, he is honest.
+
+Compound:
+He is poor, but he is honest.
+
+
+==================================================
+14. COMPOUND → SIMPLE
+==================================================
+
+Example:
+
+Compound:
+He was tired, so he went to bed.
+
+Simple:
+Being tired, he went to bed.
+
+
+Compound:
+He is poor, but he is honest.
+
+Simple:
+In spite of his poverty, he is honest.
+
+
+==================================================
+15. SIMPLE → COMPLEX
+==================================================
+
+Complex sentence contains:
+
+Main clause + Subordinate clause
+
+
+Example:
+
+Simple:
+Being ill, he could not attend the class.
+
+Complex:
+As he was ill, he could not attend the class.
+
+
+Simple:
+In spite of his poverty, he is honest.
+
+Complex:
+Though he is poor, he is honest.
+
+
+==================================================
+16. COMPLEX → SIMPLE
+==================================================
+
+Example:
+
+Complex:
+As he was ill, he could not attend the class.
+
+Simple:
+Being ill, he could not attend the class.
+
+
+Complex:
+Though he is poor, he is honest.
+
+Simple:
+In spite of his poverty, he is honest.
+
+
+==================================================
+17. SIMPLE → COMPOUND → COMPLEX
+==================================================
+
+Example:
+
+SIMPLE:
+Being ill, he could not attend the class.
+
+
+COMPOUND:
+He was ill, so he could not attend the class.
+
+
+COMPLEX:
+As he was ill, he could not attend the class.
+
+
+Another:
+
+SIMPLE:
+In spite of being poor, he is happy.
+
+
+COMPOUND:
+He is poor, but he is happy.
+
+
+COMPLEX:
+Though he is poor, he is happy.
+
+
+==================================================
+18. TOO...TO
+==================================================
+
+Structure:
+
+too + adjective + to + V1
+
+Example:
+
+He is too weak to walk.
+
+Meaning:
+He is so weak that he cannot walk.
+
+
+Change:
+
+Too...to
+→ so...that...cannot
+
+
+Example:
+
+He is too weak to walk.
+
+→ He is so weak that he cannot walk.
+
+
+Another:
+
+The box is too heavy to lift.
+
+→ The box is so heavy that I cannot lift it.
+
+
+==================================================
+19. SO...THAT
+==================================================
+
+Example:
+
+He is so weak that he cannot walk.
+
+→ He is too weak to walk.
+
+
+Structure:
+
+so + adjective + that + cannot
+
+→ too + adjective + to + V1
+
+
+==================================================
+20. AS SOON AS
+==================================================
+
+"As soon as" means immediately after.
+
+Example:
+
+As soon as he saw me, he ran away.
+
+
+Can be changed to:
+
+No sooner had + subject + V3 + than...
+
+
+Example:
+
+As soon as he saw me, he ran away.
+
+→ No sooner had he seen me than he ran away.
+
+
+Another form:
+
+Hardly had + subject + V3 + when...
+
+
+Scarcely had + subject + V3 + when...
+
+
+Example:
+
+As soon as the teacher arrived, the students became silent.
+
+→ No sooner had the teacher arrived than the students became silent.
+
+
+==================================================
+21. BECAUSE → BECAUSE OF
+==================================================
+
+Because + Subject + Verb
+
+Because of + Noun / Gerund
+
+
+Example:
+
+Because he was ill, he could not attend the class.
+
+→ Because of his illness, he could not attend the class.
+
+
+Another:
+
+Because it rained, we stayed home.
+
+→ Because of the rain, we stayed home.
+
+
+==================================================
+22. IN SPITE OF → THOUGH / ALTHOUGH
+==================================================
+
+In spite of + noun/gerund
+
+Though/Although + subject + verb
+
+
+Example:
+
+In spite of his poverty, he is honest.
+
+→ Though he is poor, he is honest.
+
+
+In spite of being tired, he continued working.
+
+→ Though he was tired, he continued working.
+
+
+==================================================
+23. IF → UNLESS
+==================================================
+
+Unless = if...not
+
+
+Example:
+
+If you do not study, you will fail.
+
+→ Unless you study, you will fail.
+
+
+If you do not hurry, you will miss the train.
+
+→ Unless you hurry, you will miss the train.
+
+
+IMPORTANT:
+
+Unless + affirmative clause
+
+Unless you study... ✅
+
+Unless you do not study... ❌
+
+
+==================================================
+24. AND → BOTH...AND
+==================================================
+
+Example:
+
+Rahim and Karim are good students.
+
+→ Both Rahim and Karim are good students.
+
+
+==================================================
+25. EITHER...OR
+==================================================
+
+Used when there are two alternatives.
+
+Example:
+
+Rahim or Karim will come.
+
+→ Either Rahim or Karim will come.
+
+
+==================================================
+26. NEITHER...NOR
+==================================================
+
+Used to express two negative alternatives.
+
+Example:
+
+Rahim does not come.
+Karim does not come.
+
+→ Neither Rahim nor Karim comes.
+
+
+==================================================
+27. NOT ONLY...BUT ALSO
+==================================================
+
+Used to connect two related ideas.
+
+Example:
+
+He is intelligent and hardworking.
+
+→ He is not only intelligent but also hardworking.
+
+
+==================================================
+28. IMPORTANT TRANSFORMATION WORDS
+==================================================
+
+only
+→ none but
+
+everyone
+→ nobody ... not
+
+always
+→ never ... not
+
+too...to
+→ so...that...cannot
+
+because
+→ because of
+
+though/although
+→ in spite of/despite
+
+if...not
+→ unless
+
+as soon as
+→ no sooner...than
+
+as soon as
+→ hardly...when
+
+as soon as
+→ scarcely...when
+
+
+==================================================
+29. QUICK EXAM CHEAT SHEET
+==================================================
+
+Affirmative ↔ Negative
+→ Meaning unchanged
+
+Assertive ↔ Interrogative
+→ Statement ↔ Question
+
+Assertive ↔ Exclamatory
+→ Statement ↔ Emotion
+
+Assertive ↔ Imperative
+→ Statement ↔ Command/Advice
+
+Active ↔ Passive
+→ Change voice
+
+Direct ↔ Indirect
+→ Change speech
+
+Positive ↔ Comparative ↔ Superlative
+→ Change degree
+
+Simple ↔ Compound ↔ Complex
+→ Change sentence structure
+
+Too...to
+→ So...that...cannot
+
+Because
+→ Because of
+
+Though/Although
+→ In spite of/Despite
+
+If...not
+→ Unless
+
+As soon as
+→ No sooner...than
+
+As soon as
+→ Hardly...when
+
+As soon as
+→ Scarcely...when
+
+
+==================================================
+GOLDEN RULE
+==================================================
+
+While changing a sentence:
+
+1. Keep the original meaning.
+2. Change the grammatical structure.
+3. Maintain the correct tense.
+4. Maintain subject-verb agreement.
+5. Use correct pronouns.
+6. Do not change the মূল meaning.
+7. Check punctuation.

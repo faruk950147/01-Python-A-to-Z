@@ -1,0 +1,407 @@
+# Right Form of Verb
+
+Right Form of Verb means using the correct form of a verb according to the tense, subject, and structure of a sentence.
+
+Example:
+
+He go to school. ❌
+He goes to school. ✅
+
+They goes to school. ❌
+They go to school. ✅
+
+
+# 1. Present Indefinite / Simple Present
+
+Structure:
+
+I / We / You / They + V1
+
+He / She / It + V1 + s/es
+
+Examples:
+
+I play football.
+We play football.
+They play football.
+
+He plays football.
+She watches TV.
+Rahim goes to school.
+
+
+# 2. After Modal Verbs
+
+After can, could, may, might, shall, should, will, would, must, etc. → V1
+
+Examples:
+
+He can swim. ✅
+He can swims. ❌
+
+You should study. ✅
+You should studies. ❌
+
+She will come. ✅
+She will comes. ❌
+
+They must obey the rules. ✅
+
+
+# 3. After "To"
+
+Usually:
+
+to + V1
+
+Examples:
+
+I want to learn Python.
+She wants to go home.
+He decided to study.
+They came to help me.
+
+
+# 4. After Prepositions
+
+Preposition + V-ing
+
+Examples:
+
+He is interested in learning Python.
+She is good at drawing.
+Thank you for helping me.
+I am tired of waiting.
+
+
+# 5. Present Continuous
+
+Structure:
+
+am / is / are + V-ing
+
+Examples:
+
+I am reading.
+He is playing.
+She is cooking.
+They are studying.
+
+
+# 6. Past Continuous
+
+Structure:
+
+was / were + V-ing
+
+Examples:
+
+I was reading.
+He was sleeping.
+They were playing.
+We were studying.
+
+
+# 7. Present Perfect
+
+Structure:
+
+has / have + V3
+
+Examples:
+
+I have finished my work.
+They have gone home.
+He has eaten lunch.
+She has completed the task.
+
+
+# 8. Past Perfect
+
+Structure:
+
+had + V3
+
+Examples:
+
+I had finished the work.
+He had gone home.
+They had eaten dinner.
+
+
+# 9. Future
+
+Structure:
+
+will + V1
+
+Examples:
+
+I will go.
+He will come.
+They will study.
+She will help me.
+
+
+# 10. Passive Voice
+
+Structure:
+
+be + V3
+
+Examples:
+
+The work is done.
+The letter was written.
+The book is written by him.
+The car was repaired.
+
+
+# 11. Have / Has / Had
+
+Have / Has / Had + V3
+
+Examples:
+
+I have eaten.
+He has eaten.
+They have eaten.
+She had eaten.
+
+
+# 12. Do / Does / Did
+
+After do / does / did → V1
+
+Examples:
+
+I do not like tea.
+He does not like tea.
+They did not go there.
+
+Does he play football?
+Did you see him?
+
+NOT:
+
+He does not likes tea. ❌
+He does not like tea. ✅
+
+Did you went there? ❌
+Did you go there? ✅
+
+
+# 13. "Let"
+
+Let + object + V1
+
+Examples:
+
+Let me go.
+Let him play.
+Let them come.
+Let us help you.
+
+
+# 14. Make
+
+Make + object + V1
+
+Examples:
+
+The teacher made me study.
+My mother made me clean the room.
+
+
+# 15. Had Better
+
+had better + V1
+
+Examples:
+
+You had better study.
+You had better go home.
+He had better be careful.
+
+
+# 16. Would Rather
+
+would rather + V1
+
+Examples:
+
+I would rather stay home.
+She would rather walk.
+He would rather study.
+
+
+# 17. Used To
+
+used to + V1
+
+Used to = past habit
+
+Examples:
+
+I used to play football.
+He used to live in Dhaka.
+They used to go there.
+
+
+# 18. Be Used To
+
+be used to + V-ing / noun
+
+Meaning: অভ্যস্ত হওয়া
+
+Examples:
+
+I am used to working hard.
+She is used to getting up early.
+He is used to living alone.
+
+
+# 19. There Is / There Are
+
+There is + singular noun
+There are + plural noun
+
+Examples:
+
+There is a book on the table.
+There are two books on the table.
+
+
+# 20. If Condition
+
+## Type 1
+
+If + Present Simple, will + V1
+
+Examples:
+
+If you study hard, you will pass.
+If it rains, we will stay home.
+
+
+## Type 2
+
+If + Past Simple, would + V1
+
+Examples:
+
+If I had money, I would buy a car.
+If I were rich, I would help people.
+
+
+## Type 3
+
+If + had + V3, would have + V3
+
+Examples:
+
+If I had studied, I would have passed.
+If he had come, I would have helped him.
+
+
+# Important Verb Forms
+
+V1 = Base Form
+V2 = Past Form
+V3 = Past Participle
+V4 = -ing Form
+V5 = s/es Form
+
+
+Example:
+
+GO
+
+V1 = go
+V2 = went
+V3 = gone
+V4 = going
+V5 = goes
+
+
+EAT
+
+V1 = eat
+V2 = ate
+V3 = eaten
+V4 = eating
+V5 = eats
+
+
+WRITE
+
+V1 = write
+V2 = wrote
+V3 = written
+V4 = writing
+V5 = writes
+
+
+DO
+
+V1 = do
+V2 = did
+V3 = done
+V4 = doing
+V5 = does
+
+
+# Quick Rules
+
+Simple Present:
+He/She/It → V5
+I/We/You/They → V1
+
+Modal → V1
+
+To → V1
+
+Preposition → V-ing
+
+am/is/are → V-ing
+
+was/were → V-ing
+
+has/have/had → V3
+
+will → V1
+
+do/does/did → V1
+
+be → V3 (Passive Voice)
+
+let → V1
+
+make → V1
+
+had better → V1
+
+would rather → V1
+
+used to → V1
+
+
+# Common Mistakes
+
+He go to school. ❌
+He goes to school. ✅
+
+He can goes. ❌
+He can go. ✅
+
+She did not went. ❌
+She did not go. ✅
+
+I have saw him. ❌
+I have seen him. ✅
+
+He is play football. ❌
+He is playing football. ✅
+
+I am interested in learn Python. ❌
+I am interested in learning Python. ✅

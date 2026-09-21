@@ -1,0 +1,545 @@
+# Preposition
+
+A Preposition is a word that shows the relationship between a noun/pronoun and another word in a sentence.
+
+বাংলায়:
+Preposition হলো এমন একটি word, যা কোনো noun/pronoun-এর সাথে sentence-এর অন্য word-এর সম্পর্ক প্রকাশ করে।
+
+Examples:
+The book is on the table.
+বইটি টেবিলের উপর আছে।
+
+She is in the room.
+সে ঘরের ভিতরে আছে।
+
+I am going to school.
+আমি স্কুলে যাচ্ছি.
+
+
+# Common Prepositions
+
+in
+on
+at
+to
+from
+for
+with
+by
+of
+about
+under
+over
+above
+below
+between
+among
+behind
+beside
+near
+inside
+outside
+before
+after
+during
+since
+until
+through
+into
+onto
+without
+
+
+# 1. IN
+
+Used for:
+- Inside something
+- Large places
+- Months / Years
+- Long periods
+
+Examples:
+
+I am in the room.
+আমি ঘরের ভিতরে আছি।
+
+He lives in Bangladesh.
+সে বাংলাদেশে থাকে।
+
+I was born in 2000.
+আমি ২০০০ সালে জন্মগ্রহণ করেছি।
+
+My birthday is in January.
+আমার জন্মদিন জানুয়ারিতে।
+
+
+# 2. ON
+
+Used for:
+- Surface
+- Days
+- Dates
+
+Examples:
+
+The book is on the table.
+বইটি টেবিলের উপর আছে।
+
+I will come on Monday.
+আমি সোমবার আসব।
+
+The exam is on 20 September.
+পরীক্ষা ২০ সেপ্টেম্বর।
+
+
+# 3. AT
+
+Used for:
+- Specific place
+- Exact time
+- Specific point
+
+Examples:
+
+I am at home.
+আমি বাসায় আছি।
+
+He is at school.
+সে স্কুলে আছে।
+
+The class starts at 10 AM.
+ক্লাস সকাল ১০টায় শুরু হয়.
+
+
+# IN vs ON vs AT
+
+IN  → Month / Year / Large area
+ON  → Day / Date / Surface
+AT  → Exact time / Specific point
+
+Examples:
+
+in 2026
+in January
+in Bangladesh
+
+on Monday
+on 20 September
+on the table
+
+at 10 AM
+at home
+at the station
+
+
+# 4. TO
+
+Used to show direction or destination.
+
+Examples:
+
+I am going to school.
+আমি স্কুলে যাচ্ছি।
+
+She went to Dhaka.
+সে ঢাকায় গিয়েছিল।
+
+Give it to me.
+এটা আমাকে দাও।
+
+
+# 5. FROM
+
+Used to show source, starting point, or origin.
+
+Examples:
+
+I am from Bangladesh.
+আমি বাংলাদেশ থেকে এসেছি।
+
+He came from Dhaka.
+সে ঢাকা থেকে এসেছে।
+
+The shop is open from 9 AM.
+দোকান সকাল ৯টা থেকে খোলা।
+
+
+# 6. FOR
+
+Used for:
+- Purpose
+- Duration
+- Someone/something intended to receive something
+
+Examples:
+
+This gift is for you.
+এই উপহারটি তোমার জন্য।
+
+I studied for two hours.
+আমি দুই ঘণ্টা পড়েছি।
+
+This medicine is for headaches.
+এই ওষুধটি মাথাব্যথার জন্য।
+
+
+# 7. WITH
+
+Used to show:
+- Together
+- Accompaniment
+- Instrument/tool
+
+Examples:
+
+I went with my friend.
+আমি আমার বন্ধুর সাথে গিয়েছিলাম।
+
+She lives with her parents.
+সে তার বাবা-মায়ের সাথে থাকে।
+
+Cut it with a knife.
+ছুরি দিয়ে এটি কাটো।
+
+
+# 8. BY
+
+Used for:
+- Method
+- Transport
+- Agent
+- Deadline
+
+Examples:
+
+I go to work by bus.
+আমি বাসে করে কাজে যাই।
+
+The book was written by him.
+বইটি তার দ্বারা লেখা হয়েছিল।
+
+Finish the work by 5 PM.
+বিকেল ৫টার মধ্যে কাজটি শেষ করো।
+
+
+# 9. OF
+
+Used to show:
+- Possession
+- Relationship
+- Part of something
+
+Examples:
+
+The color of the car is red.
+গাড়িটির রং লাল।
+
+A cup of tea.
+এক কাপ চা।
+
+The name of the boy is Rahim.
+ছেলেটির নাম রহিম।
+
+
+# 10. ABOUT
+
+Used to mean "concerning / regarding".
+
+Examples:
+
+We talked about programming.
+আমরা programming সম্পর্কে কথা বলেছি।
+
+This book is about Python.
+এই বইটি Python সম্পর্কে।
+
+
+# 11. UNDER
+
+Used when something is below another thing.
+
+Examples:
+
+The cat is under the table.
+বিড়ালটি টেবিলের নিচে আছে।
+
+The shoes are under the bed.
+জুতাগুলো বিছানার নিচে আছে।
+
+
+# 12. OVER
+
+Used when something is above another thing.
+
+Examples:
+
+The plane is flying over the city.
+বিমানটি শহরের উপর দিয়ে উড়ছে।
+
+Put the blanket over the baby.
+বাচ্চাটির উপর কম্বলটি দাও।
+
+
+# 13. BETWEEN
+
+Used for two people/things.
+
+Examples:
+
+The shop is between the bank and the school.
+দোকানটি ব্যাংক ও স্কুলের মাঝখানে।
+
+
+# 14. AMONG
+
+Used for more than two people/things.
+
+Examples:
+
+He was sitting among his friends.
+সে তার বন্ধুদের মধ্যে বসেছিল।
+
+
+# 15. BEHIND
+
+Means at the back of something.
+
+Examples:
+
+The car is behind the house.
+গাড়িটি বাড়ির পিছনে আছে।
+
+
+# 16. BESIDE
+
+Means next to.
+
+Examples:
+
+She is sitting beside me.
+সে আমার পাশে বসে আছে।
+
+
+# 17. NEAR
+
+Means close to.
+
+Examples:
+
+I live near the school.
+আমি স্কুলের কাছে থাকি।
+
+
+# 18. BEFORE
+
+Means earlier than something.
+
+Examples:
+
+Wash your hands before eating.
+খাওয়ার আগে হাত ধুয়ে নাও।
+
+
+# 19. AFTER
+
+Means later than something.
+
+Examples:
+
+I will call you after lunch.
+দুপুরের খাবারের পর আমি তোমাকে ফোন করব।
+
+
+# 20. DURING
+
+Used when something happens within a period/event.
+
+Examples:
+
+I slept during the movie.
+সিনেমার সময় আমি ঘুমিয়েছিলাম।
+
+Do not talk during the class.
+ক্লাস চলাকালীন কথা বলবে না।
+
+
+# 21. SINCE
+
+Used for a starting point in time.
+
+Examples:
+
+I have lived here since 2020.
+আমি ২০২০ সাল থেকে এখানে বসবাস করছি।
+
+She has been sick since Monday.
+সে সোমবার থেকে অসুস্থ।
+
+
+# 22. UNTIL
+
+Means up to a particular time.
+
+Examples:
+
+Wait here until 5 PM.
+বিকেল ৫টা পর্যন্ত এখানে অপেক্ষা করো।
+
+I will work until midnight.
+আমি মধ্যরাত পর্যন্ত কাজ করব।
+
+
+# 23. THROUGH
+
+Means from one side/end to the other.
+
+Examples:
+
+We walked through the forest.
+আমরা জঙ্গলের মধ্য দিয়ে হেঁটেছিলাম।
+
+
+# 24. INTO
+
+Used to show movement from outside to inside.
+
+Examples:
+
+He went into the room.
+সে ঘরের ভিতরে গেল।
+
+The cat jumped into the box.
+বিড়ালটি বাক্সের ভিতরে লাফ দিল।
+
+
+# 25. WITHOUT
+
+Means not having or using something.
+
+Examples:
+
+I cannot live without water.
+আমি পানি ছাড়া বাঁচতে পারি না।
+
+He left without saying goodbye.
+সে বিদায় না বলে চলে গেল।
+
+
+# Important Preposition Rules
+
+## Rule 1
+
+Preposition-এর পরে সাধারণত noun/pronoun আসে।
+
+Examples:
+
+with me
+for him
+to her
+from them
+
+
+## Rule 2
+
+Preposition-এর পরে verb এলে সাধারণত verb + ing হয়।
+
+Examples:
+
+I am interested in learning Python.
+আমি Python শেখার ব্যাপারে আগ্রহী।
+
+She is good at drawing.
+সে আঁকায় ভালো।
+
+Thank you for helping me.
+আমাকে সাহায্য করার জন্য ধন্যবাদ।
+
+
+# Common Mistakes
+
+❌ I am good in English.
+✅ I am good at English.
+
+❌ He is married with her.
+✅ He is married to her.
+
+❌ I am going at school.
+✅ I am going to school.
+
+❌ He is interested on programming.
+✅ He is interested in programming.
+
+❌ I have been here since two hours.
+✅ I have been here for two hours.
+
+
+# Since vs For
+
+SINCE → Starting point
+
+since 2020
+since Monday
+since morning
+since 5 PM
+
+FOR → Duration
+
+for two years
+for three days
+for two hours
+for five minutes
+
+
+# Preposition of Time
+
+IN  → Month / Year / Long period
+ON  → Day / Date
+AT  → Exact time
+
+Example:
+
+I was born in 2000.
+I was born on Monday.
+I was born at 5 AM.
+
+
+# Preposition of Place
+
+IN  → Inside an area/place
+ON  → On a surface
+AT  → Specific point/place
+
+Examples:
+
+He is in the room.
+The phone is on the table.
+I am at the station.
+
+
+# Quick Revision
+
+IN       → ভিতরে / সময়ের বড় পরিসর
+ON       → উপরে / দিন / তারিখ
+AT       → নির্দিষ্ট স্থান / সময়
+TO       → দিকে / গন্তব্য
+FROM     → থেকে
+FOR      → জন্য / সময়কাল
+WITH     → সাথে / দিয়ে
+BY       → দ্বারা / মাধ্যমে / মধ্যে
+OF       → এর / সম্পর্ক
+ABOUT    → সম্পর্কে
+UNDER    → নিচে
+OVER     → উপরে
+BETWEEN  → দুইটির মধ্যে
+AMONG    → অনেকের মধ্যে
+BEHIND   → পিছনে
+BESIDE   → পাশে
+NEAR     → কাছে
+BEFORE   → আগে
+AFTER    → পরে
+DURING   → চলাকালীন
+SINCE    → থেকে (starting point)
+UNTIL    → পর্যন্ত
+THROUGH  → মধ্য দিয়ে
+INTO     → ভিতরে
+WITHOUT  → ছাড়া

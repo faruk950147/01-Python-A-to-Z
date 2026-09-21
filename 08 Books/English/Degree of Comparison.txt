@@ -1,0 +1,329 @@
+# Degree of Comparison
+
+Degree of Comparison is used to compare people, animals, things, or qualities.
+
+There are 3 types of Degree:
+
+1. Positive Degree
+2. Comparative Degree
+3. Superlative Degree
+
+
+# 1. Positive Degree
+
+Positive Degree describes a quality without making a comparison.
+
+Structure:
+
+Subject + am/is/are + adjective
+
+Examples:
+
+Rahim is tall.
+Karim is intelligent.
+The flower is beautiful.
+
+
+# 2. Comparative Degree
+
+Comparative Degree is used to compare two people or things.
+
+Usually:
+
+Adjective + er + than
+
+or
+
+more + adjective + than
+
+Examples:
+
+Rahim is taller than Karim.
+This book is more interesting than that book.
+
+
+# 3. Superlative Degree
+
+Superlative Degree is used to compare three or more people or things and show the highest degree of a quality.
+
+Usually:
+
+the + adjective + est
+
+or
+
+the most + adjective
+
+Examples:
+
+Rahim is the tallest boy in the class.
+This is the most interesting book.
+
+
+# Basic Comparison
+
+Positive       Comparative       Superlative
+
+tall            taller             tallest
+small           smaller            smallest
+fast            faster             fastest
+short           shorter            shortest
+long            longer             longest
+
+
+# Adjectives Ending in "e"
+
+Add:
+
+r → Comparative
+st → Superlative
+
+Positive       Comparative       Superlative
+
+large           larger             largest
+nice            nicer              nicest
+wise            wiser              wisest
+brave           braver             bravest
+
+
+# Short Adjectives Ending in Consonant + Vowel + Consonant
+
+Double the final consonant.
+
+Positive       Comparative       Superlative
+
+big             bigger             biggest
+hot             hotter             hottest
+thin            thinner            thinnest
+fat             fatter             fattest
+
+
+# Adjectives Ending in "y"
+
+Change y → i and add er/est.
+
+Positive       Comparative       Superlative
+
+easy            easier             easiest
+happy           happier            happiest
+busy            busier             busiest
+heavy           heavier            heaviest
+
+
+# Long Adjectives
+
+Use:
+
+more + adjective
+most + adjective
+
+Positive            Comparative             Superlative
+
+beautiful            more beautiful          most beautiful
+difficult             more difficult           most difficult
+important             more important          most important
+expensive             more expensive          most expensive
+interesting           more interesting        most interesting
+
+
+# Irregular Degrees
+
+Some adjectives have completely different forms.
+
+Positive       Comparative       Superlative
+
+good            better             best
+bad             worse              worst
+little          less               least
+much            more               most
+many            more               most
+far             farther/further    farthest/furthest
+old             older/elder        oldest/eldest
+
+
+# Examples
+
+## Good
+
+Positive:
+He is a good student.
+
+Comparative:
+He is better than me.
+
+Superlative:
+He is the best student in the class.
+
+
+## Bad
+
+Positive:
+This is a bad road.
+
+Comparative:
+This road is worse than that road.
+
+Superlative:
+This is the worst road in the area.
+
+
+# Positive → Comparative → Superlative
+
+tall → taller → tallest
+
+small → smaller → smallest
+
+fast → faster → fastest
+
+slow → slower → slowest
+
+strong → stronger → strongest
+
+young → younger → youngest
+
+old → older → oldest
+
+high → higher → highest
+
+low → lower → lowest
+
+big → bigger → biggest
+
+hot → hotter → hottest
+
+easy → easier → easiest
+
+happy → happier → happiest
+
+heavy → heavier → heaviest
+
+beautiful → more beautiful → most beautiful
+
+difficult → more difficult → most difficult
+
+important → more important → most important
+
+good → better → best
+
+bad → worse → worst
+
+little → less → least
+
+many → more → most
+
+
+# Comparative Sentence
+
+Comparative সাধারণত দুইজন/দুইটি জিনিসের মধ্যে comparison করে।
+
+Structure:
+
+A + is + Comparative + than + B
+
+Examples:
+
+Rahim is taller than Karim.
+
+Dhaka is bigger than Narayanganj.
+
+Python is easier than C++.
+
+
+# Superlative Sentence
+
+Superlative সাধারণত তিন বা তার বেশি ব্যক্তি/বস্তুর মধ্যে সর্বোচ্চ বা সর্বনিম্ন বোঝায়।
+
+Structure:
+
+Subject + is + the + Superlative + noun
+
+Examples:
+
+Rahim is the tallest boy in the class.
+
+Mount Everest is the highest mountain in the world.
+
+This is the best book.
+
+
+# Positive Degree for Equal Comparison
+
+Positive Degree can also be used to show equality.
+
+Structure:
+
+as + adjective + as
+
+Examples:
+
+Rahim is as tall as Karim.
+
+This book is as interesting as that book.
+
+She is as intelligent as her sister.
+
+
+# Negative Comparison
+
+Structure:
+
+not as + adjective + as
+
+Examples:
+
+Rahim is not as tall as Karim.
+
+This book is not as interesting as that one.
+
+C++ is not as easy as Python.
+
+
+# Important Rules
+
+1. Comparative Degree usually uses "than".
+
+He is taller than me. ✅
+
+2. Superlative Degree usually uses "the".
+
+He is the tallest boy. ✅
+
+3. Do not use "more" with a normal "-er" comparative.
+
+more taller ❌
+taller ✅
+
+more faster ❌
+faster ✅
+
+4. Do not use "most" with a normal "-est" superlative.
+
+most tallest ❌
+the tallest ✅
+
+most fastest ❌
+the fastest ✅
+
+
+# Quick Revision
+
+Positive:
+No comparison / equality
+
+Comparative:
+Comparison between two
+
+Superlative:
+Comparison among three or more
+
+
+Examples:
+
+Positive:
+Rahim is tall.
+
+Comparative:
+Rahim is taller than Karim.
+
+Superlative:
+Rahim is the tallest boy in the class.

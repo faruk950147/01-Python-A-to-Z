@@ -1,0 +1,504 @@
+# Voice Change
+
+Voice is a grammatical form that shows whether the subject of a sentence performs an action or receives an action.
+
+There are two types of Voice:
+
+1. Active Voice
+2. Passive Voice
+
+
+# 1. Active Voice
+
+In Active Voice, the subject performs the action.
+
+Structure:
+
+Subject + Verb + Object
+
+Example:
+
+Rahim writes a letter.
+
+Rahim = Subject
+writes = Verb
+a letter = Object
+
+
+# 2. Passive Voice
+
+In Passive Voice, the object of the active sentence becomes the subject, and the action is performed on it.
+
+Structure:
+
+Object + be verb + V3 + by + Subject
+
+Example:
+
+Active:
+Rahim writes a letter.
+
+Passive:
+A letter is written by Rahim.
+
+
+# Basic Rule
+
+Active:
+Subject + Verb + Object
+
+Passive:
+Object + be + V3 + by + Subject
+
+
+# Tense-wise Voice Change
+
+
+## 1. Present Simple
+
+Active:
+
+Subject + V1/V5 + Object
+
+Passive:
+
+Object + am/is/are + V3 + by + Subject
+
+
+Examples:
+
+Active:
+He writes a letter.
+
+Passive:
+A letter is written by him.
+
+
+Active:
+They play football.
+
+Passive:
+Football is played by them.
+
+
+# 2. Present Continuous
+
+Active:
+
+Subject + am/is/are + V-ing + Object
+
+Passive:
+
+Object + am/is/are + being + V3 + by + Subject
+
+
+Example:
+
+Active:
+He is writing a letter.
+
+Passive:
+A letter is being written by him.
+
+
+# 3. Present Perfect
+
+Active:
+
+Subject + has/have + V3 + Object
+
+Passive:
+
+Object + has/have + been + V3 + by + Subject
+
+
+Example:
+
+Active:
+He has written a letter.
+
+Passive:
+A letter has been written by him.
+
+
+# 4. Past Simple
+
+Active:
+
+Subject + V2 + Object
+
+Passive:
+
+Object + was/were + V3 + by + Subject
+
+
+Example:
+
+Active:
+He wrote a letter.
+
+Passive:
+A letter was written by him.
+
+
+# 5. Past Continuous
+
+Active:
+
+Subject + was/were + V-ing + Object
+
+Passive:
+
+Object + was/were + being + V3 + by + Subject
+
+
+Example:
+
+Active:
+He was writing a letter.
+
+Passive:
+A letter was being written by him.
+
+
+# 6. Past Perfect
+
+Active:
+
+Subject + had + V3 + Object
+
+Passive:
+
+Object + had + been + V3 + by + Subject
+
+
+Example:
+
+Active:
+He had written a letter.
+
+Passive:
+A letter had been written by him.
+
+
+# 7. Future Simple
+
+Active:
+
+Subject + will + V1 + Object
+
+Passive:
+
+Object + will + be + V3 + by + Subject
+
+
+Example:
+
+Active:
+He will write a letter.
+
+Passive:
+A letter will be written by him.
+
+
+# 8. Future Perfect
+
+Active:
+
+Subject + will have + V3 + Object
+
+Passive:
+
+Object + will have been + V3 + by + Subject
+
+
+Example:
+
+Active:
+He will have written a letter.
+
+Passive:
+A letter will have been written by him.
+
+
+# Modal Verbs
+
+Modal verbs:
+
+can
+could
+may
+might
+must
+should
+will
+would
+shall
+
+
+Active:
+
+Subject + Modal + V1 + Object
+
+Passive:
+
+Object + Modal + be + V3 + by + Subject
+
+
+Examples:
+
+Active:
+He can do the work.
+
+Passive:
+The work can be done by him.
+
+
+Active:
+You should follow the rules.
+
+Passive:
+The rules should be followed by you.
+
+
+Active:
+They must complete the task.
+
+Passive:
+The task must be completed by them.
+
+
+# Important Pronoun Changes
+
+Active → Passive
+
+I → me
+we → us
+you → you
+he → him
+she → her
+they → them
+who → whom
+
+
+Examples:
+
+He helps me.
+→ I am helped by him.
+
+
+She teaches us.
+→ We are taught by her.
+
+
+They invited him.
+→ He was invited by them.
+
+
+# Negative Sentence
+
+Active:
+
+Subject + do/does/did + not + V1 + Object
+
+Passive:
+
+Object + be + not + V3 + by + Subject
+
+
+Example:
+
+Active:
+He does not write a letter.
+
+Passive:
+A letter is not written by him.
+
+
+Active:
+They did not complete the work.
+
+Passive:
+The work was not completed by them.
+
+
+# Interrogative Sentence
+
+Example:
+
+Active:
+Does he write a letter?
+
+Passive:
+Is a letter written by him?
+
+
+Active:
+Did he write the letter?
+
+Passive:
+Was the letter written by him?
+
+
+# Modal Interrogative
+
+Active:
+Can he do the work?
+
+Passive:
+Can the work be done by him?
+
+
+# Imperative Sentence
+
+For commands, requests, and advice:
+
+Active:
+Open the door.
+
+Passive:
+Let the door be opened.
+
+
+Active:
+Do the work.
+
+Passive:
+Let the work be done.
+
+
+Active:
+Help the poor.
+
+Passive:
+Let the poor be helped.
+
+
+# Two Objects
+
+Some verbs can have two objects.
+
+Example:
+
+Active:
+He gave me a book.
+
+Passive:
+I was given a book by him.
+
+OR
+
+A book was given to me by him.
+
+
+# Who
+
+Active:
+Who wrote this book?
+
+Passive:
+By whom was this book written?
+
+
+# Important Rule
+
+Only a sentence with a transitive verb (a verb that has an object) can normally be changed into Passive Voice.
+
+Example:
+
+He writes a letter. ✅
+→ A letter is written by him.
+
+But:
+
+He sleeps. ❌
+
+There is no object, so it normally cannot be changed into Passive Voice.
+
+
+# Most Important Passive Structures
+
+Present Simple:
+am/is/are + V3
+
+Present Continuous:
+am/is/are + being + V3
+
+Present Perfect:
+has/have + been + V3
+
+Past Simple:
+was/were + V3
+
+Past Continuous:
+was/were + being + V3
+
+Past Perfect:
+had + been + V3
+
+Future:
+will + be + V3
+
+Future Perfect:
+will have + been + V3
+
+Modal:
+modal + be + V3
+
+
+# Quick Example
+
+Active:
+Rahim eats rice.
+
+Passive:
+Rice is eaten by Rahim.
+
+
+Active:
+Rahim is eating rice.
+
+Passive:
+Rice is being eaten by Rahim.
+
+
+Active:
+Rahim has eaten rice.
+
+Passive:
+Rice has been eaten by Rahim.
+
+
+Active:
+Rahim ate rice.
+
+Passive:
+Rice was eaten by Rahim.
+
+
+Active:
+Rahim was eating rice.
+
+Passive:
+Rice was being eaten by Rahim.
+
+
+Active:
+Rahim had eaten rice.
+
+Passive:
+Rice had been eaten by Rahim.
+
+
+Active:
+Rahim will eat rice.
+
+Passive:
+Rice will be eaten by Rahim.
+
+
+Active:
+Rahim can eat rice.
+
+Passive:
+Rice can be eaten by Rahim.

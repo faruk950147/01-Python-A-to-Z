@@ -1,0 +1,151 @@
+# Modal Verbs — Can, Could, May, Might, Must, Should, Would
+
+## 1. Can
+
+Used for:
+- Ability
+- Permission
+- Possibility
+
+Examples:
+I can swim.
+আমি সাঁতার কাটতে পারি।
+
+Can I come in?
+আমি কি ভিতরে আসতে পারি?
+
+It can be dangerous.
+এটি বিপজ্জনক হতে পারে।
+
+
+## 2. Could
+
+Used for:
+- Past ability
+- Polite request
+- Possibility
+
+Examples:
+I could swim when I was 10.
+আমি ১০ বছর বয়সে সাঁতার কাটতে পারতাম।
+
+Could you help me?
+আপনি কি আমাকে সাহায্য করবেন?
+
+It could rain today.
+আজ বৃষ্টি হতে পারে।
+
+
+## 3. May
+
+Used for:
+- Formal permission
+- Possibility
+
+Examples:
+May I come in?
+আমি কি ভিতরে আসতে পারি?
+
+It may rain.
+বৃষ্টি হতে পারে।
+
+
+## 4. Might
+
+Used for:
+- Weak possibility
+
+Examples:
+He might come.
+সে হয়তো আসতে পারে।
+
+It might be true.
+এটি সত্যি হতে পারে।
+
+
+## 5. Must
+
+Used for:
+- Necessity
+- Strong obligation
+- Strong conclusion
+
+Examples:
+You must study.
+তোমাকে অবশ্যই পড়তে হবে।
+
+He must be tired.
+নিশ্চয়ই সে ক্লান্ত।
+
+
+## 6. Should
+
+Used for:
+- Advice
+- Expectation
+- Duty
+
+Examples:
+You should exercise.
+তোমার ব্যায়াম করা উচিত।
+
+He should arrive soon.
+তার শীঘ্রই আসার কথা।
+
+
+## 7. Would
+
+Used for:
+- Polite request
+- Hypothetical situation
+- Past habit
+
+Examples:
+Would you help me?
+আপনি কি আমাকে সাহায্য করবেন?
+
+I would buy it if I had money.
+টাকা থাকলে আমি এটা কিনতাম।
+
+When I was young, I would play football.
+ছোটবেলায় আমি ফুটবল খেলতাম।
+
+
+# Quick Comparison
+
+Can     → Ability / Permission
+Could   → Past ability / Polite request / Possibility
+May     → Formal permission / Possibility
+Might   → Weak possibility
+Must    → Necessity / Strong certainty
+Should  → Advice / Expectation
+Would   → Hypothetical / Polite request
+
+
+# Important Rule
+
+Modal verb-এর পরে সাধারণত verb-এর Base Form বসে।
+
+can + go       ✅
+can + goes     ❌
+
+should + study   ✅
+should + studies ❌
+
+might + come    ✅
+might + comes   ❌
+
+
+# Structure
+
+Subject + Modal Verb + Base Verb
+
+Examples:
+
+I can swim.
+She can dance.
+He could help.
+You should study.
+They might come.
+We must go.
+I would help.
