@@ -1,36 +1,4 @@
 # ============================= 1. What is List =============================
-# → List is a collection of items in a specific order
-# → List can contain duplicate items
-# → List is mutable (change possible)
-# → Python 3.7+ maintains insertion order
-# → Each item is indexed (0-based)
-# → List is iterable (loop possible)
-# → Reference type, dynamic array based
-# → Implemented using dynamic array
-
-# Common List Methods:
-# append()   → add element at end
-# extend()   → add multiple elements at end
-# insert()   → add element at specific index
-# remove()   → remove element by value
-# pop()      → remove element by index (default last)
-# clear()    → remove all elements
-# index()    → find index of element
-# count()    → count occurrences
-# sort()     → sort list (in-place)
-# reverse()  → reverse list (in-place)
-# copy()     → shallow copy
-# len(list)  → length of list
-# max(list)  → maximum value
-# min(list)  → minimum value
-# sum(list)  → sum of numeric values
-# sorted(list) → returns new sorted list
-# any(list)  → True if any element is True
-# all(list)  → True if all elements are True
-# enumerate(list) → index + value pairs
-# zip(list1, list2) → combine lists
-# list(iterable) → convert iterable to list
-
 
 # ============================= 2. Basic 2D List =============================
 
