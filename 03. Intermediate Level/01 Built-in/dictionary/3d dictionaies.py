@@ -165,13 +165,11 @@ print(list1)
 for dept, persons in dict1.items():
     print(f"Department: {dept}")
 
-for person, data in persons.items():
+    for person, data in persons.items():
+        print(f"  Person: {person}")
 
-    print(f"  Person: {person}")
-
-    for key, value in data.items():
-
-        print(f"    {key} → {value}")
+        for key, value in data.items():
+            print(f"    {key} → {value}")
 
 
 # Loop through List of Dictionaries

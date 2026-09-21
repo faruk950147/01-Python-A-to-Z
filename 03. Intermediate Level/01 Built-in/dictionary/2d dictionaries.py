@@ -146,8 +146,8 @@ dict1 = {
 for key, value in dict1.items():
     print(key)
 
-for inner_key, inner_value in value.items():
-    print("   ", inner_key, "→", inner_value)
+    for inner_key, inner_value in value.items():
+        print("   ", inner_key, "→", inner_value)
 
 
 # Loop through List of Dictionaries
