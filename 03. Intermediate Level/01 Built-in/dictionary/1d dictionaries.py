@@ -1,13 +1,4 @@
 # ===================== What is Dictionary =====================
-# Dictionary is a collection of key-value pairs.
-# Collection means it can store multiple items.
-# Dictionary is ordered (Python 3.7+)
-# Dictionary is mutable (change possible), but keys must be immutable.
-# Dictionary does not allow duplicate KEYS (values can be duplicate).
-# Dictionary is indexed using keys (not numeric index).
-# Dictionary is iterable (can use loop).
-# Dictionary is reference type.
-# Dictionary is implemented using HASH TABLE.
 
 # ============================= 2. Basic Dictionary =============================
 
