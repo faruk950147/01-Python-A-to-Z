@@ -20,7 +20,7 @@ print(list1[-1])    # last element
 list[:3] that means case missing start, so it will start from index 
 list[3:] that means case missing stop, so it will go to end
 list[:] that means case missing both start and stop, so it will go from start to end (full list)
-list[:len(list)] that means case missing stop, so it will go to end (full list)
+list[:len(list)] that means case missing start, so it will go to end (full list)
 list[1:4:2] that means case missing step, so it will go with step 1
 
 
