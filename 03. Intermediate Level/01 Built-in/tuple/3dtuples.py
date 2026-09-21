@@ -70,14 +70,15 @@ print("\nTuple after adding new block:", tuple3d_added)
 
 
 # ============================= 6. Tuple Modify (Derived Data) =============================
-
 # Cannot modify original tuple → only create new transformed versions
 
 tuple3d_flat_sorted = tuple(
-    sorted(item)
-    for level1 in tuple3d
-    for level2 in level1
-    for item in level2
+    sorted(
+        item
+        for level1 in tuple3d
+        for level2 in level1
+        for item in level2
+    )
 )
 
 print("\nFlattened sorted values:", tuple3d_flat_sorted)
