@@ -1,20 +1,4 @@
-# ============================= 1. What is Tuple =============================
-# Ordered Collection: Elements maintain insertion order
-# Indexed: Each element has a fixed index
-# Immutable: Cannot be changed after creation
-# Iterable: Can be looped using for/while
-# Duplicates Allowed: Same values are allowed
-# Faster than List: More memory efficient
-# Heterogeneous: Can store different data types
-# Fixed Data: Good for constant structure
-# Reference & Dynamic type
-# Hashable: Can be used as dict key (if elements are immutable)
 
-# =================== What is Tuple ===================
-# Tuple is an ordered, immutable collection.
-# Written using round brackets ()
-# Allows duplicate values
-# Cannot be modified after creation
 
 # NOTE:
 # If tuple contains mutable object (like list), that inner object can be changed
