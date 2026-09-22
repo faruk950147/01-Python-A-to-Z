@@ -7,10 +7,6 @@
 # print(f"Initial Scope: {dir()}")
 
 
-
-
-
-
 # =============== Global Space =================
 print(f"Global Scope: {dir()}")
 
