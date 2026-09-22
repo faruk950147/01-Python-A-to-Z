@@ -25,9 +25,9 @@ list[1:4:2] that means case missing step, so it will go with step 1
 
 
 negative indexing
-list[-1] that means last element
-list[-2:] that means last 2 elements
-list[:-2] that means all except last 2 elements (missing last 2)
+list[-1]   # -1 means the last element
+list[-2:]  # starts from the second-last element and goes to the end
+list[:-2]  # starts from the beginning and goes up to, but excludes, the last 2 elements
 
 
 '''
@@ -40,9 +40,9 @@ print(list1[::2])    # step slicing
 print(list1[::-1])   # reverse list
 
 # negative indexing
-print(list1[-1])     # last element
-print(list1[-2:])    # last 2 elements
-print(list1[:-2])    # all except last 2
+list[-1]   # -1 means the last element
+list[-2:]  # starts from the second-last element and goes to the end
+list[:-2]  # starts from the beginning and goes up to, but excludes, the last 2 elements
 
 
 # ============================= 4. List Add Functions =============================
