@@ -115,3 +115,11 @@ chars = tuple(c.upper() for c in "python")
 print(squares)
 print(even)
 print(chars)
+
+"""
+| Method | Syntax | Description |
+| :--- | :--- | :--- |
+| **`count()`** | `tuple.count(item)` | Returns the number of times an item appears in the tuple. |
+| **`index()`** | `tuple.index(item, start, end)` | Returns the index of the first occurrence 
+of the specified item. Raises `ValueError` if the item is not found. |
+"""

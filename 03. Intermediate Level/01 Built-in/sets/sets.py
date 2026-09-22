@@ -122,3 +122,25 @@ print("Symmetric Difference:", A ^ B)
 print("\nMembership Test:")
 print("2 in A:", 2 in A)
 print("5 not in A:", 5 not in A)
+
+"""
+| Method | Syntax | Description |
+| :--- | :--- | :--- |
+| **`add()`** | `set.add(item)` | Adds an item to the set. If the item already exists, nothing changes. |
+| **`clear()`** | `set.clear()` | Removes all items from the set. |
+| **`copy()`** | `set.copy()` | Returns a shallow copy of the set. |
+| **`difference()`** | `set.difference(other)` | Returns a new set containing items that exist in this set but not in the other set. |
+| **`difference_update()`** | `set.difference_update(other)` | Removes items from the set that are also present in the other set. |
+| **`discard()`** | `set.discard(item)` | Removes the specified item. Does nothing if the item does not exist. |
+| **`intersection()`** | `set.intersection(other)` | Returns a new set containing items common to both sets. |
+| **`intersection_update()`** | `set.intersection_update(other)` | Updates the set by keeping only items common to both sets. |
+| **`isdisjoint()`** | `set.isdisjoint(other)` | Returns `True` if the two sets have no common items; otherwise returns `False`. |
+| **`issubset()`** | `set.issubset(other)` | Returns `True` if all items of this set are present in the other set. |
+| **`issuperset()`** | `set.issuperset(other)` | Returns `True` if all items of the other set are present in this set. |
+| **`pop()`** | `set.pop()` | Removes and returns an arbitrary item from the set. Raises `KeyError` if the set is empty. |
+| **`remove()`** | `set.remove(item)` | Removes the specified item. Raises `KeyError` if the item does not exist. |
+| **`symmetric_difference()`** | `set.symmetric_difference(other)` | Returns a new set containing items that are in either set, but not in both. |
+| **`symmetric_difference_update()`** | `set.symmetric_difference_update(other)` | Updates the set with items that are in either set, but not in both. |
+| **`union()`** | `set.union(other)` | Returns a new set containing all unique items from both sets. |
+| **`update()`** | `set.update(other)` | Adds all items from another iterable to the set. |
+"""

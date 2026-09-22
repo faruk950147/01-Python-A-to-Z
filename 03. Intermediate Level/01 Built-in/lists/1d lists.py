@@ -112,3 +112,19 @@ print(all(x > 0 for x in list1))   # True (all elements are greater than 0)
 print(max(list1))                  # 5 (maximum value in the list)
 print(min(list1))                  # 1 (minimum value in the list)
 print(sum(list1))                  # 15 (sum of all elements)
+
+"""
+| Method | Syntax | Description |
+| :--- | :--- | :--- |
+| **`append()`** | `list.append(item)` | Adds an item to the end of the list. |
+| **`clear()`** | `list.clear()` | Removes all items from the list. |
+| **`copy()`** | `list.copy()` | Returns a shallow copy of the list. |
+| **`count()`** | `list.count(item)` | Returns the number of times an item appears in the list. |
+| **`extend()`** | `list.extend(iterable)` | Adds all items from an iterable to the end of the list. |
+| **`index()`** | `list.index(item, start, end)` | Returns the index of the first occurrence of an item. |
+| **`insert()`** | `list.insert(index, item)` | Inserts an item at the specified index. |
+| **`pop()`** | `list.pop(index)` | Removes and returns the item at the specified index. If no index is given, it removes and returns the last item. |
+| **`remove()`** | `list.remove(item)` | Removes the first occurrence of the specified item. |
+| **`reverse()`** | `list.reverse()` | Reverses the order of the items in the list. |
+| **`sort()`** | `list.sort(key=None, reverse=False)` | Sorts the items in the list in ascending order by default. |
+"""
