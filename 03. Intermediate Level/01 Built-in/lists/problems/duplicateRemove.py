@@ -28,6 +28,16 @@ class RemoveDuplicates:
         return result
 
 
+    def remove_duplicates4(self, lst):
+        lst2 = []
+
+        for i in range(len(lst)):
+            if lst[i] not in lst2:
+                lst2 += [lst[i]]
+
+        return lst2
+
+
 duplicates = RemoveDuplicates()
 
 print(duplicates.remove_duplicates(
@@ -43,5 +53,9 @@ print(duplicates.remove_duplicates2(
 ))
 
 print(duplicates.remove_duplicates3(
+    [1, 2, 2, 3, 3, 4, 5, 5, 6, 6]
+))
+
+print(duplicates.remove_duplicates4(
     [1, 2, 2, 3, 3, 4, 5, 5, 6, 6]
 ))
