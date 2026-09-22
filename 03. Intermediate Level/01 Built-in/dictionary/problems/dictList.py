@@ -9,9 +9,9 @@ students = {
     "courses": ["CSE", "EEE", "BBA"]
 }
 # names = list(students.keys())
-# print(f"{names[-1]}: {students[names[-1]]}")
-# print(names[-1]) # access the last key
-# print(students[names[-1]]) # access the last value
+# print(f"{names[-1]}: {students[names[-1]]}")  # access the last key and its value
+# print(names[-1])  # access the last key
+# print(students[names[-1]])  # access the value of the last key
 
 # 2. write a program to count the number of items having list as value.
 
