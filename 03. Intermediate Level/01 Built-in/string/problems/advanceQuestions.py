@@ -2,62 +2,69 @@
 # input "Sky is blue"
 # output "blue is sky"
 
+def reverseString1(str):
+    #split return list 
+    str = str.split(" ") 
+    #reverse list ['blue', 'is', 'Sky']
+    str = str[::-1]
+    #join list 'blue is sky'
+    return " ".join(str).lower()
 
-def reverseString(str):
-   #split return list ['Sky', 'is', 'blue']
-   str = str.split(" ") 
-   #reverse list ['blue', 'is', 'Sky']
-   str = str[::-1]
-   #join list 'blue is sky'
-   return " ".join(str).lower()
+print("reverseString1('Sky is blue'):", reverseString1("Sky is blue"))
 
-print(reverseString("Sky is blue"))
+def reverseString2(str):
+    rev = ""
+    for i in range(len(str)-1, -1, -1):
+        rev += str[i]
+    return rev  
+print("Reversed:",reverseString2("blue"))
+# output: eulb
 
-# output: blue is sky
-
-# 2. Question: Remove Duplicates from a List
-# lst [1, 2, 2, 3, 3, 4, 5, 5, 6, 6]
-# output [1, 4]
-
-# remove duplicates from list
-def removeDuplicates1(lst):
-    result = []
-    for i in lst:
-        # check if element is already in result
-        if lst.count(i) == 1: # Keep only the elements that appear once in the list
-            result.append(i)
-    return result
-print(removeDuplicates1([1, 2, 2, 3, 3, 4, 5, 5, 6, 6]))
-
-# output: [1, 4]
-
-def removeDuplicates(lst):
-    result = []
-    for i in lst:
-        if lst.count(i) >= 1 and i not in result:
-            result.append(i)
-    return result
-
-print(removeDuplicates([1, 2, 2, 3, 3, 4, 5, 5, 6, 6]))
-
-# output: [1, 2, 3, 4, 5, 6]
-
-# 3. Question: Count the Occurrences of Each Character in a String
+# 2. Question: Count the Occurrences of Each Character in a String
 # str1 = "a,a,a,b,b,c,c,c"
-# output = a:3, b:2, c:3
+# output = {'a': 3, 'b': 2, 'c': 3}
 def count_characters(s):
-    # remove comma and space
-    chars = s.replace(",", "")
-    result = {}
-    for ch in chars:
-        result[ch] = result.get(ch, 0) + 1 # count the occurrences of each character
+    count = {}
 
-    # generate output
-    output = ", ".join([f"{k}:{v}" for k, v in result.items()])
-    return output
+    for chr in s.split(","):
+        # get the current count of the character, defaulting to 0 if it doesn't exist, and increment it by 1
+        count[chr] = count.get(chr, 0) + 1 
+
+    return count
 
 str1 = "a,a,a,b,b,c,c,c"
 print(count_characters(str1))
 
-# output: a:3, b:2, c:3
+# output: {'a': 3, 'b': 2, 'c': 3}
 
+# 3. Question: Find the Longest Common Prefix
+# strs = ["flower", "flow", "flight"]
+# output = "fl"
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
+    
+    prefix = strs[0]
+    
+    for i in range(1, len(strs)):
+        while strs[i].find(prefix) != 0:            
+            if not prefix:
+                return ""
+            prefix = prefix[:-1]
+
+    return prefix
+
+def longest_common_prefix1(strs):
+    if not strs:
+        return ""
+
+    for i, chars in enumerate(zip(*strs)):
+        if len(set(chars)) != 1:
+            return strs[0][:i]
+
+    return strs[0][:i + 1]
+
+strs = ["flower", "flow", "flight"]
+print(longest_common_prefix(strs))
+print(longest_common_prefix1(strs))
+# output: fl
