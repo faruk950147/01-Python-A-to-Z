@@ -1,7 +1,3 @@
-
-
-
-
 # filter() takes two parameters:
 # 1. function
 # 2. iterable
