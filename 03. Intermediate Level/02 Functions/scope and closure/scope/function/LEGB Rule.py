@@ -7,13 +7,13 @@
 # =============== local scope =================
 # contains local names defined inside the current function
 
-# def local_scope():
-#     num = 10 
-#     # local variable because it is defined inside the function
-#     # access available only inside the function
-#     print(f"It's a local variable: {num}")
+def local_scope():
+    num = 10 
+    # local variable because it is defined inside the function
+    # access available only inside the function
+    print(f"It's a local variable: {num}")
 
-# local_scope()
+local_scope()
 
 
 # =============== enclosing scope =================
