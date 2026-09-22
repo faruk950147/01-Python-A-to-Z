@@ -11,10 +11,12 @@ def givenListEvenOdd(list1):
     sumOdd = 0
     for i in range(len(list1)):
         if list1[i] % 2 == 0:
-            even.append(list1[i])
+            # even.append(list1[i])
+            even += [list1[i]]
             sumEven += list1[i]
         else:
-            odd.append(list1[i])
+            # odd.append(list1[i])
+            odd += [list1[i]]
             sumOdd += list1[i]
     return even, odd, sumEven, sumOdd
 
