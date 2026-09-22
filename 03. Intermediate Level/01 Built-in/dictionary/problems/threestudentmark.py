@@ -52,3 +52,15 @@ students = {
 for name, marks in students.items():
     total = sum(marks.values())
     print(f"{name} Total = {total}")
+    
+students = {
+    "Faruk": {"C": 80, "C++": 90, "C#": 70, "Python": 85},
+    "Tamim": {"Python": 80, "Java": 90, "JS": 70},
+    "Tonmoy": {"HTML": 80, "CSS": 90, "Bootstrap": 70}
+}
+
+# Create a dictionary of {name: total_marks} in one line
+totals_dict = {name: sum(marks.values()) for name, marks in students.items()}
+
+print(totals_dict)
+# Output: {'Faruk': 325, 'Tamim': 240, 'Tonmoy': 240}
