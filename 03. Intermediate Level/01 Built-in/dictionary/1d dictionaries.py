@@ -6,6 +6,7 @@
 
 # Dictionary is ordered, changeable (mutable), and does not allow duplicate keys.
 
+# =================== Part 1 ============================
 dict1 = {"name": "John", "age": 30}
 
 # Dictionary using dict() constructor
@@ -238,7 +239,63 @@ else:
 
 print("=========================== 9. Dictionary Condition / Search =============================")
 
-# ============================= 10. Dictionary Method Summary =============================
+# ==================== 10. Nested Dictionary =======================
+
+# A dictionary can contain another dictionary as a value.
+
+studentMark = {
+    "name": "Faruk",
+    "department": "CSE",
+    "subject": {
+        "Math": 80,
+        "English": 85,
+        "Programming": 90
+    }
+}
+
+# Access the Dictionary
+
+print(studentMark)
+
+# Access a Value
+
+print(studentMark["name"])
+
+# Access the Nested Dictionary
+
+print(studentMark["subject"])
+
+# Access a Value from the Nested Dictionary
+
+print(studentMark["subject"]["Math"])
+
+# Update
+
+studentMark["subject"]["Programming"] = 95
+
+print(studentMark)
+
+# Add
+
+studentMark["subject"]["Physics"] = 90
+
+print(studentMark)
+
+# Delete the Nested Dictionary
+
+studentMark.pop("subject")
+
+print(studentMark)
+
+# Delete the Last Inserted Item
+
+studentMark.popitem()
+
+print(studentMark)
+
+print("==================== 10. Nested Dictionary =======================")
+
+# ============================= 11. Dictionary Method Summary =============================
 
 # dict[key]       -> Access / modify a value
 
@@ -262,7 +319,7 @@ print("=========================== 9. Dictionary Condition / Search ============
 
 # del              -> Delete an item or the entire dictionary
 
-# ============================= 11. Important Patterns =============================
+# ============================= 12. Important Patterns =============================
 
 # Access
 
