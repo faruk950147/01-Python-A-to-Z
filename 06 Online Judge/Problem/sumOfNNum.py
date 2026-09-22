@@ -28,28 +28,3 @@ def sumOfNumbers(n):
     return n + sumOfNumbers(n-1)
 print(sumOfNumbers(5))
 
-
-# sum of n numbers using list
-def sum_of_n_nums(nums, elements):
-    """
-    Calculate the sum of n numbers.
-    
-    Args:
-        nums (int): Number of elements.
-        elements (list): List of elements.
-        
-    Returns:
-        int: Sum of the elements.
-    """
-    sum = 0
-    for i in range(nums):
-        sum += elements[i]
-    return sum
-
-nums = int(input("How many numbers you want to operations: "))
-elements = []
-for i in range(nums):
-    element = int(input("Enter a number: "))
-    elements.append(element)
-print(sum_of_n_nums(nums, elements))
-
