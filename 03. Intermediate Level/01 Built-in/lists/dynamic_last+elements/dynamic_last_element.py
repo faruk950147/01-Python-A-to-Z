@@ -26,7 +26,11 @@ def dynamic_last_element(fruits):
     # return fruits[len(fruits) - 1] → return last item
     # why fruits[len(fruits) - 1]? this inside of dynamic
     if len(fruits) > 0:
+        # This is the index of the last element.
+        # len(fruits) - 1
+        # This index is used to access the last element.
         return fruits[len(fruits) - 1]
+
     return None
 
 
