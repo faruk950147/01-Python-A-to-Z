@@ -1,146 +1,434 @@
 """
-    # Function with Methods in Python
+====================== Function with Methods & Decorators in Python ======================
 
-    In Python, **functions and methods are both callable blocks of code**, but the main difference is **where they are defined and how they are called**.
+In Python, Functions, Methods, and Decorators are closely related, but they
+have different purposes.
 
-    ## 1. Function
 
-    A **function** is defined independently, outside a class.
+---------------------------------------------------------------------------
+1. Function
+---------------------------------------------------------------------------
 
-    ```python
+A Function is a reusable block of code defined independently.
+
+Example:
+
+def add(a, b):
+    return a + b
+
+
+result = add(10, 20)
+
+print(result)
+
+Output:
+
+30
+
+Here:
+
+add(10, 20)
+
+is a function call.
+
+
+---------------------------------------------------------------------------
+2. Method
+---------------------------------------------------------------------------
+
+A Method is a function defined inside a class and associated with a class
+or its objects.
+
+Example:
+
+class Calculator:
+
+    def add(self, a, b):
+        return a + b
+
+
+calc = Calculator()
+
+result = calc.add(10, 20)
+
+print(result)
+
+Output:
+
+30
+
+Here:
+
+calc.add(10, 20)
+
+is a method call.
+
+The self parameter refers to the current object.
+
+Conceptually:
+
+calc.add(10, 20)
+
+works like:
+
+Calculator.add(calc, 10, 20)
+
+
+---------------------------------------------------------------------------
+3. What is a Decorator?
+---------------------------------------------------------------------------
+
+A Decorator is a function that modifies or extends the behavior of another
+function or method without changing its original source code.
+
+Basic syntax:
+
+@decorator
+def function():
+    pass
+
+
+Example:
+
+def my_decorator(func):
+
+    def wrapper():
+        print("Before function")
+
+        func()
+
+        print("After function")
+
+    return wrapper
+
+
+@my_decorator
+def hello():
+    print("Hello")
+
+
+hello()
+
+Output:
+
+Before function
+Hello
+After function
+
+
+This:
+
+@my_decorator
+def hello():
+    print("Hello")
+
+is approximately equivalent to:
+
+def hello():
+    print("Hello")
+
+
+hello = my_decorator(hello)
+
+
+---------------------------------------------------------------------------
+4. Decorators with Methods
+---------------------------------------------------------------------------
+
+Decorators can also be applied to methods inside a class.
+
+Example:
+
+def log_method(func):
+
+    def wrapper(self):
+        print("Method started")
+
+        func(self)
+
+        print("Method finished")
+
+    return wrapper
+
+
+class Student:
+
+    @log_method
+    def show(self):
+        print("Student information")
+
+
+student = Student()
+
+student.show()
+
+Output:
+
+Method started
+Student information
+Method finished
+
+Here:
+
+@log_method
+
+decorates the show() method.
+
+
+---------------------------------------------------------------------------
+5. Built-in Method Decorators
+---------------------------------------------------------------------------
+
+Python provides several important decorators for methods.
+
+Common method decorators:
+
+1. @staticmethod
+2. @classmethod
+3. @property
+4. @property.setter
+
+
+---------------------------------------------------------------------------
+6. @staticmethod
+---------------------------------------------------------------------------
+
+A static method does not automatically receive self or cls.
+
+Example:
+
+class Calculator:
+
+    @staticmethod
     def add(a, b):
         return a + b
 
-    result = add(10, 20)
 
-    print(result)
-    ```
+print(Calculator.add(10, 20))
 
-    Output:
+Output:
 
-    ```text
-    30
-    ```
-
-    Here:
-
-    ```python
-    add(10, 20)
-    ```
-
-    is a **function call**.
-
-    ---
-
-    ## 2. Method
-
-    A **method** is a function that is defined **inside a class** and is usually called through an object or class.
-
-    ```python
-    class Calculator:
-
-        def add(self, a, b):
-            return a + b
+30
 
 
-    calc = Calculator()
+---------------------------------------------------------------------------
+7. @classmethod
+---------------------------------------------------------------------------
 
-    result = calc.add(10, 20)
+A class method automatically receives the class as cls.
 
-    print(result)
-    ```
+Example:
 
-    Output:
+class Student:
 
-    ```text
-    30
-    ```
+    school = "ABC School"
 
-    Here:
+    @classmethod
+    def show_school(cls):
+        print(cls.school)
 
-    ```python
-    calc.add(10, 20)
-    ```
 
-    is a **method call**.
+Student.show_school()
 
-    The `add()` function is considered a method because it is defined inside the `Calculator` class.
+Output:
 
-    ---
+ABC School
 
-    ## Function vs Method
 
-    | Function                                | Method                                 |
-    | --------------------------------------- | -------------------------------------- |
-    | Defined outside a class                 | Defined inside a class                 |
-    | Called directly                         | Usually called through an object/class |
-    | `add(10, 20)`                           | `calc.add(10, 20)`                     |
-    | Doesn't automatically receive an object | Instance method receives `self`        |
-    | Used for general-purpose operations     | Usually works with class/object data   |
+Here:
 
-    ---
+cls
 
-    ## Simple Structure
+refers to the Student class.
 
-    ### Function
 
-    ```python
-    def function():
+---------------------------------------------------------------------------
+8. @property
+---------------------------------------------------------------------------
+
+@property allows a method to be accessed like an attribute.
+
+Example:
+
+class Student:
+
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+
+student = Student("Faruk")
+
+print(student.name)
+
+Output:
+
+Faruk
+
+
+Instead of:
+
+student.name()
+
+we use:
+
+student.name
+
+
+---------------------------------------------------------------------------
+9. @property.setter
+---------------------------------------------------------------------------
+
+@property.setter is used to control how a property is modified.
+
+Example:
+
+class Student:
+
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+
+student = Student("Faruk")
+
+print(student.name)
+
+student.name = "Ahmed"
+
+print(student.name)
+
+Output:
+
+Faruk
+Ahmed
+
+
+---------------------------------------------------------------------------
+10. Function → Method → Decorator
+---------------------------------------------------------------------------
+
+The relationship can be remembered like this:
+
+
+Function
+   ↓
+Reusable block of code
+
+
+Method
+   ↓
+Function defined inside a class
+   ↓
+Associated with an object or class
+
+
+Decorator
+   ↓
+Modifies or extends a function or method
+   ↓
+Uses @decorator syntax
+
+
+---------------------------------------------------------------------------
+11. Important Examples
+---------------------------------------------------------------------------
+
+Function:
+
+def function():
+    pass
+
+
+Method:
+
+class MyClass:
+
+    def method(self):
         pass
 
-    function()
-    ```
 
-    ### Method
+Static Method:
 
-    ```python
-    class MyClass:
+class MyClass:
 
-        def method(self):
-            pass
+    @staticmethod
+    def method():
+        pass
 
 
-    obj = MyClass()
-    obj.method()
-    ```
+Class Method:
 
-    ---
+class MyClass:
 
-    ## Important Concept
+    @classmethod
+    def method(cls):
+        pass
 
-    You can think of it like this:
 
-    ```text
-    Function
+Property:
+
+class MyClass:
+
+    @property
+    def value(self):
+        return self._value
+
+
+---------------------------------------------------------------------------
+12. In Short
+---------------------------------------------------------------------------
+
+Function:
+    A reusable block of code defined independently.
+
+Method:
+    A function defined inside a class.
+
+Decorator:
+    A function that modifies or extends the behavior of another
+    function or method.
+
+Instance Method:
+    def method(self):
+
+Class Method:
+    @classmethod
+    def method(cls):
+
+Static Method:
+    @staticmethod
+    def method():
+
+Property:
+    @property
+    def value(self):
+
+
+Final Concept:
+
+Function
     ↓
-    Independent block of code
-    ```
+Independent callable block
 
-    ```text
-    Method
+
+Method
     ↓
-    Function + Class/Object relationship
-    ```
-
-    For example:
-
-    ```python
-    class Student:
-
-        def show_name(self):
-            print(self.name)
+Function associated with a class
 
 
-    student = Student()
-    student.name = "Faruk"
-
-    student.show_name()
-    ```
-
-    Here `show_name()` is a **method**, and `self` refers to the current `student` object.
-
-    ## In Short
-
-    > **Every method is a function defined in a class, but not every function is a method.**
+Decorator
+    ↓
+Modifies or extends the behavior of a function or method
 
 """
