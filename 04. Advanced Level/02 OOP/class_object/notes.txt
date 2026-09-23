@@ -1,8 +1,617 @@
+```python
+"""
+# ========================= Python Class Working Flow with Heap Memory =========================
+
+Python Class Working Flow — Step by Step
+=========================================
+
+Important Note:
+---------------
+
+Python's memory model should not be treated exactly like
+C/C++ "Stack Memory and Heap Memory".
+
+In CPython:
+
+- Python objects are generally allocated in heap-managed memory.
+- Local variables generally hold references to objects.
+- An execution frame is created when a function is called.
+- Memory management can vary depending on the Python implementation.
+
+Therefore, the terms Stack/Heap are used below mainly
+to make the concepts easier to understand.
+"""
+
+
+# ============================================================
+# Step 1: Create a Class
+# ============================================================
+
+class Work:
+    pass
+
+
+"""
+class Work:
+
+- Work is a class.
+- A class is a blueprint or template for creating objects.
+- In Python, a class is itself an object.
+- The type of the Work class is 'type'.
+
+Example:
+"""
+
+print(type(Work))
+
+# Output:
+# <class 'type'>
+
+
+"""
+Therefore:
+
+Work
+  ↓
+A class object
+
+Type of Work
+  ↓
+type
+
+
+When the class definition is executed, the Work class is created.
+However, no instance of Work has been created yet.
+"""
+
+
+# ============================================================
+# Step 2: Create a Constructor (__init__)
+# ============================================================
+
+class Work:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+"""
+__init__():
+
+- __init__ is a special method.
+- It is normally called when an object is initialized.
+- Its main purpose is to initialize the state of an instance.
+
+self:
+
+- self represents the current object/instance.
+- self.name and self.age are instance attributes.
+
+Example:
+
+work = Work("John", 30)
+
+Here:
+
+self
+ ↓
+work object
+
+self.name
+ ↓
+"John"
+
+self.age
+ ↓
+30
+"""
+
+
+# ============================================================
+# Step 3: Create a Method
+# ============================================================
+
+class Work:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def showInfo(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+
+
+"""
+showInfo():
+
+- showInfo is a method of the class.
+- Technically, a method is a function defined in a class namespace.
+- self is used to access attributes of the current instance.
+
+Example:
+
+work.showInfo()
+
+Conceptually, this can be thought of as:
+
+Work.showInfo(work)
+
+Therefore:
+
+work
+ ↓
+self
+
+So:
+
+self.name
+ ↓
+work.name
+
+self.age
+ ↓
+work.age
+"""
+
+
+# ============================================================
+# Step 4: Create an Object
+# ============================================================
+
+work = Work("John", 30)
+
+
+"""
+When this statement executes:
+
+work = Work("John", 30)
+
+Conceptually, several things happen:
+
+1. A new Work instance is created.
+2. A reference to the new object is obtained.
+3. __init__() is called to initialize the instance.
+4. Inside __init__():
+
+       self.name = "John"
+       self.age = 30
+
+   are assigned.
+5. The work variable refers to that object.
+
+Conceptual Diagram:
+
+    Variable / Reference
+    -------------------
+
+        work
+          |
+          |
+          v
+    +----------------------+
+    |   Work Object        |
+    |----------------------|
+    | name = "John"        |
+    | age  = 30            |
+    +----------------------+
+
+Python objects are generally allocated in heap-managed memory.
+
+However, saying that "work is definitely stored on the stack"
+is not technically guaranteed by the Python language.
+"""
+
+
+# ============================================================
+# Step 5: Call the Method
+# ============================================================
+
+work.showInfo()
+
+
+"""
+Output:
+
+Name: John, Age: 30
+
+
+work.showInfo()
+
+Here, the showInfo() method of the work object is called.
+
+Conceptually:
+
+work.showInfo()
+
+can be thought of as:
+
+Work.showInfo(work)
+
+Therefore:
+
+work object
+     ↓
+    self
+
+Then:
+
+self.name
+     ↓
+work.name
+     ↓
+"John"
+
+self.age
+     ↓
+work.age
+     ↓
+30
+"""
+
+
+# ============================================================
+# Step 6: Create Multiple Objects
+# ============================================================
+
+work1 = Work("John", 30)
+work2 = Work("Alice", 25)
+
+
+"""
+Two separate Work objects are created here.
+
+Conceptual Diagram:
+
+       work1
+         |
+         v
+   +----------------+
+   | Work Object    |
+   | name = John    |
+   | age  = 30      |
+   +----------------+
+
+
+       work2
+         |
+         v
+   +----------------+
+   | Work Object    |
+   | name = Alice   |
+   | age  = 25      |
+   +----------------+
+
+
+work1 and work2 are two different objects.
+
+Therefore:
+
+work1.name != work2.name
+work1.age  != work2.age
+"""
+
+
+# ============================================================
+# Step 7: Object Identity using id()
+# ============================================================
+
+print("work1 id:", id(work1))
+print("work2 id:", id(work2))
+
+
+"""
+id():
+
+id() returns the identity value of an object.
+
+Example:
+
+id(work1)
+id(work2)
+
+If the objects are different, they will normally have
+different identity values.
+
+Important:
+---------
+
+id() should not simply be defined as a "memory address".
+
+In CPython, id() is commonly related to the object's memory
+address, but according to Python's language semantics,
+id() represents the object's unique identity during its lifetime.
+
+Therefore:
+
+id(work1)
+
+is better described as:
+
+"the identity value of the work1 object"
+"""
+
+
+# ============================================================
+# Step 8: Delete a Reference
+# ============================================================
+
+del work1
+
+
+"""
+del work1
+
+This removes the name/reference work1 from the namespace.
+
+However, it does not necessarily mean that the object itself
+has immediately been deleted.
+
+If another reference to the object exists,
+the object can continue to exist.
+
+Example:
+
+work1 = Work("John", 30)
+
+another = work1
+
+del work1
+
+Now:
+
+another
+   |
+   v
+Work Object
+
+
+Even though work1 has been deleted,
+the object still exists because another refers to it.
+"""
+
+
+# ============================================================
+# Step 9: Reference Counting and Garbage Collection
+# ============================================================
+
+work1 = Work("John", 30)
+
+work1 = None
+
+
+"""
+work1 = None
+
+Now work1 no longer refers to the Work object.
+
+If there are no other references to the object,
+CPython may deallocate the object when its reference count
+reaches zero.
+
+Python's garbage collector also helps handle cyclic references.
+
+Therefore, it is not always correct to say:
+
+"No reference → Garbage Collector immediately deletes the object"
+
+A better explanation is:
+
+"If an object is no longer reachable, the Python implementation
+may eventually reclaim its memory.
+
+In CPython, reference counting often causes many objects
+to be deallocated quickly."
+"""
+
+
+# ============================================================
+# Complete Example
+# ============================================================
+
+import gc
+
+
+class Work:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def showInfo(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+
+
+# Create objects
+
+work1 = Work("John", 30)
+work2 = Work("Alice", 25)
+
+
+# Call methods
+
+work1.showInfo()
+work2.showInfo()
+
+
+# Object identity
+
+print("work1 id:", id(work1))
+print("work2 id:", id(work2))
+
+
+# Delete reference
+
+del work1
+
+
+# Request garbage collection
+
+gc.collect()
+
+
+# work2 still exists
+
+print("work2 still exists:", id(work2))
+
+
+# ============================================================
+# Complete Working Flow
+# ============================================================
+
+"""
+Python Class Working Flow:
+
+        Class Definition
+               |
+               v
+        class Work
+               |
+               v
+        Class Object
+               |
+               |
+        Object Creation
+               |
+               v
+      Work("John", 30)
+               |
+               v
+        New Work Object
+               |
+               v
+          __init__()
+               |
+               v
+      self.name = "John"
+      self.age  = 30
+               |
+               v
+       work reference
+               |
+               v
+        Work Object
+        +-------------+
+        | name = John |
+        | age  = 30   |
+        +-------------+
+               |
+               v
+       work.showInfo()
+               |
+               v
+      Work.showInfo(work)
+               |
+               v
+             Output
+               |
+               v
+      Name: John, Age: 30
+               |
+               v
+      Reference removed
+               |
+               v
+       Object may become
+       eligible for memory
+       reclamation
+"""
+
+
+# ============================================================
+# Summary Table
+# ============================================================
+
+"""
+| Step                  | What Happens                                  |
+|-----------------------|-----------------------------------------------|
+| Class Creation        | A class object is created                     |
+| __init__ Definition   | Initialization logic is defined               |
+| Method Definition     | Behavior/functionality is defined             |
+| Object Creation       | A new instance is created                     |
+| __init__ Execution    | Instance attributes are initialized           |
+| Reference Creation    | A variable refers to the object               |
+| Method Call           | Current object is passed as self              |
+| id()                  | Object identity value is returned             |
+| del Reference         | A reference is removed                        |
+| Garbage Collection    | Unreachable objects may be reclaimed          |
+
+
+Key Concepts:
+
+1. Class
+   ↓
+   Blueprint / template
+
+2. Object
+   ↓
+   Instance of a class
+
+3. self
+   ↓
+   Reference to the current instance
+
+4. __init__()
+   ↓
+   Initializes the instance
+
+5. Instance Attribute
+   ↓
+   self.name
+   self.age
+
+6. Method
+   ↓
+   Function defined inside a class
+
+7. id()
+   ↓
+   Object identity value
+
+8. Garbage Collection
+   ↓
+   Helps reclaim objects that are no longer reachable
+
+
+Important Memory Concept:
+
+A safe explanation of Python's memory model is:
+
+    Variable
+       |
+       v
+    Reference
+       |
+       v
+    Python Object
+       |
+       v
+    Heap-managed memory
+
+
+During method/function calls, Python uses execution frames.
+
+Therefore, when explaining Python memory management,
+avoid treating this as an absolute rule:
+
+"C/C++ style:
+variable = stack
+object = heap"
+
+Python's actual memory management depends on the implementation.
+"""
+
+
+# ========================= End of Python Class Working Flow =========================
+
+
+# ============================================================
 # Python OOP — Methods A to Z Complete Notes
+# ============================================================
 
-Python OOP-এ Method সম্পর্কিত গুরুত্বপূর্ণ concept:
+"""
+Important method-related concepts in Python OOP:
 
-```text
 1. Instance Method
 2. Class Method
 3. Static Method
@@ -27,103 +636,80 @@ Python OOP-এ Method সম্পর্কিত গুরুত্বপূর
 22. __init__ vs __call__
 23. __call__ + Polymorphism
 24. __call__ + Duck Typing
-```
+"""
 
----
 
-# 1. Method কী?
+# ============================================================
+# 1. What is a Method?
+# ============================================================
 
-Class-এর ভিতরে define করা function-কে সাধারণভাবে **method** বলা হয়।
+"""
+A function defined inside a class is generally called a method.
+"""
 
-Example:
-
-```python
 class Student:
 
     def show(self):
         print("Hello")
-```
 
-এখানে:
 
-```python
-show()
-```
-
-হলো একটি method।
-
-Class:
-
-```text
-Student
-   ↓
-show()
-   ↓
-Method
-```
-
-Object তৈরি করে method call করা যায়:
-
-```python
 s = Student()
 
 s.show()
-```
 
----
 
-# 2. Python-এ প্রধান Method Types
+"""
+Here:
 
-Python OOP-এ method-এর তিনটি প্রধান ধরন:
+show()
+↓
+Method
 
-```text
-Instance Method
-       ↓
-Class Method
-       ↓
-Static Method
-```
+Class:
+Student
 
-এছাড়াও method binding এবং polymorphism সম্পর্কিত গুরুত্বপূর্ণ concepts রয়েছে:
+Object:
+s
+"""
 
-```text
-Bound Method
-Method Overloading
-Method Overriding
-Duck Typing
-```
 
-এবং Python-এর special methods:
+# ============================================================
+# 2. Main Types of Methods in Python
+# ============================================================
 
-```text
-__init__
-__str__
-__call__
-__len__
-__add__
-...
-```
+"""
+The three main types of methods in Python OOP are:
 
----
+1. Instance Method
+2. Class Method
+3. Static Method
 
+Other important related concepts include:
+
+- Bound Methods
+- Method Overloading
+- Method Overriding
+- Duck Typing
+- Special Methods
+"""
+
+
+# ============================================================
 # 3. Instance Method
+# ============================================================
 
-**Instance Method** হলো এমন method যা একটি নির্দিষ্ট object/instance-এর data নিয়ে কাজ করে।
+"""
+An Instance Method is a method that works with the data
+of a particular object/instance.
 
-এটি Python-এ সবচেয়ে common method type।
+Characteristics:
 
-## বৈশিষ্ট্য
+✔ Usually has self as the first parameter
+✔ Can be called through an object
+✔ Can access instance variables
+✔ Can work with different data for different objects
+"""
 
-```text
-✔ সাধারণত প্রথম parameter self
-✔ Object-এর মাধ্যমে call করা যায়
-✔ Instance variable access করতে পারে
-✔ প্রতিটি object-এর আলাদা data নিয়ে কাজ করতে পারে
-```
-
-## Example
-
-```python
 class Student:
 
     def __init__(self, name):
@@ -136,67 +722,36 @@ class Student:
 s1 = Student("Faruk")
 
 s1.show()
-```
 
-Output:
 
-```text
-Faruk
-```
+# ============================================================
+# 4. What is self?
+# ============================================================
 
-এখানে:
+"""
+self represents the current object/instance.
 
-```python
-self.name
-```
+self is a conventional parameter name.
 
-এর মাধ্যমে `s1` object-এর `name` access করা হচ্ছে।
-
----
-
-# 4. `self` কী?
-
-`self` হলো current object/instance-কে represent করা একটি conventional parameter name।
-
-Example:
-
-```python
-class Student:
-
-    def __init__(self, name):
-        self.name = name
-
-    def show(self):
-        print(self.name)
-```
-
-যখন:
-
-```python
-s1 = Student("Faruk")
+When:
 
 s1.show()
-```
 
-call করা হয়, তখন conceptually:
+is called, it can conceptually be understood as:
 
-```python
 Student.show(s1)
-```
 
-এর মতো কাজ করে।
+Therefore:
 
-অর্থাৎ:
-
-```text
 s1 → self
-```
+"""
 
----
 
-# 5. Instance Method-এর Formula
+# ============================================================
+# 5. Instance Method Formula
+# ============================================================
 
-```text
+"""
 Instance Method
        ↓
      self
@@ -204,36 +759,29 @@ Instance Method
 Current Object
        ↓
 Instance Data
-```
+"""
 
----
 
+# ============================================================
 # 6. Class Method
+# ============================================================
 
-**Class Method** হলো এমন method যা class-level data বা class-level behavior নিয়ে কাজ করে।
+"""
+A Class Method is a method that works with class-level
+data or class-level behavior.
 
-এটি:
+The @classmethod decorator is used.
 
-```python
-@classmethod
-```
+Characteristics:
 
-decorator ব্যবহার করে তৈরি করা হয়।
+✔ Uses @classmethod
+✔ First parameter is conventionally cls
+✔ Can access class variables
+✔ Can modify class variables
+✔ Can be called through the class or an instance
+✔ Can be used to create alternative constructors
+"""
 
-## বৈশিষ্ট্য
-
-```text
-✔ @classmethod ব্যবহার করে
-✔ প্রথম parameter সাধারণত cls
-✔ Class variable access করতে পারে
-✔ Class variable পরিবর্তন করতে পারে
-✔ Class অথবা object থেকে call করা যায়
-✔ Alternative constructor তৈরি করতে পারে
-```
-
-## Example
-
-```python
 class Student:
 
     school = "TMSS"
@@ -246,69 +794,36 @@ class Student:
 Student.change_school("ABC School")
 
 print(Student.school)
-```
 
-Output:
 
-```text
-ABC School
-```
+# ============================================================
+# 7. What is cls?
+# ============================================================
 
----
+"""
+cls represents the current class.
 
-# 7. `cls` কী?
+It is a conventional parameter name.
 
-`cls` হলো current class-কে represent করার conventional parameter name।
-
-```text
 self → Current Object
 
 cls → Current Class
-```
+"""
 
-Example:
 
-```python
-class Student:
+# ============================================================
+# 8. Static Method
+# ============================================================
 
-    school = "TMSS"
+"""
+A Static Method is a method where Python does not automatically
+pass self or cls.
 
-    @classmethod
-    def show_school(cls):
-        print(cls.school)
-```
+It is commonly used for utility/helper functionality.
 
----
+The @staticmethod decorator is used.
+"""
 
-# 8. Instance Method vs Class Method
-
-```text
-Instance Method
-      ↓
-self
-      ↓
-Object
-
-Class Method
-      ↓
-cls
-      ↓
-Class
-```
-
----
-
-# 9. Static Method
-
-**Static Method** এমন method যার জন্য Python automatically `self` বা `cls` pass করে না।
-
-এটি সাধারণত utility/helper functionality-এর জন্য ব্যবহার করা হয়।
-
-`@staticmethod` decorator ব্যবহার করা হয়।
-
-## Example
-
-```python
 class Math:
 
     @staticmethod
@@ -317,70 +832,79 @@ class Math:
 
 
 print(Math.add(5, 3))
-```
 
-Output:
 
-```text
-8
-```
+# ============================================================
+# 9. When Should We Use a Static Method?
+# ============================================================
 
-এখানে `add()`:
+"""
+Use a static method when:
 
-```text
-self ব্যবহার করছে না
-cls ব্যবহার করছে না
-```
+✔ self is not required
+✔ cls is not required
+✔ Class state is not required
+✔ Instance state is not required
+✔ Utility/helper functionality is needed
+"""
 
----
 
-# 10. Static Method কখন ব্যবহার করব?
-
-যখন:
-
-```text
-✔ self দরকার নেই
-✔ cls দরকার নেই
-✔ Class state দরকার নেই
-✔ Instance state দরকার নেই
-✔ একটি utility/helper functionality দরকার
-```
-
-Example:
-
-```python
 class Math:
 
     @staticmethod
     def square(n):
         return n * n
-```
 
----
 
-# 11. তিন ধরনের Method — Comparison
+print(Math.square(5))
 
+
+# ============================================================
+# 10. Instance Method vs Class Method
+# ============================================================
+
+"""
+Instance Method
+      ↓
+self
+      ↓
+Object
+
+
+Class Method
+      ↓
+cls
+      ↓
+Class
+"""
+
+
+# ============================================================
+# 11. Three Types of Methods — Comparison
+# ============================================================
+
+"""
 | Method          | First Parameter | Context     | Main Purpose          |
-| --------------- | --------------- | ----------- | --------------------- |
-| Instance Method | `self`          | Object      | Instance-specific কাজ |
-| Class Method    | `cls`           | Class       | Class-level কাজ       |
+|-----------------|-----------------|-------------|-----------------------|
+| Instance Method | self            | Object      | Instance behavior     |
+| Class Method    | cls             | Class       | Class-level behavior  |
 | Static Method   | None            | Independent | Utility/helper        |
+
 
 Memory:
 
-```text
 self → Object
 
 cls → Class
 
 Nothing → Utility
-```
+"""
 
----
 
-# 12. একই Class-এ তিন ধরনের Method
+# ============================================================
+# 12. Three Types of Methods in the Same Class
+# ============================================================
 
-```python
 class Human:
 
     species = "Homo sapiens"
@@ -404,11 +928,11 @@ class Human:
     @staticmethod
     def general_info():
         print("Human is a living organism.")
-```
 
+
+"""
 Relationship:
 
-```text
 Human
 │
 ├── Instance Method
@@ -422,15 +946,13 @@ Human
 └── Static Method
        ↓
    Utility
-```
+"""
 
----
 
-# 13. Class Method দিয়ে Object Create
+# ============================================================
+# 13. Creating an Object Using a Class Method
+# ============================================================
 
-Class Method alternative constructor হিসেবেও ব্যবহার করা যায়।
-
-```python
 class Human:
 
     def __init__(self, name, age):
@@ -446,28 +968,13 @@ person = Human.create_anonymous()
 
 print(person.name)
 print(person.age)
-```
 
-Output:
 
-```text
-Unknown
-0
-```
-
-এখানে:
-
-```python
-return cls("Unknown", 0)
-```
-
-বর্তমান class-এর নতুন object তৈরি করছে।
-
----
-
+# ============================================================
 # 14. Alternative Constructor
+# ============================================================
 
-```text
+"""
 Normal Constructor
        ↓
 __init__()
@@ -477,19 +984,20 @@ Alternative Constructor
 classmethod
        ↓
 cls(...)
-```
+"""
 
----
 
+# ============================================================
 # 15. Method Binding
+# ============================================================
 
-Python-এ object-এর মাধ্যমে instance method access করলে method-এর সাথে object-এর connection তৈরি হয়।
+"""
+In Python, when an instance method is accessed through
+an object, the method becomes associated with that object.
 
-এই process-কে **method binding** বলা হয়।
+This process is called method binding.
+"""
 
-Example:
-
-```python
 class Student:
 
     def show(self):
@@ -499,41 +1007,32 @@ class Student:
 s = Student()
 
 s.show()
-```
 
-এখানে:
 
-```python
-s.show
-```
-
-হলো bound method।
-
----
-
+# ============================================================
 # 16. Bound Method
+# ============================================================
 
-**Bound Method** হলো এমন method object যা একটি নির্দিষ্ট instance-এর সাথে bound/attached থাকে।
+"""
+A Bound Method is a method object associated with
+a particular instance.
 
-```python
 s.show
-```
 
-মানে:
+means:
 
-```text
 show method
      +
-s object-এর context
+s object's context
      ↓
 Bound Method
-```
+"""
 
----
 
-# 17. Bound Method কীভাবে কাজ করে?
+# ============================================================
+# 17. Method Binding Example
+# ============================================================
 
-```python
 class Student:
 
     def show(self):
@@ -543,117 +1042,74 @@ class Student:
 s = Student()
 
 s.show()
-```
 
+"""
 Conceptually:
 
-```python
 s.show()
-```
 
-এর equivalent:
+is equivalent to:
 
-```python
 Student.show(s)
-```
 
-অর্থাৎ:
+Therefore:
 
-```text
 s → self
-```
+"""
 
----
 
-# 18. `Student.show` vs `s.show`
+# ============================================================
+# 18. Student.show vs s.show
+# ============================================================
 
-এটি খুব গুরুত্বপূর্ণ।
-
-## `Student.show`
-
-```python
+"""
 Student.show
-```
 
-Python 3-এ এটি সাধারণত **unbound method** বলা হয় না।
+In Python 3, it is generally not called an "unbound method".
 
-এটি class-এর মাধ্যমে accessed function।
+It is a function accessed through the class.
 
-```text
 Student.show
      ↓
 Function accessed through class
-```
 
-## `s.show`
 
-```python
 s.show
-```
 
-এটি:
+is:
 
-```text
 Bound Method
      ↓
 Bound to s
-```
+"""
 
----
 
-# 19. গুরুত্বপূর্ণ Difference
+# ============================================================
+# 19. Method Overloading
+# ============================================================
 
-```text
-Student.show
-     ↓
-Function
-     ↓
-Specific object-এর সাথে bound নয়
-```
+"""
+Method Overloading means using the same method name
+to handle different parameter lists.
 
-অন্যদিকে:
+For example:
 
-```text
-s.show
-     ↓
-Bound Method
-     ↓
-Bound to s
-```
-
-তাই:
-
-```python
-s.show()
-```
-
-call করলে `s` implicitভাবে `self` হিসেবে যায়।
-
----
-
-# 20. Method Overloading
-
-**Method Overloading** বলতে একই method name ব্যবহার করে বিভিন্ন parameter list handle করাকে বোঝায়।
-
-যেমন:
-
-```text
 add(a)
-
 add(a, b)
-
 add(a, b, c)
-```
 
-Java/C++-এর মতো language-এ traditional method overloading directly supported।
+Languages such as Java and C++ support traditional
+method overloading directly.
 
-কিন্তু Python-এ traditional method overloading সরাসরি নেই।
+Python does not directly support traditional
+method overloading.
+"""
 
----
 
-# 21. Python-এ একই Method Name দুইবার
+# ============================================================
+# 20. Same Method Name
+# ============================================================
 
-```python
 class Calculator:
 
     def add(self, a):
@@ -661,19 +1117,11 @@ class Calculator:
 
     def add(self, a, b):
         return a + b
-```
 
-এখানে দ্বিতীয়:
 
-```python
-add()
-```
+"""
+The second add() definition replaces the first definition.
 
-definition আগের definition-কে replace করবে।
-
-অর্থাৎ:
-
-```text
 First add()
      ↓
 Replaced
@@ -681,15 +1129,16 @@ Replaced
 Second add()
      ↓
 Current definition
-```
+"""
 
----
 
-# 22. Python-এ Overloading-এর Alternative
+# ============================================================
+# 21. Alternatives to Traditional Overloading in Python
+# ============================================================
 
-Python-এ flexible input handle করতে ব্যবহার করা যায়:
+"""
+Python can handle flexible input using:
 
-```text
 Default Arguments
 +
 *args
@@ -697,17 +1146,18 @@ Default Arguments
 **kwargs
 +
 Type Checking
-```
 
-এগুলো **traditional overloading নয়**।
+These are not traditional method overloading.
 
-এগুলো overloading-এর মতো flexible behavior তৈরি করে।
+They are techniques for creating flexible behavior
+similar to some use cases of overloading.
+"""
 
----
 
-# 23. Default Arguments
+# ============================================================
+# 22. Default Arguments
+# ============================================================
 
-```python
 class Calculator:
 
     def add(self, a, b=0, c=0):
@@ -719,33 +1169,12 @@ calc = Calculator()
 print(calc.add(5))
 print(calc.add(5, 10))
 print(calc.add(5, 10, 15))
-```
 
-Output:
 
-```text
-5
-15
-30
-```
+# ============================================================
+# 23. *args
+# ============================================================
 
-এখানে:
-
-```text
-add(5)
-add(5, 10)
-add(5, 10, 15)
-```
-
-সব একই method handle করছে।
-
----
-
-# 24. `*args`
-
-`*args` ব্যবহার করে যেকোনো সংখ্যক positional arguments নেওয়া যায়।
-
-```python
 class Calculator:
 
     def add(self, *args):
@@ -757,38 +1186,27 @@ calc = Calculator()
 print(calc.add(5))
 print(calc.add(5, 10))
 print(calc.add(5, 10, 15))
-```
 
-Output:
 
-```text
-5
-15
-30
-```
+"""
+When:
 
-যেমন:
-
-```python
 calc.add(5, 10, 15)
-```
 
-এর সময়:
+is called:
 
-```python
 args = (5, 10, 15)
-```
+"""
 
----
 
-# 25. `**kwargs`
+# ============================================================
+# 24. **kwargs
+# ============================================================
 
-`**kwargs` বিভিন্ন সংখ্যক keyword arguments গ্রহণ করে।
-
-```python
 class Student:
 
     def show(self, **kwargs):
+
         for key, value in kwargs.items():
             print(key, ":", value)
 
@@ -800,61 +1218,49 @@ student.show(
     age=22,
     department="CSE"
 )
-```
 
-Output:
 
-```text
-name : Faruk
-age : 22
-department : CSE
-```
+"""
+**kwargs:
 
----
+Multiple Keyword Arguments
+        ↓
+Dictionary
+"""
 
-# 26. `*args` vs `**kwargs`
 
-```text
+# ============================================================
+# 25. *args vs **kwargs
+# ============================================================
+
+"""
 *args
  ↓
 Multiple Positional Arguments
  ↓
 Tuple
-```
 
-```text
+
 **kwargs
  ↓
 Multiple Keyword Arguments
  ↓
 Dictionary
-```
+"""
 
----
 
-# 27. Method Overriding
+# ============================================================
+# 26. Method Overriding
+# ============================================================
 
-**Method Overriding** হলো child class-এ parent class-এর method নতুন implementation দিয়ে redefine করা।
+"""
+Method Overriding occurs when a child class provides
+a new implementation of a method inherited from
+a parent class.
 
-এর জন্য inheritance থাকতে হয়।
+Inheritance is required.
+"""
 
-```text
-Parent
-  ↓
-Method
-  ↓
-Child
-  ↓
-Same Method Name
-  ↓
-New Implementation
-```
-
----
-
-# 28. Method Overriding Example
-
-```python
 class Parent:
 
     def greet(self, name):
@@ -872,67 +1278,26 @@ obj2 = Child()
 
 obj1.greet("John")
 obj2.greet("John")
-```
-
-Output:
-
-```text
-Hello from Parent
-Hello from Child
-```
-
----
-
-# 29. Overriding-এর মূল শর্ত
-
-```text
-1. Inheritance থাকতে হবে
-2. Parent-এ method থাকতে হবে
-3. Child-এ একই method name থাকতে হবে
-4. Child নতুন implementation দিতে পারে
-5. Child object থেকে call করলে Child-এর implementation ব্যবহৃত হয়
-```
-
----
-
-# 30. Method Signature
-
-Overriding করার সময় child method-এর signature parent method-এর সাথে compatible রাখা ভালো।
-
-```python
-class Parent:
-
-    def greet(self, name):
-        print("Hello")
 
 
-class Child(Parent):
+# ============================================================
+# 27. Main Conditions for Overriding
+# ============================================================
 
-    def greet(self, name):
-        print("Hi")
-```
+"""
+1. Inheritance must exist.
+2. The parent class must have the method.
+3. The child class defines a method with the same name.
+4. The child can provide a new implementation.
+5. Calling the method on a child object uses the child's
+   implementation.
+"""
 
-এখানে:
 
-```text
-greet(self, name)
-```
+# ============================================================
+# 28. Method Overriding + super()
+# ============================================================
 
-দুই class-এই compatible।
-
----
-
-# 31. `super()`
-
-Child class থেকে parent class-এর implementation call করতে:
-
-```python
-super()
-```
-
-ব্যবহার করা যায়।
-
-```python
 class Parent:
 
     def greet(self, name):
@@ -942,90 +1307,91 @@ class Parent:
 class Child(Parent):
 
     def greet(self, name):
+
         super().greet(name)
+
         print("Hello from Child")
 
 
 obj = Child()
 
 obj.greet("John")
-```
 
+
+"""
 Output:
 
-```text
 Hello from Parent
 Hello from Child
-```
+"""
 
----
 
-# 32. `super()` কী করছে?
+# ============================================================
+# 29. super()
+# ============================================================
 
-```python
+"""
 super().greet(name)
-```
 
-Parent-এর `greet()` implementation access করছে।
+accesses the next implementation of greet()
+according to the method resolution order (MRO).
 
-Flow:
+In this simple example:
 
-```text
 Child.greet()
      ↓
 super().greet()
      ↓
 Parent.greet()
-```
+"""
 
----
 
-# 33. Overloading vs Overriding
+# ============================================================
+# 30. Overloading vs Overriding
+# ============================================================
 
-| বিষয়                       | Overloading                  | Overriding                       |
-| -------------------------- | ---------------------------- | -------------------------------- |
-| মূল ধারণা                  | Same name + different inputs | Child parent method redefine করে |
-| Class                      | সাধারণত একই class            | Parent + Child                   |
-| Inheritance                | প্রয়োজন নেই                  | প্রয়োজন                          |
-| Python traditional support | সরাসরি নেই                   | আছে                              |
-| উদ্দেশ্য                   | Different inputs handle করা  | Existing behavior redefine করা   |
+"""
+| Topic                    | Overloading                    | Overriding                    |
+|--------------------------|--------------------------------|-------------------------------|
+| Main idea                | Same name + different inputs   | Child redefines parent method |
+| Classes                  | Usually same class              | Parent + Child                |
+| Inheritance              | Not required                   | Required                      |
+| Direct Python support    | Traditional form: No           | Yes                           |
+| Purpose                  | Handle different inputs        | Redefine existing behavior    |
+
 
 Memory:
 
-```text
 Overloading
 → Same Class + Different Inputs
 
 Overriding
 → Parent → Child + New Implementation
-```
+"""
 
----
 
-# 34. Polymorphism
+# ============================================================
+# 31. Polymorphism
+# ============================================================
 
-**Polymorphism** অর্থ:
+"""
+Polymorphism means:
 
-```text
 Poly → Many
 Morph → Forms
-```
 
-অর্থাৎ:
+In programming:
 
-```text
 One Interface
 +
 Different Implementations
-```
+"""
 
-একই ধরনের operation বিভিন্ন object-এর ক্ষেত্রে ভিন্নভাবে কাজ করতে পারে।
 
----
+# ============================================================
+# 32. Method Overriding and Polymorphism
+# ============================================================
 
-# 35. Method Overriding এবং Polymorphism
-
-```python
 class Dog:
 
     def speak(self):
@@ -1044,54 +1410,47 @@ def make_sound(animal):
 
 make_sound(Dog())
 make_sound(Cat())
-```
 
+
+"""
 Output:
 
-```text
 Woof!
 Meow!
-```
+"""
 
-একই:
 
-```python
-animal.speak()
-```
+# ============================================================
+# 33. Duck Typing
+# ============================================================
 
-দুই object-এর জন্য দুই রকম behavior তৈরি করছে।
+"""
+Duck Typing is a Python programming style where
+the object's behavior or capability is more important
+than its actual type.
 
----
+Main idea:
 
-# 36. Duck Typing
-
-Python-এ **Duck Typing** হলো এমন programming style যেখানে object-এর actual type-এর চেয়ে তার required behavior/capability গুরুত্বপূর্ণ।
-
-মূল ধারণা:
-
-```text
 "If it walks like a duck
 and quacks like a duck,
 treat it like a duck."
-```
 
-অর্থাৎ:
+Therefore:
 
-```text
-Object কোন class-এর?
+What class is the object?
         ↓
-কম গুরুত্বপূর্ণ
+Less important
 
-Object required behavior দিতে পারে?
+Can the object provide the required behavior?
         ↓
-গুরুত্বপূর্ণ
-```
+More important
+"""
 
----
 
-# 37. Duck Typing Example
+# ============================================================
+# 34. Duck Typing Example
+# ============================================================
 
-```python
 class Duck:
 
     def quack(self):
@@ -1110,65 +1469,12 @@ def make_it_quack(thing):
 
 make_it_quack(Duck())
 make_it_quack(Person())
-```
 
-Output:
 
-```text
-Quack! Quack!
-I'm quacking like a duck!
-```
+# ============================================================
+# 35. Duck Typing — Second Example
+# ============================================================
 
----
-
-# 38. Duck Typing কীভাবে কাজ করছে?
-
-Function:
-
-```python
-def make_it_quack(thing):
-    thing.quack()
-```
-
-এখানে function check করছে না:
-
-```python
-isinstance(thing, Duck)
-```
-
-বরং সরাসরি:
-
-```python
-thing.quack()
-```
-
-call করছে।
-
-তাই:
-
-```text
-Duck
- ↓
-quack() আছে
- ↓
-Works
-```
-
-এবং:
-
-```text
-Person
- ↓
-quack() আছে
- ↓
-Works
-```
-
----
-
-# 39. Duck Typing-এর দ্বিতীয় Example
-
-```python
 class Dog:
 
     def speak(self):
@@ -1187,45 +1493,32 @@ def make_sound(animal):
 
 make_sound(Dog())
 make_sound(Cat())
-```
 
-Function শুধু ধরে নিচ্ছে:
 
-```python
-animal.speak()
-```
+# ============================================================
+# 36. Duck Typing vs Type Checking
+# ============================================================
 
-call করা যাবে।
+"""
+Type Checking:
 
----
-
-# 40. Duck Typing বনাম Type Checking
-
-## Type Checking
-
-```python
 def make_sound(animal):
 
     if isinstance(animal, Dog):
         animal.speak()
-```
 
-এখানে নির্দিষ্ট type check করা হচ্ছে।
 
-## Duck Typing
+Duck Typing:
 
-```python
 def make_sound(animal):
     animal.speak()
-```
+"""
 
-এখানে actual type check করা হচ্ছে না।
 
----
+# ============================================================
+# 37. What Happens if the Method Does Not Exist?
+# ============================================================
 
-# 41. Duck Typing-এ Method না থাকলে
-
-```python
 class Car:
     pass
 
@@ -1236,83 +1529,67 @@ def make_it_quack(thing):
 
 car = Car()
 
+# make_it_quack(car)
+
+
+"""
+Car does not have quack().
+
+Therefore, calling:
+
 make_it_quack(car)
-```
 
-`Car`-এ:
+would normally raise:
 
-```python
-quack()
-```
-
-নেই।
-
-তাই runtime-এ সাধারণত:
-
-```text
 AttributeError
-```
+"""
 
-হবে।
 
----
+# ============================================================
+# 38. Dynamic Typing vs Duck Typing
+# ============================================================
 
-# 42. Duck Typing-এর সুবিধা
+"""
+Dynamic Typing:
 
-```text
-✔ Flexible code
-✔ Less dependency on specific types
-✔ Different classes ব্যবহার করা যায়
-✔ Reusable function তৈরি করা সহজ
-✔ Polymorphic behavior তৈরি করা যায়
-```
+A variable can refer to objects of different types
+during runtime.
 
-তবে required behavior না থাকলে runtime error হতে পারে।
+Example:
 
----
-
-# 43. Dynamic Typing বনাম Duck Typing
-
-দুটো একই concept নয়।
-
-### Dynamic Typing
-
-Variable-এর type runtime-এ নির্ধারিত হতে পারে।
-
-```python
 x = 10
 x = "Hello"
-```
 
-একই variable বিভিন্ন সময়ে বিভিন্ন type-এর object reference করতে পারে।
 
-### Duck Typing
+Duck Typing:
 
-Object-এর actual type-এর পরিবর্তে তার behavior/capability-এর উপর গুরুত্ব দেওয়া হয়।
+The object's actual type is less important than
+whether it provides the required behavior.
 
-```text
 Dynamic Typing
-→ Type runtime-এ handled
+→ Type is handled dynamically at runtime
 
 Duck Typing
-→ Behavior/capability গুরুত্বপূর্ণ
-```
+→ Required behavior/capability is important
+"""
 
----
 
-# 44. Special / Magic / Dunder Method
+# ============================================================
+# 39. Special / Magic / Dunder Methods
+# ============================================================
 
-Python-এর যেসব special method সাধারণত double underscore দিয়ে শুরু এবং শেষ হয়, সেগুলোকে **dunder methods** বলা হয়।
+"""
+Python special methods are commonly surrounded by
+double underscores.
+
+They are called dunder methods.
 
 Dunder:
 
-```text
 Double UNDERscore
-```
 
 Examples:
 
-```python
 __init__
 __str__
 __repr__
@@ -1320,19 +1597,19 @@ __len__
 __add__
 __eq__
 __call__
-```
+"""
 
-এগুলো Python-এর built-in syntax/operation-এর behavior customize করতে সাহায্য করে।
 
----
+# ============================================================
+# 40. __call__
+# ============================================================
 
-# 45. `__call__`
+"""
+__call__ is a special/dunder method.
 
-`__call__` হলো Python-এর একটি special/dunder method।
+It allows an object to be called like a function.
+"""
 
-এর মাধ্যমে কোনো object-কে function-এর মতো call করা যায়।
-
-```python
 class Test:
 
     def __call__(self):
@@ -1342,41 +1619,34 @@ class Test:
 t = Test()
 
 t()
-```
 
+
+"""
 Output:
 
-```text
 Object called
-```
+"""
 
----
 
-# 46. `t()` কীভাবে কাজ করে?
+# ============================================================
+# 41. How Does t() Work?
+# ============================================================
 
-```python
+"""
+Conceptually:
+
 t()
-```
 
-conceptually:
+can be understood as:
 
-```python
 t.__call__()
-```
+"""
 
-অর্থাৎ:
 
-```text
-t()
- ↓
-__call__()
-```
+# ============================================================
+# 42. __call__ with Parameters
+# ============================================================
 
----
-
-# 47. Parameter সহ `__call__`
-
-```python
 class Add:
 
     def __call__(self, a, b):
@@ -1386,72 +1656,61 @@ class Add:
 calc = Add()
 
 print(calc(5, 3))
-```
 
+
+"""
 Output:
 
-```text
 8
-```
+
 
 Conceptually:
 
-```python
 calc(5, 3)
-```
 
-মানে:
+means:
 
-```python
 calc.__call__(5, 3)
-```
+"""
 
----
 
-# 48. `__call__`-এ `self`
+# ============================================================
+# 43. self in __call__
+# ============================================================
 
-`__call__` একটি instance method।
+"""
+__call__ is an instance method.
 
-তাই:
+Therefore:
 
-```python
 class Add:
 
     def __call__(self, a, b):
         return a + b
-```
 
-এখানে:
 
-```text
+Here:
+
 self → calc object
 a    → 5
 b    → 3
-```
+"""
 
-যখন:
 
-```python
-calc(5, 3)
-```
+# ============================================================
+# 44. Callable Object
+# ============================================================
 
-call করা হয়।
+"""
+An object that can be called like:
 
----
-
-# 49. Callable Object
-
-যে object-কে:
-
-```python
 obj()
-```
 
-এর মতো call করা যায় তাকে **callable object** বলা যায়।
+is called a callable object.
 
-`__call__` implement করা object callable হতে পারে।
+An object that implements __call__ can be callable.
+"""
 
-```python
 class Test:
 
     def __call__(self):
@@ -1461,27 +1720,12 @@ class Test:
 t = Test()
 
 print(callable(t))
-```
 
-Output:
 
-```text
-True
-```
+# ============================================================
+# 45. callable()
+# ============================================================
 
----
-
-# 50. `callable()`
-
-Python-এর built-in:
-
-```python
-callable()
-```
-
-দিয়ে পরীক্ষা করা যায় কোনো object/function call করা যায় কি না।
-
-```python
 def add(a, b):
     return a + b
 
@@ -1496,44 +1740,47 @@ t = Test()
 
 print(callable(add))
 print(callable(t))
-```
 
+
+"""
 Output:
 
-```text
 True
 True
-```
+"""
 
----
 
-# 51. `__call__` না থাকলে
+# ============================================================
+# 46. Without __call__
+# ============================================================
 
-```python
 class Test:
+
     pass
 
 
 t = Test()
 
+# t()
+
+
+"""
+Calling:
+
 t()
-```
 
-এখানে সাধারণভাবে:
+would normally raise:
 
-```text
 TypeError
-```
 
-হবে।
+because t is not callable.
+"""
 
-কারণ `t` callable নয়।
 
----
+# ============================================================
+# 47. With __call__
+# ============================================================
 
-# 52. `__call__` থাকলে
-
-```python
 class Test:
 
     def __call__(self):
@@ -1543,11 +1790,11 @@ class Test:
 t = Test()
 
 t()
-```
 
+
+"""
 Flow:
 
-```text
 t
  ↓
 Callable Object
@@ -1555,15 +1802,13 @@ Callable Object
 t()
  ↓
 t.__call__()
-```
+"""
 
----
 
-# 53. Stateful Callable Object
+# ============================================================
+# 48. Stateful Callable Object
+# ============================================================
 
-`__call__` ব্যবহার করে object function-এর মতো call হওয়ার পাশাপাশি নিজের state-ও ধরে রাখতে পারে।
-
-```python
 class Counter:
 
     def __init__(self):
@@ -1579,51 +1824,46 @@ c = Counter()
 print(c())
 print(c())
 print(c())
-```
 
+
+"""
 Output:
 
-```text
 1
 2
 3
-```
+"""
 
----
 
-# 54. Stateful কীভাবে?
+# ============================================================
+# 49. How is it Stateful?
+# ============================================================
 
-প্রথমে:
+"""
+Initially:
 
-```text
 count = 0
-```
 
-প্রথম call:
+First call:
 
-```text
 0 → 1
-```
 
-দ্বিতীয় call:
+Second call:
 
-```text
 1 → 2
-```
 
-তৃতীয় call:
+Third call:
 
-```text
 2 → 3
-```
 
-অর্থাৎ object state মনে রাখছে।
+The object remembers its state between calls.
+"""
 
----
 
-# 55. একাধিক Callable Object-এর State
+# ============================================================
+# 50. State of Multiple Callable Objects
+# ============================================================
 
-```python
 class Counter:
 
     def __init__(self):
@@ -1642,29 +1882,28 @@ print(c1())
 
 print(c2())
 print(c2())
-```
 
+
+"""
 Output:
 
-```text
 1
 2
 1
 2
-```
 
-কারণ:
 
-```text
-c1 → আলাদা state
-c2 → আলাদা state
-```
+Because:
 
----
+c1 → Separate state
+c2 → Separate state
+"""
 
-# 56. `__call__` বনাম Normal Method
 
-```python
+# ============================================================
+# 51. __call__ vs Normal Method
+# ============================================================
+
 class Test:
 
     def show(self):
@@ -1678,46 +1917,43 @@ t = Test()
 
 t.show()
 t()
-```
 
+
+"""
 Difference:
 
-```text
 Normal Method
 → t.show()
 
 __call__
 → t()
-```
+"""
 
----
 
-# 57. `__init__` vs `__call__`
+# ============================================================
+# 52. __init__ vs __call__
+# ============================================================
 
-এটি খুব গুরুত্বপূর্ণ।
+"""
+__init__
 
-### `__init__`
+Used to initialize an instance.
 
-Object initialization-এর সময় ব্যবহৃত হয়।
-
-```python
 obj = Test()
-```
 
-### `__call__`
 
-Object-কে function-এর মতো call করলে ব্যবহৃত হয়।
+__call__
 
-```python
+Used when an object is called like a function.
+
 obj()
-```
+
 
 Formula:
 
-```text
 Class()
  ↓
-Object Creation / Initialization
+Object Creation
  ↓
 __init__()
 
@@ -1726,13 +1962,14 @@ obj()
 Object Call
  ↓
 __call__()
-```
+"""
 
----
 
-# 58. `__str__` vs `__call__`
+# ============================================================
+# 53. __str__ vs __call__
+# ============================================================
 
-```text
+"""
 print(obj)
     ↓
 __str__()
@@ -1740,17 +1977,13 @@ __str__()
 obj()
     ↓
 __call__()
-```
+"""
 
-অর্থাৎ `__str__` object-এর string representation-এর behavior control করে।
 
-`__call__` object call করার behavior control করে।
+# ============================================================
+# 54. Real-Life Example — MultiplyLayer
+# ============================================================
 
----
-
-# 59. Real-Life Example — MultiplyLayer
-
-```python
 class MultiplyLayer:
 
     def __init__(self, weight):
@@ -1763,61 +1996,52 @@ class MultiplyLayer:
 layer = MultiplyLayer(10)
 
 print(layer(5))
-```
 
+
+"""
 Output:
 
-```text
 50
-```
+"""
 
----
 
-# 60. MultiplyLayer-এর Flow
+# ============================================================
+# 55. MultiplyLayer Flow
+# ============================================================
 
-প্রথমে:
+"""
+First:
 
-```python
 layer = MultiplyLayer(10)
-```
 
-তখন:
+Then:
 
-```text
 layer.weight = 10
-```
 
-তারপর:
 
-```python
+Next:
+
 layer(5)
-```
 
-মানে:
+means:
 
-```python
 layer.__call__(5)
-```
 
-তারপর:
 
-```python
+Then:
+
 5 * 10
-```
 
-ফলাফল:
+Result:
 
-```text
 50
-```
+"""
 
----
 
-# 61. `__call__` এবং Class-Based Decorator
+# ============================================================
+# 56. __call__ and Class-Based Decorator
+# ============================================================
 
-Class-based decorator তৈরিতেও `__call__` ব্যবহার করা যায়।
-
-```python
 class MyDecorator:
 
     def __init__(self, func):
@@ -1835,59 +2059,54 @@ def hello():
 
 
 hello()
-```
 
+
+"""
 Output:
 
-```text
 Before function
 Hello
 After function
-```
+"""
 
----
 
-# 62. `@MyDecorator` কী করছে?
+# ============================================================
+# 57. What Does @MyDecorator Do?
+# ============================================================
 
-এই:
+"""
+This:
 
-```python
 @MyDecorator
 def hello():
     print("Hello")
-```
 
-conceptually:
 
-```python
+can conceptually be understood as:
+
 def hello():
     print("Hello")
 
 
 hello = MyDecorator(hello)
-```
 
-এর মতো।
 
-তখন `hello` একটি callable decorator object হয়ে যায়।
+Therefore, hello becomes a callable decorator object.
 
-কারণ:
+Why?
 
-```python
-MyDecorator
-```
+Because the MyDecorator class contains:
 
-class-এর মধ্যে আছে:
-
-```python
 def __call__(self):
-```
+    ...
+"""
 
----
 
-# 63. Class-Based Decorator Flow
+# ============================================================
+# 58. Class-Based Decorator Flow
+# ============================================================
 
-```text
+"""
 Original Function
        ↓
 MyDecorator(function)
@@ -1897,13 +2116,13 @@ Decorator Object
 __call__()
        ↓
 Original Function
-```
+"""
 
----
 
-# 64. `__call__` + Polymorphism
+# ============================================================
+# 59. __call__ + Polymorphism
+# ============================================================
 
-```python
 class Add:
 
     def __call__(self, a, b):
@@ -1921,28 +2140,27 @@ multiply = Multiply()
 
 print(add(5, 3))
 print(multiply(5, 3))
-```
 
+
+"""
 Output:
 
-```text
 8
 15
-```
 
-দুই object-এর interface একই:
 
-```python
+Both objects provide the same callable interface:
+
 operation(a, b)
-```
 
-কিন্তু behavior আলাদা।
+But their behavior is different.
+"""
 
----
 
-# 65. `__call__` + Duck Typing
+# ============================================================
+# 60. __call__ + Duck Typing
+# ============================================================
 
-```python
 class Add:
 
     def __call__(self, a, b):
@@ -1961,48 +2179,50 @@ def calculate(operation, a, b):
 
 print(calculate(Add(), 5, 3))
 print(calculate(Multiply(), 5, 3))
-```
 
+
+"""
 Output:
 
-```text
 8
 15
-```
 
-`calculate()` function জানে না object-এর type কী।
 
-এটি শুধু ধরে নিচ্ছে:
+The calculate() function does not need to know
+the exact type of the object.
 
-```python
+It only assumes that:
+
 operation(a, b)
-```
 
-call করা যাবে।
+can be called.
 
-এটাই duck-typing style behavior।
+This is an example of duck-typing style behavior.
+"""
 
----
 
-# 66. `__call__` + Duck Typing Flow
+# ============================================================
+# 61. __call__ + Duck Typing Flow
+# ============================================================
 
-```text
+"""
 calculate(operation)
         ↓
 operation(a, b)
         ↓
-Object callable?
+Object is callable?
         ↓
 __call__()
         ↓
 Specific implementation
-```
+"""
 
----
 
-# 67. Methods + Polymorphism-এর Relationship
+# ============================================================
+# 62. Relationship Between Methods and Polymorphism
+# ============================================================
 
-```text
+"""
 Python OOP
 │
 ├── Methods
@@ -2024,7 +2244,7 @@ Python OOP
 ├── Polymorphism
 │   │
 │   ├── Overloading
-│   │      └── Traditional form নেই
+│   │      └── Traditional form is not directly supported
 │   │
 │   ├── Overriding
 │   │      └── Parent → Child
@@ -2039,79 +2259,78 @@ Python OOP
     ├── __len__
     ├── __add__
     └── __call__
-```
+"""
 
----
 
-# 68. Complete Comparison
+# ============================================================
+# 63. Complete Comparison
+# ============================================================
 
-| Concept         | Main Idea                           |  `self` | `cls` | Inheritance | Main Purpose          |
-| --------------- | ----------------------------------- | ------: | ----: | ----------: | --------------------- |
-| Instance Method | Object-এর data নিয়ে কাজ            |       ✅ |     ❌ |           ❌ | Instance behavior     |
-| Class Method    | Class-level data/behavior           |       ❌ |     ✅ |           ❌ | Class behavior        |
-| Static Method   | Independent utility                 |       ❌ |     ❌ |           ❌ | Utility               |
-| Bound Method    | Method + specific instance          | Usually |     — |           ❌ | Instance binding      |
-| Overloading     | Same name + different inputs        |       — |     — |           ❌ | Flexible inputs       |
-| Overriding      | Child parent method redefine করে    | Usually |     — |           ✅ | New implementation    |
-| Duck Typing     | Type-এর চেয়ে behavior গুরুত্বপূর্ণ |       — |     — |           ❌ | Flexible polymorphism |
-| `__call__`      | Object-কে callable করে              | Usually |     — |           ❌ | Function-like object  |
+"""
+| Concept         | Main Idea                         | self | cls | Inheritance | Main Purpose          |
+|-----------------|-----------------------------------|------|-----|-------------|-----------------------|
+| Instance Method | Object-specific behavior          | Yes  | No  | No          | Instance behavior     |
+| Class Method    | Class-level behavior/data         | No   | Yes | No          | Class behavior        |
+| Static Method   | Independent utility               | No   | No  | No          | Utility               |
+| Bound Method    | Method + specific instance        | Yes  | —   | No          | Instance binding      |
+| Overloading     | Same name + different inputs      | —    | —   | No          | Flexible inputs       |
+| Overriding      | Child redefines parent method     | Yes  | —   | Yes         | New implementation    |
+| Duck Typing     | Behavior matters more than type   | —    | —   | No          | Flexible polymorphism |
+| __call__        | Object becomes callable            | Yes  | —   | No          | Function-like object  |
+"""
 
----
 
-# 69. Important Differences
+# ============================================================
+# 64. Important Differences
+# ============================================================
 
-## Instance Method
+"""
+Instance Method
 
-```text
 self
  ↓
 Object
  ↓
 Instance Data
-```
 
-## Class Method
 
-```text
+Class Method
+
 cls
  ↓
 Class
  ↓
 Class Data
-```
 
-## Static Method
 
-```text
+Static Method
+
 No self
 No cls
  ↓
 Utility
-```
 
-## Bound Method
 
-```text
+Bound Method
+
 Method
  +
 Specific Object
  ↓
 Bound Method
-```
 
-## Overloading
 
-```text
+Overloading
+
 Same Name
  +
 Different Inputs
-```
 
-Python-এ traditional form সরাসরি নেই।
+Traditional form is not directly supported in Python.
 
-## Overriding
 
-```text
+Overriding
+
 Parent
  ↓
 Child
@@ -2119,11 +2338,10 @@ Child
 Same Method Name
  ↓
 New Implementation
-```
 
-## Duck Typing
 
-```text
+Duck Typing
+
 Actual Type
  ↓
 Less Important
@@ -2131,23 +2349,23 @@ Less Important
 Required Behavior
  ↓
 More Important
-```
 
-## `__call__`
 
-```text
+__call__
+
 Object
  ↓
 ()
  ↓
 __call__()
-```
+"""
 
----
 
-# 70. Final A–Z Memory Map
+# ============================================================
+# 65. Final A–Z Memory Map
+# ============================================================
 
-```text
+"""
 A → Arguments
     Default args / *args / **kwargs
 
@@ -2164,7 +2382,7 @@ E → Encapsulation
     Methods often operate on object/class state
 
 F → Function-like Object
-    __call__ দিয়ে তৈরি করা যায়
+    __call__ can make an object function-like
 
 G → General Utility
     Static Method
@@ -2175,63 +2393,65 @@ H → Hierarchy
 I → Instance Method
     self + Object
 
-J → `__init__`
+J → __init__
     Object initialization
 
-K → `cls`
+K → cls
     Current Class
 
-L → `self`
+L → self
     Current Object
 
 M → Method
-    Class-এর ভিতরের function
+    Function defined inside a class
 
 N → Normal Method
     obj.method()
 
 O → Overriding
-    Child নতুন implementation দেয়
+    Child provides a new implementation
 
 P → Polymorphism
     Same interface, different behavior
 
-Q → `__call__`
-    Object-কে function-এর মতো call
+Q → __call__
+    Object can be called like a function
 
 R → Runtime Behavior
-    Duck typing runtime-এ behavior ব্যবহার করে
+    Duck typing relies on behavior at runtime
 
 S → Static Method
     @staticmethod
 
 T → Type Checking
-    isinstance() ইত্যাদি
+    isinstance() and related techniques
 
 U → Utility
-    Static Method-এর common use
+    Common use of static methods
 
 V → Variable Scope
-    self / cls দিয়ে state access
+    self / cls can be used to access state
 
-W → `*args`
+W → *args
     Multiple positional arguments
 
-X → `**kwargs`
+X → **kwargs
     Multiple keyword arguments
 
 Y → Yield/Generator
-    Method/function-এর অন্য Python concept; OOP method type নয়
+    Another Python concept;
+    not a method type
 
-Z → Zero/No automatic context
-    Static method-এ self/cls automatically যায় না
-```
+Z → Zero/No Automatic Context
+    Static methods do not receive self/cls automatically
+"""
 
----
 
-# 71. Ultimate Memory Trick
+# ============================================================
+# 66. Final Memory Trick
+# ============================================================
 
-```text
+"""
 Instance
 → self
 → Object
@@ -2254,64 +2474,18 @@ Overriding
 → Parent → Child + New Behavior
 
 Duck Typing
-→ Type নয়, Behavior
+→ Type is less important than Behavior
 
 __call__
 → Object → Function-like
-```
+"""
 
----
 
-# 72. সবকিছুর এক লাইনের Formula
+# ============================================================
+# 67. Final Concept Tree
+# ============================================================
 
-```text
-self
-→ Current Object
-
-cls
-→ Current Class
-
-@staticmethod
-→ No automatic self/cls
-
-s.show
-→ Bound Method
-
-Student.show
-→ Function accessed through Class
-
-s.show()
-→ Conceptually Student.show(s)
-
-Overloading
-→ Same Name + Different Arguments
-→ Python-এ Traditional Form নেই
-
-Overriding
-→ Child + Same Method Name + New Implementation
-
-super()
-→ Parent Implementation Access
-
-Duck Typing
-→ Required Behavior Matters More Than Actual Type
-
-__call__
-→ obj() → obj.__call__()
-
-callable(obj)
-→ Object Call করা যায় কি না
-
-Stateful Callable
-→ __call__ + Instance State
-
-Class-based Decorator
-→ __call__ ব্যবহার করে callable decorator object
-```
-
-# 73. Final Concept Tree
-
-```text
+"""
 Python OOP
 │
 ├── Methods
@@ -2361,47 +2535,556 @@ Python OOP
         obj.__call__()
             ↓
         Callable Object
-```
+"""
 
-# 74. Final Final Formula
 
-```text
+# ============================================================
+# 68. Final Formula
+# ============================================================
+
+"""
 METHODS
 │
 ├── Instance → self → Object
 ├── Class → cls → Class
 └── Static → Nothing → Utility
 
+
 BINDING
+
 └── Bound → Method + Instance
 
+
 POLYMORPHISM
+
 ├── Overloading → Same Name + Different Inputs
 ├── Overriding → Parent → Child + New Behavior
-└── Duck Typing → Behavior > Explicit Type
+└── Duck Typing → Behavior > Explicit Type Checking
+
 
 SPECIAL METHODS
+
 ├── __init__ → Initialize
 ├── __str__ → String Representation
 ├── __len__ → Length
 ├── __add__ → +
-└── __call__ → Object behaves like Function
+└── __call__ → Object behaves like a Function
+
 
 CALLABLE
+
 └── obj()
       ↓
    __call__()
-```
+"""
 
-## সবচেয়ে গুরুত্বপূর্ণ ৮টি লাইন
 
-```text
+# ============================================================
+# 69. Final Most Important 8 Lines
+# ============================================================
+
+"""
 1. self → Current Object
+
 2. cls → Current Class
+
 3. Static Method → No automatic self/cls
+
 4. s.show → Bound Method
+
 5. Overloading → Same Name + Different Inputs
+
 6. Overriding → Child redefines Parent Method
+
 7. Duck Typing → Behavior matters more than actual type
+
 8. __call__ → obj() executes obj.__call__()
+"""
+
+
+# ============================================================
+# Polymorphism with Collections
+# ============================================================
+
+"""
+Polymorphism with Collections means storing objects of
+different classes in the same collection, such as a list,
+and using the same method call on every object.
+
+Each object can respond differently to the same method call.
+
+Example:
+
+animals = [Dog(), Cat(), Bird()]
+
+Here:
+
+Dog, Cat, and Bird are different classes.
+
+But all of them provide the same method:
+
+speak()
+
+Therefore:
+
+for animal in animals:
+    animal.speak()
+
+The same interface is used for different objects.
+"""
+
+
+# ============================================================
+# Abstract Base Class
+# ============================================================
+
+from abc import ABC, abstractmethod
+
+
+class Animal(ABC):
+
+    @abstractmethod
+    def speak(self):
+        pass
+
+
+# ============================================================
+# Subclasses
+# ============================================================
+
+class Dog(Animal):
+
+    def speak(self):
+        return "Woof!"
+
+
+class Cat(Animal):
+
+    def speak(self):
+        return "Meow!"
+
+
+class Bird(Animal):
+
+    def speak(self):
+        return "Chirp!"
+
+
+# ============================================================
+# Collection of Objects
+# ============================================================
+
+animals = [
+    Dog(),
+    Cat(),
+    Bird()
+]
+
+
+# ============================================================
+# Polymorphism in Action
+# ============================================================
+
+for animal in animals:
+    print(animal.speak())
+
+
+# ============================================================
+# Output
+# ============================================================
+
+"""
+Woof!
+Meow!
+Chirp!
+"""
+
+
+# ============================================================
+# How It Works
+# ============================================================
+
+"""
+The collection contains different objects:
+
+animals
+   |
+   +---- Dog()
+   |
+   +---- Cat()
+   |
+   +---- Bird()
+
+
+Then:
+
+for animal in animals:
+    print(animal.speak())
+
+
+First:
+
+animal = Dog()
+animal.speak()
+        ↓
+"Woof!"
+
+
+Second:
+
+animal = Cat()
+animal.speak()
+        ↓
+"Meow!"
+
+
+Third:
+
+animal = Bird()
+animal.speak()
+        ↓
+"Chirp!"
+"""
+
+
+# ============================================================
+# Same Interface, Different Behavior
+# ============================================================
+
+"""
+The method name is the same:
+
+speak()
+
+But the behavior is different:
+
+Dog  → "Woof!"
+Cat  → "Meow!"
+Bird → "Chirp!"
+
+This is polymorphism.
+"""
+
+
+# ============================================================
+# Important Point
+# ============================================================
+
+"""
+The for loop does not need to know the exact class of the object.
+
+It only expects that the object provides:
+
+speak()
+
+Therefore:
+
+for animal in animals:
+    print(animal.speak())
+
+works with Dog, Cat, and Bird.
+
+This demonstrates polymorphic behavior.
+
+It also fits Python's duck-typing style because the code
+can rely on the required behavior rather than explicitly
+checking the concrete class.
+"""
+
+
+# ============================================================
+# Why Use Collections with Polymorphism?
+# ============================================================
+
+"""
+Polymorphism with collections helps us:
+
+1. Store different types of objects together.
+2. Use one common interface.
+3. Avoid writing separate code for each class.
+4. Make code easier to extend.
+5. Reduce unnecessary type-checking logic.
+6. Improve flexibility and maintainability.
+"""
+
+
+# ============================================================
+# Example Without Polymorphism
+# ============================================================
+
+"""
+Without polymorphism, we might write:
+
+for animal in animals:
+
+    if isinstance(animal, Dog):
+        print(animal.speak())
+
+    elif isinstance(animal, Cat):
+        print(animal.speak())
+
+    elif isinstance(animal, Bird):
+        print(animal.speak())
+
+
+This is unnecessary for this example.
+
+With polymorphism, we simply write:
+"""
+
+for animal in animals:
+    print(animal.speak())
+
+
+# ============================================================
+# Adding a New Class
+# ============================================================
+
+class Cow(Animal):
+
+    def speak(self):
+        return "Moo!"
+
+
+# Add Cow to the same collection
+
+animals.append(Cow())
+
+
+# The same code still works
+
+for animal in animals:
+    print(animal.speak())
+
+
+# Output:
+
+"""
+Woof!
+Meow!
+Chirp!
+Moo!
+"""
+
+
+# ============================================================
+# Key Point
+# ============================================================
+
+"""
+We added a completely new class:
+
+Cow
+
+But we did not need to change this code:
+
+for animal in animals:
+    print(animal.speak())
+
+This is one of the major benefits of polymorphism.
+"""
+
+
+# ============================================================
+# Polymorphism + Inheritance
+# ============================================================
+
+"""
+Animal
+  |
+  +---- Dog
+  |
+  +---- Cat
+  |
+  +---- Bird
+  |
+  +---- Cow
+
+
+All subclasses inherit from Animal.
+
+Animal defines the common interface:
+
+speak()
+
+Each subclass provides its own implementation:
+
+Dog  → Woof!
+Cat  → Meow!
+Bird → Chirp!
+Cow  → Moo!
+"""
+
+
+# ============================================================
+# Polymorphism + Abstract Class
+# ============================================================
+
+"""
+Animal is an Abstract Base Class (ABC).
+
+The abstract method:
+
+@abstractmethod
+def speak(self):
+    pass
+
+requires concrete subclasses to provide an implementation
+of speak() before their instances can be created.
+
+Therefore:
+
+Dog  → implements speak()
+Cat  → implements speak()
+Bird → implements speak()
+Cow  → implements speak()
+"""
+
+
+# ============================================================
+# Simple Definition
+# ============================================================
+
+"""
+Polymorphism with Collections
+
+=
+
+Storing objects of different classes in one collection
+and using the same method or interface on each object,
+while each object provides its own behavior.
+"""
+
+
+# ============================================================
+# Easy Way to Remember
+# ============================================================
+
+"""
+One Collection
+      |
+      v
+[Dog, Cat, Bird]
+      |
+      v
+Same Method
+   speak()
+      |
+      +--------+--------+
+      |        |        |
+      v        v        v
+    Woof!    Meow!    Chirp!
+
+
+One Interface + Many Implementations
+                =
+           Polymorphism
+"""
+
+
+# ============================================================
+# Final Polymorphism Example
+# ============================================================
+
+from abc import ABC, abstractmethod
+
+
+class Animal(ABC):
+
+    @abstractmethod
+    def speak(self):
+        pass
+
+
+class Dog(Animal):
+
+    def speak(self):
+        return "Woof!"
+
+
+class Cat(Animal):
+
+    def speak(self):
+        return "Meow!"
+
+
+class Bird(Animal):
+
+    def speak(self):
+        return "Chirp!"
+
+
+class Cow(Animal):
+
+    def speak(self):
+        return "Moo!"
+
+
+# Collection containing different objects
+
+animals = [
+    Dog(),
+    Cat(),
+    Bird(),
+    Cow()
+]
+
+
+# Polymorphism
+
+for animal in animals:
+    print(animal.speak())
+
+
+# Output:
+
+"""
+Woof!
+Meow!
+Chirp!
+Moo!
+"""
+
+
+# ============================================================
+# Final Key Point
+# ============================================================
+
+"""
+Polymorphism
+
+    =
+One Interface
+    +
+Many Implementations
+
+
+In this example:
+
+Common Interface:
+    speak()
+
+Implementations:
+    Dog  → Woof!
+    Cat  → Meow!
+    Bird → Chirp!
+    Cow  → Moo!
+
+
+Collection:
+    [Dog(), Cat(), Bird(), Cow()]
+
+Same Code:
+    for animal in animals:
+        print(animal.speak())
+
+
+Different objects
+        ↓
+Same method call
+        ↓
+Different behavior
+        ↓
+Polymorphism
+"""
 ```
