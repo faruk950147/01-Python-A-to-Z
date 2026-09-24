@@ -160,7 +160,7 @@ First-Class Functions are useful for:
 # ---------------- 5.1 Function stored in a variable -----------------------------
 
 def square(x):
-    return x * x
+    return x * x # here is return
 
 
 f = square
@@ -195,7 +195,7 @@ def greet(name):
 
 
 def call_func(func, value):
-    return func(value)
+    return func(value) # here is return + called
 
 
 print(call_func(greet, "Ahmed"))
@@ -226,7 +226,7 @@ def outer_func():
     def inner_func():
         return "I'm inside the outer function!"
 
-    return inner_func
+    return inner_func # here is return 
 
 
 result = outer_func()
