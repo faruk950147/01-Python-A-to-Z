@@ -142,3 +142,60 @@ index
 
 দুটাই access করতে পারবে
 '''
+
+
+"""
+Basic idea of reduce():
+
+Multiple values
+      |
+      v
+Repeatedly apply callback
+      |
+      v
+One final value
+"""
+
+
+def my_reduce(callback, iterable):
+
+    iterator = iter(iterable)
+
+    result = next(iterator)
+
+    for value in iterator:
+
+        result = callback(result, value)
+
+    return result
+
+
+def add(x, y):
+
+    return x + y
+
+
+numbers = [1, 2, 3, 4, 5]
+
+result = my_reduce(add, numbers)
+
+print(result)
+
+# Output:
+# 15
+
+
+"""
+Flow:
+
+result = 1
+
+1 + 2 = 3
+3 + 3 = 6
+6 + 4 = 10
+10 + 5 = 15
+
+Final result:
+
+15
+"""
