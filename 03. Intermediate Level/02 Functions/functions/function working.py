@@ -7,7 +7,7 @@
 # 4 built-in identifier
 
 
-# ============================= 🧩 Local Identifier or Variable ==============================
+# ============================= Local Identifier or Variable ==============================
 # A local identifier (or local variable) is a variable that is defined inside a function.
 # It is created when the function starts executing and destroyed when the function ends.
 
