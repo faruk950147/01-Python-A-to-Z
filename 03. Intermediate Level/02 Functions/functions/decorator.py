@@ -151,6 +151,100 @@ So:
 5. Calling say_hello() executes wrapper().
 """
 
+def even_check(func):
+
+    def wrapper(num):
+
+        if num % 2 == 0:
+            func(num)
+        else:
+            print("Number is not even")
+
+    return wrapper
+
+
+@even_check
+def show_number(num):
+    print("Even number:", num)
+
+
+show_number(10)
+show_number(7)
+
+"""
+Decorator Flow:
+
+def show_number(num):
+    print("Even number:", num)
+
+This is the Original Function.
+
+When we write:
+
+@even_check
+def show_number(num):
+    print("Even number:", num)
+
+Python internally converts it to:
+
+show_number = even_check(show_number)
+
+
+Step-by-step:
+
+1. The original show_number function is passed to even_check.
+2. Inside even_check, the original function is received as `func`.
+3. even_check creates a new function called `wrapper`.
+4. wrapper checks whether the number is even or not.
+5. even_check returns wrapper.
+6. The name `show_number` is reassigned to the returned wrapper.
+7. Now `show_number` refers to wrapper, not directly to the original function.
+8. The original show_number function is still available through `func`.
+9. When we call show_number(10), wrapper(10) is executed.
+10. If the number is even, wrapper calls the original function using func(num).
+11. If the number is not even, wrapper prints "Number is not even".
+
+
+Flow:
+
+Original show_number
+        ↓
+@even_check
+        ↓
+even_check(show_number)
+        ↓
+func = Original show_number
+        ↓
+wrapper is created
+        ↓
+wrapper is returned
+        ↓
+show_number = wrapper
+
+
+Therefore:
+
+show_number(10)
+        ↓
+wrapper(10)
+        ↓
+10 % 2 == 0
+        ↓
+func(10)
+        ↓
+Original show_number(10)
+        ↓
+Even number: 10
+
+
+show_number(7)
+        ↓
+wrapper(7)
+        ↓
+7 % 2 == 0 → False
+        ↓
+Number is not even
+"""
 
 # ========================================================================
 # 4. DECORATOR FLOW
