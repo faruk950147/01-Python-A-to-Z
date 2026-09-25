@@ -16,11 +16,11 @@ Example idea:
            ↓
        Decorator
            ↓
-     Wrapper Function
+      Wrapper Function
            ↓
-    Extra Behavior
+       Extra Behavior
            +
-    Original Function
+      Original Function
 """
 
 
@@ -373,7 +373,7 @@ print(result)
 """
 Without:
 
-return result
+    return result
 
 the wrapper would return None by default.
 
@@ -390,11 +390,11 @@ Sometimes the decorator itself needs arguments.
 
 Example:
 
-@repeat(3)
+    @repeat(3)
 
 Here:
 
-repeat(3)
+    repeat(3)
 
 is not directly the decorator.
 
@@ -450,11 +450,11 @@ Structure:
 
     Decorator Factory
           ↓
-      Decorator
+        Decorator
           ↓
-       Wrapper
+        Wrapper
           ↓
-   Original Function
+    Original Function
 """
 
 
@@ -791,7 +791,7 @@ For example:
 
 To preserve this metadata, use:
 
-from functools import wraps
+    from functools import wraps
 """
 
 
@@ -1076,8 +1076,8 @@ Rule 4:
 
 Use:
 
-*args
-**kwargs
+    *args
+    **kwargs
 
 when the wrapper should support flexible arguments.
 
@@ -1114,7 +1114,7 @@ Rule 9:
 
 Use:
 
-@wraps(func)
+    @wraps(func)
 
 to preserve the original function's metadata.
 
@@ -1150,8 +1150,6 @@ There is no fixed universal number of arguments.
 
 A decorator factory can accept as many arguments as its
 definition requires.
-
-Example:
 """
 
 
@@ -1210,6 +1208,7 @@ requires three decorator arguments.
 """
 There are THREE different types of arguments to understand.
 
+
 1. Decorator Arguments
 ----------------------
 
@@ -1265,13 +1264,13 @@ When the decorator itself has arguments:
 
         decorator_with_args()
                   ↓
-        Decorator Factory
+          Decorator Factory
                   ↓
-           decorator(func)
+             decorator(func)
                   ↓
-             Actual Decorator
+            Actual Decorator
                   ↓
-      wrapper(*args, **kwargs)
+        wrapper(*args, **kwargs)
                   ↓
           Original Function
 
@@ -1298,7 +1297,7 @@ Structure:
 
 decorator(func)
        ↓
-   wrapper()
+    wrapper()
 
 
 ---------------------------------------------------------------
@@ -1314,9 +1313,9 @@ Structure:
 
 decorator_factory(argument)
            ↓
-       decorator(func)
+        decorator(func)
            ↓
-         wrapper()
+          wrapper()
 """
 
 
@@ -1354,15 +1353,15 @@ The complete decorator concept:
 
                 Function
                    ↓
-              Decorator
+                Decorator
                    ↓
-                Wrapper
+                 Wrapper
                    ↓
-          Extra Functionality
+            Extra Functionality
                    +
-             Original Function
+              Original Function
                    ↓
-               Result
+                 Result
 
 
 The decorator does NOT need to modify the original function's
@@ -1384,13 +1383,16 @@ Remember these four concepts:
    ↓
    The original function.
 
+
 2. Decorator
    ↓
    Receives the original function.
 
+
 3. Wrapper
    ↓
    Adds extra behavior and calls the original function.
+
 
 4. @decorator
    ↓
@@ -1401,7 +1403,7 @@ Remember these four concepts:
 
 For decorators with arguments:
 
-Factory → Decorator → Wrapper → Function
+    Factory → Decorator → Wrapper → Function
 
 
 One-Line Definition:
@@ -1409,3 +1411,567 @@ One-Line Definition:
 Decorator = A callable that extends or modifies the behavior
 of another callable without changing its original source code.
 """
+
+
+# ========================================================================
+# FUNCTION WITH METHODS & DECORATORS IN PYTHON
+# ========================================================================
+
+"""
+In Python, Functions, Methods, and Decorators are closely related,
+but they have different purposes.
+"""
+
+
+# ------------------------------------------------------------------------
+# 1. FUNCTION
+# ------------------------------------------------------------------------
+
+"""
+A Function is a reusable block of code defined independently.
+"""
+
+
+def add(a, b):
+
+    return a + b
+
+
+result = add(10, 20)
+
+print(result)
+
+
+# Output:
+# 30
+
+
+"""
+Here:
+
+add(10, 20)
+
+is a function call.
+"""
+
+
+# ------------------------------------------------------------------------
+# 2. METHOD
+# ------------------------------------------------------------------------
+
+"""
+A Method is a function defined inside a class and associated
+with a class or its objects.
+"""
+
+
+class Calculator:
+
+    def add(self, a, b):
+
+        return a + b
+
+
+calc = Calculator()
+
+result = calc.add(10, 20)
+
+print(result)
+
+
+# Output:
+# 30
+
+
+"""
+Here:
+
+calc.add(10, 20)
+
+is a method call.
+
+The self parameter refers to the current object.
+
+Conceptually:
+
+calc.add(10, 20)
+
+works like:
+
+Calculator.add(calc, 10, 20)
+"""
+
+
+# ------------------------------------------------------------------------
+# 3. WHAT IS A DECORATOR?
+# ------------------------------------------------------------------------
+
+"""
+A Decorator is a function that modifies or extends the behavior
+of another function or method without changing its original
+source code.
+
+Basic syntax:
+
+@decorator
+def function():
+    pass
+"""
+
+
+def my_decorator(func):
+
+    def wrapper():
+
+        print("Before function")
+
+        func()
+
+        print("After function")
+
+    return wrapper
+
+
+@my_decorator
+def hello():
+
+    print("Hello")
+
+
+hello()
+
+
+# Output:
+#
+# Before function
+# Hello
+# After function
+
+
+"""
+This:
+
+@my_decorator
+def hello():
+    print("Hello")
+
+
+is approximately equivalent to:
+
+def hello():
+    print("Hello")
+
+
+hello = my_decorator(hello)
+"""
+
+
+# ------------------------------------------------------------------------
+# 4. DECORATORS WITH METHODS
+# ------------------------------------------------------------------------
+
+"""
+Decorators can also be applied to methods inside a class.
+"""
+
+
+def log_method(func):
+
+    def wrapper(self):
+
+        print("Method started")
+
+        func(self)
+
+        print("Method finished")
+
+    return wrapper
+
+
+class Student:
+
+    @log_method
+    def show(self):
+
+        print("Student information")
+
+
+student = Student()
+
+student.show()
+
+
+# Output:
+#
+# Method started
+# Student information
+# Method finished
+
+
+"""
+Here:
+
+@log_method
+
+decorates the show() method.
+"""
+
+
+# ------------------------------------------------------------------------
+# 5. BUILT-IN METHOD DECORATORS
+# ------------------------------------------------------------------------
+
+"""
+Python provides several important decorators for methods.
+
+Common method decorators:
+
+1. @staticmethod
+2. @classmethod
+3. @property
+4. @property.setter
+"""
+
+
+# ------------------------------------------------------------------------
+# 6. @staticmethod
+# ------------------------------------------------------------------------
+
+"""
+A static method does not automatically receive self or cls.
+"""
+
+
+class Calculator:
+
+    @staticmethod
+    def add(a, b):
+
+        return a + b
+
+
+print(Calculator.add(10, 20))
+
+
+# Output:
+# 30
+
+
+# ------------------------------------------------------------------------
+# 7. @classmethod
+# ------------------------------------------------------------------------
+
+"""
+A class method automatically receives the class as cls.
+"""
+
+
+class Student:
+
+    school = "ABC School"
+
+    @classmethod
+    def show_school(cls):
+
+        print(cls.school)
+
+
+Student.show_school()
+
+
+# Output:
+# ABC School
+
+
+"""
+Here:
+
+cls
+
+refers to the Student class.
+"""
+
+
+# ------------------------------------------------------------------------
+# 8. @property
+# ------------------------------------------------------------------------
+
+"""
+@property allows a method to be accessed like an attribute.
+"""
+
+
+class Student:
+
+    def __init__(self, name):
+
+        self._name = name
+
+    @property
+    def name(self):
+
+        return self._name
+
+
+student = Student("Faruk")
+
+print(student.name)
+
+
+# Output:
+# Faruk
+
+
+"""
+Instead of:
+
+student.name()
+
+we use:
+
+student.name
+"""
+
+
+# ------------------------------------------------------------------------
+# 9. @property.setter
+# ------------------------------------------------------------------------
+
+"""
+@property.setter is used to control how a property is modified.
+"""
+
+
+class Student:
+
+    def __init__(self, name):
+
+        self._name = name
+
+    @property
+    def name(self):
+
+        return self._name
+
+    @name.setter
+    def name(self, value):
+
+        self._name = value
+
+
+student = Student("Faruk")
+
+print(student.name)
+
+student.name = "Ahmed"
+
+print(student.name)
+
+
+# Output:
+#
+# Faruk
+# Ahmed
+
+
+# ------------------------------------------------------------------------
+# 10. FUNCTION → METHOD → DECORATOR
+# ------------------------------------------------------------------------
+
+"""
+The relationship can be remembered like this:
+
+
+Function
+   ↓
+Reusable block of code
+
+
+Method
+   ↓
+Function defined inside a class
+   ↓
+Associated with an object or class
+
+
+Decorator
+   ↓
+Modifies or extends a function or method
+   ↓
+Uses @decorator syntax
+"""
+
+
+# ------------------------------------------------------------------------
+# 11. IMPORTANT EXAMPLES
+# ------------------------------------------------------------------------
+
+# Function
+
+def function():
+
+    pass
+
+
+# Method
+
+class MyClass:
+
+    def method(self):
+
+        pass
+
+
+# Static Method
+
+class MyClass:
+
+    @staticmethod
+    def method():
+
+        pass
+
+
+# Class Method
+
+class MyClass:
+
+    @classmethod
+    def method(cls):
+
+        pass
+
+
+# Property
+
+class MyClass:
+
+    @property
+    def value(self):
+
+        return self._value
+
+
+# ------------------------------------------------------------------------
+# 12. IN SHORT
+# ------------------------------------------------------------------------
+
+"""
+Function:
+    A reusable block of code defined independently.
+
+Method:
+    A function defined inside a class.
+
+Decorator:
+    A function that modifies or extends the behavior of another
+    function or method.
+
+Instance Method:
+
+    def method(self):
+
+
+Class Method:
+
+    @classmethod
+    def method(cls):
+
+
+Static Method:
+
+    @staticmethod
+    def method():
+
+
+Property:
+
+    @property
+    def value(self):
+"""
+
+
+# Final Concept:
+
+"""
+Function
+    ↓
+Independent callable block
+
+
+Method
+    ↓
+Function associated with a class
+
+
+Decorator
+    ↓
+Modifies or extends the behavior of a function or method
+"""
+
+
+# ========================================================================
+# CLASS-BASED DECORATOR
+# ========================================================================
+
+
+# 1. Class Decorator
+
+class Decorator:
+
+    def __init__(self, func):
+
+        self.func = func
+
+    def __call__(self):
+
+        print("Before call")
+
+        self.func()
+
+        print("After call")
+
+
+@Decorator
+def greet_class():
+
+    print("Hello from function")
+
+
+greet_class()
+
+
+# ========================================================================
+# CLASS-BASED DECORATOR WITH ARGUMENT VALIDATION
+# ========================================================================
+
+class Decorator(object):
+
+    def __init__(self, func):
+
+        self.func = func
+
+    def __call__(self, *args, **kwargs):
+
+        if any([isinstance(i, str) for i in args]):
+
+            return "All arguments must be int"
+
+        return self.func(*args, **kwargs)
+
+
+@Decorator
+def sum(a, b):
+
+    if not isinstance(a, int) or not isinstance(b, int):
+
+        return "All arguments must be int"
+
+    return a + b
+
+
+if __name__ == "__main__":
+
+    print("sum(1, 2) = ", sum(1, 2))
+
+    print("sum(1, 2) = ", sum("1", "2"))
