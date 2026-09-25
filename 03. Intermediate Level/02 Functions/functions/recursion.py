@@ -43,7 +43,7 @@ def demo(n):
     print("demo:", n)
 
     # Recursive Case
-    demo(n - 1)
+    return demo(n - 1)
 
 
 demo(5)
