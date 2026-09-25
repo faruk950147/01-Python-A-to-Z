@@ -3,7 +3,7 @@
 #     x = 'local'
 #     def inner_func():
 #         print(x)
-#     return inner_func() # here inner_func() is called
+#     return inner_func() # here inner_func() is return + called
 
 # outer_func()
 
