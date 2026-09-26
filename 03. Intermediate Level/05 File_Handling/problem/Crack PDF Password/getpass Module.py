@@ -2,7 +2,7 @@ import getpass
 
 password = getpass.getpass("Enter your password: ")
 print("Password entered successfully.")
-if password == "1234":
+if password == "950147":
     print("Access granted.")
 else:
     print("Access denied.")
