@@ -8,7 +8,7 @@ import os
 TODO_FILE = "todos.csv"
 
 # -----------------------------
-# 🔹 TODO MANAGER FUNCTIONS
+# TODO MANAGER FUNCTIONS
 # -----------------------------
 def load_tasks():
     """Load all tasks from CSV"""
@@ -58,7 +58,7 @@ def delete_task(index):
 
 
 # -----------------------------
-# 🔹 CSV PARSER FUNCTIONS
+# CSV PARSER FUNCTIONS
 # -----------------------------
 def parse_csv(filename):
     """Parse a CSV file and print each row"""
@@ -75,7 +75,7 @@ def parse_csv(filename):
 
 
 # -----------------------------
-# 🔹 MAIN MENU
+# MAIN MENU
 # -----------------------------
 def todo_menu():
     while True:
