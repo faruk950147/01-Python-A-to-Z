@@ -12,7 +12,8 @@
 # closefd = True
 # opener = None
 
-# buffer is the integer number of bytes to be read at a time set to -1 for default size of file
+# buffer is the integer number of bytes to be read at a time set to -1 for default 
+# size of file
 # encoding is the encoding of the file
 # errors is the error handling scheme
 # newline is the newline mode
