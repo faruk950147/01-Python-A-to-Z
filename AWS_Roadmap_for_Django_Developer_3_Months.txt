@@ -1,0 +1,752 @@
+AWS Roadmap for Django Developer — 3 Months Day-by-Day Plan
+===============================================================
+
+Target:
+- Python/Django Backend Developer
+- Goal: Learn AWS from fundamentals to production deployment
+- Duration: 12 weeks / 90 days
+- Suggested study time: 2–3 hours/day
+- Main stack: Django, Django REST Framework, PostgreSQL, Linux, Docker, GitHub Actions, AWS
+
+===============================================================
+MONTH 1 — AWS FUNDAMENTALS + DJANGO DEPLOYMENT
+===============================================================
+
+WEEK 1 — Cloud, Linux, Networking
+
+Day 1
+- What is Cloud Computing?
+- IaaS, PaaS, SaaS
+- Public, Private, Hybrid Cloud
+- AWS Regions and Availability Zones
+Practice:
+- Create an AWS account if you do not already have one.
+- Explore the AWS Management Console.
+
+Day 2
+- AWS global infrastructure
+- Region vs Availability Zone
+- Scalability
+- Elasticity
+- High Availability
+Practice:
+- Identify 3 AWS Regions and their Availability Zones.
+
+Day 3
+- Linux fundamentals
+- pwd, ls, cd, mkdir, touch, cp, mv, rm
+Practice:
+- Create and manage files/directories in Linux.
+
+Day 4
+- Linux permissions
+- chmod, chown
+- Users and groups
+- sudo
+Practice:
+- Create a user and change file permissions.
+
+Day 5
+- Linux processes and services
+- ps, top, systemctl, journalctl
+Practice:
+- Start/stop/restart a Linux service.
+
+Day 6
+- Networking fundamentals
+- IP address
+- Public vs Private IP
+- Port
+- TCP/UDP
+- HTTP/HTTPS
+Practice:
+- Learn ports 22, 80, 443, 5432, 3306.
+
+Day 7
+- Review Week 1
+- Create a short AWS/Linux/networking note
+- Practice SSH concepts
+
+
+WEEK 2 — IAM + EC2
+
+Day 8
+- AWS IAM
+- Users
+- Groups
+- Roles
+- Policies
+- Permissions
+
+Day 9
+- IAM security
+- Least privilege
+- MFA
+- Access keys
+Practice:
+- Create an IAM user/role according to AWS best practices.
+
+Day 10
+- EC2 introduction
+- AMI
+- Instance type
+- Key pair
+- Storage
+- Security Group
+
+Day 11
+- Launch an Ubuntu EC2 instance
+- Connect using SSH
+Practice:
+- SSH into your server.
+
+Day 12
+- EC2 Linux setup
+- Update packages
+- Install Python
+- Install Git
+- Install Nginx
+
+Day 13
+- Security Groups
+- Inbound/outbound rules
+- Open only required ports
+Practice:
+- Allow SSH and HTTP access appropriately.
+
+Day 14
+PROJECT 1:
+Deploy a simple Python/Django application to EC2.
+Tasks:
+- Launch EC2
+- Install Python
+- Clone GitHub repository
+- Create virtual environment
+- Install dependencies
+
+
+WEEK 3 — Django + Gunicorn + Nginx
+
+Day 15
+- Django production settings
+- DEBUG=False
+- ALLOWED_HOSTS
+- SECRET_KEY
+- Environment variables
+
+Day 16
+- Static files
+- collectstatic
+- STATIC_ROOT
+- MEDIA_ROOT
+- MEDIA_URL
+
+Day 17
+- Gunicorn
+- WSGI
+- Run Django with Gunicorn
+
+Day 18
+- systemd
+- Create Gunicorn service
+- Restart and inspect service
+
+Day 19
+- Nginx
+- Reverse proxy
+- Server blocks
+- Static file serving
+
+Day 20
+- Connect:
+  Browser → Nginx → Gunicorn → Django
+
+Day 21
+PROJECT 1 COMPLETE:
+- Django + Gunicorn + Nginx + EC2
+- Test application from public IP
+- Write deployment notes
+
+
+WEEK 4 — S3 + RDS + Production Django
+
+Day 22
+- Amazon S3
+- Bucket
+- Object
+- Key
+- Region
+- Bucket policies
+
+Day 23
+- S3 security
+- Public access
+- IAM permissions
+- Presigned URLs
+- Versioning
+
+Day 24
+- Django + S3
+- Store media files in S3
+- Understand django-storages
+
+Day 25
+- Amazon RDS
+- PostgreSQL
+- Database instance
+- Security Groups
+
+Day 26
+- Create RDS PostgreSQL
+- Connect Django to RDS
+
+Day 27
+- Database backup concepts
+- Automated backups
+- Multi-AZ concept
+- Database security
+
+Day 28
+PROJECT 2:
+Build:
+Django + EC2 + RDS PostgreSQL + S3
+
+Day 29
+- Environment variables
+- Secrets
+- Production settings cleanup
+
+Day 30
+- Month 1 review
+- Rebuild the deployment from scratch
+- Document architecture
+
+
+===============================================================
+MONTH 2 — VPC + DNS + HTTPS + DOCKER + CI/CD
+===============================================================
+
+WEEK 5 — VPC + Networking
+
+Day 31
+- VPC fundamentals
+- CIDR
+- Subnet
+- Route Table
+
+Day 32
+- Public subnet
+- Private subnet
+- Internet Gateway
+
+Day 33
+- NAT Gateway
+- Why private resources need outbound access
+- Public vs private architecture
+
+Day 34
+- Security Group
+- Network ACL
+- Differences between SG and NACL
+
+Day 35
+- Build a basic VPC
+- Public subnet
+- Private subnet
+- Route tables
+
+Day 36
+- Understand production architecture:
+  Internet
+  ↓
+  Public Load Balancer
+  ↓
+  Private application servers
+  ↓
+  Private database
+
+Day 37
+- VPC review
+- Draw your own AWS network diagram
+
+
+WEEK 6 — Route 53 + HTTPS + Load Balancer
+
+Day 38
+- DNS fundamentals
+- Domain
+- A record
+- CNAME
+- Alias
+
+Day 39
+- Amazon Route 53
+- Hosted Zone
+- DNS records
+
+Day 40
+- Connect your domain to AWS
+- Point domain to application
+
+Day 41
+- HTTPS
+- SSL/TLS
+- Certificates
+- AWS Certificate Manager (ACM)
+
+Day 42
+- Application Load Balancer (ALB)
+- Listener
+- Target Group
+- Health Check
+
+Day 43
+- Deploy multiple application instances
+- Put them behind ALB
+
+Day 44
+PROJECT 3:
+Django + ALB + EC2 + RDS + S3
+Architecture:
+User
+ ↓
+Route 53
+ ↓
+ALB
+ ↓
+EC2
+ ↓
+RDS
+ ↓
+S3
+
+
+WEEK 7 — Docker
+
+Day 45
+- What is Docker?
+- Image
+- Container
+- Registry
+
+Day 46
+- Dockerfile
+- Build an image
+- Run a container
+
+Day 47
+- Docker commands
+- docker ps
+- docker images
+- docker build
+- docker run
+- docker exec
+- docker logs
+
+Day 48
+- Docker volumes
+- Docker networks
+
+Day 49
+- Docker Compose
+- Django + PostgreSQL
+
+Day 50
+- Dockerize your Django application
+- Run Django locally using Docker
+
+Day 51
+- Production Dockerfile
+- Gunicorn inside Docker
+- Environment variables
+
+Day 52
+PROJECT 4:
+Dockerized Django
+Components:
+- Django
+- Gunicorn
+- PostgreSQL
+- Nginx
+
+
+WEEK 8 — ECR + ECS
+
+Day 53
+- Amazon ECR
+- Docker image repository
+
+Day 54
+- Push Docker image to ECR
+
+Day 55
+- Amazon ECS
+- Cluster
+- Task Definition
+- Service
+
+Day 56
+- ECS on AWS
+- Understand ECS deployment model
+
+Day 57
+- ECS networking
+- Security Groups
+- Load Balancer integration
+
+Day 58
+- ECS environment variables
+- Secrets
+- Task roles
+
+Day 59
+- Deploy Django container to ECS
+
+Day 60
+- Month 2 review
+- Compare:
+  EC2 deployment vs ECS deployment
+
+
+===============================================================
+MONTH 3 — CI/CD + MONITORING + SERVERLESS + ARCHITECTURE
+===============================================================
+
+WEEK 9 — GitHub Actions + CI/CD
+
+Day 61
+- CI/CD concepts
+- Continuous Integration
+- Continuous Deployment
+
+Day 62
+- GitHub Actions fundamentals
+- Workflow
+- Job
+- Step
+- Runner
+
+Day 63
+- Create CI pipeline
+- Install dependencies
+- Run tests
+
+Day 64
+- Build Docker image in GitHub Actions
+
+Day 65
+- Authenticate with AWS securely
+- Understand GitHub secrets
+
+Day 66
+- Push image to ECR automatically
+
+Day 67
+- Deploy automatically to ECS
+
+Day 68
+PROJECT 5:
+Full CI/CD pipeline:
+GitHub
+ ↓
+GitHub Actions
+ ↓
+Test
+ ↓
+Docker Build
+ ↓
+ECR
+ ↓
+ECS
+
+
+WEEK 10 — CloudWatch + Security
+
+Day 69
+- Amazon CloudWatch
+- Logs
+- Metrics
+- Dashboards
+
+Day 70
+- EC2 monitoring
+- CPU utilization
+- Disk and memory concepts
+
+Day 71
+- Application logs
+- Nginx logs
+- Gunicorn logs
+- Django logs
+
+Day 72
+- CloudWatch alarms
+- Error monitoring
+
+Day 73
+- AWS security fundamentals
+- IAM roles
+- Least privilege
+- MFA
+
+Day 74
+- AWS Secrets Manager
+- Systems Manager Parameter Store
+
+Day 75
+- Encryption
+- KMS
+- HTTPS
+- Data at rest vs data in transit
+
+
+WEEK 11 — Serverless + AWS Services
+
+Day 76
+- AWS Lambda
+- Function
+- Runtime
+- Event
+
+Day 77
+- API Gateway
+- REST API concepts
+- Lambda integration
+
+Day 78
+- DynamoDB
+- Table
+- Item
+- Partition Key
+
+Day 79
+- SQS
+- Message queue
+- Producer
+- Consumer
+
+Day 80
+- SNS
+- Notifications
+- Pub/Sub concept
+
+Day 81
+- CloudFront
+- CDN
+- Caching
+
+Day 82
+- Event-driven architecture
+- Lambda + S3
+- Lambda + SQS
+
+
+WEEK 12 — Architecture + Final Project
+
+Day 83
+- AWS Well-Architected concepts
+- Operational Excellence
+- Security
+- Reliability
+- Performance Efficiency
+- Cost Optimization
+- Sustainability
+
+Day 84
+- High Availability
+- Fault Tolerance
+- Scalability
+- Auto Scaling
+
+Day 85
+- Auto Scaling Group
+- Launch Template
+- Health checks
+
+Day 86
+- Cost optimization
+- Right-sizing
+- Storage lifecycle
+- Avoid unnecessary resources
+- Monitor AWS billing
+
+Day 87
+FINAL PROJECT DESIGN:
+Production Django REST API
+
+Architecture:
+User
+ ↓
+Route 53
+ ↓
+CloudFront / ALB
+ ↓
+ECS
+ ↓
+RDS PostgreSQL
+ ↓
+S3
+
+Supporting services:
+- IAM
+- ECR
+- CloudWatch
+- Secrets Manager
+- SQS
+
+
+Day 88
+FINAL PROJECT IMPLEMENTATION:
+- Dockerize Django REST API
+- Push image to ECR
+- Deploy to ECS
+- Connect RDS
+- Configure S3
+
+Day 89
+FINAL PROJECT CI/CD:
+- GitHub Actions
+- Automated tests
+- Docker build
+- ECR push
+- ECS deployment
+- Monitoring
+
+Day 90
+FINAL REVIEW:
+- Review all AWS services
+- Rebuild the project
+- Draw architecture diagram
+- Write README
+- Document deployment steps
+- Document security decisions
+- Document cost considerations
+
+
+===============================================================
+FINAL SKILL CHECKLIST
+===============================================================
+
+Linux:
+[ ] Linux commands
+[ ] SSH
+[ ] Permissions
+[ ] systemd
+[ ] Nginx
+
+Networking:
+[ ] IP
+[ ] DNS
+[ ] HTTP/HTTPS
+[ ] TCP/UDP
+[ ] Ports
+[ ] CIDR
+[ ] Subnet
+[ ] Routing
+
+AWS:
+[ ] IAM
+[ ] EC2
+[ ] EBS
+[ ] S3
+[ ] VPC
+[ ] RDS
+[ ] Route 53
+[ ] ACM
+[ ] ALB
+[ ] Auto Scaling
+[ ] ECR
+[ ] ECS
+[ ] CloudWatch
+[ ] Secrets Manager
+[ ] Lambda
+[ ] API Gateway
+[ ] DynamoDB
+[ ] SQS
+[ ] SNS
+[ ] CloudFront
+
+Django:
+[ ] Production settings
+[ ] Gunicorn
+[ ] Nginx
+[ ] PostgreSQL
+[ ] S3 media storage
+[ ] Environment variables
+[ ] REST API
+[ ] Docker
+
+DevOps:
+[ ] Docker
+[ ] GitHub Actions
+[ ] CI/CD
+[ ] ECR
+[ ] ECS
+[ ] Logging
+[ ] Monitoring
+
+
+===============================================================
+PROJECT PORTFOLIO
+===============================================================
+
+Project 1:
+Django on EC2
+
+Project 2:
+Django + RDS + S3
+
+Project 3:
+Django + ALB + Route 53 + HTTPS
+
+Project 4:
+Dockerized Django
+
+Project 5:
+GitHub Actions + ECR + ECS CI/CD
+
+Final Project:
+Production-ready Django REST API on AWS
+
+
+===============================================================
+RECOMMENDED DAILY ROUTINE
+===============================================================
+
+2–3 hours/day:
+
+45 min  → Learn theory
+60 min  → Hands-on AWS/Linux/Docker
+30 min  → Django project
+15 min  → Notes/review
+
+Rule:
+Do not only watch tutorials.
+For every AWS service:
+1. Learn what it does.
+2. Create/use it.
+3. Connect it with Django.
+4. Delete unused resources.
+5. Document what you learned.
+
+
+===============================================================
+IMPORTANT AWS SAFETY RULES
+===============================================================
+
+- Enable MFA on your AWS account.
+- Do not expose AWS access keys in GitHub.
+- Never commit .env files or secrets.
+- Use IAM roles where possible.
+- Use least-privilege permissions.
+- Restrict Security Group ports.
+- Monitor billing and budgets.
+- Delete unused EC2/RDS/ALB/NAT resources.
+- Be especially careful with NAT Gateway and other potentially
+  chargeable resources.
+- Use AWS documentation when configuring production systems.
+
+
+===============================================================
+END
+===============================================================
