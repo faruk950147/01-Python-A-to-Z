@@ -1,31 +1,37 @@
 class Student:
+    school = "TMSS"
+
     def __init__(self, name):
         self.name = name
 
-    def show(self):   # instance method
+    # Instance Method
+    def show(self):
         print(self.name)
 
-
-
-class Student:
-    school = "TMSS"
-
+    # Class Method
     @classmethod
-    def change_school(cls, name): # class method
+    def change_school(cls, name):
         cls.school = name
         print(cls)
-        
 
-class Math:
     
+class Math:
+
+    # Static Method
     @staticmethod
     def add(a, b):
-        return a + b # static method
-    
-s1 = Student("Faruk")
-s1.show()
+        return a + b
 
-Student.change_school("ABC School")
-Student.school
 
-Math.add(5, 3)
+if __name__ == '__main__':
+    # Instance method
+    s1 = Student("Faruk")
+    s1.show()
+
+    # Class method
+    Student.change_school("ABC School")
+    print(Student.school)
+
+    # Static method
+    result = Math.add(5, 3)
+    print(result)
