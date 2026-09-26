@@ -3,7 +3,8 @@
 
 ## 1. What is List Comprehension?
 
-**List Comprehension** is a concise and readable way to create a new list from an existing iterable such as a `list`, `range`, or `string`.
+**List Comprehension** is a concise and readable way to create a new list from an 
+existing iterable such as a `list`, `range`, or `string`.
 
 It often allows us to replace a traditional `for` loop with a single line of code.
 
