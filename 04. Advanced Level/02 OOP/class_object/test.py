@@ -24,6 +24,7 @@ class Math:
     
 s1 = Student("Faruk")
 s1.show()
+
 Student.change_school("ABC School")
 Student.school
 
