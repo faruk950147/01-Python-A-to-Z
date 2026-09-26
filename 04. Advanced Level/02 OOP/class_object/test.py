@@ -5,8 +5,7 @@ class Student:
     def show(self):   # instance method
         print(self.name)
 
-s1 = Student("Faruk")
-s1.show()
+
 
 class Student:
     school = "TMSS"
@@ -15,12 +14,17 @@ class Student:
     def change_school(cls, name): # class method
         cls.school = name
         print(cls)
-Student.change_school("ABC School")
-print(Student.school)
+        
 
 class Math:
+    
     @staticmethod
     def add(a, b):
         return a + b # static method
+    
+s1 = Student("Faruk")
+s1.show()
+Student.change_school("ABC School")
+Student.school
 
-print(Math.add(5, 3))
+Math.add(5, 3)
