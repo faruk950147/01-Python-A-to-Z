@@ -1,5 +1,23 @@
-```python
 """
+# Python OOP — Full Notes
+
+## 1. What is OOP?
+
+**OOP = Object-Oriented Programming**
+
+OOP is a programming paradigm where programs are designed around **classes and objects**.
+
+Real-world examples:
+
+* Student
+* Car
+* Bank Account
+* Employee
+* Book
+* Mobile
+
+---
+
 # ========================= Python Class Working Flow with Heap Memory =========================
 
 Python Class Working Flow — Step by Step
