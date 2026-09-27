@@ -1,46 +1,88 @@
 """
-# Python OOP — Full Notes
+# Python OOP — Complete Notes
 
 ## 1. What is OOP?
 
 **OOP = Object-Oriented Programming**
 
-OOP is a programming paradigm where programs are designed around **classes and objects**.
+OOP is a programming paradigm where programs are organized around **objects and classes**.
 
-Real-world examples:
+Common real-world examples:
 
 * Student
+* Employee
 * Car
 * Bank Account
-* Employee
 * Book
 * Mobile
+* Product
+
+The main concepts of OOP are:
+
+```text
+Class
+Object
+Encapsulation
+Inheritance
+Polymorphism
+Abstraction
+```
 
 ---
 
-# 2. What is a Class?
+# 2. Class
 
-A **class is a blueprint or template for creating objects**.
+A **class** is a blueprint/template used to create objects.
 
 ```python
 class Student:
     pass
 ```
 
-Here, `Student` is a class.
+Here:
 
-A class defines the structure and behavior that its objects can have.
+```text
+Student → Class
+```
+
+A class defines attributes and methods that its objects can have.
+
+Important:
+
+A class in Python is itself an object.
+
+```python
+class Student:
+    pass
+
+print(type(Student))
+```
+
+Output:
+
+```text
+<class 'type'>
+```
+
+So:
+
+```text
+Student
+   ↓
+Class Object
+   ↓
+type
+```
 
 ---
 
-# 3. What is an Object?
+# 3. Object
 
 An **object is an instance of a class**.
 
 ```python
 class Student:
     pass
-
 
 s1 = Student()
 s2 = Student()
@@ -60,12 +102,12 @@ Multiple objects can be created from the same class.
 
 # 4. Class vs Object
 
-| Class                  | Object               |
-| ---------------------- | -------------------- |
-| Blueprint              | Instance             |
-| Template               | Real instance        |
-| Used to create objects | Created from a class |
-| `Student`              | `s1`, `s2`           |
+| Class                      | Object                         |
+| -------------------------- | ------------------------------ |
+| Blueprint/template         | Instance                       |
+| Defines structure/behavior | Represents a concrete instance |
+| Used to create objects     | Created from a class           |
+| `Student`                  | `s1`, `s2`                     |
 
 Example:
 
@@ -73,16 +115,15 @@ Example:
 class Student:
     pass
 
-
 s1 = Student()
 s2 = Student()
 ```
 
 ---
 
-# 5. How to Create an Object
+# 5. Creating an Object
 
-Basic syntax:
+General syntax:
 
 ```python
 object_name = ClassName()
@@ -94,28 +135,32 @@ Example:
 class Student:
     pass
 
-
 s1 = Student()
 ```
 
-Here:
+Conceptually:
 
 ```text
-Student() → Creates an object
-s1        → Reference to the object
+Student()
+   ↓
+New instance
+
+s1
+   ↓
+Reference to that instance
 ```
 
 ---
 
-# 6. Constructor
+# 6. `__init__()` Method
 
-In Python, `__init__()` is used to initialize an object.
+`__init__()` is a special method used to **initialize an instance after it has been created**.
 
 ```python
 class Student:
 
     def __init__(self):
-        print("Student object created")
+        print("Student initialized")
 
 
 s1 = Student()
@@ -124,14 +169,25 @@ s1 = Student()
 Output:
 
 ```text
-Student object created
+Student initialized
 ```
 
-The `__init__()` method is automatically called when an object is created.
+### Important terminology
+
+It is common to call `__init__()` a "constructor" in beginner materials.
+
+Technically:
+
+```text
+__new__() → creates the instance
+__init__() → initializes the instance
+```
+
+For normal Python programming, you will usually work with `__init__()`.
 
 ---
 
-# 7. Constructor with Parameters
+# 7. `__init__()` with Parameters
 
 ```python
 class Student:
@@ -158,7 +214,7 @@ Faruk
 
 # 8. What is `self`?
 
-`self` is a reference to the **current object**.
+`self` is the conventional name for the reference to the **current instance**.
 
 Example:
 
@@ -169,25 +225,56 @@ class Student:
         self.name = name
 ```
 
-When we create:
+When:
 
 ```python
 s1 = Student("Faruk")
 ```
 
-`self` refers to the current object, `s1`.
-
-Shortcut:
+is executed, conceptually:
 
 ```text
-self → Current Object
+self → s1
 ```
+
+And:
+
+```python
+self.name
+```
+
+refers to the `name` attribute of that instance.
 
 ---
 
-# 9. Instance Variable
+# 9. `self` is a Convention
 
-A variable that belongs to a particular object is called an **instance variable**.
+Python does not require the parameter to literally be named `self`.
+
+For example:
+
+```python
+class Student:
+
+    def show(current):
+        print("Hello")
+```
+
+This works, but using `self` is the standard Python convention.
+
+Use:
+
+```python
+def show(self):
+```
+
+not unusual names.
+
+---
+
+# 10. Instance Variable / Instance Attribute
+
+An instance variable/attribute belongs to a particular object.
 
 ```python
 class Student:
@@ -202,7 +289,7 @@ Here:
 self.name
 ```
 
-is an instance variable.
+is an instance attribute.
 
 Example:
 
@@ -221,13 +308,13 @@ Faruk
 Rahim
 ```
 
-Each object can have different instance data.
+Each object has its own instance data.
 
 ---
 
-# 10. Class Variable
+# 11. Class Variable / Class Attribute
 
-A variable defined at the class level is called a **class variable**.
+A variable defined directly inside the class body is a class attribute.
 
 ```python
 class Student:
@@ -244,7 +331,7 @@ Here:
 school
 ```
 
-is a class variable.
+is a class attribute.
 
 Access:
 
@@ -252,7 +339,7 @@ Access:
 print(Student.school)
 ```
 
-It can also usually be accessed through an instance:
+An instance can also access it:
 
 ```python
 s1 = Student("Faruk")
@@ -260,9 +347,11 @@ s1 = Student("Faruk")
 print(s1.school)
 ```
 
+Python first looks for an instance attribute and then follows the attribute lookup rules, including the class.
+
 ---
 
-# 11. Instance Variable vs Class Variable
+# 12. Instance Attribute vs Class Attribute
 
 ```python
 class Student:
@@ -276,37 +365,35 @@ class Student:
 Here:
 
 ```text
-school → Class Variable
-name   → Instance Variable
+school → Class Attribute
+name   → Instance Attribute
 ```
 
-### Instance Variable
+### Instance Attribute
 
 ```python
 self.name
 ```
 
-* Belongs to an individual object
-* Can have different values for different objects
-* Usually accessed using `self`
+* Belongs to an instance.
+* Different objects can have different values.
+* Usually accessed through an instance.
 
-### Class Variable
+### Class Attribute
 
 ```python
 Student.school
 ```
 
-* Belongs to the class
-* Usually shared by instances unless an instance overrides it
-* Can be accessed through the class
+* Defined on the class.
+* Shared through the class unless an instance provides an overriding attribute.
+* Useful for data/behavior common to the class.
 
 ---
 
-# 12. Instance Method
+# 13. Instance Method
 
-A method that operates on an object is called an **instance method**.
-
-It normally takes `self` as its first parameter.
+An instance method normally takes `self` as its first parameter.
 
 ```python
 class Student:
@@ -332,13 +419,31 @@ Output:
 Faruk
 ```
 
+Conceptually:
+
+```python
+s1.show()
+```
+
+is equivalent to:
+
+```python
+Student.show(s1)
+```
+
 ---
 
-# 13. Class Method
+# 14. Class Method
 
-A class method operates on class-level data.
+A class method receives the class as its first argument.
 
-The `@classmethod` decorator is used.
+Use:
+
+```python
+@classmethod
+```
+
+Example:
 
 ```python
 class Student:
@@ -364,19 +469,26 @@ Output:
 ABC School
 ```
 
-Shortcut:
+Convention:
 
 ```text
-cls → Current Class
+self → Current Instance
+cls  → Current Class
 ```
 
 ---
 
-# 14. Static Method
+# 15. Static Method
 
-A static method does not require `self` or `cls`.
+A static method does not automatically receive `self` or `cls`.
 
-The `@staticmethod` decorator is used.
+Use:
+
+```python
+@staticmethod
+```
+
+Example:
 
 ```python
 class Math:
@@ -389,9 +501,7 @@ class Math:
 Usage:
 
 ```python
-result = Math.add(5, 3)
-
-print(result)
+print(Math.add(5, 3))
 ```
 
 Output:
@@ -400,33 +510,31 @@ Output:
 8
 ```
 
+Use a static method when the operation logically belongs to the class but does not need instance or class state.
+
 ---
 
-# 15. Three Types of Methods
+# 16. Three Main Method Types
+
+| Method          | First Parameter    | Access   | Main Purpose            |
+| --------------- | ------------------ | -------- | ----------------------- |
+| Instance Method | `self`             | Instance | Instance behavior       |
+| Class Method    | `cls`              | Class    | Class-level behavior    |
+| Static Method   | None automatically | Neither  | Utility/helper behavior |
+
+Memory trick:
 
 ```text
-Instance Method
-      ↓
-    self
-      ↓
-Operates on object data
+Instance → self → Object
 
+Class → cls → Class
 
-Class Method
-      ↓
-     cls
-      ↓
-Operates on class data
-
-
-Static Method
-      ↓
-No self / cls
-      ↓
-Utility operation
+Static → No automatic self/cls → Utility
 ```
 
-Example:
+---
+
+# 17. All Three in One Class
 
 ```python
 class Student:
@@ -436,16 +544,16 @@ class Student:
     def __init__(self, name):
         self.name = name
 
-    # Instance Method
+    # Instance method
     def show(self):
         print(self.name)
 
-    # Class Method
+    # Class method
     @classmethod
-    def change_school(cls, name):
-        cls.school = name
+    def change_school(cls, school):
+        cls.school = school
 
-    # Static Method
+    # Static method
     @staticmethod
     def info():
         print("This is Student class.")
@@ -453,335 +561,269 @@ class Student:
 
 ---
 
-# 16. How to Access an Object
+# 18. Alternative Constructor
 
-### Object
-
-```python
-s1
-```
-
-### Attribute
-
-```python
-s1.name
-```
-
-### Method
-
-```python
-s1.show()
-```
-
-General syntax:
-
-```text
-object.attribute
-object.method()
-```
-
----
-
-# 17. Delete Object / Attribute
-
-The `del` keyword can be used to delete a reference or an attribute.
-
-### Delete a reference
-
-```python
-s1 = Student("Faruk")
-
-del s1
-```
-
-### Delete an attribute
-
-```python
-del s1.name
-```
-
-After deleting:
-
-```python
-print(s1.name)
-```
-
-will raise an `AttributeError`.
-
-Note:
-
-`del s1` removes the name/reference `s1`. It does not necessarily mean the object is immediately destroyed. Python manages object lifetime through reference counting and garbage collection.
-
----
-
-# 18. Four Pillars of OOP
-
-The four fundamental pillars of OOP are:
-
-1. Encapsulation
-2. Inheritance
-3. Polymorphism
-4. Abstraction
-
-_a    → Protected
-__a   → Private
-a__   → Normal/Public
----
-
-# 19. Encapsulation
-
-**Encapsulation** means bundling data and methods inside a class and controlling access to the data.
-
-```python
-class BankAccount:
-
-    def __init__(self, balance):
-        self.__balance = balance
-
-    def get_balance(self):
-        return self.__balance
-```
-
-Here:
-
-```python
-self.__balance
-```
-
-uses Python's private-name convention through name mangling.
-
----
-
-# 20. Access Conventions in Python
-
-### Public
-
-```python
-self.name
-```
-
-A public attribute.
-
-### Protected Convention
-
-```python
-self._name
-```
-
-A single underscore conventionally indicates that an attribute is intended for internal/protected use.
-
-### Private Name Mangling
-
-```python
-self.__name
-```
-
-Python applies name mangling to double-underscore attributes.
-
-Example:
+One important use of `@classmethod` is creating an **alternative constructor**.
 
 ```python
 class Student:
 
-    def __init__(self):
-        self.__name = "Faruk"
-```
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-Conceptually, Python transforms the name to:
-
-```text
-__name
-   ↓
-_Student__name
-```
-
----
-
-# 21. Inheritance
-
-**Inheritance** allows a child class to reuse attributes and methods from a parent class.
-
-```python
-class Animal:
-
-    def speak(self):
-        print("Animal speaks")
-
-
-class Dog(Animal):
-    pass
-
-
-dog = Dog()
-
-dog.speak()
-```
-
-Output:
-
-```text
-Animal speaks
-```
-
-Here:
-
-```text
-Animal → Parent/Base Class
-Dog    → Child/Derived Class
-```
-
----
-
-# 22. Single Inheritance
-
-One child class inherits from one parent class.
-
-```python
-class Animal:
-    pass
-
-
-class Dog(Animal):
-    pass
-```
-
-Diagram:
-
-```text
-Animal
-   ↓
-  Dog
-```
-
----
-
-# 23. Multilevel Inheritance
-
-Inheritance across multiple levels.
-
-```python
-class Animal:
-    pass
-
-
-class Dog(Animal):
-    pass
-
-
-class Puppy(Dog):
-    pass
-```
-
-Diagram:
-
-```text
-Animal
-   ↓
- Dog
-   ↓
-Puppy
-```
-
----
-
-# 24. Multiple Inheritance
-
-A class inherits from multiple parent classes.
-
-```python
-class Father:
-
-    def skills(self):
-        print("Programming")
-
-
-class Mother:
-
-    def talent(self):
-        print("Cooking")
-
-
-class Child(Father, Mother):
-    pass
+    @classmethod
+    def create_anonymous(cls):
+        return cls("Unknown", 0)
 ```
 
 Usage:
 
 ```python
-c = Child()
+student = Student.create_anonymous()
 
-c.skills()
-c.talent()
-```
-
----
-
-# 25. Hierarchical Inheritance
-
-One parent class has multiple child classes.
-
-```python
-class Animal:
-    pass
-
-
-class Dog(Animal):
-    pass
-
-
-class Cat(Animal):
-    pass
-```
-
-Diagram:
-
-```text
-       Animal
-       /    \
-     Dog    Cat
-```
-
----
-
-# 26. Hybrid Inheritance
-
-A combination of two or more inheritance patterns is called **Hybrid Inheritance**.
-
----
-
-# 27. `super()`
-
-`super()` is used to access methods or the constructor of a parent class.
-
-```python
-class Animal:
-
-    def __init__(self):
-        print("Animal constructor")
-
-
-class Dog(Animal):
-
-    def __init__(self):
-        super().__init__()
-        print("Dog constructor")
-
-
-dog = Dog()
+print(student.name)
+print(student.age)
 ```
 
 Output:
 
 ```text
-Animal constructor
-Dog constructor
+Unknown
+0
+```
+
+Why `cls(...)`?
+
+Because it creates an instance of the current class and also works properly with subclasses.
+
+---
+
+# 19. Method Binding
+
+When an instance method is accessed through an instance, Python creates a **bound method**.
+
+```python
+class Student:
+
+    def show(self):
+        print("Hello")
+
+
+s = Student()
+
+s.show()
+```
+
+Conceptually:
+
+```python
+Student.show(s)
+```
+
+So:
+
+```text
+s.show
+   ↓
+Bound Method
+   ↓
+Method + s instance
 ```
 
 ---
 
-# 28. Method Overriding
+# 20. `Student.show` vs `s.show`
 
-When a child class provides its own implementation of a method already defined in the parent class, it is called **method overriding**.
+### Through class
+
+```python
+Student.show
+```
+
+This accesses the function descriptor through the class.
+
+### Through instance
+
+```python
+s.show
+```
+
+This produces a bound method with `s` automatically supplied as `self`.
+
+Python 3 does not normally call `Student.show` an "unbound method"; it is simply a function accessed through the class.
+
+---
+
+# 21. Method Overloading
+
+Traditional method overloading means:
+
+```text
+Same method name
++
+Different parameter lists
+```
+
+For example:
+
+```text
+add(a)
+add(a, b)
+add(a, b, c)
+```
+
+Languages such as Java and C++ support traditional method overloading.
+
+Python does **not** support traditional signature-based method overloading directly.
+
+Example:
+
+```python
+class Calculator:
+
+    def add(self, a):
+        return a
+
+    def add(self, a, b):
+        return a + b
+```
+
+The second definition replaces the first one in the class namespace.
+
+Therefore:
+
+```python
+calc.add(5)
+```
+
+would raise a `TypeError` because the active `add()` expects two arguments besides `self`.
+
+---
+
+# 22. Alternatives to Traditional Overloading
+
+Python commonly uses:
+
+* Default arguments
+* `*args`
+* `**kwargs`
+* Conditional logic
+* `functools.singledispatch` in appropriate cases
+
+Example using default arguments:
+
+```python
+class Calculator:
+
+    def add(self, a, b=0, c=0):
+        return a + b + c
+
+
+calc = Calculator()
+
+print(calc.add(5))
+print(calc.add(5, 10))
+print(calc.add(5, 10, 15))
+```
+
+Output:
+
+```text
+5
+15
+30
+```
+
+This is flexible argument handling, not traditional method overloading.
+
+---
+
+# 23. `*args`
+
+`*args` collects extra positional arguments into a tuple.
+
+```python
+class Calculator:
+
+    def add(self, *args):
+        return sum(args)
+
+
+calc = Calculator()
+
+print(calc.add(5))
+print(calc.add(5, 10))
+print(calc.add(5, 10, 15))
+```
+
+Conceptually:
+
+```python
+calc.add(5, 10, 15)
+```
+
+creates:
+
+```python
+args = (5, 10, 15)
+```
+
+---
+
+# 24. `**kwargs`
+
+`**kwargs` collects extra keyword arguments into a dictionary.
+
+```python
+class Student:
+
+    def show(self, **kwargs):
+        for key, value in kwargs.items():
+            print(key, ":", value)
+
+
+student = Student()
+
+student.show(
+    name="Faruk",
+    age=22,
+    department="CSE"
+)
+```
+
+Conceptually:
+
+```text
+kwargs
+   ↓
+Dictionary
+```
+
+---
+
+# 25. `*args` vs `**kwargs`
+
+```text
+*args
+ ↓
+Positional arguments
+ ↓
+Tuple
+
+
+**kwargs
+ ↓
+Keyword arguments
+ ↓
+Dictionary
+```
+
+---
+
+# 26. Method Overriding
+
+Method overriding happens when a child class provides its own implementation of an inherited method.
 
 ```python
 class Animal:
@@ -807,84 +849,270 @@ Output:
 Bark
 ```
 
+Requirements:
+
+1. There is an inheritance relationship.
+2. Parent provides/inherits the method.
+3. Child defines a method with the same name.
+4. The child implementation is selected for normal instance dispatch.
+
 ---
 
-# 29. Polymorphism
+# 27. `super()`
 
-**Poly = Many**
+`super()` gives access to the **next implementation in the MRO**.
 
-**Morphism = Forms**
-
-Polymorphism means the same interface or method can have different behavior for different objects.
+Simple example:
 
 ```python
-class Dog:
+class Animal:
 
     def sound(self):
+        print("Animal sound")
+
+
+class Dog(Animal):
+
+    def sound(self):
+        super().sound()
         print("Bark")
 
 
-class Cat:
-
-    def sound(self):
-        print("Meow")
-
-
-animals = [Dog(), Cat()]
-
-for animal in animals:
-    animal.sound()
+dog = Dog()
+dog.sound()
 ```
 
 Output:
 
 ```text
+Animal sound
 Bark
-Meow
 ```
 
-The same:
+In this simple hierarchy:
 
-```python
-animal.sound()
+```text
+Dog.sound()
+    ↓
+super().sound()
+    ↓
+Animal.sound()
 ```
 
-produces different behavior.
+Important:
+
+`super()` should not be thought of as simply "parent".
+
+It follows Python's **Method Resolution Order (MRO)**.
 
 ---
 
-# 30. Duck Typing
+# 28. Polymorphism
 
-Python often focuses on what an object can do rather than its exact type.
+Polymorphism means that the same interface or operation can produce different behavior depending on the object.
+
+Example:
 
 ```python
 class Dog:
 
     def speak(self):
-        print("Bark")
+        return "Woof!"
 
 
 class Cat:
 
     def speak(self):
-        print("Meow")
+        return "Meow!"
 
 
 def make_sound(animal):
-    animal.speak()
+    print(animal.speak())
 
 
 make_sound(Dog())
 make_sound(Cat())
 ```
 
+Output:
+
+```text
+Woof!
+Meow!
+```
+
+Same interface:
+
+```python
+animal.speak()
+```
+
+Different behavior:
+
+```text
+Dog → Woof!
+Cat → Meow!
+```
+
 ---
 
-# 31. Abstraction
+# 29. Duck Typing
 
-**Abstraction** means hiding unnecessary implementation details and exposing the essential interface.
+Duck typing is a Python style where code often focuses on whether an object supports the required operation rather than checking its exact class.
 
-Python provides the `abc` module for implementing abstraction.
+Classic idea:
+
+```text
+"If it behaves like a duck,
+we can use it like a duck."
+```
+
+Example:
+
+```python
+class Duck:
+
+    def quack(self):
+        print("Quack!")
+
+
+class Person:
+
+    def quack(self):
+        print("Person is quacking!")
+
+
+def make_it_quack(thing):
+    thing.quack()
+
+
+make_it_quack(Duck())
+make_it_quack(Person())
+```
+
+The function does not care whether the object is a `Duck` or `Person`.
+
+It only requires:
+
+```python
+thing.quack()
+```
+
+---
+
+# 30. Duck Typing and `AttributeError`
+
+If the required operation does not exist:
+
+```python
+class Car:
+    pass
+
+
+def make_it_quack(thing):
+    thing.quack()
+
+
+car = Car()
+
+make_it_quack(car)
+```
+
+Python normally raises:
+
+```text
+AttributeError
+```
+
+because `Car` does not provide `quack()`.
+
+---
+
+# 31. Dynamic Typing vs Duck Typing
+
+These are different concepts.
+
+### Dynamic Typing
+
+Python variables can refer to objects of different types during runtime.
+
+```python
+x = 10
+x = "Hello"
+x = [1, 2, 3]
+```
+
+### Duck Typing
+
+Code focuses on required behavior rather than requiring a particular concrete type.
+
+```python
+def process(obj):
+    obj.run()
+```
+
+The function assumes that `obj` supports `run()`.
+
+Memory:
+
+```text
+Dynamic Typing
+→ Type determined/checked at runtime
+
+Duck Typing
+→ Required behavior matters
+```
+
+---
+
+# 32. Polymorphism with Collections
+
+Different objects can be stored in the same collection and processed through the same interface.
+
+```python
+class Dog:
+
+    def speak(self):
+        return "Woof!"
+
+
+class Cat:
+
+    def speak(self):
+        return "Meow!"
+
+
+class Bird:
+
+    def speak(self):
+        return "Chirp!"
+
+
+animals = [
+    Dog(),
+    Cat(),
+    Bird()
+]
+
+for animal in animals:
+    print(animal.speak())
+```
+
+Output:
+
+```text
+Woof!
+Meow!
+Chirp!
+```
+
+The loop does not need separate logic for each concrete class.
+
+---
+
+# 33. Polymorphism + Abstract Base Class
+
+Python provides the `abc` module for abstract base classes.
 
 ```python
 from abc import ABC, abstractmethod
@@ -893,24 +1121,121 @@ from abc import ABC, abstractmethod
 class Animal(ABC):
 
     @abstractmethod
-    def sound(self):
+    def speak(self):
         pass
 ```
 
-Child class:
+Concrete subclasses:
 
 ```python
 class Dog(Animal):
 
-    def sound(self):
-        print("Bark")
+    def speak(self):
+        return "Woof!"
+
+
+class Cat(Animal):
+
+    def speak(self):
+        return "Meow!"
+
+
+class Bird(Animal):
+
+    def speak(self):
+        return "Chirp!"
+```
+
+Collection:
+
+```python
+animals = [
+    Dog(),
+    Cat(),
+    Bird()
+]
+
+for animal in animals:
+    print(animal.speak())
+```
+
+Output:
+
+```text
+Woof!
+Meow!
+Chirp!
 ```
 
 ---
 
-# 32. Abstract Class
+# 34. Adding a New Class
 
-A class that contains one or more abstract methods can be an **abstract class**.
+```python
+class Cow(Animal):
+
+    def speak(self):
+        return "Moo!"
+```
+
+Now:
+
+```python
+animals.append(Cow())
+```
+
+The same loop still works:
+
+```python
+for animal in animals:
+    print(animal.speak())
+```
+
+Output:
+
+```text
+Woof!
+Meow!
+Chirp!
+Moo!
+```
+
+The loop itself did not need to be modified.
+
+This demonstrates the practical benefit of programming against a common interface.
+
+---
+
+# 35. Abstraction
+
+**Abstraction** means exposing essential behavior while hiding unnecessary implementation details.
+
+Python provides:
+
+```python
+abc
+ABC
+@abstractmethod
+```
+
+Example:
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Animal(ABC):
+
+    @abstractmethod
+    def speak(self):
+        pass
+```
+
+---
+
+# 36. Abstract Class
+
+An abstract base class can define methods that subclasses are required to implement.
 
 ```python
 from abc import ABC, abstractmethod
@@ -923,55 +1248,163 @@ class Shape(ABC):
         pass
 ```
 
-A subclass must implement the abstract methods before it can be instantiated.
+A subclass should implement the abstract method before it can normally be instantiated.
+
+```python
+class Circle(Shape):
+
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return 3.1416 * self.radius ** 2
+```
 
 ---
 
-# 33. Encapsulation vs Abstraction
+# 37. Encapsulation
 
-| Encapsulation                 | Abstraction                              |
-| ----------------------------- | ---------------------------------------- |
-| Bundles data and methods      | Hides implementation details             |
-| Related to controlling access | Related to exposing essential interfaces |
-| `_` and `__` may be used      | `ABC` and `@abstractmethod` may be used  |
+Encapsulation means keeping related data and behavior together and controlling how state is accessed or modified.
 
-Shortcut:
+Example:
+
+```python
+class BankAccount:
+
+    def __init__(self, balance):
+        self.__balance = balance
+
+    def get_balance(self):
+        return self.__balance
+```
+
+Here:
+
+```python
+self.__balance
+```
+
+uses Python's **name-mangling mechanism**.
+
+---
+
+# 38. Public, Protected Convention, Private Name Mangling
+
+Python does not have Java/C++-style access modifiers in the same strict sense.
+
+### Public
+
+```python
+self.name
+```
+
+Normal public attribute.
+
+### Single Underscore
+
+```python
+self._name
+```
+
+Conventionally means:
 
 ```text
-Encapsulation → How to organize/protect data?
+Internal / non-public API
+```
 
-Abstraction → What should the user see?
+It is not enforced as private.
+
+### Double Underscore
+
+```python
+self.__name
+```
+
+Python applies name mangling.
+
+Example:
+
+```python
+class Student:
+
+    def __init__(self):
+        self.__name = "Faruk"
+```
+
+Conceptually:
+
+```text
+__name
+   ↓
+_Student__name
+```
+
+Important:
+
+`__name` is **not truly inaccessible/private**. Name mangling mainly helps avoid accidental name collisions, especially in inheritance.
+
+---
+
+# 39. `_name` vs `__name`
+
+```text
+name
+ ↓
+Public
+
+
+_name
+ ↓
+Internal-use convention
+
+
+__name
+ ↓
+Name mangling
+```
+
+Do not describe:
+
+```python
+__name
+```
+
+as absolutely "private" in the same sense as languages with enforced private access.
+
+---
+
+# 40. Four Fundamental OOP Concepts
+
+The commonly taught four pillars are:
+
+```text
+1. Encapsulation
+2. Inheritance
+3. Polymorphism
+4. Abstraction
+```
+
+Memory:
+
+```text
+Encapsulation
+→ Bundle + control access
+
+Inheritance
+→ Reuse / IS-A
+
+Polymorphism
+→ Same interface, different behavior
+
+Abstraction
+→ Essential interface, hidden implementation details
 ```
 
 ---
 
-# 34. Constructor vs Method
+# 41. `__str__()`
 
-### Constructor / Initializer
-
-```python
-def __init__(self):
-```
-
-Used to initialize an object.
-
-### Normal Method
-
-```python
-def show(self):
-```
-
-Must normally be called explicitly.
-
-```python
-s1.show()
-```
-
----
-
-# 35. `__str__()`
-
-`__str__()` provides a user-friendly string representation of an object.
+`__str__()` provides a user-friendly string representation.
 
 ```python
 class Student:
@@ -983,9 +1416,9 @@ class Student:
         return self.name
 
 
-s1 = Student("Faruk")
+student = Student("Faruk")
 
-print(s1)
+print(student)
 ```
 
 Output:
@@ -994,11 +1427,13 @@ Output:
 Faruk
 ```
 
+`print(obj)` generally uses `str(obj)`, which can invoke `obj.__str__()`.
+
 ---
 
-# 36. `__repr__()`
+# 42. `__repr__()`
 
-`__repr__()` is generally intended to provide an unambiguous or developer-oriented representation.
+`__repr__()` is generally intended to provide a useful, developer-oriented representation.
 
 ```python
 class Student:
@@ -1010,28 +1445,63 @@ class Student:
         return f"Student(name={self.name!r})"
 ```
 
+Example:
+
+```python
+student = Student("Faruk")
+
+print(repr(student))
+```
+
+Possible output:
+
+```text
+Student(name='Faruk')
+```
+
 ---
 
-# 37. Magic / Dunder Methods
+# 43. `__str__()` vs `__repr__()`
 
-Special methods whose names start and end with double underscores are commonly called **dunder methods**.
+```text
+__str__
+   ↓
+User-friendly representation
+
+__repr__
+   ↓
+Developer/debugging representation
+```
+
+A good `repr` is often useful for understanding exactly what object/value is being represented.
+
+---
+
+# 44. Magic / Dunder Methods
+
+Special methods are commonly called **dunder methods** because their names begin and end with double underscores.
 
 Examples:
 
-```text
+```python
 __init__
 __str__
 __repr__
 __len__
 __eq__
 __add__
+__call__
 ```
+
+They allow Python syntax and built-in operations to interact with user-defined objects.
 
 ---
 
-# 38. Operator Overloading
+# 45. Operator Overloading
 
-Special methods can be used to define how operators work with custom objects.
+Special methods allow classes to define behavior for operators.
+
+Example:
 
 ```python
 class Number:
@@ -1041,8 +1511,11 @@ class Number:
 
     def __add__(self, other):
         return Number(self.value + other.value)
+```
 
+Usage:
 
+```python
 n1 = Number(10)
 n2 = Number(20)
 
@@ -1057,13 +1530,13 @@ Output:
 30
 ```
 
-Here:
+Conceptually:
 
 ```python
 n1 + n2
 ```
 
-uses:
+dispatches through the appropriate addition protocol, involving:
 
 ```python
 __add__()
@@ -1071,9 +1544,9 @@ __add__()
 
 ---
 
-# 39. `__eq__()`
+# 46. `__eq__()`
 
-`__eq__()` can customize equality comparison between objects.
+`__eq__()` can define equality behavior for objects.
 
 ```python
 class Student:
@@ -1082,14 +1555,34 @@ class Student:
         self.name = name
 
     def __eq__(self, other):
+        if not isinstance(other, Student):
+            return NotImplemented
+
         return self.name == other.name
 ```
 
+Usage:
+
+```python
+s1 = Student("Faruk")
+s2 = Student("Faruk")
+
+print(s1 == s2)
+```
+
+Output:
+
+```text
+True
+```
+
+Without a custom equality implementation, user-defined objects generally use identity-based equality inherited from `object`.
+
 ---
 
-# 40. Property
+# 47. `@property`
 
-The `@property` decorator allows a method to be accessed like an attribute.
+`@property` allows a method to be accessed using attribute syntax.
 
 ```python
 class Student:
@@ -1105,16 +1598,28 @@ class Student:
 Usage:
 
 ```python
-s1 = Student("Faruk")
+student = Student("Faruk")
 
-print(s1.name)
+print(student.name)
+```
+
+Notice:
+
+```python
+student.name
+```
+
+instead of:
+
+```python
+student.name()
 ```
 
 ---
 
-# 41. Setter
+# 48. Property Setter
 
-A setter can be used to control how a property's value is changed.
+A setter controls how a property's value is assigned.
 
 ```python
 class Student:
@@ -1128,6 +1633,7 @@ class Student:
 
     @age.setter
     def age(self, value):
+
         if value >= 0:
             self._age = value
         else:
@@ -1137,18 +1643,34 @@ class Student:
 Usage:
 
 ```python
-s1 = Student(20)
+student = Student(20)
 
-print(s1.age)
+print(student.age)
 
-s1.age = 25
+student.age = 25
+
+print(student.age)
+```
+
+Invalid value:
+
+```python
+student.age = -5
+```
+
+raises:
+
+```text
+ValueError
 ```
 
 ---
 
-# 42. Composition
+# 49. Composition
 
-Composition is a relationship where one class contains an object of another class.
+Composition represents a **HAS-A** relationship where an object contains another object as part of its implementation.
+
+Example:
 
 ```python
 class Engine:
@@ -1171,16 +1693,16 @@ Here:
 ```text
 Car
  ↓
+HAS-A
+ ↓
 Engine
 ```
 
-Car **HAS-A** Engine.
-
 ---
 
-# 43. Aggregation
+# 50. Aggregation
 
-Aggregation is a relationship where one object uses or contains another object, while the contained object can exist independently.
+Aggregation is a looser HAS-A relationship where the contained object can exist independently.
 
 ```python
 class Teacher:
@@ -1193,13 +1715,21 @@ class Department:
         self.teacher = teacher
 ```
 
-The `Teacher` object is created outside and passed into `Department`.
+The `Teacher` object is created outside:
+
+```python
+teacher = Teacher()
+
+department = Department(teacher)
+```
+
+The teacher can exist independently of the department object.
 
 ---
 
-# 44. Association
+# 51. Association
 
-Association is a relationship between independent objects.
+Association means objects are related/interact with each other without necessarily implying ownership.
 
 Examples:
 
@@ -1209,30 +1739,19 @@ Doctor ↔ Patient
 Customer ↔ Bank
 ```
 
+Association is a broad relationship concept.
+
 ---
 
-# 45. Inheritance vs Composition
-
-### Inheritance
-
-**IS-A relationship**
-
-```text
-Dog IS-A Animal
-```
-
-```python
-class Dog(Animal):
-    pass
-```
+# 52. Composition vs Aggregation
 
 ### Composition
 
-**HAS-A relationship**
-
 ```text
-Car HAS-A Engine
+Stronger ownership relationship
 ```
+
+Example:
 
 ```python
 class Car:
@@ -1241,18 +1760,193 @@ class Car:
         self.engine = Engine()
 ```
 
-Shortcut:
+### Aggregation
 
 ```text
-Inheritance → IS-A
-Composition → HAS-A
+Weaker ownership relationship
+```
+
+Example:
+
+```python
+teacher = Teacher()
+
+department = Department(teacher)
+```
+
+Memory:
+
+```text
+Composition → contained object managed as part of the whole
+
+Aggregation → contained object can exist independently
 ```
 
 ---
 
-# 46. Method Resolution Order (MRO)
+# 53. Inheritance
 
-MRO determines the order in which Python searches for methods and attributes in an inheritance hierarchy.
+Inheritance allows a child class to reuse or extend behavior from a parent class.
+
+```python
+class Animal:
+
+    def speak(self):
+        print("Animal speaks")
+
+
+class Dog(Animal):
+    pass
+
+
+dog = Dog()
+
+dog.speak()
+```
+
+Output:
+
+```text
+Animal speaks
+```
+
+Terminology:
+
+```text
+Animal → Parent/Base/Superclass
+Dog    → Child/Derived/Subclass
+```
+
+---
+
+# 54. Single Inheritance
+
+One child inherits from one parent.
+
+```python
+class Animal:
+    pass
+
+
+class Dog(Animal):
+    pass
+```
+
+Diagram:
+
+```text
+Animal
+   ↓
+  Dog
+```
+
+---
+
+# 55. Multilevel Inheritance
+
+Inheritance across multiple levels.
+
+```python
+class Animal:
+    pass
+
+
+class Dog(Animal):
+    pass
+
+
+class Puppy(Dog):
+    pass
+```
+
+Diagram:
+
+```text
+Animal
+   ↓
+  Dog
+   ↓
+ Puppy
+```
+
+---
+
+# 56. Multiple Inheritance
+
+A class inherits from multiple base classes.
+
+```python
+class Father:
+
+    def skills(self):
+        print("Programming")
+
+
+class Mother:
+
+    def talent(self):
+        print("Cooking")
+
+
+class Child(Father, Mother):
+    pass
+```
+
+Usage:
+
+```python
+child = Child()
+
+child.skills()
+child.talent()
+```
+
+---
+
+# 57. Hierarchical Inheritance
+
+One parent has multiple child classes.
+
+```python
+class Animal:
+    pass
+
+
+class Dog(Animal):
+    pass
+
+
+class Cat(Animal):
+    pass
+```
+
+Diagram:
+
+```text
+       Animal
+       /    \
+     Dog    Cat
+```
+
+---
+
+# 58. Hybrid Inheritance
+
+Hybrid inheritance is a combination of multiple inheritance patterns.
+
+For example:
+
+```text
+Single + Multiple + Multilevel
+```
+
+Python's MRO is important when multiple inheritance creates a complex hierarchy.
+
+---
+
+# 59. Method Resolution Order (MRO)
+
+MRO determines the order in which Python searches classes for methods and attributes.
 
 Example:
 
@@ -1275,14 +1969,22 @@ print(C.mro())
 Conceptually:
 
 ```text
-C → B → A → object
+C
+↓
+B
+↓
+A
+↓
+object
 ```
+
+For multiple inheritance, Python uses the **C3 linearization algorithm** to construct the MRO.
 
 ---
 
-# 47. `object` Class
+# 60. `object` Class
 
-Python classes ultimately participate in an inheritance hierarchy rooted at the built-in `object` class.
+Python's normal class hierarchy ultimately includes `object`.
 
 ```python
 class Student:
@@ -1297,31 +1999,43 @@ Student
 object
 ```
 
----
-
-# 48. `isinstance()`
-
-`isinstance()` checks whether an object is an instance of a class.
+You can inspect:
 
 ```python
-class Student:
+print(Student.__mro__)
+```
+
+---
+
+# 61. `isinstance()`
+
+`isinstance()` checks whether an object is an instance of a class or compatible subclass.
+
+```python
+class Animal:
     pass
 
 
-s1 = Student()
+class Dog(Animal):
+    pass
 
-print(isinstance(s1, Student))
+
+dog = Dog()
+
+print(isinstance(dog, Dog))
+print(isinstance(dog, Animal))
 ```
 
 Output:
 
 ```text
 True
+True
 ```
 
 ---
 
-# 49. `issubclass()`
+# 62. `issubclass()`
 
 `issubclass()` checks whether one class is a subclass of another.
 
@@ -1345,7 +2059,871 @@ True
 
 ---
 
-# 50. Complete OOP Example
+# 63. `__call__()`
+
+`__call__()` allows an object to be called using function-call syntax.
+
+```python
+class Test:
+
+    def __call__(self):
+        print("Object called")
+
+
+t = Test()
+
+t()
+```
+
+Output:
+
+```text
+Object called
+```
+
+Conceptually:
+
+```python
+t()
+```
+
+invokes the object's callable protocol, which for a normal Python class is provided through:
+
+```python
+t.__call__()
+```
+
+---
+
+# 64. `__call__()` with Parameters
+
+```python
+class Add:
+
+    def __call__(self, a, b):
+        return a + b
+
+
+calc = Add()
+
+print(calc(5, 3))
+```
+
+Output:
+
+```text
+8
+```
+
+Conceptually:
+
+```python
+calc(5, 3)
+```
+
+uses:
+
+```python
+calc.__call__(5, 3)
+```
+
+---
+
+# 65. Callable Object
+
+An object that can be called like a function is called a **callable object**.
+
+```python
+class Test:
+
+    def __call__(self):
+        print("Called")
+
+
+t = Test()
+
+print(callable(t))
+```
+
+Output:
+
+```text
+True
+```
+
+---
+
+# 66. `callable()`
+
+`callable()` checks whether an object appears callable.
+
+```python
+def add(a, b):
+    return a + b
+
+
+class Test:
+
+    def __call__(self):
+        pass
+
+
+t = Test()
+
+print(callable(add))
+print(callable(t))
+```
+
+Output:
+
+```text
+True
+True
+```
+
+Without `__call__()`:
+
+```python
+class Test:
+    pass
+
+
+t = Test()
+
+print(callable(t))
+```
+
+Output:
+
+```text
+False
+```
+
+Calling:
+
+```python
+t()
+```
+
+would raise:
+
+```text
+TypeError
+```
+
+---
+
+# 67. Stateful Callable Object
+
+A callable object can maintain state between calls.
+
+```python
+class Counter:
+
+    def __init__(self):
+        self.count = 0
+
+    def __call__(self):
+        self.count += 1
+        return self.count
+
+
+counter = Counter()
+
+print(counter())
+print(counter())
+print(counter())
+```
+
+Output:
+
+```text
+1
+2
+3
+```
+
+The object remembers:
+
+```text
+count = 1
+count = 2
+count = 3
+```
+
+---
+
+# 68. Multiple Stateful Callable Objects
+
+```python
+class Counter:
+
+    def __init__(self):
+        self.count = 0
+
+    def __call__(self):
+        self.count += 1
+        return self.count
+
+
+c1 = Counter()
+c2 = Counter()
+
+print(c1())
+print(c1())
+
+print(c2())
+print(c2())
+```
+
+Output:
+
+```text
+1
+2
+1
+2
+```
+
+Because:
+
+```text
+c1 → Separate state
+c2 → Separate state
+```
+
+---
+
+# 69. `__init__()` vs `__call__()`
+
+```text
+Class()
+   ↓
+Instance creation
+   ↓
+__init__()
+   ↓
+Initialize instance
+```
+
+Whereas:
+
+```text
+obj()
+   ↓
+Callable object
+   ↓
+__call__()
+```
+
+Example:
+
+```python
+class Test:
+
+    def __init__(self):
+        print("Initialized")
+
+    def __call__(self):
+        print("Called")
+
+
+obj = Test()
+
+obj()
+```
+
+Output:
+
+```text
+Initialized
+Called
+```
+
+---
+
+# 70. Class-Based Decorator
+
+`__call__()` is commonly used to implement decorators as classes.
+
+```python
+class MyDecorator:
+
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self):
+        print("Before function")
+
+        self.func()
+
+        print("After function")
+```
+
+Usage:
+
+```python
+@MyDecorator
+def hello():
+    print("Hello")
+
+
+hello()
+```
+
+Output:
+
+```text
+Before function
+Hello
+After function
+```
+
+Conceptually:
+
+```python
+@MyDecorator
+def hello():
+    print("Hello")
+```
+
+is approximately:
+
+```python
+def hello():
+    print("Hello")
+
+
+hello = MyDecorator(hello)
+```
+
+Now `hello` refers to a callable decorator object.
+
+---
+
+# 71. `__call__()` + Polymorphism
+
+```python
+class Add:
+
+    def __call__(self, a, b):
+        return a + b
+
+
+class Multiply:
+
+    def __call__(self, a, b):
+        return a * b
+
+
+operations = [
+    Add(),
+    Multiply()
+]
+
+for operation in operations:
+    print(operation(5, 3))
+```
+
+Output:
+
+```text
+8
+15
+```
+
+Both objects support the same interface:
+
+```python
+operation(a, b)
+```
+
+but have different implementations.
+
+---
+
+# 72. `__call__()` + Duck Typing
+
+```python
+class Add:
+
+    def __call__(self, a, b):
+        return a + b
+
+
+class Multiply:
+
+    def __call__(self, a, b):
+        return a * b
+
+
+def calculate(operation, a, b):
+    return operation(a, b)
+```
+
+Usage:
+
+```python
+print(calculate(Add(), 5, 3))
+print(calculate(Multiply(), 5, 3))
+```
+
+Output:
+
+```text
+8
+15
+```
+
+`calculate()` does not need to know the exact class.
+
+It only requires:
+
+```text
+operation(a, b)
+```
+
+to work.
+
+---
+
+# 73. Class Working Flow
+
+Consider:
+
+```python
+class Work:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def show_info(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+```
+
+Then:
+
+```python
+work = Work("John", 30)
+```
+
+Conceptually:
+
+```text
+Work
+ ↓
+Class Object
+ ↓
+Work("John", 30)
+ ↓
+New Work Instance
+ ↓
+__init__()
+ ↓
+self.name = "John"
+self.age = 30
+ ↓
+work references the instance
+```
+
+Object state:
+
+```text
++----------------------+
+| Work Object          |
+|----------------------|
+| name = "John"        |
+| age  = 30            |
++----------------------+
+          ↑
+          |
+        work
+```
+
+---
+
+# 74. Method Call Flow
+
+When:
+
+```python
+work.show_info()
+```
+
+is called, Python binds the instance to the method.
+
+Conceptually:
+
+```python
+Work.show_info(work)
+```
+
+Therefore:
+
+```text
+work
+ ↓
+self
+ ↓
+self.name
+ ↓
+work.name
+ ↓
+"John"
+```
+
+---
+
+# 75. Multiple Objects
+
+```python
+work1 = Work("John", 30)
+work2 = Work("Alice", 25)
+```
+
+Conceptually:
+
+```text
+work1 ──→ Work Object
+          name = John
+          age = 30
+
+
+work2 ──→ Work Object
+          name = Alice
+          age = 25
+```
+
+They are separate instances.
+
+---
+
+# 76. `id()`
+
+`id()` returns an object's identity value during its lifetime.
+
+```python
+work1 = Work("John", 30)
+work2 = Work("Alice", 25)
+
+print(id(work1))
+print(id(work2))
+```
+
+Important:
+
+Do not define `id()` simply as "memory address".
+
+A more accurate definition is:
+
+```text
+id(object)
+→ identity value of the object
+```
+
+In CPython, the identity is commonly related to the object's memory address, but this is an implementation detail rather than the language-level definition.
+
+---
+
+# 77. `del`
+
+`del` can remove a name/reference or an attribute.
+
+Example:
+
+```python
+work = Work("John", 30)
+
+del work
+```
+
+This removes the name `work` from the namespace.
+
+It does **not** necessarily mean that the object is immediately destroyed.
+
+Example:
+
+```python
+work = Work("John", 30)
+
+another = work
+
+del work
+```
+
+Now:
+
+```text
+another
+   ↓
+Work Object
+```
+
+The object still has a reference.
+
+---
+
+# 78. Deleting an Attribute
+
+```python
+class Student:
+
+    def __init__(self):
+        self.name = "Faruk"
+
+
+student = Student()
+
+del student.name
+```
+
+After this:
+
+```python
+print(student.name)
+```
+
+raises:
+
+```text
+AttributeError
+```
+
+---
+
+# 79. Python Memory Model
+
+Python's memory model should not be explained as exactly:
+
+```text
+Variable → Stack
+Object   → Heap
+```
+
+like a simplified C/C++ model.
+
+A safer explanation is:
+
+```text
+Variable
+   ↓
+Reference
+   ↓
+Python Object
+   ↓
+Implementation-managed memory
+```
+
+In CPython, Python objects are generally allocated in heap-managed memory.
+
+Function calls use execution frames.
+
+The exact memory implementation can vary between Python implementations.
+
+---
+
+# 80. Reference Counting
+
+CPython uses reference counting as an important part of memory management.
+
+Example:
+
+```python
+work = Work("John", 30)
+
+another = work
+
+del work
+```
+
+The object still exists because:
+
+```text
+another
+   ↓
+Object
+```
+
+If the object has no remaining references, its reference count may reach zero and CPython can deallocate it promptly.
+
+---
+
+# 81. Garbage Collection
+
+Python also provides garbage collection mechanisms, particularly for detecting and reclaiming cyclic garbage.
+
+Example concept:
+
+```text
+Object A → Object B
+   ↑         |
+   |_________|
+```
+
+A cycle can keep reference counts non-zero.
+
+Python's cyclic garbage collector can help handle such cycles.
+
+Therefore, avoid saying:
+
+```text
+"No reference = garbage collector immediately deletes object"
+```
+
+A better statement is:
+
+```text
+An unreachable object may become eligible for memory reclamation.
+The exact timing depends on the Python implementation and runtime.
+```
+
+---
+
+# 82. `gc.collect()`
+
+Python provides the `gc` module.
+
+```python
+import gc
+
+gc.collect()
+```
+
+This requests a garbage-collection cycle.
+
+It should not be interpreted as:
+
+```text
+"Delete every unused object immediately."
+```
+
+It is a request to perform garbage collection according to the runtime's rules.
+
+---
+
+# 83. Inheritance vs Composition
+
+### Inheritance
+
+Represents an **IS-A** relationship.
+
+```text
+Dog IS-A Animal
+```
+
+```python
+class Dog(Animal):
+    pass
+```
+
+### Composition
+
+Represents a **HAS-A** relationship.
+
+```text
+Car HAS-A Engine
+```
+
+```python
+class Car:
+
+    def __init__(self):
+        self.engine = Engine()
+```
+
+Memory:
+
+```text
+Inheritance → IS-A
+
+Composition → HAS-A
+```
+
+---
+
+# 84. Encapsulation vs Abstraction
+
+| Encapsulation                                | Abstraction                              |
+| -------------------------------------------- | ---------------------------------------- |
+| Bundles data and behavior                    | Exposes essential interface              |
+| Helps control access to state                | Hides unnecessary implementation details |
+| Can use properties/name mangling/conventions | Can use ABCs and abstract methods        |
+| Focuses on managing internal state           | Focuses on what interface is exposed     |
+
+Easy memory:
+
+```text
+Encapsulation
+→ How is data/state organized and accessed?
+
+Abstraction
+→ What interface should users work with?
+```
+
+---
+
+# 85. Overloading vs Overriding
+
+| Overloading                                                          | Overriding                                   |
+| -------------------------------------------------------------------- | -------------------------------------------- |
+| Same method name for different parameter patterns                    | Child provides a new implementation          |
+| Traditional signature-based form is not directly supported in Python | Supported                                    |
+| Inheritance not required                                             | Inheritance involved                         |
+| Python uses alternatives such as defaults/`*args`                    | Child replaces/influences inherited behavior |
+
+Memory:
+
+```text
+Overloading
+→ Same Name + Flexible Inputs
+
+Overriding
+→ Parent → Child + New Implementation
+```
+
+---
+
+# 86. Polymorphism vs Duck Typing
+
+They are related but not identical terms.
+
+### Polymorphism
+
+General idea:
+
+```text
+One interface
++
+Different implementations
+```
+
+### Duck Typing
+
+A Python style of achieving flexible behavior by relying on capabilities/behavior instead of explicit concrete-type checks.
+
+Example:
+
+```python
+def make_sound(obj):
+    obj.speak()
+```
+
+The function does not need:
+
+```python
+isinstance(obj, Dog)
+```
+
+or:
+
+```python
+isinstance(obj, Cat)
+```
+
+---
+
+# 87. Complete OOP Example
 
 ```python
 from abc import ABC, abstractmethod
@@ -1405,21 +2983,42 @@ print(Student.school)
 Student.info()
 ```
 
+Concepts demonstrated:
+
+```text
+Abstract Class
+Inheritance
+super()
+Instance Attributes
+Class Attributes
+Property
+Instance Method
+Class Method
+Static Method
+Polymorphism
+Encapsulation
+```
+
 ---
 
-# 51. Important OOP Concepts
+# 88. Important OOP Concepts
 
 ```text
 Class
 Object
-Constructor
+
+__init__()
 self
-Instance Variable
-Class Variable
+
+Instance Attribute
+Class Attribute
 
 Instance Method
 Class Method
 Static Method
+
+Method Binding
+Bound Method
 
 Encapsulation
 Inheritance
@@ -1428,15 +3027,18 @@ Abstraction
 
 Method Overriding
 super()
-Multiple Inheritance
 MRO
 
-Magic Methods
-__init__()
+Method Overloading limitations
+*args
+**kwargs
+
+Magic/Dunder Methods
 __str__()
 __repr__()
 __eq__()
 __add__()
+__call__()
 
 @property
 Setter
@@ -1447,24 +3049,26 @@ Association
 
 isinstance()
 issubclass()
+
+callable()
 ```
 
 ---
 
-# 52. Quick Revision
+# 89. Quick Revision
 
 ```text
 Class
     ↓
-Blueprint
+Blueprint / Template
 
 Object
     ↓
-Instance of Class
+Instance of a Class
 
 self
     ↓
-Current Object
+Current Instance
 
 cls
     ↓
@@ -1472,15 +3076,15 @@ Current Class
 
 __init__()
     ↓
-Initialize Object
+Initialize Instance
 
-Instance Variable
+Instance Attribute
     ↓
-Object-specific Data
+Object-specific State
 
-Class Variable
+Class Attribute
     ↓
-Class-level Data
+Class-level Attribute
 
 Instance Method
     ↓
@@ -1496,32 +3100,44 @@ Static Method
 
 Encapsulation
     ↓
-Bundle + Control Access
+Bundle + Manage Access
 
 Inheritance
     ↓
-Reuse / IS-A
-
-Polymorphism
-    ↓
-Same Interface, Different Behavior
-
-Abstraction
-    ↓
-Hide Implementation Details
+IS-A
 
 Composition
     ↓
 HAS-A
 
-Inheritance
+Polymorphism
     ↓
-IS-A
+Same Interface + Different Behavior
+
+Duck Typing
+    ↓
+Behavior/Capability over Explicit Type Checking
+
+Abstraction
+    ↓
+Essential Interface
+
+super()
+    ↓
+Next implementation according to MRO
+
+MRO
+    ↓
+Method/Attribute Lookup Order
+
+__call__()
+    ↓
+Object can be called like a function
 ```
 
 ---
 
-# 53. OOP Learning Roadmap
+# 90. OOP Learning Roadmap
 
 ```text
 1. Class
@@ -1532,9 +3148,9 @@ IS-A
    ↓
 4. self
    ↓
-5. Instance Variable
+5. Instance Attribute
    ↓
-6. Class Variable
+6. Class Attribute
    ↓
 7. Instance Method
    ↓
@@ -1552,66 +3168,413 @@ IS-A
     ↓
 14. Polymorphism
     ↓
-15. Abstraction
+15. Duck Typing
     ↓
-16. Magic Methods
+16. Abstraction
     ↓
-17. Property / Setter
+17. Magic Methods
     ↓
-18. Composition
+18. @property / Setter
     ↓
-19. MRO
+19. Composition
     ↓
-20. OOP Projects + Practice
+20. Aggregation / Association
+    ↓
+21. MRO
+    ↓
+22. __call__ / Callable Objects
+    ↓
+23. OOP Design
+    ↓
+24. Projects + Practice
 ```
 
 ---
 
-# 54. One-Line Definition
+# 91. Interview Questions
 
-**Class** is a blueprint.
-
-**Object** is an instance of a class.
-
-**Encapsulation, Inheritance, Polymorphism, and Abstraction** are the four fundamental pillars of OOP.
-
----
-
-# 55. Most Important Interview Questions
+## Basic
 
 1. What is OOP?
 2. What is a class?
 3. What is an object?
-4. What is the difference between class and object?
+4. Difference between class and object?
 5. What is `self`?
 6. What is `__init__()`?
-7. What is an instance variable?
-8. What is a class variable?
+7. What is an instance attribute?
+8. What is a class attribute?
 9. What is an instance method?
 10. What is a class method?
 11. What is a static method?
 12. Difference between `self` and `cls`?
+
+## Core OOP
+
 13. What are the four pillars of OOP?
 14. What is encapsulation?
 15. What is inheritance?
 16. What are the types of inheritance?
-17. What is `super()`?
-18. What is method overriding?
-19. What is polymorphism?
-20. What is duck typing?
-21. What is abstraction?
-22. What is an abstract class?
-23. What are magic/dunder methods?
-24. What is operator overloading?
-25. What is `__str__()`?
-26. What is `__repr__()`?
-27. What is `@property`?
-28. What is composition?
-29. Difference between inheritance and composition?
-30. What is MRO?
-31. What is `isinstance()`?
-32. What is `issubclass()`?
-33. What is name mangling?
-34. What is the difference between public, protected, and private conventions in Python?
-35. What is the difference between aggregation and composition?
+17. What is polymorphism?
+18. What is abstraction?
+19. What is an abstract class?
+20. What is method overriding?
+21. What is `super()`?
+22. What is MRO?
+
+## Python-Specific
+
+23. Does Python support traditional method overloading?
+24. What are `*args` and `**kwargs`?
+25. What is duck typing?
+26. What is dynamic typing?
+27. What is method binding?
+28. What is a bound method?
+29. What is name mangling?
+30. Is `__name` truly private?
+31. What is `@property`?
+32. What is a setter?
+33. What are dunder methods?
+34. What is `__str__()`?
+35. What is `__repr__()`?
+36. What is `__eq__()`?
+37. What is operator overloading?
+38. What is `__call__()`?
+39. What is a callable object?
+40. What does `callable()` do?
+
+## Object Relationships
+
+41. What is composition?
+42. What is aggregation?
+43. What is association?
+44. Difference between composition and inheritance?
+45. What is an IS-A relationship?
+46. What is a HAS-A relationship?
+
+## Runtime / Memory
+
+47. What does `id()` return?
+48. What happens when `del obj` is used?
+49. What is reference counting?
+50. What is garbage collection?
+51. Why should Python's Stack/Heap model not be explained exactly like C/C++?
+
+---
+
+# 92. Most Important Differences
+
+### `self` vs `cls`
+
+```text
+self
+ ↓
+Current Instance
+
+cls
+ ↓
+Current Class
+```
+
+### Instance vs Class Attribute
+
+```text
+Instance Attribute
+→ Belongs to individual object
+
+Class Attribute
+→ Defined on class
+```
+
+### Instance vs Class vs Static Method
+
+```text
+Instance
+→ self
+→ Instance behavior
+
+Class
+→ cls
+→ Class behavior
+
+Static
+→ No automatic self/cls
+→ Utility behavior
+```
+
+### Inheritance vs Composition
+
+```text
+Inheritance
+→ IS-A
+
+Composition
+→ HAS-A
+```
+
+### Overriding vs Overloading
+
+```text
+Overriding
+→ Child redefines inherited method
+
+Traditional Overloading
+→ Same name + different signatures
+→ Not directly supported in Python
+```
+
+### Polymorphism vs Duck Typing
+
+```text
+Polymorphism
+→ Same interface, different behavior
+
+Duck Typing
+→ Required behavior matters more than concrete type
+```
+
+### `__init__` vs `__call__`
+
+```text
+Class()
+→ __init__()
+→ Initialize instance
+
+obj()
+→ __call__()
+→ Call object
+```
+
+---
+
+# 93. Final Concept Map
+
+```text
+                    PYTHON OOP
+                        │
+        ┌───────────────┼────────────────┐
+        │               │                │
+      Class           Object           Methods
+        │               │                │
+        │               │       ┌────────┼─────────┐
+        │               │       │        │         │
+        │               │   Instance   Class    Static
+        │               │      │         │         │
+        │               │     self      cls       -
+        │               │
+        └───────────────┼──────────────────────────
+                        │
+                Four Pillars
+                        │
+          ┌─────────────┼─────────────┐
+          │             │             │
+    Encapsulation   Inheritance   Polymorphism
+          │             │             │
+          │             │        ┌────┴─────┐
+          │             │        │          │
+          │             │    Overriding  Duck Typing
+          │             │
+          │          MRO / super()
+          │
+       Properties
+       Name Mangling
+                        │
+                   Abstraction
+                        │
+                      ABC
+                @abstractmethod
+                        │
+                        │
+                Object Relationships
+                        │
+          ┌─────────────┼──────────────┐
+          │             │              │
+      Composition   Aggregation    Association
+          │
+        HAS-A
+          │
+      Inheritance
+        IS-A
+```
+
+---
+
+# 94. Final 20 Lines to Memorize
+
+```text
+1. Class → Blueprint / Template
+
+2. Object → Instance of a Class
+
+3. self → Current Instance
+
+4. cls → Current Class
+
+5. __init__() → Initialize an Instance
+
+6. Instance Attribute → Object-specific state
+
+7. Class Attribute → Class-level attribute
+
+8. Instance Method → self
+
+9. Class Method → @classmethod + cls
+
+10. Static Method → @staticmethod
+
+11. Encapsulation → Bundle + Manage Access
+
+12. Inheritance → IS-A
+
+13. Composition → HAS-A
+
+14. Polymorphism → Same Interface + Different Behavior
+
+15. Duck Typing → Behavior/Capability matters
+
+16. Abstraction → Essential Interface
+
+17. Overriding → Child provides new implementation
+
+18. MRO → Method Resolution Order
+
+19. __call__() → Makes an object callable
+
+20. callable(obj) → Checks whether obj is callable
+```
+
+---
+
+# 95. One-Line Definitions
+
+```text
+Class
+→ A blueprint/template for creating objects.
+
+Object
+→ An instance of a class.
+
+self
+→ Conventional reference to the current instance.
+
+cls
+→ Conventional reference to the current class.
+
+__init__()
+→ Initializes a newly created instance.
+
+Encapsulation
+→ Bundling state and behavior while managing access to state.
+
+Inheritance
+→ Mechanism for creating a class based on another class.
+
+Polymorphism
+→ Same interface/operation with different object-specific behavior.
+
+Abstraction
+→ Exposing essential behavior while hiding unnecessary implementation details.
+
+Duck Typing
+→ Relying on an object's supported behavior rather than its concrete type.
+
+Method Overriding
+→ Child class provides its own implementation of an inherited method.
+
+Composition
+→ HAS-A relationship using contained objects.
+
+Aggregation
+→ A looser HAS-A relationship where contained objects can exist independently.
+
+Association
+→ General relationship between independent objects.
+
+MRO
+→ The order Python uses to search classes for methods/attributes.
+
+__call__()
+→ Special method that allows an object to be called using ().
+
+@property
+→ Allows method-based logic to be accessed with attribute syntax.
+
+@classmethod
+→ Creates a method that receives the class as its first argument.
+
+@staticmethod
+→ Creates a method with no automatically supplied instance/class argument.
+```
+
+---
+
+# Final Memory Formula
+
+```text
+OOP
+│
+├── Class → Blueprint
+├── Object → Instance
+│
+├── Methods
+│   ├── Instance → self
+│   ├── Class → cls
+│   └── Static → No automatic self/cls
+│
+├── Four Pillars
+│   ├── Encapsulation
+│   ├── Inheritance
+│   ├── Polymorphism
+│   └── Abstraction
+│
+├── Relationships
+│   ├── Inheritance → IS-A
+│   ├── Composition → HAS-A
+│   ├── Aggregation
+│   └── Association
+│
+├── Polymorphism
+│   ├── Overriding
+│   └── Duck Typing
+│
+├── Special Methods
+│   ├── __init__
+│   ├── __str__
+│   ├── __repr__
+│   ├── __eq__
+│   ├── __add__
+│   └── __call__
+│
+└── Python Features
+    ├── @property
+    ├── Setter
+    ├── MRO
+    ├── isinstance()
+    ├── issubclass()
+    └── callable()
+```
+
+**সবচেয়ে গুরুত্বপূর্ণ flow:**
+
+```text
+Class
+  ↓
+Object
+  ↓
+self
+  ↓
+Instance Attributes
+  ↓
+Instance Methods
+  ↓
+Inheritance
+  ↓
+Overriding
+  ↓
+Polymorphism
+  ↓
+Abstraction
+  ↓
+OOP Design
+```
+
 """
