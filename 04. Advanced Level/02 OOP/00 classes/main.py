@@ -523,6 +523,9 @@ The four fundamental pillars of OOP are:
 3. Polymorphism
 4. Abstraction
 
+_a    → Protected
+__a   → Private
+a__   → Normal/Public
 ---
 
 # 19. Encapsulation
