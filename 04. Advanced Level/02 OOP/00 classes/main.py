@@ -194,6 +194,8 @@ class Student:
 
 
 student = Student("Faruk")
+
+
 For normal Python programming, you will usually work with `__init__()`.
 
 ---
