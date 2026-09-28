@@ -182,7 +182,18 @@ Technically:
 __new__() → creates the instance
 __init__() → initializes the instance
 ```
+class Student:
+    def __new__(cls, name):
+        print("__new__() called")
+        instance = super().__new__(cls)
+        return instance
 
+    def __init__(self, name):
+        print("__init__() called")
+        self.name = name
+
+
+student = Student("Faruk")
 For normal Python programming, you will usually work with `__init__()`.
 
 ---
