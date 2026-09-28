@@ -1212,19 +1212,24 @@ Duck Typing
 Different objects can be stored in the same collection and processed through the same interface.
 
 ```python
-class Dog:
+class Animal:
+
+    def speak(self):
+        pass
+
+
+class Dog(Animal):
 
     def speak(self):
         return "Woof!"
 
 
-class Cat:
+class Cat(Animal):
 
     def speak(self):
         return "Meow!"
 
-
-class Bird:
+class Bird(Animal):
 
     def speak(self):
         return "Chirp!"
