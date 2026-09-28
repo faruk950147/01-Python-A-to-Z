@@ -1218,24 +1218,25 @@ class Animal:
         pass
 
 
-class Dog(Animal):
+class Dog:
 
     def speak(self):
         return "Woof!"
 
 
-class Cat(Animal):
+class Cat:
 
     def speak(self):
         return "Meow!"
 
-class Bird(Animal):
+class Bird:
 
     def speak(self):
         return "Chirp!"
 
 
 animals = [
+    Animal(),
     Dog(),
     Cat(),
     Bird()
