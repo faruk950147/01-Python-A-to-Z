@@ -1037,13 +1037,19 @@ This becomes especially important in multiple inheritance.
 Example:
 
 ```python
-class Dog:
+class Animal:
+
+    def speak(self):
+        pass
+
+
+class Dog(Animal):
 
     def speak(self):
         return "Woof!"
 
 
-class Cat:
+class Cat(Animal):
 
     def speak(self):
         return "Meow!"
