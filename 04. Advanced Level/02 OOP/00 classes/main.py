@@ -1094,6 +1094,10 @@ Classic idea:
 ```text
 "If it behaves like a duck,
 we can use it like a duck."
+
+Code focuses on required behavior rather than requiring a specific concrete type.
+Duck Typing
+→ Required behavior/capability matters
 ```
 
 Example:
@@ -1178,7 +1182,8 @@ x = [1, 2, 3]
 ## Duck Typing
 
 Code focuses on required behavior rather than requiring a specific concrete type.
-
+Duck Typing
+→ Required behavior/capability matters
 ```python
 def process(obj):
     obj.run()
