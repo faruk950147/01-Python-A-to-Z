@@ -1,6 +1,13 @@
 # ====================== Python Duck Typing ======================
 
 """
+
+Duck typing is a Python style where code focuses on whether an object supports the 
+required behavior rather than checking its exact concrete class.
+
+ডাক টাইপিং হলো পাইথনের একটি শৈলী, যেখানে কোড কোনো অবজেক্টের সুনির্দিষ্ট কনক্রিট ক্লাস
+পরীক্ষা করার পরিবর্তে, সেটি প্রয়োজনীয় আচরণটি সমর্থন করে কি না, তার উপর আলোকপাত করে।
+
 Duck Typing হলো Python-এর একটি concept যেখানে object-এর
 actual type/class-এর চেয়ে object-এর behavior বেশি গুরুত্বপূর্ণ।
 
