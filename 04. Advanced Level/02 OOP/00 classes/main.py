@@ -5,7 +5,7 @@
 
 **OOP = Object-Oriented Programming**
 
-OOP is a programming paradigm where programs are designed around **objects**, which combine **data (state)** and **behavior (methods)**.
+OOP is a programming paradigm where programs are designed around ** classes ** and **objects**
 
 Real-world examples:
 
