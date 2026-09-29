@@ -3909,48 +3909,4 @@ PYTHON OOP
     └── callable()
 ```
 
-## Most Important Learning Flow
-
-```text
-Class
-  ↓
-Object
-  ↓
-__new__() / __init__()
-  ↓
-self
-  ↓
-Instance Attributes
-  ↓
-Instance Methods
-  ↓
-Class / Static Methods
-  ↓
-Encapsulation
-  ↓
-Inheritance
-  ↓
-super()
-  ↓
-MRO
-  ↓
-Method Overriding
-  ↓
-Polymorphism
-  ↓
-Duck Typing
-  ↓
-Abstraction
-  ↓
-Magic Methods
-  ↓
-@property
-  ↓
-Composition
-  ↓
-OOP Design
-  ↓
-Projects + Practice
-```
-
 """
