@@ -1513,6 +1513,8 @@ __name
 
 is not truly private in the strict sense.
 
+Name Mangling is a mechanism in Python where Python internally changes the name of a variable or method that starts with a double underscore (__) inside a class, making it difficult to access directly.
+
 Name mangling mainly helps prevent accidental name collisions, particularly in inheritance.
 
 ---
