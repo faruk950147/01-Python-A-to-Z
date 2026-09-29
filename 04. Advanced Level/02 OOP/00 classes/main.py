@@ -1494,7 +1494,11 @@ class Student:
 ```
 
 Conceptually:
-
+Python internally transforms __name into
+_Student__name
+# Double underscore (__name) triggers name mangling in Python.
+# Inside the Student class, __name becomes _Student__name.
+# __name → _Student__name (Name Mangling)
 ```text
 __name
    ↓
