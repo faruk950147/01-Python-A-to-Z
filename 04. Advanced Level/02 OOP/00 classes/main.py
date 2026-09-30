@@ -1255,6 +1255,35 @@
     Example:
 
     ```python
+    class Animal:
+        def speak(self):
+            pass
+
+
+    class Dog(Animal):
+
+        def speak(self):
+            return "Woof!"
+
+
+    class Cat(Animal):
+
+        def speak(self):
+            return "Meow!"
+
+
+    class Bird(Animal):
+
+        def speak(self):
+            return "Chirp!"
+    
+        Output:
+        ```text
+        Woof!
+        Meow!
+        Chirp!
+        ```
+    
     class Dog:
 
         def speak(self):
