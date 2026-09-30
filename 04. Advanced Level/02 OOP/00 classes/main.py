@@ -688,20 +688,21 @@
 
     ```python
     class Student:
-
         def __init__(self, name, age):
             self.name = name
             self.age = age
 
         @classmethod
-        def create_anonymous(cls):
-            return cls("Unknown", 0)
+        def from_string(cls, data):
+            name, age = data.split("-")
+            return cls(name, int(age))
     ```
 
     Usage:
 
     ```python
-    student = Student.create_anonymous()
+
+    student = Student.from_string("Faruk-25")
 
     print(student.name)
     print(student.age)
@@ -710,8 +711,8 @@
     Output:
 
     ```text
-    Unknown
-    0
+    Faruk
+    25
     ```
 
     ### Why `cls(...)`?
