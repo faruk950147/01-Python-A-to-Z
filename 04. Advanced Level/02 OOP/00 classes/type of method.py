@@ -83,8 +83,8 @@ Human.showName(human)
 
 # 2. Class Method
 
-A **class method** is a method that works with the class itself rather than a specific instance.
-
+A class method is a method that works with the class instead of a specific object. 
+It uses cls to refer to the class and is created using the @classmethod decorator.
 It receives the class automatically through the `cls` parameter.
 
 A class method is created using the `@classmethod` decorator.
