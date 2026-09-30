@@ -83,7 +83,7 @@ Human.showName(human)
 
 # 2. Class Method
 
-A class method is a method that works with the class instead of a specific object. 
+A class method is a method that works directly with the class, not with specific objects (instance).
 It uses cls to refer to the class and is created using the @classmethod decorator.
 It receives the class automatically through the `cls` parameter.
 
