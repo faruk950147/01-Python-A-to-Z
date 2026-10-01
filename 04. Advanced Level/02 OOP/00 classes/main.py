@@ -2175,6 +2175,450 @@
     Inheritance → IS-A
     Composition → HAS-A
     ```
+    # IS-A, HAS-A, Inheritance & Composition
+
+    ## 1. IS-A Relationship
+
+    **IS-A** means:
+
+    > **"One thing is another thing."**
+
+    When one class is a **type of** another class, we have an IS-A relationship.
+
+    ### Examples
+
+    ```text
+    Dog IS-A Animal
+    Student IS-A Person
+    Car IS-A Vehicle
+    ```
+
+    For example:
+
+    ```text
+    Dog → Animal
+    ```
+
+    A Dog is an Animal.
+
+    ### Python Example
+
+    ```python
+    class Animal:
+        def eat(self):
+            print("Eating")
+
+
+    class Dog(Animal):
+        pass
+    ```
+
+    Here:
+
+    ```text
+    Dog IS-A Animal
+    ```
+
+    So, **Inheritance** is used.
+
+    ### Easy Trick
+
+    ```text
+    IS-A → "I am this"
+    ```
+
+    Example:
+
+    ```text
+    Dog IS-A Animal
+    ```
+
+    Means:
+
+    > A Dog is an Animal.
+
+    ---
+
+    # 2. HAS-A Relationship
+
+    **HAS-A** means:
+
+    > **"One thing has another thing."**
+
+    When one object contains or uses another object, we have a HAS-A relationship.
+
+    ### Examples
+
+    ```text
+    Car HAS-A Engine
+    Student HAS-A Address
+    Computer HAS-A CPU
+    House HAS-A Room
+    ```
+
+    A Car is **not** an Engine.
+
+    Instead:
+
+    ```text
+    Car
+    └── Engine
+    ```
+
+    The Car **has** an Engine.
+
+    ### Python Example
+
+    ```python
+    class Engine:
+        def start(self):
+            print("Engine started")
+
+
+    class Car:
+        def __init__(self):
+            self.engine = Engine()
+    ```
+
+    Here:
+
+    ```text
+    Car HAS-A Engine
+    ```
+
+    ---
+
+    # 3. Inheritance
+
+    **Inheritance** is commonly used when there is an **IS-A relationship**.
+
+    A child class can inherit attributes and methods from a parent class.
+
+    ### Example
+
+    ```python
+    class Animal:
+        def eat(self):
+            print("Eating")
+
+
+    class Dog(Animal):
+        pass
+    ```
+
+    Here:
+
+    ```text
+    Dog IS-A Animal
+    ```
+
+    Therefore:
+
+    ```text
+    IS-A → Inheritance
+    ```
+
+    ### Advantages
+
+    * Code reuse
+    * Reuse parent methods
+    * Method overriding
+    * Creates a class hierarchy
+
+    ---
+
+    # 4. Composition
+
+    **Composition** is a strong **HAS-A relationship**.
+
+    One object contains another object as an important part of its implementation.
+
+    ### Example
+
+    ```python
+    class Engine:
+        def start(self):
+            print("Engine started")
+
+
+    class Car:
+        def __init__(self):
+            self.engine = Engine()
+
+        def start(self):
+            self.engine.start()
+    ```
+
+    Here:
+
+    ```text
+    Car HAS-A Engine
+    ```
+
+    The `Car` creates its `Engine` object:
+
+    ```python
+    self.engine = Engine()
+    ```
+
+    Therefore, this is an example of **Composition**.
+
+    ---
+
+    # 5. Why Do We Use Composition?
+
+    Composition allows us to build a class using objects of other classes.
+
+    For example:
+
+    ```text
+    Car
+    ├── Engine
+    ├── Battery
+    └── Wheel
+    ```
+
+    So:
+
+    ```text
+    Car HAS-A Engine
+    Car HAS-A Battery
+    Car HAS-A Wheel
+    ```
+
+    Each class can have its own responsibility:
+
+    ```text
+    Car     → Car-related behavior
+    Engine  → Engine-related behavior
+    Battery → Battery-related behavior
+    ```
+
+    This makes the code more **modular, maintainable, and flexible**.
+
+    ---
+
+    # 6. IS-A vs HAS-A
+
+    | Feature            | IS-A                 | HAS-A                      |
+    | ------------------ | -------------------- | -------------------------- |
+    | Meaning            | One thing is another | One thing has another      |
+    | Relationship       | Type relationship    | Contains/uses relationship |
+    | Common OOP concept | Inheritance          | Composition/Aggregation    |
+    | Example            | Dog IS-A Animal      | Car HAS-A Engine           |
+    | Question           | "Is A a B?"          | "Does A have a B?"         |
+
+    ---
+
+    # 7. How to Identify Them
+
+    When you see two classes, ask yourself a question.
+
+    ### Question 1: "Is A a B?"
+
+    If **yes**:
+
+    ```text
+    A IS-A B
+    ```
+
+    Usually → **Inheritance**
+
+    Example:
+
+    ```text
+    Is a Dog an Animal?
+    Yes.
+
+    Dog IS-A Animal
+    ```
+
+    ---
+
+    ### Question 2: "Does A have a B?"
+
+    If **yes**:
+
+    ```text
+    A HAS-A B
+    ```
+
+    Usually → **Composition/Aggregation**
+
+    Example:
+
+    ```text
+    Does a Car have an Engine?
+    Yes.
+
+    Car HAS-A Engine
+    ```
+
+    ---
+
+    # 8. Inheritance vs Composition
+
+    Inheritance:
+
+    ```text
+    IS-A
+    ↓
+    "I am this"
+    ↓
+    Inheritance
+    ```
+
+    Example:
+
+    ```text
+    Dog IS-A Animal
+    ```
+
+    Composition:
+
+    ```text
+    HAS-A
+    ↓
+    "I have this"
+    ↓
+    Composition
+    ```
+
+    Example:
+
+    ```text
+    Car HAS-A Engine
+    ```
+
+    ---
+
+    # 9. Is Composition an Alternative to Inheritance?
+
+    **In many situations, yes. But they are not the same thing.**
+
+    Inheritance represents:
+
+    ```text
+    IS-A
+    ```
+
+    Composition represents:
+
+    ```text
+    HAS-A
+    ```
+
+    Use inheritance when there is a genuine **IS-A** relationship.
+
+    Use composition when an object **has or uses** another object.
+
+    ### Incorrect Example
+
+    ```python
+    class Car(Engine):
+        pass
+    ```
+
+    This says:
+
+    ```text
+    Car IS-A Engine
+    ```
+
+    That does not make logical sense.
+
+    ### Better Example
+
+    ```python
+    class Car:
+        def __init__(self):
+            self.engine = Engine()
+    ```
+
+    Now:
+
+    ```text
+    Car HAS-A Engine
+    ```
+
+    This is Composition.
+
+    ---
+
+    # 10. Real-Life Examples
+
+    ## IS-A
+
+    ```text
+    Dog IS-A Animal
+    Cat IS-A Animal
+    Student IS-A Person
+    Manager IS-A Employee
+    Car IS-A Vehicle
+    ```
+
+    ## HAS-A
+
+    ```text
+    Car HAS-A Engine
+    Car HAS-A Wheel
+    Student HAS-A Address
+    Computer HAS-A CPU
+    House HAS-A Room
+    ```
+
+    ---
+
+    # 11. Easy Memory Trick
+
+    Remember these two lines:
+
+    ```text
+    IS-A  = "I am this"
+    HAS-A = "I have this"
+    ```
+
+    ### Example
+
+    ```text
+    Dog IS-A Animal
+    ```
+
+    > A Dog **is** an Animal.
+
+    ```text
+    Car HAS-A Engine
+    ```
+
+    > A Car **has** an Engine.
+
+    ---
+
+    # Final Summary
+
+    ```text
+                    OOP Relationships
+                        │
+                ┌─────────┴─────────┐
+                │                   │
+            IS-A                HAS-A
+                │                   │
+        "I am this"         "I have this"
+                │                   │
+        Inheritance          Composition
+                │                   │
+        Dog → Animal          Car → Engine
+    ```
+
+    ### Key Points
+
+    > **IS-A → Inheritance**
+
+    > **HAS-A → Composition/Aggregation**
+
+    > **IS-A = "I am this"**
+
+    > **HAS-A = "I have this"**
 
 # 56. Nested Class
 
