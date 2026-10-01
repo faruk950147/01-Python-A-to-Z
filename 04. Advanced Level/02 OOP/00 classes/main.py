@@ -1950,7 +1950,7 @@
     student.name
     ```
 
-    # 50. Property Setter
+# 50. Property Setter
 
     A setter controls how a property's value is assigned.
 
