@@ -58,3 +58,23 @@
 |                               | `git push origin --delete <branch>`              | Delete a remote branch                                    |
 |----------------------------------------------------------------------------------------------------------------------------------------------|
 
+Step 1: Git cache clean এবং remote prune
+git gc --prune=now
+git remote prune origin
+
+Step 2: origin folder এ কী কী ref আছে দেখো
+ls .git/refs/remotes/origin/
+
+Step 3: যদি main ফাইল corrupt হয়, তাহলে ডিলিট করো
+rm -f .git/refs/remotes/origin/main
+
+Step 4: নতুন করে remote থেকে রেফারেন্স ফেচ করো
+git fetch origin
+
+Step 5: এখন আবার পুল করো
+git pull origin main
+
+#Bonus Step (যদি এখনও এরর আসে):
+packed-refs ফাইল corrupt হলে রিসেট করো
+mv .git/packed-refs .git/packed-refs.backup
+git fetch origin
