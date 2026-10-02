@@ -214,7 +214,7 @@ class Person:
 
     college_name = "TMSS Technical Institute"
 
-    def change(self, college_name):
+    def changeName(self, college_name):
         self.college_name = college_name
 ```
 
@@ -223,11 +223,12 @@ When we write:
 ```python
 p1 = Person()
 
-p1.change("TTI")
+p1.changeName("TTI")
 ```
 
 the statement:
 
+```python
 self.college_name = college_name
 ```
 
@@ -242,13 +243,13 @@ class Person:
 
     college_name = "TMSS Technical Institute"
 
-    def change(self, college_name):
+    def changeName(self, college_name):
         self.college_name = college_name
 
 
 p1 = Person()
 
-p1.change("TTI")
+p1.changeName("TTI")
 
 print(p1.college_name)
 print(Person.college_name)
@@ -292,13 +293,13 @@ class Person:
 
     name = "John"
 
-    def change(self, name):
+    def changeName(self, name):
         Person.name = name
 
 
 p1 = Person()
 
-p1.change("Doe")
+p1.changeName("Doe")
 
 print(p1.name)
 print(Person.name)
@@ -339,13 +340,13 @@ class Person:
     name = "John"
 
     @classmethod
-    def change(cls, name):
+    def changeName(cls, name):
         cls.name = name
 
 
 p1 = Person()
 
-p1.change("Doe")
+p1.changeName("Doe")
 
 print(p1.name)
 print(Person.name)
@@ -474,13 +475,13 @@ class Person:
     name = "John"
 
     @staticmethod
-    def change(name):
+    def changeName(name):
         Person.name = name
 
 
 p1 = Person()
 
-p1.change("Doe")
+p1.changeName("Doe")
 
 print(p1.name)
 print(Person.name)
