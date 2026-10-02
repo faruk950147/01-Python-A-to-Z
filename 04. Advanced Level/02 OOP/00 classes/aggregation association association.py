@@ -1488,9 +1488,6 @@ Aggregation
 Composition
 Inheritance
 ```
-
-
-
 Association
     ↓
 "I work with you / interact with you"
