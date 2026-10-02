@@ -3,9 +3,9 @@
 
 ## 1. Introduction
 
-In OOP, objects can have relationships with other objects.
+In Object-Oriented Programming (OOP), objects can have relationships with other objects.
 
-The main relationships are:
+The main object relationships are:
 
 ```text
 Association
@@ -18,8 +18,8 @@ The easiest way to remember them:
 
 ```text
 Association  → USES / INTERACTS WITH
-Aggregation  → HAS-A + Independent
-Composition  → HAS-A + Strongly Owned
+Aggregation  → HAS-A + Independent Part
+Composition  → HAS-A + Strong Ownership
 Inheritance  → IS-A
 ```
 
@@ -31,11 +31,11 @@ Inheritance  → IS-A
 
 **Association** is a general relationship between two objects.
 
-It means one object **uses, communicates with, or interacts with** another object.
+It means one object can **use, communicate with, interact with, or work with** another object.
 
 ### Simple Definition
 
-> Association means two objects are connected, but neither object necessarily owns the other.
+> **Association is a general relationship between two objects where they are connected or interact, without requiring one object to own the other.**
 
 Example:
 
@@ -45,7 +45,7 @@ Teacher ───── Student
 
 A teacher teaches a student.
 
-Both can exist independently.
+Both objects can exist independently.
 
 ---
 
@@ -83,9 +83,9 @@ Here:
 Teacher ───── Student
 ```
 
-The teacher interacts with the student.
+The `Teacher` interacts with the `Student`.
 
-So this is:
+Therefore, this is an example of:
 
 ```text
 Association
@@ -108,9 +108,9 @@ Then:
 teacher.teach(student)
 ```
 
-The teacher uses the student object.
+The `Teacher` uses the `Student` object.
 
-But:
+There is no required ownership:
 
 ```text
 Teacher does not own Student
@@ -122,7 +122,7 @@ Both can exist independently.
 Therefore:
 
 ```text
-Association = Interaction
+Association = General Interaction
 ```
 
 ---
@@ -145,7 +145,7 @@ Teacher teaches Student.
 Customer ───── Order
 ```
 
-Customer places Order.
+Customer places an Order.
 
 ```text
 Driver ───── Car
@@ -159,17 +159,25 @@ The important idea is:
 A interacts with B
 ```
 
+So:
+
+```text
+Association → USES / INTERACTS WITH
+```
+
 ---
 
 # Part 2: Aggregation
 
 ## 6. What is Aggregation?
 
-**Aggregation** is a special type of relationship where one object **has** another object, but the other object can exist independently.
+**Aggregation** is a specialized form of association that represents a **whole-part relationship**.
+
+The whole object has or groups one or more part objects, but the part has an **independent lifecycle** and is not exclusively owned by the whole.
 
 ### Simple Definition
 
-> Aggregation is a weak HAS-A relationship where the part can exist without the whole.
+> **Aggregation is a whole-part relationship where the part can exist independently of the whole.**
 
 Example:
 
@@ -188,6 +196,8 @@ But:
 ```text
 Teacher can exist without Department
 ```
+
+The hollow diamond `◇` is placed on the **whole side**.
 
 ---
 
@@ -227,27 +237,25 @@ department.show_teacher()
 CSE department has teacher John
 ```
 
-The teacher is created first:
+The teacher is created separately:
 
 ```python
 teacher = Teacher("John")
 ```
 
-Then the teacher is given to the department:
+Then the teacher is associated with the department:
 
 ```python
 department = Department("CSE", teacher)
 ```
 
-So:
+Conceptually:
 
 ```text
-Department
-     │
-     └── Teacher
+Department ◇──── Teacher
 ```
 
-This can represent **Aggregation**.
+This can represent **Aggregation** when the domain model treats the teacher as an independently existing part.
 
 ---
 
@@ -269,9 +277,9 @@ Then:
 department = Department("CSE", teacher)
 ```
 
-The department simply keeps a reference to the teacher.
+The department simply maintains a reference to the teacher.
 
-So:
+Therefore:
 
 ```text
 Department HAS-A Teacher
@@ -280,10 +288,10 @@ Department HAS-A Teacher
 and:
 
 ```text
-Teacher can exist independently
+Teacher has an independent lifecycle
 ```
 
-Therefore:
+So the relationship can be modeled as:
 
 ```text
 Aggregation
@@ -293,14 +301,14 @@ Aggregation
 
 # 9. Main Features of Aggregation
 
-Aggregation usually has:
+Aggregation generally represents:
 
 ```text
-1. HAS-A relationship
-2. Whole-Part relationship
+1. Whole-Part relationship
+2. HAS-A relationship
 3. Independent part
-4. Weak ownership
-5. Part can have another reference
+4. No exclusive ownership
+5. Part can exist without the whole
 ```
 
 Example:
@@ -311,7 +319,7 @@ Department ◇──── Teacher
 
 Think:
 
-> "I have you, but you can live without me."
+> **"I have you, but you can exist without me."**
 
 ---
 
@@ -352,16 +360,22 @@ team.show_players()
 Conceptually:
 
 ```text
-Team
- │
- ├── Player
- ├── Player
- └── Player
+Team ◇──── Player
+          Player
+          Player
 ```
 
-The players were created separately.
+The players were created independently:
 
-So this can represent:
+```python
+player1 = Player("John")
+player2 = Player("David")
+player3 = Player("Mike")
+```
+
+Then they were added to the team.
+
+If the domain model says the players can exist independently of the team, this represents:
 
 ```text
 Aggregation
@@ -373,13 +387,13 @@ Aggregation
 
 ## 11. What is Composition?
 
-**Composition** is a strong whole-part relationship.
+**Composition** is a strong form of whole-part relationship.
 
-One object contains another object as a strongly owned part, and the part's lifecycle is strongly connected to the whole according to the domain model.
+The whole object **strongly owns** its parts, and the part's lifecycle is tied to the whole according to the domain model.
 
 ### Simple Definition
 
-> Composition means one object is made up of another object as a strongly owned part.
+> **Composition is a whole-part relationship where the part is strongly owned by the whole and normally cannot meaningfully exist independently of that whole.**
 
 Example:
 
@@ -387,9 +401,11 @@ Example:
 House ◆──── Room
 ```
 
+The filled diamond `◆` is placed on the **whole side**.
+
 Think:
 
-> "You are a strongly controlled part of me."
+> **"You are a strongly owned part of me."**
 
 ---
 
@@ -426,16 +442,15 @@ Here:
 self.engine = Engine()
 ```
 
-creates an engine object as part of the `Car` object.
+creates the `Engine` as part of the `Car`.
 
 Conceptually:
 
 ```text
-Car
- └── Engine
+Car ◆──── Engine
 ```
 
-This can represent **Composition** when the domain model treats the engine as a strongly owned part of that car.
+This can represent **Composition** when the domain model treats that engine as a strongly owned part of that particular car.
 
 ---
 
@@ -466,22 +481,31 @@ house.show_room()
 Bedroom
 ```
 
-Here:
+Conceptually:
 
 ```text
-House
- └── Room
+House ◆──── Room
 ```
 
 The `House` creates and contains the `Room`.
 
-If the domain model says that the room belongs exclusively to that house and its lifecycle depends on that house, this is **Composition**.
+If the domain model defines the room as an exclusive, lifecycle-dependent part of that house, this is:
+
+```text
+Composition
+```
 
 ---
 
 # 14. Aggregation vs Composition
 
-This is the most important difference.
+Both are:
+
+```text
+Whole-Part Relationships
+```
+
+The main difference is **ownership and lifecycle semantics**.
 
 ## Aggregation
 
@@ -489,12 +513,22 @@ This is the most important difference.
 Department ◇──── Teacher
 ```
 
-Teacher can exist independently.
+The teacher can exist independently.
+
+Conceptually:
 
 ```text
 Department removed
-       ↓
+        ↓
 Teacher can still exist
+```
+
+Therefore:
+
+```text
+Aggregation
+→ Independent Part
+→ No Exclusive Ownership
 ```
 
 ---
@@ -505,33 +539,42 @@ Teacher can still exist
 House ◆──── Room
 ```
 
-If the room is defined as a lifecycle-dependent part of that particular house:
+If the room is modeled as a lifecycle-dependent part of that particular house:
 
 ```text
 House removed
-       ↓
-Room no longer exists as a part of that house
+        ↓
+Room no longer exists
+as a part of that house
 ```
 
-So:
+Therefore:
 
 ```text
-Aggregation → Independent Part
-Composition → Dependent Part
+Composition
+→ Strong Ownership
+→ Lifecycle Dependency
+```
+
+### Easy Difference
+
+```text
+Aggregation  → Independent Part
+Composition  → Lifecycle-Dependent Part
 ```
 
 ---
 
 # 15. Very Important Python Rule
 
-Do **not** think:
+Do NOT think:
 
 ```text
 Created outside = Aggregation
 Created inside = Composition
 ```
 
-This is too simple.
+This is an oversimplification.
 
 For example:
 
@@ -543,9 +586,9 @@ class Car:
 
 The engine is created outside.
 
-But this does not automatically mean UML aggregation.
+But this does **not automatically** mean UML aggregation.
 
-And:
+Similarly:
 
 ```python
 class Car:
@@ -555,11 +598,11 @@ class Car:
 
 The engine is created inside.
 
-But this alone does not automatically prove UML composition.
+But this alone does **not automatically prove** UML composition.
 
-The correct rule is:
+The correct principle is:
 
-> **The relationship depends on ownership and lifecycle semantics, not only on Python syntax.**
+> **The relationship depends on ownership, lifecycle semantics, and the intended domain model—not merely on Python syntax.**
 
 ---
 
@@ -577,17 +620,17 @@ Meaning:
 Teacher interacts with Student
 ```
 
-No required ownership.
+There is no required whole-part ownership.
 
-### Remember:
+Remember:
 
 ```text
-Association = USES
+Association = USES / INTERACTS WITH
 ```
 
 ---
 
-## 17. Aggregation
+# 17. Aggregation
 
 ```text
 Department ◇──── Teacher
@@ -599,17 +642,17 @@ Meaning:
 Department HAS-A Teacher
 ```
 
-Teacher can exist independently.
+The teacher has an independent lifecycle.
 
-### Remember:
+Remember:
 
 ```text
-Aggregation = HAS-A + Independent
+Aggregation = HAS-A + Independent Part
 ```
 
 ---
 
-## 18. Composition
+# 18. Composition
 
 ```text
 House ◆──── Room
@@ -621,9 +664,9 @@ Meaning:
 House strongly HAS-A Room
 ```
 
-The part has a strong lifecycle dependency on the whole according to the domain model.
+The room's lifecycle is tied to the house according to the domain model.
 
-### Remember:
+Remember:
 
 ```text
 Composition = HAS-A + Strong Ownership/Lifecycle
@@ -633,12 +676,18 @@ Composition = HAS-A + Strong Ownership/Lifecycle
 
 # 19. Main Comparison Table
 
-| Relationship | Simple Meaning   | Ownership              | Part Independent? | Example            |
-| ------------ | ---------------- | ---------------------- | ----------------- | ------------------ |
-| Association  | Uses / Interacts | No required ownership  | Yes               | Teacher–Student    |
-| Aggregation  | Weak HAS-A       | Weak                   | Yes               | Department–Teacher |
-| Composition  | Strong HAS-A     | Strong                 | Generally no      | House–Room         |
-| Inheritance  | IS-A             | Parent-child hierarchy | N/A               | Dog–Animal         |
+| Relationship | Meaning           | Ownership                      | Part Independent? | UML Symbol     | Example            |
+| ------------ | ----------------- | ------------------------------ | ----------------- | -------------- | ------------------ |
+| Association  | Uses / Interacts  | No required ownership          | Usually yes       | `─────`        | Teacher–Student    |
+| Aggregation  | Whole-Part        | No exclusive ownership         | Yes               | `◇────`        | Department–Teacher |
+| Composition  | Strong Whole-Part | Strong ownership               | Normally no       | `◆────`        | House–Room         |
+| Inheritance  | IS-A              | Parent-child type relationship | N/A               | Generalization | Dog–Animal         |
+
+### Important
+
+Aggregation and composition are both more specific forms of **whole-part relationships**.
+
+Association is the broader/general relationship.
 
 ---
 
@@ -650,7 +699,11 @@ Composition = HAS-A + Strong Ownership/Lifecycle
 Teacher ───── Student
 ```
 
-Plain line.
+Plain line:
+
+```text
+─────
+```
 
 ---
 
@@ -666,6 +719,8 @@ Hollow diamond:
 ◇
 ```
 
+The diamond is placed on the **whole side**.
+
 ---
 
 ## Composition
@@ -680,13 +735,13 @@ Filled diamond:
 ◆
 ```
 
-The diamond is placed on the **whole/container side**.
+The diamond is placed on the **whole side**.
 
 ---
 
 # 21. Association vs Aggregation
 
-### Association
+## Association
 
 ```text
 Doctor ───── Patient
@@ -694,13 +749,15 @@ Doctor ───── Patient
 
 Doctor treats Patient.
 
-It is simply an interaction.
+It simply represents an interaction:
 
 ```text
 Doctor interacts with Patient
 ```
 
-### Aggregation
+---
+
+## Aggregation
 
 ```text
 Department ◇──── Teacher
@@ -708,26 +765,30 @@ Department ◇──── Teacher
 
 Department has Teachers.
 
-It is a whole-part relationship.
+It represents a whole-part relationship:
 
 ```text
-Teacher can exist independently
+Department
+    ↓
+has Teacher
 ```
+
+while the teacher can exist independently.
 
 Therefore:
 
 ```text
 Association
     ↓
-General relationship
+General Relationship
 ```
 
-while:
+and:
 
 ```text
 Aggregation
     ↓
-Whole-Part relationship
+Whole-Part Relationship
     ↓
 Independent Part
 ```
@@ -736,24 +797,32 @@ Independent Part
 
 # 22. Aggregation vs Composition
 
-Both are **whole-part relationships**.
+Both represent:
 
-The main difference is the lifecycle relationship.
+```text
+Whole-Part Relationship
+```
+
+But their ownership and lifecycle semantics differ.
 
 ```text
 Aggregation
     ↓
-Weak relationship
+Whole-Part
     ↓
-Part can exist independently
+No Exclusive Ownership
+    ↓
+Part is Independent
 ```
 
 ```text
 Composition
     ↓
-Strong relationship
+Whole-Part
     ↓
-Part's lifecycle depends on Whole
+Strong Ownership
+    ↓
+Part's Lifecycle is Tied to Whole
 ```
 
 Example:
@@ -774,7 +843,7 @@ House ◆──── Room
 
 # 23. Composition vs Inheritance
 
-These are completely different concepts.
+These represent completely different concepts.
 
 ## Composition
 
@@ -818,7 +887,7 @@ class Dog(Animal):
     pass
 ```
 
-So:
+Therefore:
 
 ```text
 Composition → HAS-A
@@ -834,11 +903,6 @@ Composition allows us to build a class using other objects.
 For example:
 
 ```python
-class Engine:
-    def start(self):
-        print("Engine started")
-
-
 class Car:
     def __init__(self, engine):
         self.engine = engine
@@ -847,7 +911,7 @@ class Car:
         self.engine.start()
 ```
 
-Now we can provide different engines.
+Now different engine objects can be provided.
 
 ```python
 class PetrolEngine:
@@ -877,27 +941,31 @@ Petrol engine started
 Electric engine started
 ```
 
-This makes the design more flexible.
+This design is flexible because `Car` depends on an engine interface/behavior rather than a single concrete engine implementation.
 
 ---
 
 # 25. Favor Composition Over Inheritance
 
-A common OOP principle is:
+A common OOP design principle is:
 
 > **Favor composition over inheritance.**
 
-This does not mean composition is always better.
+This does NOT mean composition is always better.
 
 It means:
 
 ```text
 Use inheritance
-when there is a real IS-A relationship.
+when there is a genuine IS-A relationship.
+```
 
+And:
+
+```text
 Use composition
 when there is a HAS-A relationship
-or when combining objects gives a better design.
+or when combining objects gives a more flexible design.
 ```
 
 Example:
@@ -906,19 +974,21 @@ Example:
 Dog IS-A Animal
 ```
 
-Use inheritance.
+Inheritance can be appropriate.
 
 ```text
 Car HAS-A Engine
 ```
 
-Use composition.
+Composition can be appropriate.
+
+The important thing is to choose the relationship that matches the domain and design requirements.
 
 ---
 
 # 26. Python Does Not Have Special Keywords
 
-Python does not have:
+Python does not have special keywords such as:
 
 ```python
 association
@@ -926,11 +996,9 @@ aggregation
 composition
 ```
 
-keywords.
-
 These are **OOP and software design concepts**.
 
-Python uses normal features such as:
+Python uses normal language features such as:
 
 ```text
 Classes
@@ -943,23 +1011,31 @@ Constructors
 Inheritance
 ```
 
-Example:
+For example:
 
 ```python
 self.teacher = teacher
 ```
 
-This means the object has a reference to another object.
+This creates an object reference.
 
-The relationship type depends on the intended design.
+Whether that reference represents:
+
+```text
+Association
+Aggregation
+Composition
+```
+
+depends on the intended design and semantics.
 
 ---
 
 # 27. Important Point About Object Lifetime
 
-Do not think Python automatically destroys child objects when the parent is deleted.
+Do not assume Python automatically destroys child objects when a parent object is deleted.
 
-Example:
+For example:
 
 ```python
 engine = Engine()
@@ -969,35 +1045,47 @@ car = Car(engine)
 del car
 ```
 
-The `engine` object can still exist because:
+If another reference still points to the engine:
 
 ```python
 engine
 ```
 
-still refers to it.
+then the `Engine` object can continue to exist.
 
-Therefore, UML composition is about:
+Therefore:
 
 ```text
-Ownership
-+
-Lifecycle semantics
-+
-Domain design
+Python Object Lifetime
+        ≠
+UML Composition Semantics
 ```
 
-not simply Python garbage collection.
+UML composition describes a **design relationship** involving strong ownership and lifecycle semantics.
+
+It is not simply a statement about Python garbage collection.
+
+Therefore:
+
+```text
+Composition
+    ↓
+Ownership
++
+Lifecycle Semantics
++
+Domain Model
+```
 
 ---
 
-# 28. Interview Questions
+# Part 5: Interview Questions
 
 ## Q1. What is Association?
 
 ### Answer
 
-> **Association is a general relationship between two independent objects where they interact with, communicate with, or use each other without requiring ownership.**
+> **Association is a general relationship between two objects where they interact with, communicate with, or use each other without requiring ownership.**
 
 Example:
 
@@ -1011,7 +1099,7 @@ Teacher ───── Student
 
 ### Answer
 
-> **Aggregation is a weak whole-part relationship where one object has another object, but the part can exist independently of the whole.**
+> **Aggregation is a whole-part relationship where the part has an independent lifecycle and is not exclusively owned by the whole.**
 
 Example:
 
@@ -1025,7 +1113,7 @@ Department ◇──── Teacher
 
 ### Answer
 
-> **Composition is a strong whole-part relationship where one object strongly owns another object as a part, and the part's lifecycle is strongly dependent on the whole according to the domain model.**
+> **Composition is a strong whole-part relationship where the whole strongly owns the part and the part's lifecycle is tied to the whole according to the domain model.**
 
 Example:
 
@@ -1039,13 +1127,17 @@ House ◆──── Room
 
 ### Answer
 
-> **Association is a general interaction between objects, while aggregation is a more specific whole-part relationship where the part can exist independently.**
+> **Association is a general relationship between objects, while aggregation is a more specific whole-part relationship in which the part can exist independently of the whole.**
 
 ```text
 Association:
-Doctor ───── Patient
 
+Doctor ───── Patient
+```
+
+```text
 Aggregation:
+
 Department ◇──── Teacher
 ```
 
@@ -1055,13 +1147,17 @@ Department ◇──── Teacher
 
 ### Answer
 
-> **Aggregation has an independent part, while composition has a strong ownership and lifecycle dependency between the whole and the part.**
+> **Aggregation represents a whole-part relationship with an independently existing part, while composition represents strong ownership where the part's lifecycle is tied to the whole.**
 
 ```text
 Aggregation:
-Department ◇──── Teacher
 
+Department ◇──── Teacher
+```
+
+```text
 Composition:
+
 House ◆──── Room
 ```
 
@@ -1071,7 +1167,7 @@ House ◆──── Room
 
 ### Answer
 
-HAS-A means one object contains, references, or uses another object.
+**HAS-A** describes a relationship where one object contains, references, or is made up of another object.
 
 Examples:
 
@@ -1081,7 +1177,7 @@ Computer HAS-A CPU
 Department HAS-A Teacher
 ```
 
-HAS-A relationships can be modeled as aggregation or composition depending on the design semantics.
+A HAS-A relationship may represent different designs, including aggregation or composition, depending on ownership and lifecycle semantics.
 
 ---
 
@@ -1089,7 +1185,7 @@ HAS-A relationships can be modeled as aggregation or composition depending on th
 
 ### Answer
 
-IS-A represents inheritance.
+**IS-A** represents an inheritance/generalization relationship.
 
 Example:
 
@@ -1110,9 +1206,9 @@ class Dog(Animal):
 
 ---
 
-# 29. Common Mistakes
+# Part 6: Common Mistakes
 
-### Mistake 1
+## Mistake 1
 
 ```text
 HAS-A = Always Composition
@@ -1120,11 +1216,18 @@ HAS-A = Always Composition
 
 Wrong.
 
-HAS-A can represent aggregation or composition depending on ownership and lifecycle.
+HAS-A can represent different designs.
+
+For example:
+
+```text
+Aggregation → HAS-A + Independent Part
+Composition → HAS-A + Strong Ownership
+```
 
 ---
 
-### Mistake 2
+## Mistake 2
 
 ```text
 Created inside __init__ = Always Composition
@@ -1136,7 +1239,7 @@ Creation location alone does not determine the UML relationship.
 
 ---
 
-### Mistake 3
+## Mistake 3
 
 ```text
 Passed into constructor = Always Aggregation
@@ -1144,11 +1247,17 @@ Passed into constructor = Always Aggregation
 
 Wrong.
 
-Passing an object is often just dependency injection.
+Passing an object into a constructor is often simply:
+
+```text
+Dependency Injection
+```
+
+The UML relationship depends on the intended domain semantics.
 
 ---
 
-### Mistake 4
+## Mistake 4
 
 Confusing:
 
@@ -1176,7 +1285,25 @@ Dog IS-A Animal
 
 ---
 
-# 30. Complete Comparison
+## Mistake 5
+
+Thinking:
+
+```text
+del parent
+    ↓
+Python automatically destroys all child objects
+```
+
+This is not generally correct.
+
+Object lifetime depends on references and Python's memory-management mechanisms.
+
+UML composition is a design concept, not simply a garbage-collection rule.
+
+---
+
+# 28. Complete Conceptual Comparison
 
 ```text
 Association
@@ -1193,9 +1320,9 @@ Aggregation
     ↓
 Whole-Part Relationship
     ↓
-Weak HAS-A
+HAS-A
     ↓
-Part is independent
+Independent Part
     ↓
 Department ◇──── Teacher
 ```
@@ -1207,7 +1334,9 @@ Whole-Part Relationship
     ↓
 Strong HAS-A
     ↓
-Part has strong lifecycle dependency
+Strong Ownership
+    ↓
+Lifecycle Tied to Whole
     ↓
 House ◆──── Room
 ```
@@ -1217,79 +1346,148 @@ Inheritance
     ↓
 IS-A Relationship
     ↓
-Dog ───── Animal
+Dog IS-A Animal
 ```
 
 ---
 
-# 31. Easy Memory Trick
+# 29. Easy Memory Trick
 
 Remember these four sentences:
 
 ```text
 Association:
 "I interact with you."
+```
 
+```text
 Aggregation:
 "I have you, but you can exist independently."
+```
 
+```text
 Composition:
 "You are a strongly owned part of me."
+```
 
+```text
 Inheritance:
 "I am a type of you."
 ```
 
 ---
 
-# 32. Final Cheat Sheet
+# 30. Final Cheat Sheet
 
 ```text
-┌───────────────────────────────────────┐
-│         OOP RELATIONSHIPS             │
-├───────────────────────────────────────┤
-│                                       │
-│ Association                           │
-│ → USES / INTERACTS WITH               │
-│ → Teacher ───── Student               │
-│                                       │
-│ Aggregation                           │
-│ → WEAK HAS-A                          │
-│ → Independent Part                    │
-│ → Department ◇──── Teacher            │
-│                                       │
-│ Composition                           │
-│ → STRONG HAS-A                        │
-│ → Strong Lifecycle Dependency         │
-│ → House ◆──── Room                   │
-│                                       │
-│ Inheritance                           │
-│ → IS-A                                │
-│ → Dog ───── Animal                    │
-│                                       │
-└───────────────────────────────────────┘
+┌────────────────────────────────────────────┐
+│             OOP RELATIONSHIPS              │
+├────────────────────────────────────────────┤
+│                                            │
+│ Association                                │
+│ → USES / INTERACTS WITH                    │
+│ → General Relationship                     │
+│ → Teacher ───── Student                    │
+│                                            │
+│ Aggregation                                │
+│ → WHOLE-PART                               │
+│ → HAS-A                                    │
+│ → Independent Part                         │
+│ → No Exclusive Ownership                   │
+│ → Department ◇──── Teacher                 │
+│                                            │
+│ Composition                                │
+│ → WHOLE-PART                               │
+│ → Strong HAS-A                             │
+│ → Strong Ownership                         │
+│ → Lifecycle Tied to Whole                  │
+│ → House ◆──── Room                         │
+│                                            │
+│ Inheritance                                │
+│ → IS-A                                     │
+│ → Generalization                           │
+│ → Dog IS-A Animal                          │
+│                                            │
+└────────────────────────────────────────────┘
 ```
 
 ---
 
-# 33. One-Line Summary
+# 31. One-Line Summary
 
 ```text
 Association  → Uses / Interacts
-Aggregation  → Has + Independent
-Composition  → Has + Strongly Owned
+Aggregation  → Has + Independent Part
+Composition  → Has + Strong Ownership/Lifecycle
 Inheritance  → Is-A
 ```
 
 ### The easiest way to remember:
 
-> **Association = "I use you."**
+> **Association = "I interact with you."**
 
-> **Aggregation = "I have you, but you can live without me."**
+> **Aggregation = "I have you, but you can exist independently."**
 
 > **Composition = "You are a strongly owned part of me."**
 
 > **Inheritance = "I am a type of you."**
+
+---
+
+# 32. Final Mental Model
+
+Think about the relationships in this order:
+
+```text
+                OOP Relationships
+                       │
+          ┌────────────┴────────────┐
+          │                         │
+      Object-to-Object          Type Relationship
+          │                         │
+     ┌────┴────┐                    │
+     │         │                 Inheritance
+     │         │                    │
+Association  Whole-Part            IS-A
+             │
+        ┌────┴────┐
+        │         │
+   Aggregation  Composition
+        │         │
+ Independent   Strong Ownership
+    Part       + Lifecycle
+```
+
+So the key distinction is:
+
+```text
+Association
+    ↓
+Do they interact?
+
+Aggregation
+    ↓
+Is it a whole-part relationship
+with an independent part?
+
+Composition
+    ↓
+Is it a whole-part relationship
+with strong ownership and lifecycle dependency?
+
+Inheritance
+    ↓
+Is one class a specialized type of another?
+```
+
+This gives you the cleanest conceptual understanding of:
+
+```text
+Association
+Aggregation
+Composition
+Inheritance
+```
 
 
 
