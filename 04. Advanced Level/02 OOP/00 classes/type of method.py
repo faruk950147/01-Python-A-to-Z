@@ -117,12 +117,12 @@ class Human:
     species = "Homo sapiens"
 
     @classmethod
-    def showClassName(cls):
+    def show(cls):
         print(f"Class Name: {cls.__name__}")
         print(f"Species: {cls.species}")
 
 
-Human.showClassName()
+Human.show()
 ```
 
 ### Output
@@ -147,7 +147,7 @@ Human
 Conceptually:
 
 ```python
-Human.showClassName()
+Human.show()
 ```
 
 passes the class automatically.
@@ -214,7 +214,7 @@ class Person:
 
     college_name = "TMSS Technical Institute"
 
-    def changeName(self, college_name):
+    def change(self, college_name):
         self.college_name = college_name
 ```
 
@@ -223,12 +223,11 @@ When we write:
 ```python
 p1 = Person()
 
-p1.changeName("TTI")
+p1.change("TTI")
 ```
 
 the statement:
 
-```python
 self.college_name = college_name
 ```
 
@@ -243,13 +242,13 @@ class Person:
 
     college_name = "TMSS Technical Institute"
 
-    def changeName(self, college_name):
+    def change(self, college_name):
         self.college_name = college_name
 
 
 p1 = Person()
 
-p1.changeName("TTI")
+p1.change("TTI")
 
 print(p1.college_name)
 print(Person.college_name)
@@ -293,13 +292,13 @@ class Person:
 
     name = "John"
 
-    def changeName(self, name):
+    def change(self, name):
         Person.name = name
 
 
 p1 = Person()
 
-p1.changeName("Doe")
+p1.change("Doe")
 
 print(p1.name)
 print(Person.name)
@@ -340,13 +339,13 @@ class Person:
     name = "John"
 
     @classmethod
-    def changeName(cls, name):
+    def change(cls, name):
         cls.name = name
 
 
 p1 = Person()
 
-p1.changeName("Doe")
+p1.change("Doe")
 
 print(p1.name)
 print(Person.name)
@@ -475,13 +474,13 @@ class Person:
     name = "John"
 
     @staticmethod
-    def changeName(name):
+    def change(name):
         Person.name = name
 
 
 p1 = Person()
 
-p1.changeName("Doe")
+p1.change("Doe")
 
 print(p1.name)
 print(Person.name)
