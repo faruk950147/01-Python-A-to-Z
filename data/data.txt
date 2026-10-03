@@ -1,7 +1,0 @@
-Monday: 16.0
-Tuesday: 17.0
-Wednesday: 24.0
-Thursday: 34.0
-Friday: 36.0
-Saturday: 44.0
-Sunday: 3.0
