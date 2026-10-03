@@ -3,7 +3,8 @@
 
 ## 1. Introduction
 
-In Python, **Asynchronous Programming** is used to handle tasks where a program can make progress on other tasks while waiting for an asynchronous operation to complete.
+In Python, **Asynchronous Programming** is used to handle tasks where a program can make 
+progress on other tasks while waiting for an asynchronous operation to complete.
 
 The main concepts are:
 
