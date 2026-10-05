@@ -1,3 +1,4 @@
+"""
 # Python Multiprocessing — Notes
 
 ## 1. Multiprocessing কী?
@@ -605,3 +606,5 @@ join()
 
 **Process Alive → `.is_alive()`**
 
+
+"""
