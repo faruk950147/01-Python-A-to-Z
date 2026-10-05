@@ -570,7 +570,7 @@ process.join()
 
 ---
 
-# 🧠 Shortcut
+# Shortcut
 
 ```text
 current_process()
