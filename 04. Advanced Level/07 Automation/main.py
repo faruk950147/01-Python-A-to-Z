@@ -1,65 +1,69 @@
 """
-# ============================================================
-# PYTHON AUTOMATION + SHUTIL + SELENIUM + PLAYWRIGHT
-# FULL NOTES — BANGLA
-# ============================================================
+# Python Automation + Shutil + Selenium + Playwright
 
+## Easy English Full Notes
 
-# ============================================================
-# 1. PYTHON AUTOMATION কী?
-# ============================================================
+---
 
-Python Automation মানে হলো Python ব্যবহার করে repetitive
-বা manual কাজগুলো automatically program/script-এর মাধ্যমে
-করানো।
+# 1. What is Python Automation?
 
-সহজভাবে:
+**Python Automation** means using Python programs or scripts to perform repetitive or manual tasks automatically.
 
-মানুষ যে কাজ বারবার হাতে করে
+Simple idea:
+
+```text
+Manual / Repetitive Work
         ↓
-Python script তৈরি করি
+   Python Script
         ↓
-কম্পিউটার নিজে কাজটি করে
+Computer does the work automatically
+```
 
-উদাহরণ:
+### Examples
 
-- File rename
-- File copy/move
-- Folder organize
-- Backup তৈরি
-- Excel report তৈরি
-- CSV process
-- Web scraping
-- Browser automation
-- Form fill-up
-- Email পাঠানো
-- PDF তৈরি
-- Database backup
-- API call
-- Scheduled task
+Python can automate:
 
+* File renaming
+* File copying and moving
+* Folder organization
+* Backup creation
+* Excel report generation
+* CSV processing
+* Web scraping
+* Browser automation
+* Form filling
+* Sending emails
+* PDF generation
+* Database backup
+* API requests
+* Scheduled tasks
 
-# ============================================================
-# 2. PYTHON AUTOMATION-এর সুবিধা
-# ============================================================
+### Simple Definition
 
-1. Time save করে
-2. Repetitive কাজ কমায়
-3. Human error কমাতে সাহায্য করে
-4. Productivity বাড়ায়
-5. Large amount of data process করা যায়
-6. একই কাজ বারবার নির্ভুলভাবে করা যায়
-7. Business process automate করা যায়
-8. Developer productivity বাড়ায়
+> **Python Automation = Using Python to make repetitive work automatic.**
 
+---
 
-# ============================================================
-# 3. PYTHON AUTOMATION-এর প্রধান ক্ষেত্র
-# ============================================================
+# 2. Advantages of Python Automation
 
-Python দিয়ে সাধারণত নিচের কাজগুলো automate করা যায়:
+Python automation can:
 
-1. File & Folder Automation
+1. Save time
+2. Reduce repetitive manual work
+3. Reduce human errors
+4. Increase productivity
+5. Process large amounts of data
+6. Perform the same task consistently
+7. Automate business processes
+8. Improve developer productivity
+
+---
+
+# 3. Main Areas of Python Automation
+
+Python can be used for:
+
+1. File and Folder Automation
 2. Excel / CSV Automation
 3. Web Automation
 4. Web Scraping
@@ -72,220 +76,224 @@ Python দিয়ে সাধারণত নিচের কাজগুলো 
 11. Image Automation
 12. Testing Automation
 
+---
 
-# ============================================================
-# 4. PYTHON AUTOMATION LIBRARIES
-# ============================================================
+# 4. Important Python Automation Libraries
 
-| কাজ | Library | ব্যবহার |
-|---|---|---|
-| File operation | os | rename, delete, list |
-| File operation | shutil | copy, move, delete |
-| File path | pathlib | path management |
-| Web automation | Selenium | browser control |
-| Web automation | Playwright | modern browser automation |
-| HTTP | requests | API/web request |
-| Scraping | BeautifulSoup | HTML parsing |
-| Scraping | Scrapy | large-scale scraping |
-| Data | pandas | CSV/data processing |
-| Excel | openpyxl | XLSX read/write |
-| GUI | pyautogui | mouse/keyboard |
-| Email | smtplib | email send |
-| Email | imaplib | email read |
-| Scheduling | schedule | scheduled task |
-| File monitoring | watchdog | file change detection |
-| PDF | reportlab | PDF generation |
-| PDF | pdfplumber | PDF extraction |
-| Image | Pillow | image processing |
-| Database | sqlite3 | SQLite |
-| Database | SQLAlchemy | database abstraction |
-| Async | asyncio | asynchronous programming |
+| Task                 | Library       | Main Use                    |
+| -------------------- | ------------- | --------------------------- |
+| File operations      | `os`          | List, rename, delete, paths |
+| File operations      | `shutil`      | Copy, move, delete          |
+| Path handling        | `pathlib`     | Modern path management      |
+| Browser automation   | Selenium      | Control browsers            |
+| Browser automation   | Playwright    | Modern browser automation   |
+| HTTP requests        | Requests      | API/web requests            |
+| HTML parsing         | BeautifulSoup | Parse HTML                  |
+| Web crawling         | Scrapy        | Large-scale crawling        |
+| Data processing      | Pandas        | Data analysis               |
+| Excel                | openpyxl      | Read/write XLSX             |
+| GUI automation       | PyAutoGUI     | Mouse/keyboard              |
+| Email sending        | smtplib       | Send emails                 |
+| Email reading        | imaplib       | Read emails                 |
+| Scheduling           | schedule      | Run tasks at specific times |
+| File monitoring      | watchdog      | Detect file changes         |
+| PDF creation         | ReportLab     | Create PDFs                 |
+| PDF extraction       | pdfplumber    | Extract PDF data            |
+| Image processing     | Pillow        | Process images              |
+| Database             | sqlite3       | SQLite database             |
+| Database abstraction | SQLAlchemy    | Database access/ORM         |
+| Async programming    | asyncio       | Asynchronous tasks          |
 
+---
 
-# ============================================================
-# 5. AUTOMATION ROADMAP
-# ============================================================
+# 5. Python Automation Roadmap
 
-LEVEL 1
--------
-Python Basics
+## Level 1 — Python Basics
 
-শিখতে হবে:
+First learn:
 
-- Variable
-- Data Types
-- List
-- Tuple
-- Set
-- Dictionary
-- if/else
-- for loop
-- while loop
-- Function
-- Module
-- Package
-- Exception Handling
-- File Handling
-- Virtual Environment
+* Variables
+* Data types
+* List
+* Tuple
+* Set
+* Dictionary
+* `if/else`
+* `for` loop
+* `while` loop
+* Functions
+* Modules
+* Packages
+* Exception handling
+* File handling
+* Virtual environments
 
+---
 
-LEVEL 2
--------
-File & Folder Automation
+## Level 2 — File and Folder Automation
 
-Libraries:
+Learn:
 
-- os
-- shutil
-- pathlib
+```text
+os
+shutil
+pathlib
+```
 
 Practice:
 
-- Rename files
-- Copy files
-- Move files
-- Delete files
-- Create folders
-- Backup system
-- File organizer
+* Rename files
+* Copy files
+* Move files
+* Delete files
+* Create folders
+* Create backups
+* Build a file organizer
 
+---
 
-LEVEL 3
--------
-Excel / CSV Automation
-
-Libraries:
-
-- pandas
-- openpyxl
-- csv
-
-Practice:
-
-- CSV read
-- CSV write
-- Excel read
-- Excel write
-- Data filtering
-- Report generation
-- Excel merge
-
-
-LEVEL 4
--------
-Web Automation
+## Level 3 — Excel / CSV Automation
 
 Libraries:
 
-- Selenium
-- Playwright
-- requests
+```text
+pandas
+openpyxl
+csv
+```
 
 Practice:
 
-- Website open
-- Login
-- Form fill
-- Button click
-- Data extraction
-- Screenshot
-- PDF generation
+* Read CSV
+* Write CSV
+* Read Excel
+* Write Excel
+* Filter data
+* Generate reports
+* Merge Excel data
 
+---
 
-LEVEL 5
--------
-Web Scraping
+## Level 4 — Web Automation
 
 Libraries:
 
-- requests
-- BeautifulSoup
-- Scrapy
-- Playwright
+```text
+Selenium
+Playwright
+requests
+```
 
 Practice:
 
-- Product scraping
-- News scraping
-- Table scraping
-- Pagination
-- Dynamic website scraping
+* Open websites
+* Login
+* Fill forms
+* Click buttons
+* Extract data
+* Take screenshots
+* Generate PDFs
 
+---
 
-LEVEL 6
--------
-Email Automation
+## Level 5 — Web Scraping
 
 Libraries:
 
-- smtplib
-- email
-- imaplib
+```text
+requests
+BeautifulSoup
+Scrapy
+Playwright
+```
 
 Practice:
 
-- Send email
-- Read email
-- Daily report email
-- Attachment send
+* Product scraping
+* News scraping
+* Table scraping
+* Pagination
+* Dynamic website scraping
 
+---
 
-LEVEL 7
--------
-Task Scheduling
+## Level 6 — Email Automation
 
 Libraries:
 
-- schedule
-- datetime
-- time
-- cron (Linux)
+```text
+smtplib
+email
+imaplib
+```
 
 Practice:
 
-- Daily report
-- Periodic API request
-- Automatic backup
-- Scheduled scraping
+* Send email
+* Read email
+* Send daily reports
+* Send attachments
 
+---
 
-LEVEL 8
--------
-Desktop Automation
+## Level 7 — Task Scheduling
+
+Libraries/tools:
+
+```text
+schedule
+datetime
+time
+cron
+```
+
+Practice:
+
+* Daily reports
+* Periodic API requests
+* Automatic backups
+* Scheduled scraping
+
+---
+
+## Level 8 — Desktop Automation
 
 Libraries:
 
-- pyautogui
-- pynput
+```text
+pyautogui
+pynput
+```
 
 Practice:
 
-- Mouse click
-- Keyboard typing
-- Screenshot
-- Desktop application control
+* Mouse movement
+* Mouse clicking
+* Keyboard typing
+* Screenshots
+* Desktop application control
 
+---
 
-LEVEL 9
--------
-Advanced Automation
+## Level 9 — Advanced Automation
 
-শিখতে হবে:
+Learn:
 
-- asyncio
-- threading
-- multiprocessing
-- API automation
-- Database automation
-- Logging
-- Retry system
-- Configuration
-- Deployment
+* `asyncio`
+* `threading`
+* `multiprocessing`
+* API automation
+* Database automation
+* Logging
+* Retry systems
+* Configuration
+* Deployment
 
+---
 
-LEVEL 10
---------
-Real Projects
+## Level 10 — Real Projects
+
+Build:
 
 1. Auto File Organizer
 2. Auto Backup System
@@ -298,127 +306,120 @@ Real Projects
 9. Database Backup System
 10. Django Automation System
 
+---
 
-# ============================================================
-# 6. SHUTIL LIBRARY
-# ============================================================
+# 6. What is `shutil`?
 
-shutil = Shell Utilities
+`shutil` is a Python **standard library module** for high-level file and directory operations.
 
-এটি Python-এর standard library।
+The name comes from **Shell Utilities**.
 
-মূলত file এবং folder-এর high-level operation করার জন্য
-shutil ব্যবহার করা হয়।
+It is mainly used for:
 
-প্রধান কাজ:
+* Copying files
+* Moving files
+* Copying folders
+* Deleting folders
+* Working with directory trees
 
-- Copy
-- Move
-- Delete
-- Folder copy
-- Directory tree operations
+---
 
+# 7. Important `shutil` Methods
 
-# ============================================================
-# 7. SHUTIL-এর গুরুত্বপূর্ণ METHODS
-# ============================================================
+## `shutil.copy()`
 
-shutil.copy(src, dst)
+Copies a file.
 
-একটি file copy করে।
-
-Example:
-
+```python
 import shutil
 
 shutil.copy(
     "source.txt",
     "destination.txt"
 )
+```
 
+---
 
-------------------------------------------------------------
+## `shutil.copy2()`
 
-shutil.copy2(src, dst)
+Copies a file and tries to preserve file metadata such as modification time.
 
-File copy করার পাশাপাশি metadata-ও preserve করার চেষ্টা করে।
-
-Example:
-
+```python
 shutil.copy2(
     "source.txt",
     "backup.txt"
 )
+```
 
+---
 
-------------------------------------------------------------
+## `shutil.copytree()`
 
-shutil.copytree(src, dst)
+Copies an entire directory tree.
 
-পুরো folder এবং তার ভিতরের file/folder copy করে।
-
-Example:
-
+```python
 shutil.copytree(
     "my_folder",
     "backup_folder"
 )
+```
 
+---
 
-------------------------------------------------------------
+## `shutil.move()`
 
-shutil.move(src, dst)
+Moves a file or directory.
 
-File অথবা folder move করে।
-
-Example:
-
+```python
 shutil.move(
     "file.txt",
     "new_folder/file.txt"
 )
+```
 
+---
 
-------------------------------------------------------------
+## `shutil.rmtree()`
 
-shutil.rmtree(path)
+Deletes a directory and all of its contents recursively.
 
-পুরো directory এবং ভিতরের contents delete করে।
-
-Example:
-
+```python
 shutil.rmtree("old_folder")
+```
 
+### Warning
 
-WARNING:
+Be careful with `rmtree()`.
 
-rmtree() খুব carefully ব্যবহার করতে হবে।
+It can delete the entire directory tree, including all files and subfolders.
 
-কারণ এটি recursiveভাবে folder-এর contents delete করে।
+---
 
+# 8. `os` + `shutil`
 
-# ============================================================
-# 8. OS + SHUTIL
-# ============================================================
+### `os`
 
-os:
+Commonly used for:
 
-- path তৈরি
-- directory list
-- file existence check
-- rename
-- basic OS operations
+* File paths
+* Directory listing
+* Checking file existence
+* Rename operations
+* Basic operating-system operations
 
-shutil:
+### `shutil`
 
-- copy
-- move
-- folder copy
-- recursive folder delete
+Commonly used for:
 
+* Copy
+* Move
+* Directory copy
+* Recursive directory deletion
 
 Example:
 
+```python
 import os
 import shutil
 
@@ -429,43 +430,51 @@ if os.path.exists(source):
     shutil.copy(source, destination)
 
 print("Backup completed")
+```
 
+---
 
-# ============================================================
-# 9. PATHLIB
-# ============================================================
+# 9. `pathlib`
 
-Modern Python code-এ pathlib ব্যবহার করা খুব সুবিধাজনক।
+`pathlib` provides a modern and convenient way to work with file paths.
 
 Example:
 
+```python
 from pathlib import Path
 
 base = Path("files")
 
 for file in base.iterdir():
     print(file)
+```
 
+### Check if a file exists
 
-File check:
-
+```python
 path = Path("test.txt")
 
 if path.exists():
     print("File exists")
+```
 
+### Create a folder
 
-Folder create:
-
+```python
 Path("backup").mkdir(exist_ok=True)
+```
 
+### Why use `pathlib`?
 
-# ============================================================
-# 10. FILE AUTOMATION PROJECT
-# ============================================================
+It makes path-related code cleaner and more portable across operating systems.
+
+---
+
+# 10. Simple File Automation Project
 
 Example:
 
+```python
 import os
 import shutil
 
@@ -497,35 +506,37 @@ for count, filename in enumerate(
     )
 
 print("Files successfully moved!")
+```
 
+### Flow
 
-কাজ:
-
+```text
 files/
-    ↓
-rename
-    ↓
+   ↓
+Rename
+   ↓
 backup/
+```
 
 Example:
 
+```text
 file1.txt → file_1.txt
 file2.txt → file_2.txt
 file3.txt → file_3.txt
+```
 
+### Important
 
-IMPORTANT:
+This simple example assumes that all items are files and can safely be renamed to `.txt`.
 
-উপরের example ধরে নেয় source folder-এর সব item file
-এবং সব file .txt হিসেবে rename করা যাবে।
+In a real project, it is better to preserve the original extension.
 
-বাস্তব project-এ extension preserve করা ভালো।
+---
 
+# 11. Rename Files While Preserving Extension
 
-# ============================================================
-# 11. EXTENSION PRESERVE করে RENAME
-# ============================================================
-
+```python
 import os
 
 folder = "files"
@@ -555,12 +566,21 @@ for i, filename in enumerate(
     )
 
 print("Rename completed")
+```
 
+Example:
 
-# ============================================================
-# 12. SAFE FILE COPY
-# ============================================================
+```text
+photo.jpg   → file_1.jpg
+data.csv    → file_2.csv
+report.pdf  → file_3.pdf
+```
 
+---
+
+# 12. Safe File Copy
+
+```python
 import os
 import shutil
 
@@ -579,6 +599,7 @@ destination = os.path.join(
 )
 
 if not os.path.exists(source):
+
     print("Source file does not exist")
 
 else:
@@ -608,66 +629,81 @@ else:
     print(
         f"File copied to {destination}"
     )
+```
 
+If `destination.txt` already exists, this code creates:
 
-# ============================================================
-# 13. AUTOMATION-এ FILE ORGANIZER
-# ============================================================
+```text
+destination_1.txt
+destination_2.txt
+destination_3.txt
+```
 
-একটি folder-এর file extension দেখে আলাদা folder-এ
-move করা যায়।
+instead of overwriting the existing file.
+
+---
+
+# 13. File Organizer Automation
+
+A file organizer can move files into folders based on their extensions.
 
 Example:
 
+```text
 Downloads/
+│
+├── photo.jpg
+├── photo.png
+├── document.pdf
+├── data.csv
+└── movie.mp4
+```
 
-photo.jpg
-photo.png
-document.pdf
-data.csv
-movie.mp4
+After automation:
 
-Automation:
-
+```text
 Downloads/
-    images/
-        photo.jpg
-        photo.png
+│
+├── images/
+│   ├── photo.jpg
+│   └── photo.png
+│
+├── documents/
+│   └── document.pdf
+│
+├── csv/
+│   └── data.csv
+│
+└── videos/
+    └── movie.mp4
+```
 
-    documents/
-        document.pdf
+This is a good beginner automation project.
 
-    csv/
-        data.csv
+---
 
-    videos/
-        movie.mp4
+# 14. What is Selenium?
 
+**Selenium** is an open-source framework used for **browser automation and web testing**.
 
-# ============================================================
-# 14. SELENIUM কী?
-# ============================================================
+It can control a real browser programmatically.
 
-Selenium হলো browser automation এবং web testing-এর জন্য
-একটি জনপ্রিয় open-source framework।
+### Selenium can:
 
-Selenium দিয়ে browser control করা যায়।
+* Open websites
+* Click buttons
+* Fill forms
+* Login
+* Navigate between pages
+* Take screenshots
+* Test web applications
+* Interact with dynamic websites
 
-যেমন:
+---
 
-- Website open
-- Button click
-- Form fill
-- Login
-- Page navigation
-- Screenshot
-- Testing
-- কিছু ক্ষেত্রে data extraction
+# 15. Selenium Use Cases
 
-
-# ============================================================
-# 15. SELENIUM-এর USE CASE
-# ============================================================
+Common uses:
 
 1. Web testing
 2. UI testing
@@ -677,55 +713,63 @@ Selenium দিয়ে browser control করা যায়।
 6. Dynamic website interaction
 7. Repetitive browser tasks
 
+---
 
-# ============================================================
-# 16. SELENIUM COMPONENTS
-# ============================================================
+# 16. Selenium Components
 
-1. Selenium WebDriver
+## 1. Selenium WebDriver
 
-Browser control করার সবচেয়ে গুরুত্বপূর্ণ component।
+The most important component for browser control.
 
-2. Selenium IDE
+It allows Python code to control browsers.
 
-Record & playback based testing tool।
+---
 
-3. Selenium Grid
+## 2. Selenium IDE
 
-Multiple machine/browser environment-এ test চালাতে সাহায্য করে।
+A record-and-playback testing tool.
 
-4. Selenium RC
+---
 
-পুরোনো technology।
+## 3. Selenium Grid
 
-বর্তমানে সাধারণ Selenium development-এ ব্যবহার করা হয় না।
+Used for running tests across multiple machines, browsers, or environments.
 
+---
 
-# ============================================================
-# 17. SELENIUM SUPPORTED LANGUAGES
-# ============================================================
+## 4. Selenium RC
 
-- Python
-- Java
-- C#
-- JavaScript
-- Ruby
+An old Selenium technology.
 
+It is not used for modern Selenium development.
 
-# ============================================================
-# 18. SELENIUM INSTALLATION
-# ============================================================
+---
+
+# 17. Selenium Supported Languages
+
+Selenium supports several programming languages, including:
+
+* Python
+* Java
+* C#
+* JavaScript
+* Ruby
+
+---
+
+# 18. Selenium Installation
 
 Install:
 
+```bash
 pip install selenium
+```
 
+Modern Selenium can often manage browser drivers through **Selenium Manager**, making driver setup easier.
 
-Modern Selenium সাধারণত Selenium Manager-এর মাধ্যমে
-browser driver management সহজ করে।
+Basic example:
 
-Basic code:
-
+```python
 from selenium import webdriver
 
 driver = webdriver.Chrome()
@@ -737,111 +781,132 @@ driver.get(
 print(driver.title)
 
 driver.quit()
+```
 
+### Important
 
-# ============================================================
-# 19. SELENIUM ELEMENT FIND
-# ============================================================
+Always close the browser when your automation is finished:
 
-ID:
+```python
+driver.quit()
+```
 
+---
+
+# 19. Finding Elements in Selenium
+
+## By ID
+
+```python
 driver.find_element(
     "id",
     "email"
 )
+```
 
+## By Name
 
-Name:
-
+```python
 driver.find_element(
     "name",
     "password"
 )
+```
 
+## By XPath
 
-XPath:
-
+```python
 driver.find_element(
     "xpath",
     "//input[@type='text']"
 )
+```
 
+## By CSS Selector
 
-CSS Selector:
-
+```python
 driver.find_element(
     "css selector",
     ".class_name"
 )
+```
 
+### Recommended style
 
-Modern recommended style:
-
+```python
 from selenium.webdriver.common.by import By
 
 element = driver.find_element(
     By.ID,
     "email"
 )
+```
 
+Using `By` makes Selenium code clearer and easier to maintain.
 
-# ============================================================
-# 20. SELENIUM ACTIONS
-# ============================================================
+---
 
-Click:
+# 20. Selenium Actions
 
+## Click
+
+```python
 element.click()
+```
 
+## Type text
 
-Input:
+```python
+element.send_keys("Hello")
+```
 
-element.send_keys(
-    "Hello"
-)
+## Clear input
 
-
-Clear:
-
+```python
 element.clear()
+```
 
+## Get text
 
-Get text:
-
+```python
 print(element.text)
+```
 
+## Get an attribute
 
-Attribute:
-
+```python
 print(
     element.get_attribute("href")
 )
+```
 
+---
 
-# ============================================================
-# 21. SELENIUM WAIT
-# ============================================================
+# 21. Selenium Waits
 
-Web automation-এ সবচেয়ে important বিষয়গুলোর একটি হলো
-waiting।
+Waiting is very important in browser automation.
 
-কারণ webpage load হতে সময় লাগতে পারে।
+A webpage may take time to load.
 
+If your code searches for an element before it is ready, the automation can fail.
 
-------------------------------------------------------------
-Implicit Wait
-------------------------------------------------------------
+---
 
+## Implicit Wait
+
+```python
 driver.implicitly_wait(10)
+```
 
+This tells Selenium to wait for an element during element searches, up to the specified timeout.
 
-এতে Selenium element search করার সময় অপেক্ষা করতে পারে।
+---
 
+## Explicit Wait
 
-------------------------------------------------------------
-Explicit Wait
-------------------------------------------------------------
+Explicit wait waits for a specific condition.
 
+```python
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -856,28 +921,43 @@ email = wait.until(
         (By.ID, "email")
     )
 )
+```
 
+### Simple idea
 
-Explicit wait নির্দিষ্ট condition-এর জন্য অপেক্ষা করে।
+```text
+Wait
+ ↓
+Condition becomes true
+ ↓
+Perform action
+```
 
+### Best Practice
 
-# ============================================================
-# 22. SELENIUM HEADLESS MODE
-# ============================================================
+Do not solve every timing problem using:
 
-Browser screen না দেখিয়ে background-এ browser চালানোকে
-Headless mode বলা হয়।
+```python
+time.sleep(10)
+```
+
+Condition-based waits are usually more reliable.
+
+---
+
+# 22. Selenium Headless Mode
+
+A **headless browser** runs without displaying the normal browser window.
 
 Example:
 
+```python
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 options = Options()
 
-options.add_argument(
-    "--headless"
-)
+options.add_argument("--headless")
 
 driver = webdriver.Chrome(
     options=options
@@ -890,21 +970,35 @@ driver.get(
 print(driver.title)
 
 driver.quit()
+```
 
+### Headless
 
-# ============================================================
-# 23. SELENIUM SCREENSHOT
-# ============================================================
+```text
+Browser works
+     ↓
+No visible browser window
+```
 
+This is useful for servers and automated jobs.
+
+---
+
+# 23. Selenium Screenshot
+
+```python
 driver.save_screenshot(
     "page.png"
 )
+```
 
+This saves the current browser view as an image.
 
-# ============================================================
-# 24. SELENIUM NAVIGATION
-# ============================================================
+---
 
+# 24. Selenium Navigation
+
+```python
 driver.get(
     "https://example.com"
 )
@@ -914,42 +1008,58 @@ driver.back()
 driver.forward()
 
 driver.refresh()
+```
 
+---
 
-# ============================================================
-# 25. SELENIUM MULTIPLE TABS
-# ============================================================
+# 25. Selenium Multiple Tabs/Windows
 
+Get window handles:
+
+```python
 window_handles = driver.window_handles
+```
 
+Switch to another window:
+
+```python
 driver.switch_to.window(
     window_handles[1]
 )
+```
 
+You should make sure the required window actually exists before accessing a specific index.
 
-# ============================================================
-# 26. SELENIUM COOKIES
-# ============================================================
+---
 
-Get cookies:
+# 26. Selenium Cookies
 
+### Get cookies
+
+```python
 cookies = driver.get_cookies()
 
 print(cookies)
+```
 
+### Add a cookie
 
-Add cookie:
-
+```python
 driver.add_cookie({
     "name": "test",
     "value": "123"
 })
+```
 
+Cookies can be useful when working with sessions and authentication.
 
-# ============================================================
-# 27. SELENIUM LOGIN AUTOMATION
-# ============================================================
+---
 
+# 27. Selenium Login Automation
+
+Example:
+
+```python
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -989,79 +1099,84 @@ driver.find_element(
 print(driver.title)
 
 driver.quit()
+```
 
+### Note
 
-# ============================================================
-# 28. SELENIUM ADVANTAGES
-# ============================================================
+Never put real passwords directly in source code.
 
-- Real browser control
-- JavaScript website handle করতে পারে
-- Testing-এর জন্য জনপ্রিয়
-- Multiple browser support
-- Large ecosystem
+Use environment variables or a secure secret-management system.
 
+---
 
-# ============================================================
-# 29. SELENIUM DISADVANTAGES
-# ============================================================
+# 28. Selenium Advantages
 
-- Browser চালাতে হয়
-- Resource বেশি লাগে
-- সাধারণ HTTP request-এর তুলনায় ধীর
-- Large-scale scraping-এর জন্য inefficient হতে পারে
+* Controls real browsers
+* Can interact with JavaScript websites
+* Very popular for testing
+* Supports multiple browsers
+* Large ecosystem
+* Good documentation and community
 
+---
 
-# ============================================================
-# 30. PLAYWRIGHT কী?
-# ============================================================
+# 29. Selenium Disadvantages
 
-Playwright হলো modern browser automation এবং testing
-framework।
+* Browser process is relatively resource-heavy
+* Usually slower than direct HTTP requests
+* Large-scale crawling can be inefficient
+* Browser automation needs more resources than simple HTTP scraping
 
-Python-এ Playwright ব্যবহার করে:
+---
 
-- Browser automation
-- Web testing
-- Dynamic website interaction
-- Data extraction
-- Screenshot
-- PDF generation
+# 30. What is Playwright?
 
+**Playwright** is a modern framework for browser automation and testing.
 
-# ============================================================
-# 31. PLAYWRIGHT SUPPORT
-# ============================================================
+It can be used with Python for:
 
-Playwright প্রধানত:
+* Browser automation
+* Web testing
+* Dynamic website interaction
+* Data extraction
+* Screenshots
+* PDF generation
 
-- Chromium
-- Firefox
-- WebKit
+---
 
-support করে।
+# 31. Playwright Browser Support
 
-Chromium browser family-এর মধ্যে Chrome/Edge-এর জন্য
-ব্যবহার করা যায়।
+Playwright supports:
 
-WebKit Safari-এর browser engine।
+* Chromium
+* Firefox
+* WebKit
 
+Chromium is used for Chromium-based browser automation.
 
-# ============================================================
-# 32. PLAYWRIGHT INSTALLATION
-# ============================================================
+WebKit is the browser engine used by Safari.
 
+---
+
+# 32. Playwright Installation
+
+Install the Python package:
+
+```bash
 pip install playwright
+```
 
-তারপর:
+Then install the required browsers:
 
+```bash
 playwright install
+```
 
+---
 
-# ============================================================
-# 33. PLAYWRIGHT BASIC SETUP
-# ============================================================
+# 33. Playwright Basic Setup
 
+```python
 from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
@@ -1079,227 +1194,260 @@ with sync_playwright() as p:
     print(page.title())
 
     browser.close()
+```
 
+---
 
-# ============================================================
-# 34. PLAYWRIGHT BROWSER TYPES
-# ============================================================
+# 34. Playwright Browser Types
 
-Chromium:
+### Chromium
 
+```python
 p.chromium.launch()
+```
 
+### Firefox
 
-Firefox:
-
+```python
 p.firefox.launch()
+```
 
+### WebKit
 
-WebKit:
-
+```python
 p.webkit.launch()
+```
 
+---
 
-# ============================================================
-# 35. PLAYWRIGHT HEADLESS
-# ============================================================
+# 35. Playwright Headless Mode
 
-Headless:
+### Headless
 
+```python
 browser = p.chromium.launch(
     headless=True
 )
+```
 
+### Headful
 
-Headful:
-
+```python
 browser = p.chromium.launch(
     headless=False
 )
+```
 
+During development, `headless=False` is useful because you can see what the browser is doing.
 
-Development-এর সময় headless=False ব্যবহার করলে
-browser-এর action দেখা যায়।
+For automated server tasks, `headless=True` is often useful.
 
-Production automation-এ প্রয়োজন অনুযায়ী headless=True
-ব্যবহার করা যায়।
+---
 
+# 36. Playwright Selectors
 
-# ============================================================
-# 36. PLAYWRIGHT SELECTORS
-# ============================================================
+## CSS
 
-CSS:
+```python
+page.locator("button")
+```
 
-page.locator(
-    "button"
-)
+## ID
 
+```python
+page.locator("#username")
+```
 
-ID:
+## Class
 
-page.locator(
-    "#username"
-)
+```python
+page.locator(".product")
+```
 
+## Text
 
-Class:
+```python
+page.get_by_text("Submit")
+```
 
-page.locator(
-    ".product"
-)
+## Role-based locator
 
-
-Text:
-
-page.get_by_text(
-    "Submit"
-)
-
-
-Role-based:
-
+```python
 page.get_by_role(
     "button",
     name="Submit"
 )
+```
 
+### Best Practice
 
-Playwright-এর modern locator API ব্যবহার করা সাধারণত
-ভালো practice।
+Prefer Playwright's locator APIs, especially semantic locators such as:
 
+```python
+page.get_by_role()
+page.get_by_text()
+page.locator()
+```
 
-# ============================================================
-# 37. PLAYWRIGHT ACTIONS
-# ============================================================
+They often make automation code easier to understand and maintain.
 
-Fill:
+---
 
+# 37. Playwright Actions
+
+## Fill
+
+```python
 page.fill(
     "#username",
     "admin"
 )
+```
 
+## Click
 
-Click:
-
+```python
 page.click(
     "#login"
 )
+```
 
+## Hover
 
-Hover:
-
+```python
 page.hover(
     "#menu"
 )
+```
 
+## Check
 
-Check:
-
+```python
 page.check(
     "#checkbox"
 )
+```
 
+## Select option
 
-Select:
-
+```python
 page.select_option(
     "#dropdown",
     "Bangladesh"
 )
+```
 
+---
 
-# ============================================================
-# 38. PLAYWRIGHT TEXT EXTRACTION
-# ============================================================
+# 38. Playwright Text Extraction
 
-element = page.locator(
-    "h1"
-)
+```python
+element = page.locator("h1")
 
 print(
     element.text_content()
 )
+```
 
+You can also use:
 
-Modern locator:
-
+```python
 print(
     page.locator("h1").inner_text()
 )
+```
 
+### Difference
 
-# ============================================================
-# 39. PLAYWRIGHT ATTRIBUTE EXTRACTION
-# ============================================================
+`inner_text()` generally returns user-visible text.
 
-link = page.locator(
-    "a"
-).first
+`text_content()` returns the element's text content, including text that may not be currently visible.
+
+---
+
+# 39. Playwright Attribute Extraction
+
+```python
+link = page.locator("a").first
 
 print(
     link.get_attribute("href")
 )
+```
 
+---
 
-# ============================================================
-# 40. PLAYWRIGHT WAIT
-# ============================================================
+# 40. Playwright Waiting
 
-Playwright action-এর আগে অনেক ক্ষেত্রে automatically
-element-এর প্রয়োজনীয় state-এর জন্য wait করে।
+Playwright provides automatic waiting for many actions and locator operations.
 
-এটি automation-কে robust করতে সাহায্য করে।
+For example:
 
-Explicit wait প্রয়োজন হলে:
+```python
+page.get_by_role(
+    "button",
+    name="Submit"
+).click()
+```
 
+Playwright can automatically wait for the button to become actionable.
+
+Explicit waiting can also be used when needed:
+
+```python
 page.wait_for_selector(
     "#username"
 )
+```
 
+### Best Practice
 
-তবে unnecessary sleep() ব্যবহার না করাই ভালো।
+Avoid unnecessary:
 
+```python
+time.sleep()
+```
 
-# ============================================================
-# 41. PLAYWRIGHT SCREENSHOT
-# ============================================================
+Prefer Playwright's built-in waiting and locator-based actions.
 
+---
+
+# 41. Playwright Screenshot
+
+```python
 page.screenshot(
     path="screenshot.png"
 )
+```
 
+### Full page screenshot
 
-Full page:
-
+```python
 page.screenshot(
     path="full.png",
     full_page=True
 )
+```
 
+---
 
-# ============================================================
-# 42. PLAYWRIGHT PDF
-# ============================================================
+# 42. Playwright PDF
 
-Chromium-based browser-এ:
+Chromium can generate PDFs.
 
+```python
 page.pdf(
     path="page.pdf"
 )
+```
 
+PDF generation is mainly supported through Chromium, so use Chromium when PDF output is required.
 
-Note:
+---
 
-PDF generation-এর ক্ষেত্রে browser/context এবং rendering
-requirements অনুযায়ী Chromium ব্যবহার করা সুবিধাজনক।
+# 43. Playwright Navigation
 
-
-# ============================================================
-# 43. PLAYWRIGHT NAVIGATION
-# ============================================================
-
+```python
 page.goto(
     "https://example.com/page2"
 )
@@ -1309,18 +1457,18 @@ page.go_back()
 page.go_forward()
 
 page.reload()
+```
 
+---
 
-# ============================================================
-# 44. PLAYWRIGHT MULTIPLE PAGES
-# ============================================================
+# 44. Playwright Multiple Pages
 
+```python
 page1 = browser.new_page()
 
 page1.goto(
     "https://example.com"
 )
-
 
 page2 = browser.new_page()
 
@@ -1328,32 +1476,42 @@ page2.goto(
     "https://example.org"
 )
 
-
 page2.close()
+```
 
+A browser can contain multiple pages/tabs.
 
-# ============================================================
-# 45. PLAYWRIGHT JAVASCRIPT EXECUTION
-# ============================================================
+---
 
+# 45. Playwright JavaScript Execution
+
+You can execute JavaScript inside the page.
+
+```python
 result = page.evaluate(
     "() => document.title"
 )
 
 print(result)
+```
 
+Another example:
 
-Example:
-
+```python
 page.evaluate(
     "() => alert('Hello')"
 )
+```
 
+Use this carefully because many normal browser interactions can already be performed through locators.
 
-# ============================================================
-# 46. PLAYWRIGHT MULTIPLE ITEMS
-# ============================================================
+---
 
+# 46. Playwright Multiple Items
+
+Suppose the page contains multiple products:
+
+```python
 items = page.locator(
     ".product"
 )
@@ -1367,12 +1525,15 @@ for i in range(count):
     print(
         item.inner_text()
     )
+```
 
+This processes each matching element.
 
-# ============================================================
-# 47. PLAYWRIGHT LOGIN AUTOMATION
-# ============================================================
+---
 
+# 47. Playwright Login Automation
+
+```python
 from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
@@ -1406,16 +1567,19 @@ with sync_playwright() as p:
     )
 
     browser.close()
+```
 
+Again, do not store real credentials directly in source code.
 
-# ============================================================
-# 48. PLAYWRIGHT ASYNC VERSION
-# ============================================================
+---
 
-Playwright-এর sync এবং async দুই ধরনের API আছে।
+# 48. Playwright Async Version
 
-Async example:
+Playwright provides both **sync** and **async** APIs.
 
+Example:
+
+```python
 import asyncio
 
 from playwright.async_api import async_playwright
@@ -1443,139 +1607,150 @@ async def main():
 
 
 asyncio.run(main())
+```
 
+### Remember
 
-# ============================================================
-# 49. PLAYWRIGHT BEST PRACTICES
-# ============================================================
+Use either the synchronous API or asynchronous API according to your application design.
 
-1. Sync এবং async API একসাথে mix না করা
-2. Locator ব্যবহার করা
-3. Unnecessary sleep() avoid করা
-4. Proper wait ব্যবহার করা
-5. Browser close করা
-6. Production-এ logging রাখা
-7. Error handling রাখা
-8. Website-এর terms/rules respect করা
-9. Excessive request না পাঠানো
-10. Credentials source code-এ hard-code না করা
+Do not randomly mix sync and async Playwright APIs.
 
+---
 
-# ============================================================
-# 50. SELENIUM VS PLAYWRIGHT
-# ============================================================
+# 49. Playwright Best Practices
 
-| Feature | Selenium | Playwright |
-|---|---|---|
-| Browser automation | Yes | Yes |
-| Chromium | Yes | Yes |
-| Firefox | Yes | Yes |
-| WebKit | No direct WebKit engine support | Yes |
-| Auto-waiting | Available | Strong built-in auto-waiting |
-| Sync API | Yes | Yes |
-| Async API | Different model | Yes |
-| Testing | Excellent | Excellent |
-| Modern locator API | Yes | Yes |
-| Dynamic website | Yes | Yes |
-| Screenshot | Yes | Yes |
-| PDF | Browser dependent | Chromium supports PDF |
-| Large-scale scraping | Usually not ideal | Usually not ideal |
+1. Do not mix sync and async APIs unnecessarily
+2. Prefer locators
+3. Avoid unnecessary `sleep()`
+4. Use proper waits
+5. Close the browser
+6. Add logging in production
+7. Add error handling
+8. Respect website rules and terms
+9. Avoid excessive requests/actions
+10. Do not hard-code credentials
 
+---
 
-Important:
+# 50. Selenium vs Playwright
 
-Selenium বা Playwright browser চালায়।
+| Feature              | Selenium                         | Playwright                   |
+| -------------------- | -------------------------------- | ---------------------------- |
+| Browser automation   | Yes                              | Yes                          |
+| Chromium             | Yes                              | Yes                          |
+| Firefox              | Yes                              | Yes                          |
+| WebKit               | No direct WebKit engine support  | Yes                          |
+| Auto-waiting         | Available                        | Strong built-in auto-waiting |
+| Sync API             | Yes                              | Yes                          |
+| Async API            | Not the same model as Playwright | Yes                          |
+| Testing              | Excellent                        | Excellent                    |
+| Modern locator API   | Yes                              | Yes                          |
+| Dynamic websites     | Yes                              | Yes                          |
+| Screenshot           | Yes                              | Yes                          |
+| PDF                  | Browser-dependent                | Chromium supports PDF        |
+| Large-scale scraping | Usually not ideal                | Usually not ideal            |
 
-তাই সাধারণ static website-এর জন্য requests + BeautifulSoup
-অনেক সময় বেশি lightweight।
+### Important Rule
 
-Dynamic JavaScript website-এর জন্য browser automation
-প্রয়োজন হতে পারে।
+For a simple static website:
 
+```text
+requests + BeautifulSoup
+```
 
-# ============================================================
-# 51. SELENIUM VS SCRAPY
-# ============================================================
+may be much more lightweight.
 
-| Feature | Selenium | Scrapy |
-|---|---|---|
-| Browser | Yes | No |
-| JavaScript rendering | Yes | No by default |
-| Speed | তুলনামূলক ধীর | Fast |
-| Large-scale crawling | সীমিত | Excellent |
-| Web testing | Excellent | No |
-| Browser interaction | Excellent | No |
-| Data crawling | Yes | Excellent |
+For a dynamic JavaScript website:
 
+```text
+Playwright / Selenium
+```
 
-Rule of thumb:
+may be necessary.
 
-Browser interaction দরকার
+---
+
+# 51. Selenium vs Scrapy
+
+| Feature              | Selenium       | Scrapy                 |
+| -------------------- | -------------- | ---------------------- |
+| Real browser         | Yes            | No                     |
+| JavaScript rendering | Yes            | No by default          |
+| Speed                | Usually slower | Fast for HTTP crawling |
+| Large-scale crawling | Limited        | Excellent              |
+| Web testing          | Excellent      | Not its main purpose   |
+| Browser interaction  | Excellent      | No                     |
+| Data crawling        | Yes            | Excellent              |
+
+### Rule of Thumb
+
+```text
+Browser interaction
         ↓
 Selenium / Playwright
 
-Large-scale HTTP crawling দরকার
+Large-scale HTTP crawling
         ↓
 Scrapy
 
 Simple HTML scraping
         ↓
-requests + BeautifulSoup
+Requests + BeautifulSoup
+```
 
+---
 
-# ============================================================
-# 52. WEB AUTOMATION vs WEB SCRAPING
-# ============================================================
+# 52. Web Automation vs Web Scraping
 
-Web Automation:
+## Web Automation
 
-Browser-এর action automate করা।
+Web automation means automating browser actions.
 
 Example:
 
+```text
 Open browser
-↓
+     ↓
 Login
-↓
+     ↓
 Click
-↓
-Form fill
-↓
+     ↓
+Fill form
+     ↓
 Submit
+```
 
+## Web Scraping
 
-Web Scraping:
-
-Website থেকে data collect করা।
+Web scraping means collecting data from websites.
 
 Example:
 
+```text
 Website
-↓
+   ↓
 HTML
-↓
+   ↓
 Parse
-↓
+   ↓
 Product name
 Price
 Rating
-↓
+   ↓
 CSV
+```
 
+These two can also be used together.
 
-দুইটি একসাথেও ব্যবহার করা যায়।
+---
 
+# 53. Email Automation
 
-# ============================================================
-# 53. EMAIL AUTOMATION
-# ============================================================
-
-Email পাঠানোর জন্য:
-
-smtplib
+Python's `smtplib` can be used to send email through an SMTP server.
 
 Example:
 
+```python
 import smtplib
 
 server = smtplib.SMTP(
@@ -1597,42 +1772,55 @@ server.sendmail(
 )
 
 server.quit()
+```
 
+### Security
 
-Production project-এ password source code-এ রাখা উচিত নয়।
+Never put real passwords directly in source code.
 
-Environment variable ব্যবহার করা ভালো।
+Better:
 
+```text
+Environment variable
+        ↓
+Password / API key
+```
 
-# ============================================================
-# 54. EXCEL AUTOMATION
-# ============================================================
+For production systems, use secure credential management where appropriate.
 
-Libraries:
+---
 
+# 54. Excel Automation
+
+Important libraries:
+
+```text
 pandas
 openpyxl
+```
 
+## Pandas
 
-pandas:
+Good for:
 
-- Data analysis
-- CSV
-- Excel
-- Filtering
-- Aggregation
+* Data analysis
+* CSV
+* Excel data processing
+* Filtering
+* Aggregation
 
+## openpyxl
 
-openpyxl:
+Good for:
 
-- XLSX read
-- XLSX write
-- Cell formatting
-- Worksheet operation
-
+* Reading XLSX
+* Writing XLSX
+* Cell formatting
+* Worksheet operations
 
 Example:
 
+```python
 import pandas as pd
 
 df = pd.read_csv(
@@ -1644,22 +1832,23 @@ print(df.head())
 print(
     df["salary"].sum()
 )
+```
 
+---
 
-# ============================================================
-# 55. TASK SCHEDULING
-# ============================================================
+# 55. Task Scheduling
 
-schedule library ব্যবহার করে নির্দিষ্ট সময় অনুযায়ী
-function চালানো যায়।
+The `schedule` library can run functions at specific times.
 
 Install:
 
+```bash
 pip install schedule
-
+```
 
 Example:
 
+```python
 import schedule
 import time
 
@@ -1681,25 +1870,26 @@ while True:
     schedule.run_pending()
 
     time.sleep(1)
+```
 
+### Linux
 
-Linux production environment-এ cron-ও ব্যবহার করা যায়।
+For production environments, Linux `cron` is another common scheduling option.
 
+---
 
-# ============================================================
-# 56. DESKTOP AUTOMATION
-# ============================================================
+# 56. Desktop Automation
 
-pyautogui:
+`pyautogui` can automate:
 
-- Mouse move
-- Mouse click
-- Keyboard typing
-- Screenshot
-
+* Mouse movement
+* Mouse clicks
+* Keyboard typing
+* Screenshots
 
 Example:
 
+```python
 import pyautogui
 
 pyautogui.write(
@@ -1709,75 +1899,74 @@ pyautogui.write(
 pyautogui.press(
     "enter"
 )
+```
 
+---
 
-# ============================================================
-# 57. FILE CHANGE DETECTION
-# ============================================================
+# 57. File Change Detection
 
-watchdog library দিয়ে file/folder change detect করা যায়।
+The `watchdog` library can monitor files and folders.
 
-Possible use:
+Example workflow:
 
-একটি folder monitor করা।
-
-নতুন file এলে:
-
+```text
 New file detected
-        ↓
-Process
-        ↓
-Move
-        ↓
-Rename
-        ↓
+       ↓
+Process file
+       ↓
+Move file
+       ↓
+Rename file
+       ↓
 Backup
+```
 
+This is useful for automated file-processing systems.
 
-# ============================================================
-# 58. PDF AUTOMATION
-# ============================================================
+---
 
-Useful libraries:
+# 58. PDF Automation
 
-PyPDF2
-pdfplumber
-reportlab
+Useful libraries include:
 
+### PyPDF2
 
-PyPDF2:
+Common PDF operations such as:
 
-- Merge
-- Split
-- Read/write basic PDF operations
+* Merge
+* Split
+* Basic PDF manipulation
 
+### pdfplumber
 
-pdfplumber:
+Useful for:
 
-- Text extraction
-- Table extraction
+* Text extraction
+* Table extraction
 
+### ReportLab
 
-reportlab:
+Useful for:
 
-- Programmatically PDF তৈরি
+* Creating PDFs programmatically
 
+---
 
-# ============================================================
-# 59. IMAGE AUTOMATION
-# ============================================================
+# 59. Image Automation
 
-Pillow:
+**Pillow** is a popular Python image-processing library.
 
-- Resize
-- Crop
-- Convert
-- Compress
-- Format change
+It can:
 
+* Resize
+* Crop
+* Convert
+* Compress
+* Change image formats
 
 Example:
 
+```python
 from PIL import Image
 
 image = Image.open(
@@ -1791,21 +1980,23 @@ image = image.resize(
 image.save(
     "output.jpg"
 )
+```
 
+---
 
-# ============================================================
-# 60. DATABASE AUTOMATION
-# ============================================================
+# 60. Database Automation
 
-Libraries:
+Common libraries:
 
+```text
 sqlite3
 SQLAlchemy
 mysql-connector-python
+```
 
+Automation workflow:
 
-Automation example:
-
+```text
 Data
  ↓
 Process
@@ -1813,25 +2004,25 @@ Process
 Database
  ↓
 Report
+```
 
+Possible tasks:
 
-Possible কাজ:
+* Database backup
+* Insert data
+* Update data
+* Generate reports
+* Scheduled cleanup
 
-- Backup
-- Insert data
-- Update data
-- Generate report
-- Scheduled database cleanup
+---
 
+# 61. API Automation
 
-# ============================================================
-# 61. API AUTOMATION
-# ============================================================
-
-requests দিয়ে API automate করা যায়।
+`requests` can be used to automate API calls.
 
 Example:
 
+```python
 import requests
 
 response = requests.get(
@@ -1844,28 +2035,27 @@ if response.ok:
     data = response.json()
 
     print(data)
+```
 
+When working with APIs, understand:
 
-API automation-এর ক্ষেত্রে:
+* Authentication
+* Headers
+* JSON
+* Error handling
+* Retry
+* Rate limits
+* Timeouts
 
-- Authentication
-- Headers
-- JSON
-- Error handling
-- Retry
-- Rate limit
+---
 
-বোঝা গুরুত্বপূর্ণ।
+# 62. Automation Error Handling
 
-
-# ============================================================
-# 62. AUTOMATION ERROR HANDLING
-# ============================================================
-
-Automation script-এ error handling খুব গুরুত্বপূর্ণ।
+Error handling is very important in automation.
 
 Example:
 
+```python
 import shutil
 
 try:
@@ -1878,7 +2068,7 @@ try:
 except FileNotFoundError:
 
     print(
-        "Source file পাওয়া যায়নি"
+        "Source file was not found"
     )
 
 except PermissionError:
@@ -1892,17 +2082,39 @@ except Exception as e:
     print(
         f"Unexpected error: {e}"
     )
+```
 
+### Why?
 
-# ============================================================
-# 63. AUTOMATION LOGGING
-# ============================================================
+Without error handling:
 
-Production automation-এ print() এর পরিবর্তে logging
-ব্যবহার করা ভালো।
+```text
+Small error
+    ↓
+Entire automation stops
+```
+
+With proper handling:
+
+```text
+Error
+ ↓
+Handle it
+ ↓
+Log it
+ ↓
+Continue or fail safely
+```
+
+---
+
+# 63. Automation Logging
+
+In production automation, `logging` is usually better than only using `print()`.
 
 Example:
 
+```python
 import logging
 
 logging.basicConfig(
@@ -1916,20 +2128,20 @@ logging.info(
 logging.error(
     "Something went wrong"
 )
+```
 
+Logging helps you understand:
 
-Log দিয়ে পরে বোঝা যায়:
+* When the task started
+* What happened
+* Where an error occurred
+* How often failures occurred
 
-- কখন কাজ শুরু হয়েছে
-- কোন কাজ হয়েছে
-- কোথায় error হয়েছে
-- কতবার failure হয়েছে
+---
 
+# 64. Automation Project — Auto Backup
 
-# ============================================================
-# 64. AUTOMATION PROJECT — AUTO BACKUP
-# ============================================================
-
+```python
 import os
 import shutil
 from datetime import datetime
@@ -1961,21 +2173,33 @@ shutil.copytree(
 print(
     f"Backup created: {backup_path}"
 )
-
+```
 
 Result:
 
+```text
 backups/
-    backup_20261003_103000/
-        file1
-        file2
-        file3
+└── backup_20261003_103000/
+    ├── file1
+    ├── file2
+    └── file3
+```
 
+### Improvement
 
-# ============================================================
-# 65. AUTO FILE ORGANIZER PROJECT
-# ============================================================
+For production use, consider:
 
+* Checking whether the source exists
+* Handling permission errors
+* Logging
+* Avoiding accidental overwrite
+* Retaining only the required number of backups
+
+---
+
+# 65. Auto File Organizer Project
+
+```python
 import os
 import shutil
 
@@ -2057,13 +2281,27 @@ for filename in os.listdir(SOURCE):
 print(
     "Files organized successfully!"
 )
+```
 
+### Workflow
 
-# ============================================================
-# 66. AUTOMATION PROJECT IDEAS
-# ============================================================
+```text
+Downloads
+    ↓
+Check extension
+    ↓
+Find category
+    ↓
+Create category folder
+    ↓
+Move file
+```
 
-BEGINNER:
+---
+
+# 66. Automation Project Ideas
+
+## Beginner
 
 1. Auto File Renamer
 2. File Organizer
@@ -2071,8 +2309,7 @@ BEGINNER:
 4. Duplicate File Finder
 5. CSV Processor
 
-
-INTERMEDIATE:
+## Intermediate
 
 6. Excel Report Generator
 7. Daily Email Reporter
@@ -2080,24 +2317,23 @@ INTERMEDIATE:
 9. API Data Downloader
 10. Automatic PDF Generator
 
-
-ADVANCED:
+## Advanced
 
 11. Price Tracker
 12. Web Testing Framework
 13. Dynamic Website Automation
 14. Database Backup System
 15. Django Automation System
-16. Multi-step workflow automation
-17. Scheduled reporting system
+16. Multi-step Workflow Automation
+17. Scheduled Reporting System
 
+---
 
-# ============================================================
-# 67. PYTHON AUTOMATION ARCHITECTURE
-# ============================================================
+# 67. Python Automation Architecture
 
-একটি ভালো automation project সাধারণত:
+A good automation project often follows this structure:
 
+```text
 Input
   ↓
 Validation
@@ -2109,10 +2345,11 @@ Storage
 Output
   ↓
 Logging
-
+```
 
 Example:
 
+```text
 CSV File
    ↓
 Read
@@ -2126,43 +2363,45 @@ Database
 Generate Report
    ↓
 Email
+```
 
+This structure makes automation systems easier to maintain.
 
-# ============================================================
-# 68. AUTOMATION + SCHEDULING
-# ============================================================
+---
 
-Example workflow:
+# 68. Automation + Scheduling
 
+Example automated reporting workflow:
+
+```text
 08:00 AM
    ↓
-Script start
+Script starts
    ↓
-API থেকে data collect
+Collect data from API
    ↓
-Data process
+Process data
    ↓
-Excel report
+Create Excel report
    ↓
-PDF report
+Create PDF report
    ↓
-Email send
+Send email
    ↓
-Log save
+Save log
+```
 
+This can become a complete automated reporting system.
 
-এটি সম্পূর্ণ automated reporting system হতে পারে।
+---
 
+# 69. Automation + Django
 
-# ============================================================
-# 69. AUTOMATION + DJANGO
-# ============================================================
-
-Django developer হিসেবে Python Automation-এর অনেক use case
-আছে।
+As a Django developer, Python automation can be very useful.
 
 Example:
 
+```text
 Django
    ↓
 Management Command
@@ -2172,42 +2411,48 @@ Automation Task
 Database
    ↓
 Report
-
+```
 
 Possible tasks:
 
-- Database backup
-- Scheduled data processing
-- Email notification
-- API synchronization
-- Report generation
-- Background jobs
+* Database backup
+* Scheduled data processing
+* Email notifications
+* API synchronization
+* Report generation
+* Background jobs
 
+### Django Management Commands
 
-Django management command automation-এর জন্য খুব useful।
+Django management commands are especially useful for repeatable server-side tasks.
 
+Example structure:
 
-# ============================================================
-# 70. AUTOMATION SECURITY
-# ============================================================
+```text
+manage.py
+   ↓
+custom management command
+   ↓
+automation logic
+```
 
-Automation script-এ security গুরুত্বপূর্ণ।
+---
 
-কখনো source code-এ সরাসরি:
+# 70. Automation Security
 
+Security is very important in automation.
+
+Never do this:
+
+```python
 password = "123456"
+```
 
-এভাবে credential রাখা উচিত নয়।
-
-
-এর পরিবর্তে:
-
-Environment Variables
-
-ব্যবহার করা ভালো।
+Instead, use environment variables or a secure secrets system.
 
 Example:
 
+```python
 import os
 
 username = os.getenv(
@@ -2217,163 +2462,194 @@ username = os.getenv(
 password = os.getenv(
     "PASSWORD"
 )
+```
 
+Sensitive information includes:
 
-Sensitive data:
+* Password
+* API key
+* Access token
+* Secret key
+* Database credentials
 
-- Password
-- API key
-- Token
-- Secret key
+### Important
 
-GitHub-এ commit করা যাবে না।
+Never commit secrets to GitHub or other source-control repositories.
 
+---
 
-# ============================================================
-# 71. AUTOMATION BEST PRACTICES
-# ============================================================
+# 71. Automation Best Practices
 
-1. Virtual environment ব্যবহার করো
-2. requirements.txt রাখো
-3. Logging ব্যবহার করো
-4. Error handling রাখো
-5. Timeout ব্যবহার করো
-6. Retry strategy রাখো
-7. Credentials secure রাখো
-8. File path-এর জন্য pathlib consider করো
-9. Production-এ unnecessary sleep avoid করো
-10. Browser automation-এ proper waits ব্যবহার করো
-11. Resource cleanup করো
-12. Backup automation-এ overwrite carefully করো
-13. User-Agent/website rules respect করো
-14. Website terms এবং applicable restrictions মেনে চলো
-15. Automation-এর scope সীমিত রাখো
+1. Use a virtual environment
+2. Keep a dependency file such as `requirements.txt`
+3. Use logging
+4. Add error handling
+5. Use timeouts for network operations
+6. Use a proper retry strategy
+7. Keep credentials secure
+8. Consider `pathlib` for path handling
+9. Avoid unnecessary `sleep()`
+10. Use proper browser waits
+11. Clean up resources
+12. Be careful with backup overwrites
+13. Respect website access rules
+14. Follow website terms and applicable restrictions
+15. Keep the automation scope controlled
 
+---
 
-# ============================================================
-# 72. SELENIUM / PLAYWRIGHT RESOURCE MANAGEMENT
-# ============================================================
+# 72. Selenium / Playwright Resource Management
 
-Browser open করলে শেষে close করতে হবে।
+When a browser is opened, close it after the work is finished.
 
-Selenium:
+### Selenium
 
+```python
 driver.quit()
+```
 
+### Playwright
 
-Playwright:
-
+```python
 browser.close()
+```
 
+This helps:
 
-এতে:
+* Release memory
+* Stop browser processes
+* Release system resources
+* Prevent orphaned browser processes
 
-- Memory leak কমে
-- Browser process বন্ধ হয়
-- Resource release হয়
+---
 
+# 73. Important Selenium Rule
 
-# ============================================================
-# 73. SELENIUM-এর জন্য IMPORTANT RULE
-# ============================================================
+A common browser automation flow is:
 
-Browser automation-এ:
-
+```text
 Element
    ↓
 Wait
    ↓
 Action
-
+```
 
 Example:
 
-Wait until element exists
+```text
+Wait until element is available
         ↓
 Find element
         ↓
 Click
+```
 
+Avoid solving every timing issue with:
 
-শুধু:
-
+```python
 time.sleep(10)
+```
 
-ব্যবহার করে সব problem solve করার চেষ্টা করা উচিত নয়।
+Instead, use explicit or condition-based waits.
 
+---
 
-# ============================================================
-# 74. PLAYWRIGHT-এর জন্য IMPORTANT RULE
-# ============================================================
+# 74. Important Playwright Rule
 
-Playwright-এর auto-waiting সুবিধা ব্যবহার করো।
+Take advantage of Playwright's built-in auto-waiting and locators.
 
 Prefer:
 
+```python
 page.get_by_role(...)
 page.get_by_text(...)
 page.locator(...)
+```
 
+Then perform actions:
 
-এরপর action:
-
+```python
 click()
 fill()
 check()
 select_option()
+```
 
+This usually makes the automation code more readable and reliable.
 
-এতে automation code সাধারণত বেশি readable হয়।
+---
 
+# 75. Selenium / Playwright / Requests / BeautifulSoup
 
-# ============================================================
-# 75. SELENIUM / PLAYWRIGHT / REQUESTS / BS4
-# ============================================================
+Suppose you need data from a website.
 
-Problem:
+## Static HTML
 
-"আমার website থেকে data দরকার। কোনটা ব্যবহার করব?"
+Use:
 
-
-------------------------------------------------------------
-Static HTML
-------------------------------------------------------------
-
+```text
 requests
 +
 BeautifulSoup
+```
 
+Flow:
 
-------------------------------------------------------------
-Dynamic JavaScript website
-------------------------------------------------------------
+```text
+Website
+   ↓
+HTTP Request
+   ↓
+HTML
+   ↓
+BeautifulSoup
+   ↓
+Data
+```
 
+---
+
+## Dynamic JavaScript Website
+
+Use:
+
+```text
 Playwright
-অথবা
+or
 Selenium
+```
 
+when browser interaction or JavaScript rendering is actually required.
 
-------------------------------------------------------------
-Large-scale crawling
-------------------------------------------------------------
+---
 
+## Large-Scale Crawling
+
+Use:
+
+```text
 Scrapy
+```
 
+---
 
-------------------------------------------------------------
-API available
-------------------------------------------------------------
+## API Available
 
+If the website provides an appropriate API, prefer:
+
+```text
 requests
-অথবা
+or
 httpx
+```
 
+### General Rule
 
-সাধারণ rule:
-
+```text
 API
  ↓
-requests/httpx
+requests / httpx
 
 Static HTML
  ↓
@@ -2381,183 +2657,214 @@ requests + BeautifulSoup
 
 Dynamic browser
  ↓
-Playwright/Selenium
+Playwright / Selenium
 
 Large crawler
  ↓
 Scrapy
+```
 
+---
 
-# ============================================================
-# 76. AUTOMATION LIBRARY CHEAT SHEET
-# ============================================================
+# 76. Automation Library Cheat Sheet
 
-File:
+## File
+
+```text
 os
 shutil
 pathlib
+```
 
+## Web
 
-Web:
+```text
 requests
 BeautifulSoup
 Selenium
 Playwright
 Scrapy
+```
 
+## Data
 
-Data:
+```text
 pandas
 csv
+```
 
+## Excel
 
-Excel:
+```text
 openpyxl
 xlsxwriter
+```
 
+## Email
 
-Email:
+```text
 smtplib
 imaplib
 email
+```
 
+## GUI
 
-GUI:
+```text
 pyautogui
 pynput
+```
 
+## PDF
 
-PDF:
+```text
 PyPDF2
 pdfplumber
 reportlab
+```
 
+## Image
 
-Image:
+```text
 Pillow
 OpenCV
+```
 
+## Database
 
-Database:
+```text
 sqlite3
 SQLAlchemy
+```
 
+## Scheduling
 
-Scheduling:
+```text
 schedule
 datetime
 time
 cron
+```
 
+## File Monitoring
 
-File monitoring:
+```text
 watchdog
+```
 
+## Async
 
-Async:
+```text
 asyncio
+```
 
+---
 
-# ============================================================
-# 77. AUTOMATION LEARNING PLAN
-# ============================================================
+# 77. Six-Week Python Automation Learning Plan
 
-WEEK 1
--------
+## Week 1 — Python Basics
 
-Python basics
+Learn:
 
-- Variables
-- Conditions
-- Loops
-- Functions
-- Exceptions
-- Files
+* Variables
+* Conditions
+* Loops
+* Functions
+* Exceptions
+* Files
 
+---
 
-WEEK 2
--------
+## Week 2 — File Automation
 
-File automation
+Learn:
 
-- os
-- shutil
-- pathlib
-
-Projects:
-
-- Renamer
-- Organizer
-- Backup
-
-
-WEEK 3
--------
-
-CSV + Excel
-
-- csv
-- pandas
-- openpyxl
+```text
+os
+shutil
+pathlib
+```
 
 Projects:
 
-- Report generator
-- Excel processor
+* File Renamer
+* File Organizer
+* Backup System
 
+---
 
-WEEK 4
--------
+## Week 3 — CSV + Excel
 
-Web automation
+Learn:
 
-- requests
-- BeautifulSoup
-- Selenium
-- Playwright
-
+```text
+csv
+pandas
+openpyxl
+```
 
 Projects:
 
-- Login automation
-- Form automation
-- Data extraction
+* Report Generator
+* Excel Processor
 
+---
 
-WEEK 5
--------
+## Week 4 — Web Automation
 
-Email + scheduling
+Learn:
 
-- smtplib
-- schedule
-- datetime
+```text
+requests
+BeautifulSoup
+Selenium
+Playwright
+```
 
+Projects:
+
+* Login automation
+* Form automation
+* Data extraction
+
+---
+
+## Week 5 — Email + Scheduling
+
+Learn:
+
+```text
+smtplib
+schedule
+datetime
+```
 
 Project:
 
-Daily automated report
+```text
+Daily Automated Report
+```
 
+---
 
-WEEK 6
--------
+## Week 6 — Advanced Automation
 
-Advanced automation
+Learn:
 
-- asyncio
-- threading
-- APIs
-- database
-- logging
-- error handling
+* `asyncio`
+* Threading
+* APIs
+* Databases
+* Logging
+* Error handling
 
+---
 
-# ============================================================
-# 78. FINAL MENTAL MODEL
-# ============================================================
+# 78. Final Mental Model
 
-Python Automation:
+The main idea of Python Automation is:
 
+```text
 Manual Task
      ↓
 Identify repetitive work
@@ -2573,292 +2880,449 @@ Add logging
 Schedule if necessary
      ↓
 Run automatically
+```
 
+### File Automation
 
-File Automation:
+```text
+os + shutil + pathlib
+```
 
+### Data Automation
+
+```text
+pandas + openpyxl
+```
+
+### Web Automation
+
+```text
+Selenium + Playwright
+```
+
+### Web Scraping
+
+```text
+requests + BeautifulSoup + Scrapy
+```
+
+### Email
+
+```text
+smtplib + email + imaplib
+```
+
+### Scheduling
+
+```text
+schedule + cron
+```
+
+### Desktop
+
+```text
+pyautogui + pynput
+```
+
+### Database
+
+```text
+sqlite3 + SQLAlchemy
+```
+
+### PDF
+
+```text
+pdfplumber + PyPDF2 + reportlab
+```
+
+### Image
+
+```text
+Pillow + OpenCV
+```
+
+---
+
+# 79. Very Short Revision
+
+## Automation
+
+Making manual or repetitive tasks automatic using programs.
+
+---
+
+## `shutil`
+
+High-level file and directory operations.
+
+```text
+copy
+move
+delete
+copy folder
+```
+
+---
+
+## `os`
+
+Basic operating-system and file/folder operations.
+
+---
+
+## `pathlib`
+
+Modern and convenient path handling.
+
+---
+
+## Selenium
+
+Browser automation + web testing.
+
+---
+
+## Playwright
+
+Modern browser automation + testing.
+
+---
+
+## Requests
+
+HTTP requests and API communication.
+
+---
+
+## BeautifulSoup
+
+HTML/XML parsing.
+
+---
+
+## Scrapy
+
+Large-scale web crawling and scraping framework.
+
+---
+
+## Pandas
+
+Data processing and analysis.
+
+---
+
+## openpyxl
+
+Excel XLSX automation.
+
+---
+
+## PyAutoGUI
+
+Mouse and keyboard automation.
+
+---
+
+## smtplib
+
+Sending email through SMTP.
+
+---
+
+## schedule
+
+Time-based Python task scheduling.
+
+---
+
+## watchdog
+
+File/folder change monitoring.
+
+---
+
+## SQLAlchemy
+
+Database access and ORM/database abstraction.
+
+---
+
+# 80. Important Interview Questions
+
+## Q1. What is Python Automation?
+
+**Answer:**
+
+Python Automation means using Python programs to perform repetitive or manual tasks automatically.
+
+---
+
+## Q2. What is `shutil`?
+
+**Answer:**
+
+`shutil` is a Python standard-library module used for high-level file and directory operations.
+
+---
+
+## Q3. What does `shutil.copy()` do?
+
+**Answer:**
+
+It copies a file from one location to another.
+
+---
+
+## Q4. What does `shutil.move()` do?
+
+**Answer:**
+
+It moves a file or directory to another location.
+
+---
+
+## Q5. What does `shutil.rmtree()` do?
+
+**Answer:**
+
+It recursively deletes a directory and all of its contents.
+
+---
+
+## Q6. What is Selenium?
+
+**Answer:**
+
+Selenium is a framework for browser automation and web application testing.
+
+---
+
+## Q7. What is Playwright?
+
+**Answer:**
+
+Playwright is a modern browser automation and testing framework.
+
+---
+
+## Q8. What is the main purpose of Selenium and Playwright?
+
+**Answer:**
+
+They are used to automate and test web applications through browsers.
+
+---
+
+## Q9. What is the difference between Requests and Selenium?
+
+**Answer:**
+
+### Requests
+
+Sends HTTP requests directly.
+
+```text
+Python
+ ↓
+HTTP Request
+ ↓
+Server
+ ↓
+Response
+```
+
+### Selenium
+
+Controls a real browser.
+
+```text
+Python
+ ↓
+Browser
+ ↓
+Website
+```
+
+---
+
+## Q10. What is BeautifulSoup?
+
+**Answer:**
+
+BeautifulSoup is a Python library used to parse HTML and XML documents and extract information from them.
+
+---
+
+## Q11. What is Scrapy?
+
+**Answer:**
+
+Scrapy is a Python framework designed for web crawling and scraping, especially for larger projects.
+
+---
+
+## Q12. What is a headless browser?
+
+**Answer:**
+
+A headless browser runs browser operations without showing the normal graphical browser window.
+
+---
+
+## Q13. What is Explicit Wait?
+
+**Answer:**
+
+Explicit Wait means waiting until a specific condition becomes true before continuing.
+
+Example:
+
+```text
+Wait for element
+     ↓
+Element becomes available
+     ↓
+Perform action
+```
+
+---
+
+## Q14. Why is logging important in automation?
+
+**Answer:**
+
+Logging helps track:
+
+* Execution
+* Errors
+* Failures
+* Important events
+* Timing information
+
+---
+
+## Q15. Why use environment variables?
+
+**Answer:**
+
+Environment variables help keep sensitive information such as passwords, API keys, and tokens outside the source code.
+
+---
+
+# 81. Final Conclusion
+
+The main goal of Python Automation is:
+
+> **Do a repetitive task once in Python, then let the computer perform it automatically.**
+
+The overall learning path is:
+
+```text
+Python
+   ↓
+os / shutil / pathlib
+   ↓
+pandas / openpyxl
+   ↓
+requests / BeautifulSoup
+   ↓
+Selenium / Playwright
+   ↓
+Email / Scheduling
+   ↓
+Database / API
+   ↓
+Logging / Error Handling
+   ↓
+Production Automation
+```
+
+## Most Important Learning Order
+
+```text
+Beginner
+   ↓
+File Automation
+   ↓
+Excel / CSV Automation
+   ↓
+Web Automation
+   ↓
+Email + Scheduling
+   ↓
+API + Database
+   ↓
+Async + Advanced Concepts
+   ↓
+Real Automation Projects
+```
+
+## One-Line Formula
+
+```text
+Python Automation
+=
+Repetitive Task
++
+Python Script
++
+Validation
++
+Error Handling
++
+Logging
++
+Scheduling
+=
+Automatic Workflow
+```
+
+## Final Rule for Choosing Tools
+
+```text
+Need file operations?
+        ↓
 os + shutil + pathlib
 
-
-Data Automation:
-
+Need data processing?
+        ↓
 pandas + openpyxl
 
-
-Web Automation:
-
-Selenium + Playwright
-
-
-Web Scraping:
-
-requests + BeautifulSoup + Scrapy
-
-
-Email:
-
-smtplib + email + imaplib
-
-
-Scheduling:
-
-schedule + cron
-
-
-Desktop:
-
-pyautogui + pynput
-
-
-Database:
-
-sqlite3 + SQLAlchemy
-
-
-PDF:
-
-pdfplumber + PyPDF2 + reportlab
-
-
-Image:
-
-Pillow + OpenCV
-
-
-# ============================================================
-# 79. VERY SHORT REVISION
-# ============================================================
-
-Automation
------------
-Manual/repetitive কাজকে programmatically automatic করা।
-
-
-shutil
--------
-File/folder copy, move, delete করার জন্য high-level
-standard library।
-
-
-os
---
-Operating system এবং file/folder basic operations।
-
-
-pathlib
--------
-Modern path handling।
-
-
-Selenium
---------
-Browser automation + testing।
-
-
-Playwright
-----------
-Modern browser automation + testing।
-
-
-requests
---------
-HTTP request এবং API communication।
-
-
-BeautifulSoup
--------------
-HTML parsing।
-
-
-Scrapy
-------
-Large-scale web crawling/scraping।
-
-
-pandas
-------
-Data processing।
-
-
-openpyxl
---------
-Excel XLSX automation।
-
-
-pyautogui
----------
-Mouse + keyboard automation।
-
-
-smtplib
--------
-Email send।
-
-
-schedule
---------
-Time-based Python task scheduling।
-
-
-watchdog
---------
-File/folder change monitoring।
-
-
-SQLAlchemy
-----------
-Database abstraction/ORM।
-
-
-# ============================================================
-# 80. IMPORTANT INTERVIEW QUESTIONS
-# ============================================================
-
-Q1. Python Automation কী?
-
-Ans:
-Python ব্যবহার করে repetitive/manual কাজ automatically
-করাকে Python Automation বলে।
-
-
-Q2. shutil কী?
-
-Ans:
-shutil Python standard library-এর একটি module, যা high-level
-file এবং directory operations-এর জন্য ব্যবহৃত হয়।
-
-
-Q3. shutil.copy() কী করে?
-
-Ans:
-একটি file copy করে।
-
-
-Q4. shutil.move() কী করে?
-
-Ans:
-File বা directory move করে।
-
-
-Q5. shutil.rmtree() কী করে?
-
-Ans:
-একটি directory এবং তার contents recursively delete করে।
-
-
-Q6. Selenium কী?
-
-Ans:
-Browser automation এবং web testing framework।
-
-
-Q7. Playwright কী?
-
-Ans:
-Modern browser automation/testing framework।
-
-
-Q8. Selenium এবং Playwright-এর মূল উদ্দেশ্য কী?
-
-Ans:
-Browser-এর মাধ্যমে web application automate এবং test করা।
-
-
-Q9. requests এবং Selenium-এর পার্থক্য কী?
-
-Ans:
-
-requests:
-HTTP request পাঠায়।
-
-Selenium:
-Real browser control করে।
-
-
-Q10. BeautifulSoup কী?
-
-Ans:
-HTML/XML parse করার library।
-
-
-Q11. Scrapy কী?
-
-Ans:
-Large-scale web crawling এবং scraping framework।
-
-
-Q12. Headless browser কী?
-
-Ans:
-Browser UI না দেখিয়ে background-এ browser চালানো।
-
-
-Q13. Explicit Wait কী?
-
-Ans:
-নির্দিষ্ট condition পূরণ হওয়া পর্যন্ত অপেক্ষা করা।
-
-
-Q14. Automation-এ logging কেন দরকার?
-
-Ans:
-Script-এর execution এবং error track করার জন্য।
-
-
-Q15. Automation-এ environment variable কেন দরকার?
-
-Ans:
-Password, API key, token-এর মতো sensitive information
-securely manage করার জন্য।
-
-
-# ============================================================
-# 81. FINAL CONCLUSION
-# ============================================================
-
-Python Automation শেখার মূল উদ্দেশ্য হলো:
-
-"যে কাজ বারবার করতে হয়,
-সেটা একবার Python-এ লিখে
-কম্পিউটারকে দিয়ে করানো।"
-
-
-Core Stack:
-
-Python
-  ↓
-os / shutil / pathlib
-  ↓
-pandas / openpyxl
-  ↓
-requests / BeautifulSoup
-  ↓
+Need API?
+        ↓
+requests / httpx
+
+Need static HTML scraping?
+        ↓
+requests + BeautifulSoup
+
+Need browser interaction?
+        ↓
 Selenium / Playwright
-  ↓
-Email / Scheduling
-  ↓
-Database / API
-  ↓
-Logging / Error Handling
-  ↓
-Production Automation
 
+Need large-scale crawling?
+        ↓
+Scrapy
 
-সবচেয়ে গুরুত্বপূর্ণ:
+Need email?
+        ↓
+smtplib / email / imaplib
 
-Beginner
-    ↓
-File Automation
-    ↓
-Excel Automation
-    ↓
-Web Automation
-    ↓
-Email + Scheduling
-    ↓
-API + Database
-    ↓
-Async + Advanced Concepts
-    ↓
-Real Automation Projects
+Need scheduling?
+        ↓
+schedule / cron
+
+Need desktop control?
+        ↓
+pyautogui / pynput
+
+Need database automation?
+        ↓
+sqlite3 / SQLAlchemy
+```
+
+**The best automation is not simply the one that works once. It should be reliable, secure, maintainable, observable, and safe to run repeatedly.**
+
 """

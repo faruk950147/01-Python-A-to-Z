@@ -1,40 +1,43 @@
-'''
-# Async and Await in Python
+"""
+# Python Async and Await
 
-## 1. Introduction
+## 1. What is Asynchronous Programming?
 
-In Python, **Asynchronous Programming** is used to handle tasks where a program can make 
-progress on other tasks while waiting for an asynchronous operation to complete.
+**Asynchronous Programming** means a program can work on other tasks while one task is waiting.
 
-The main concepts are:
+It is very useful when the program spends time waiting for:
 
-```text
-async
-await
-asyncio
-```
+* Network requests
+* API responses
+* Database operations
+* File I/O
+* Timers
 
-The easiest way to remember them:
+The three main concepts are:
 
 ```text
 async   → Defines an asynchronous function
-await   → Waits for an asynchronous operation
+await   → Waits for an awaitable operation
 asyncio → Provides tools for asynchronous programming
 ```
 
+### Easy way to remember
+
+> **async = Define an async function**
+> **await = Wait for an async operation**
+> **asyncio = Tools for async programming**
+
 ---
 
-# Part 1: async
+# Part 1: `async`
 
 ## 2. What is `async`?
 
-`async` is a Python **keyword** used to define an **asynchronous function**, also called a **coroutine function**.
+`async` is a Python **keyword** used to define an asynchronous function.
 
-### Simple Definition
+An asynchronous function is also called a **coroutine function**.
 
-> **`async` is a keyword used to define an asynchronous function (coroutine function).**
-
-Example:
+### Example
 
 ```python
 async def main():
@@ -47,11 +50,15 @@ Here:
 async def
 ```
 
-defines `main()` as an asynchronous function.
+means `main()` is an asynchronous function.
+
+### Easy Definition
+
+> **`async` is used to define a coroutine function.**
 
 ---
 
-## 3. Simple Example of `async`
+## 3. Simple Example
 
 ```python
 import asyncio
@@ -70,65 +77,43 @@ asyncio.run(main("Faruk"))
 Hello World Faruk
 ```
 
-Here:
-
-```python
-async def main(name):
-```
-
-defines the asynchronous function.
-
-And:
-
-```python
-asyncio.run(main("Faruk"))
-```
-
-runs the coroutine.
-
----
-
-## 4. What Happens Here?
-
-Conceptually:
+### What happens?
 
 ```text
-async def
-    ↓
+async def main()
+       ↓
 Coroutine Function
-    ↓
+       ↓
 main("Faruk")
-    ↓
+       ↓
 Coroutine Object
-    ↓
+       ↓
 asyncio.run()
-    ↓
+       ↓
 Execution
 ```
 
-Calling:
+Important:
+
+When we call:
 
 ```python
 main("Faruk")
 ```
 
-creates a coroutine object.
+it creates a **coroutine object**.
 
-It does not execute the coroutine body in the same way as calling a normal synchronous function.
+It does not immediately execute the coroutine body like a normal function call.
 
 ---
 
-# Part 2: await
+# Part 2: `await`
 
-## 5. What is `await`?
+## 4. What is `await`?
 
-`await` is a Python **keyword** used inside an asynchronous function to wait for an **awaitable operation** to complete.
+`await` is a Python keyword used inside an asynchronous function to wait for an **awaitable** operation.
 
-### Simple Definition
-
-> **`await` is used inside an async function to wait for an asynchronous operation to complete.**
-
-Example:
+### Example
 
 ```python
 import asyncio
@@ -160,29 +145,43 @@ await asyncio.sleep(1)
 
 waits for the asynchronous sleep operation.
 
+### Easy Definition
+
+> **`await` is used to wait for an awaitable operation inside an async function.**
+
 ---
 
-# Part 3: asyncio
+# Part 3: `asyncio`
 
-## 6. What is `asyncio`?
+## 5. What is `asyncio`?
 
-`asyncio` is a Python **standard library module** used for writing and running asynchronous programs.
+`asyncio` is a Python **standard library module** used for asynchronous programming.
 
-### Simple Definition
+It provides tools for:
 
-> **`asyncio` is a Python standard library module that provides tools for asynchronous programming.**
+* Running coroutines
+* Creating tasks
+* Waiting for async operations
+* Managing the event loop
+* Running multiple async operations
 
-Import:
+Import it using:
 
 ```python
 import asyncio
 ```
 
+### Easy Definition
+
+> **`asyncio` is Python's standard library for asynchronous programming.**
+
 ---
 
-# 7. `asyncio.run()`
+# Part 4: `asyncio.run()`
 
-`asyncio.run()` is used to run a top-level coroutine.
+## 6. What is `asyncio.run()`?
+
+`asyncio.run()` is commonly used to run a **top-level coroutine**.
 
 Example:
 
@@ -190,20 +189,12 @@ Example:
 import asyncio
 
 
-async def main(name):
-    print(f"Hello World {name}")
+async def main():
+    print("Hello")
 
 
-asyncio.run(main("Faruk"))
+asyncio.run(main())
 ```
-
-Here:
-
-```python
-asyncio.run(main("Faruk"))
-```
-
-runs the `main()` coroutine.
 
 Conceptually:
 
@@ -217,11 +208,15 @@ Event Loop
 Coroutine Execution
 ```
 
+### Easy Definition
+
+> **`asyncio.run()` starts and runs a coroutine from normal synchronous code.**
+
 ---
 
-# Part 4: async + await
+# Part 5: `async` + `await`
 
-## 8. Simple Example
+## 7. Simple Example
 
 ```python
 import asyncio
@@ -232,7 +227,7 @@ async def main(name):
 
     await asyncio.sleep(1)
 
-    print(f"Hello World {name}")
+    print(f"Hello Again {name}")
 
 
 asyncio.run(main("Faruk"))
@@ -242,12 +237,10 @@ asyncio.run(main("Faruk"))
 
 ```text
 Hello World Faruk
-Hello World Faruk
+Hello Again Faruk
 ```
 
----
-
-## 9. Step-by-Step Explanation
+### Step-by-step
 
 First:
 
@@ -255,7 +248,7 @@ First:
 async def main(name):
 ```
 
-defines an asynchronous function.
+defines the coroutine function.
 
 Then:
 
@@ -265,13 +258,13 @@ asyncio.run(main("Faruk"))
 
 runs the coroutine.
 
-First:
+Next:
 
 ```python
 print(f"Hello World {name}")
 ```
 
-is executed.
+prints the first message.
 
 Then:
 
@@ -279,53 +272,55 @@ Then:
 await asyncio.sleep(1)
 ```
 
-waits for one second.
+waits asynchronously for one second.
 
-After the wait:
+Finally:
 
 ```python
-print(f"Hello World {name}")
+print(f"Hello Again {name}")
 ```
 
-is executed again.
+prints the second message.
 
-Conceptually:
+### Flow
 
 ```text
-async def main()
-        ↓
-      Start
-        ↓
-Print Hello World
-        ↓
+Start
+  ↓
+Print "Hello World Faruk"
+  ↓
 await asyncio.sleep(1)
-        ↓
-      Wait
-        ↓
-Print Hello World
-        ↓
-       End
+  ↓
+Wait for 1 second
+  ↓
+Print "Hello Again Faruk"
+  ↓
+End
 ```
 
 ---
 
-# Part 5: Why Use Async?
+# Part 6: Why Use Async Programming?
 
-## 10. Why Asynchronous Programming?
+## 8. Why Do We Need Asynchronous Programming?
 
-Asynchronous programming is especially useful for **I/O-bound operations**, such as:
+Async programming is especially useful for **I/O-bound tasks**.
+
+Examples:
 
 ```text
 Network Requests
-Database Operations
 API Requests
+Database Operations
 File I/O
 Timers
 ```
 
-For example, suppose a program is waiting for a network response.
+Suppose a program sends a network request.
 
-In synchronous programming:
+The program may have to wait for the server response.
+
+### Synchronous
 
 ```text
 Task A
@@ -337,27 +332,37 @@ Task A Complete
 Task B
 ```
 
-In asynchronous programming:
+The program waits for Task A before moving to Task B.
+
+### Asynchronous
 
 ```text
 Task A
   ↓
-Waiting ─────────┐
-                 ↓
-               Task B
-                 ↓
-Task A Complete
+Waiting
+  ↓
+Task B starts
+  ↓
+Task B works
+  ↓
+Task A completes
 ```
 
-While one asynchronous operation is waiting, other asynchronous work can make progress.
+While Task A is waiting, other asynchronous tasks can make progress.
+
+### Important
+
+Async programming does **not automatically mean parallel execution**.
+
+Asynchronous programming and parallelism are different concepts.
 
 ---
 
-# Part 6: asyncio.sleep()
+# Part 7: `asyncio.sleep()`
 
-## 11. `asyncio.sleep()`
+## 9. What is `asyncio.sleep()`?
 
-`asyncio.sleep()` provides an asynchronous sleep operation.
+`asyncio.sleep()` creates an asynchronous delay.
 
 Example:
 
@@ -376,7 +381,7 @@ async def main():
 asyncio.run(main())
 ```
 
-Conceptually:
+### Flow
 
 ```text
 Start
@@ -386,21 +391,21 @@ Wait 2 seconds
 End
 ```
 
-Important:
+The important part is:
 
 ```python
 await asyncio.sleep(2)
 ```
 
-uses `await` because `asyncio.sleep()` returns an awaitable.
+`asyncio.sleep()` returns an awaitable, so we normally use `await` with it.
 
 ---
 
-# Part 7: Multiple Async Tasks
+# Part 8: Multiple Async Tasks
 
-## 12. Running Multiple Coroutines
+## 10. Running Multiple Coroutines
 
-One of the important benefits of asynchronous programming is that multiple coroutines can make progress while other operations are waiting.
+One important advantage of async programming is that multiple coroutines can make progress while other coroutines are waiting.
 
 Example:
 
@@ -437,19 +442,28 @@ asyncio.run(main())
 Conceptually:
 
 ```text
-Task 1 ── Start ── Wait 2s ── Complete
-Task 2 ── Start ── Wait 1s ── Complete
+Task 1 → Start → Wait 2s → Complete
+Task 2 → Start → Wait 1s → Complete
 ```
 
-While `task1()` is waiting, `task2()` can make progress.
+While Task 1 is waiting, Task 2 can continue.
+
+### Typical Output
+
+```text
+Task 1 started
+Task 2 started
+Task 2 completed
+Task 1 completed
+```
 
 ---
 
-# Part 8: asyncio.gather()
+# Part 9: `asyncio.gather()`
 
-## 13. What is `asyncio.gather()`?
+## 11. What is `asyncio.gather()`?
 
-`asyncio.gather()` is used to schedule multiple awaitables and wait for their results.
+`asyncio.gather()` is used to run multiple awaitables and wait until they finish.
 
 Example:
 
@@ -485,34 +499,54 @@ asyncio.run(main())
 ['Task 1 completed', 'Task 2 completed']
 ```
 
-Conceptually:
+Notice something important:
+
+Although `task2()` finishes first, the result list keeps the **same order as the awaitables passed to `gather()`**.
+
+We passed:
+
+```python
+task1(),
+task2()
+```
+
+So the result is:
+
+```python
+[
+    "Task 1 completed",
+    "Task 2 completed"
+]
+```
+
+### Visual Flow
 
 ```text
-             main()
-               │
-       ┌───────┴───────┐
-       ↓               ↓
-    task1()          task2()
-       ↓               ↓
-    sleep 2s         sleep 1s
-       ↓               ↓
-   completed        completed
-       └───────┬───────┘
-               ↓
-          gather()
-               ↓
-            results
+              main()
+                │
+        ┌───────┴───────┐
+        ↓               ↓
+     task1()          task2()
+        ↓               ↓
+    sleep 2s          sleep 1s
+        ↓               ↓
+    completed        completed
+        └───────┬───────┘
+                ↓
+           gather()
+                ↓
+             results
 ```
 
 ---
 
-# Part 9: async vs await
+# Part 10: `async` vs `await`
 
-## 14. Difference Between `async` and `await`
+## 12. Difference Between `async` and `await`
 
 ### `async`
 
-Used to define an asynchronous function.
+Used to **define** an asynchronous function.
 
 ```python
 async def main():
@@ -521,33 +555,45 @@ async def main():
 
 ### `await`
 
-Used to wait for an awaitable operation.
+Used to **wait for** an awaitable.
 
 ```python
 await asyncio.sleep(1)
 ```
 
-Therefore:
+### Easy Table
+
+| `async`                      | `await`                  |
+| ---------------------------- | ------------------------ |
+| Defines a coroutine function | Waits for an awaitable   |
+| Used before `def`            | Used before an awaitable |
+| `async def main()`           | `await asyncio.sleep(1)` |
+
+Remember:
 
 ```text
-async  → Defines a coroutine function
-await  → Waits for an awaitable
+async  → Define
+await  → Wait
 ```
 
 ---
 
-# Part 10: async vs asyncio
+# Part 11: `async` vs `asyncio`
 
-## 15. Difference Between `async` and `asyncio`
+## 13. Difference Between `async` and `asyncio`
 
-`async` is a Python keyword:
+### `async`
+
+`async` is a Python **keyword**.
 
 ```python
 async def main():
     pass
 ```
 
-`asyncio` is a Python standard library module:
+### `asyncio`
+
+`asyncio` is a Python **standard library module**.
 
 ```python
 import asyncio
@@ -565,81 +611,11 @@ asyncio
 
 ---
 
-# Part 11: Complete Example
+# Part 12: Coroutine
 
-## 16. Full Example
+## 14. What is a Coroutine?
 
-```python
-import asyncio
-
-
-async def main(name):
-    print(f"Hello World {name}")
-
-    await asyncio.sleep(1)
-
-    print(f"Hello Again {name}")
-
-
-asyncio.run(main("Faruk"))
-```
-
-### Output
-
-```text
-Hello World Faruk
-Hello Again Faruk
-```
-
-### Explanation
-
-```text
-async def
-    ↓
-Defines coroutine function
-
-main("Faruk")
-    ↓
-Creates coroutine
-
-asyncio.run()
-    ↓
-Runs coroutine
-
-await asyncio.sleep(1)
-    ↓
-Waits asynchronously
-
-Next statement
-    ↓
-Executes
-```
-
----
-
-# Part 12: Important Rules
-
-## 17. Rule 1 — `await` is used inside an async function
-
-Correct:
-
-```python
-async def main():
-    await asyncio.sleep(1)
-```
-
-Incorrect:
-
-```python
-def main():
-    await asyncio.sleep(1)
-```
-
-In normal Python code, `await` must be used in an appropriate asynchronous context, typically inside an `async def` coroutine.
-
----
-
-## 18. Rule 2 — `async def` defines a coroutine function
+A **coroutine** is an asynchronous computation created from an `async def` function.
 
 Example:
 
@@ -648,27 +624,45 @@ async def main():
     print("Hello")
 ```
 
-This is a coroutine function.
+This defines a coroutine function.
 
-Calling:
+When we call:
 
 ```python
 main()
 ```
 
-creates a coroutine object.
+we get a **coroutine object**.
 
-It can then be executed using:
+It can be run using:
 
 ```python
 asyncio.run(main())
+```
+
+### Simple Flow
+
+```text
+async def main()
+       ↓
+Coroutine Function
+       ↓
+main()
+       ↓
+Coroutine Object
+       ↓
+asyncio.run()
+       ↓
+Execution
 ```
 
 ---
 
 # Part 13: Synchronous vs Asynchronous
 
-## 19. Synchronous Example
+## 15. Synchronous Programming
+
+Example:
 
 ```python
 import time
@@ -694,25 +688,33 @@ task1()
 task2()
 ```
 
-Conceptually:
+Flow:
 
 ```text
-Task 1
-  ↓
-Wait 2s
-  ↓
-Task 1 Complete
-  ↓
-Task 2
-  ↓
-Wait 1s
-  ↓
-Task 2 Complete
+Task 1 starts
+    ↓
+Wait 2 seconds
+    ↓
+Task 1 completes
+    ↓
+Task 2 starts
+    ↓
+Wait 1 second
+    ↓
+Task 2 completes
+```
+
+The total waiting time is approximately:
+
+```text
+2 + 1 = 3 seconds
 ```
 
 ---
 
-## 20. Asynchronous Example
+# Part 14: Asynchronous Programming
+
+## 16. Asynchronous Example
 
 ```python
 import asyncio
@@ -747,19 +749,22 @@ asyncio.run(main())
 Conceptually:
 
 ```text
-Task 1 ──────── Wait ───────── Complete
-     \
-      \
-Task 2 ── Wait ── Complete
+Task 1 → Start → Wait ─────────→ Complete
+              ↘
+Task 2 → Start → Wait → Complete
 ```
 
-Here, while `task1()` is waiting, `task2()` can make progress.
+The two waits can overlap, so the total waiting time is approximately **2 seconds**, not 3 seconds.
+
+### Important
+
+This happens because both tasks are doing asynchronous waiting.
 
 ---
 
-# Part 14: Async Programming Mental Model
+# Part 15: Easy Mental Model
 
-## 21. Easy Mental Model
+## 17. Restaurant Waiter Example
 
 Imagine you are a restaurant waiter.
 
@@ -768,21 +773,25 @@ Imagine you are a restaurant waiter.
 ```text
 Take Customer A's order
         ↓
-Give it to the kitchen
+Give order to kitchen
         ↓
-Wait for the order
+Wait for A's food
         ↓
-Order completed
+Food ready
         ↓
-Serve Customer B
+Serve A
+        ↓
+Take Customer B's order
 ```
+
+The waiter stays focused on Customer A.
 
 ### Asynchronous
 
 ```text
 Take Customer A's order
         ↓
-Give it to the kitchen
+Give order to kitchen
         ↓
 Do not wait there
         ↓
@@ -790,20 +799,71 @@ Take Customer B's order
         ↓
 Take Customer C's order
         ↓
-A's order becomes ready
+A's food becomes ready
         ↓
 Serve Customer A
 ```
 
-This is the basic idea of asynchronous programming.
+### Main Idea
+
+> **When one task is waiting, the program can work on other available asynchronous tasks.**
 
 ---
 
-# Part 15: Common Mistakes
+# Part 16: Important Rules
 
-## Mistake 1
+## 18. Rule 1 — `await` is normally used inside `async def`
 
-Wrong:
+Correct:
+
+```python
+async def main():
+    await asyncio.sleep(1)
+```
+
+Incorrect:
+
+```python
+def main():
+    await asyncio.sleep(1)
+```
+
+In normal Python code, `await` must be used in an appropriate asynchronous context.
+
+---
+
+## 19. Rule 2 — `async def` creates a Coroutine Function
+
+Example:
+
+```python
+async def main():
+    print("Hello")
+```
+
+This defines a coroutine function.
+
+Calling:
+
+```python
+main()
+```
+
+creates a coroutine object.
+
+To run it from normal top-level code:
+
+```python
+asyncio.run(main())
+```
+
+---
+
+# Part 17: Common Mistakes
+
+## Mistake 1: Confusing `async` and `await`
+
+Wrong idea:
 
 ```text
 await = async function
@@ -812,38 +872,44 @@ await = async function
 Correct:
 
 ```text
-async  → Defines a coroutine function
-await  → Waits for an awaitable
+async → Defines a coroutine function
+await → Waits for an awaitable
 ```
 
 ---
 
-## Mistake 2
+## Mistake 2: Thinking `async` Means Parallel
 
-Thinking:
+This is incorrect:
 
-```python
-async def
+```text
+async = parallel
 ```
 
-automatically means the function runs in parallel.
+Async programming is about **cooperative concurrency**.
 
-This is not correct.
+Parallelism means multiple computations can execute at the same time, typically using multiple CPU cores or workers.
 
-**Asynchronous programming and parallelism are different concepts.**
+So:
+
+```text
+Concurrency ≠ Parallelism
+```
+
+Asyncio is mainly useful for handling many **I/O-bound** operations efficiently.
 
 ---
 
-## Mistake 3
+## Mistake 3: Using `await` in a Normal Function
 
-Using `await` inside a normal function:
+Wrong:
 
 ```python
 def main():
     await asyncio.sleep(1)
 ```
 
-Usually, it should be:
+Correct:
 
 ```python
 async def main():
@@ -852,19 +918,169 @@ async def main():
 
 ---
 
-## Mistake 4
+## Mistake 4: Thinking `asyncio` is a Keyword
 
-Thinking `asyncio` is a keyword.
+Incorrect:
+
+```text
+asyncio = keyword
+```
 
 Correct:
 
 ```text
-asyncio = Python standard library module
+asyncio = standard library module
 ```
 
 ---
 
-# Part 16: Interview Questions
+# Part 18: Complete Example
+
+## 20. Full Example
+
+```python
+import asyncio
+
+
+async def main(name):
+    print(f"Hello World {name}")
+
+    await asyncio.sleep(1)
+
+    print(f"Hello Again {name}")
+
+
+asyncio.run(main("Faruk"))
+```
+
+### Output
+
+```text
+Hello World Faruk
+Hello Again Faruk
+```
+
+### Explanation
+
+```text
+async def
+    ↓
+Defines coroutine function
+
+main("Faruk")
+    ↓
+Creates coroutine object
+
+asyncio.run()
+    ↓
+Runs coroutine
+
+await asyncio.sleep(1)
+    ↓
+Waits asynchronously
+
+Next statement
+    ↓
+Executes
+```
+
+---
+
+# Part 19: Real-Life Example
+
+Suppose you need to call three APIs:
+
+```text
+API 1 → 2 seconds
+API 2 → 1 second
+API 3 → 3 seconds
+```
+
+### Synchronous approach
+
+```text
+API 1 → Wait 2s
+API 2 → Wait 1s
+API 3 → Wait 3s
+
+Total ≈ 6s
+```
+
+### Asynchronous approach
+
+```text
+API 1 ─────── Wait 2s ─── Complete
+API 2 ── Wait 1s ── Complete
+API 3 ───────────── Wait 3s ───────── Complete
+```
+
+The waits can overlap.
+
+So the total time can be close to:
+
+```text
+3 seconds
+```
+
+rather than:
+
+```text
+6 seconds
+```
+
+This is why async programming is useful for many I/O-bound tasks.
+
+---
+
+# Part 20: Important Terms
+
+## 21. Awaitable
+
+An **awaitable** is an object that can be used with `await`.
+
+Common examples include:
+
+* Coroutine objects
+* `asyncio.Task`
+* `asyncio.Future`
+
+Example:
+
+```python
+await asyncio.sleep(1)
+```
+
+Here, the result of `asyncio.sleep(1)` is awaitable.
+
+---
+
+## 22. Event Loop
+
+The **event loop** is the mechanism that manages and runs asynchronous tasks.
+
+Simple mental model:
+
+```text
+Event Loop
+    ↓
+Check tasks
+    ↓
+Run task
+    ↓
+Task waits
+    ↓
+Run another ready task
+    ↓
+Task becomes ready
+    ↓
+Continue task
+```
+
+You can think of it as the **manager of async tasks**.
+
+---
+
+# Part 21: Interview Questions
 
 ## Q1. What is `async`?
 
@@ -885,7 +1101,7 @@ async def main():
 
 ### Answer
 
-> **`await` is a Python keyword used inside an async function to wait for an awaitable operation to complete.**
+> **`await` is a Python keyword used to wait for an awaitable operation inside an asynchronous context.**
 
 Example:
 
@@ -899,7 +1115,7 @@ await asyncio.sleep(1)
 
 ### Answer
 
-> **`asyncio` is Python's standard library module for writing and running asynchronous programs.**
+> **`asyncio` is Python's standard library module for writing asynchronous programs.**
 
 Example:
 
@@ -936,7 +1152,7 @@ creates a coroutine object.
 
 ### Answer
 
-`asyncio.run()` runs a top-level coroutine and manages the event loop used to execute it.
+`asyncio.run()` runs a top-level coroutine and manages the event loop needed to execute it.
 
 Example:
 
@@ -950,7 +1166,7 @@ asyncio.run(main())
 
 ### Answer
 
-In normal Python code, `await` must be used in an appropriate asynchronous context, typically inside an `async def` coroutine.
+In normal Python code, `await` must be used in an appropriate asynchronous context, typically inside an `async def` function.
 
 Example:
 
@@ -965,76 +1181,196 @@ async def main():
 
 ### Answer
 
-```text
-Synchronous
-→ Tasks generally execute sequentially
-→ A waiting operation can block subsequent work
+### Synchronous
 
-Asynchronous
-→ Other asynchronous work can make progress while an operation is waiting
-→ Especially useful for I/O-bound workloads
+```text
+Task A
+  ↓
+Wait
+  ↓
+Task A Complete
+  ↓
+Task B
+```
+
+### Asynchronous
+
+```text
+Task A
+  ↓
+Wait
+  ↓
+Task B can make progress
+  ↓
+Task A completes
+```
+
+Async programming is especially useful for I/O-bound work.
+
+---
+
+## Q8. Does async mean parallelism?
+
+### Answer
+
+**No.**
+
+Asynchronous programming and parallelism are different.
+
+```text
+Async
+→ Multiple tasks can make progress without blocking on I/O
+
+Parallelism
+→ Multiple computations execute at the same time
 ```
 
 ---
 
-# Part 17: Main Comparison Table
+## Q9. What is `asyncio.gather()`?
 
-| Concept            | What it is              | Main Purpose                     | Example                     |
-| ------------------ | ----------------------- | -------------------------------- | --------------------------- |
-| `async`            | Keyword                 | Define coroutine function        | `async def main()`          |
-| `await`            | Keyword                 | Wait for an awaitable            | `await asyncio.sleep(1)`    |
-| `asyncio`          | Standard library module | Async programming tools          | `import asyncio`            |
-| Coroutine          | Async computation       | Represents async work            | `main()`                    |
-| `asyncio.run()`    | Function                | Run a top-level coroutine        | `asyncio.run(main())`       |
-| `asyncio.gather()` | Function                | Run/wait for multiple awaitables | `await asyncio.gather(...)` |
+### Answer
 
----
+`asyncio.gather()` is used to run multiple awaitables and wait for all of them to finish.
 
-# Part 18: Final Cheat Sheet
+Example:
 
-```text
-┌────────────────────────────────────────────┐
-│          ASYNCHRONOUS PROGRAMMING          │
-├────────────────────────────────────────────┤
-│                                            │
-│ async                                      │
-│ → Python keyword                           │
-│ → Defines coroutine function               │
-│                                            │
-│ await                                      │
-│ → Python keyword                           │
-│ → Waits for an awaitable                   │
-│                                            │
-│ asyncio                                    │
-│ → Standard library module                  │
-│ → Provides async programming tools         │
-│                                            │
-│ asyncio.run()                              │
-│ → Runs a top-level coroutine               │
-│                                            │
-│ asyncio.gather()                           │
-│ → Runs/waits for multiple awaitables       │
-│                                            │
-└────────────────────────────────────────────┘
+```python
+results = await asyncio.gather(
+    task1(),
+    task2()
+)
 ```
 
 ---
 
-# 19. One-Line Summary
+## Q10. What is an event loop?
+
+### Answer
+
+> **An event loop manages and executes asynchronous tasks and decides which ready task should run next.**
+
+---
+
+# Part 22: Main Comparison Table
+
+| Concept            | Type              | Main Purpose                     | Example                     |
+| ------------------ | ----------------- | -------------------------------- | --------------------------- |
+| `async`            | Keyword           | Define coroutine function        | `async def main()`          |
+| `await`            | Keyword           | Wait for an awaitable            | `await asyncio.sleep(1)`    |
+| `asyncio`          | Module            | Async programming tools          | `import asyncio`            |
+| Coroutine          | Async computation | Represents async work            | `main()`                    |
+| Awaitable          | Object/protocol   | Can be used with `await`         | `asyncio.sleep(1)`          |
+| Event Loop         | Async mechanism   | Manages async execution          | `asyncio.run()`             |
+| `asyncio.run()`    | Function          | Run top-level coroutine          | `asyncio.run(main())`       |
+| `asyncio.gather()` | Function          | Run/wait for multiple awaitables | `await asyncio.gather(...)` |
+
+---
+
+# Part 23: Quick Revision
+
+```text
+async
+↓
+Defines an asynchronous/coroutine function
+```
+
+```text
+await
+↓
+Waits for an awaitable
+```
+
+```text
+asyncio
+↓
+Python standard library for async programming
+```
+
+```text
+asyncio.run()
+↓
+Runs a top-level coroutine
+```
+
+```text
+asyncio.gather()
+↓
+Runs multiple awaitables and waits for them
+```
+
+```text
+Coroutine
+↓
+Asynchronous computation
+```
+
+```text
+Event Loop
+↓
+Manages asynchronous execution
+```
+
+---
+
+# Part 24: Final Cheat Sheet
+
+```text
+┌──────────────────────────────────────────────┐
+│       PYTHON ASYNCHRONOUS PROGRAMMING        │
+├──────────────────────────────────────────────┤
+│                                              │
+│ async                                        │
+│ → Defines a coroutine function              │
+│                                              │
+│ await                                        │
+│ → Waits for an awaitable                     │
+│                                              │
+│ asyncio                                      │
+│ → Standard library module                    │
+│ → Provides async programming tools           │
+│                                              │
+│ Coroutine                                    │
+│ → Asynchronous computation                   │
+│                                              │
+│ asyncio.run()                                │
+│ → Runs a top-level coroutine                 │
+│                                              │
+│ asyncio.gather()                             │
+│ → Runs/waits for multiple awaitables         │
+│                                              │
+│ Event Loop                                   │
+│ → Manages asynchronous execution             │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
+# One-Line Summary
 
 ```text
 async   → Define an asynchronous function
-await   → Wait for an asynchronous operation
+await   → Wait for an awaitable
 asyncio → Tools for asynchronous programming
 ```
 
-### The easiest way to remember:
+### Easiest Way to Remember
 
-> **async = "Define an async function."**
+> **async = Define**
 
-> **await = "Wait for this async operation."**
+> **await = Wait**
 
-> **asyncio = "Tools for asynchronous programming."**
+> **asyncio = Async tools**
 
-> **asyncio.run() = "Run this coroutine."**
-'''
+> **asyncio.run() = Run a coroutine**
+
+> **asyncio.gather() = Run/wait for multiple async operations**
+
+### Most Important Point
+
+```text
+Async programming is mainly useful when tasks spend time
+waiting for I/O, such as network requests, APIs, databases,
+files, and timers.
+```
+
+"""

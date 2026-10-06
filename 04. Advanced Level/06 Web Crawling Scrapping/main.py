@@ -1,123 +1,116 @@
 """
-============================================================
-      WEB CRAWLING & WEB SCRAPING WITH PYTHON
-                    FULL NOTES
-============================================================
+# Web Crawling & Web Scraping with Python
 
+# 1. What is Web Crawling?
 
-1. WEB CRAWLING কী?
-============================================================
+**Web Crawling** is an automated process where a program visits web pages and follows links to discover other pages.
 
-Web Crawling হলো এমন একটি automated process যেখানে একটি
-program website-এর webpage visit করে এবং সেই webpage-এর
-links follow করে নতুন webpage খুঁজে বের করে।
+### Easy Definition
 
-সহজভাবে:
-
-Crawling = কোথায় কী আছে খুঁজে বের করা।
+> **Crawling = Finding and visiting web pages.**
 
 Example:
 
+```text
 Page A
-   ↓
+  ↓
 Page B
-   ↓
+  ↓
 Page C
-   ↓
+  ↓
 Page D
+```
 
-Crawler:
+A crawler may work like this:
+
+```text
 Visit A
-   ↓
-Find B, C
-   ↓
+  ↓
+Find B and C
+  ↓
 Visit B
-   ↓
+  ↓
 Find D
-   ↓
+  ↓
 Visit D
+```
 
+### Main jobs of a Web Crawler
 
-Web Crawler-এর প্রধান কাজ:
+* Collect URLs
+* Discover new pages
+* Follow links
+* Understand website structure
+* Discover pages for search engines
+* Monitor websites
+* Analyze websites
 
-- URL সংগ্রহ করা
-- নতুন Page খুঁজে বের করা
-- এক Page থেকে অন্য Page-এ যাওয়া
-- Website structure তৈরি করা
-- Search engine indexing-এর জন্য page discover করা
-- Website analysis করা
+### Examples
 
+* Googlebot
+* Bingbot
+* Custom Python crawler
+* Scrapy Spider
 
-Examples:
+---
 
-- Googlebot
-- Bingbot
-- Custom Python Crawler
-- Scrapy Spider
+# 2. What is Web Scraping?
 
+**Web Scraping** is the process of automatically extracting specific data from a website.
 
+### Easy Definition
 
-2. WEB SCRAPING কী?
-============================================================
+> **Scraping = Extracting useful information from web pages.**
 
-Web Scraping হলো কোনো website থেকে নির্দিষ্ট data
-automatedভাবে extract করার process।
+For example, from an e-commerce website we may collect:
 
-সহজভাবে:
-
-Scraping = ওয়েবপেজ থেকে তথ্য বের করা।
-
-Example:
-
-একটি e-commerce website থেকে:
-
+```text
 Product Name
 Price
 Rating
 Image
 Availability
+```
 
-সংগ্রহ করা।
+### Uses of Web Scraping
 
-Web Scraping-এর ব্যবহার:
+* Product information
+* Price monitoring
+* News collection
+* Job listings
+* Research
+* Data analysis
+* Real-estate data
+* Public data collection
 
-- Product information
-- Price monitoring
-- News collection
-- Job listing collection
-- Research
-- Data analysis
-- Real-estate data
-- Public data collection
+---
 
+# 3. Web Crawling vs Web Scraping
 
+| Feature      | Web Crawling       | Web Scraping            |
+| ------------ | ------------------ | ----------------------- |
+| Main purpose | Discover pages     | Extract data            |
+| Main focus   | URLs and structure | Page content            |
+| Main action  | Follow links       | Select and extract data |
+| Output       | URLs / pages       | Structured data         |
+| Common use   | Indexing           | Research / analysis     |
+| Example      | Googlebot          | Product scraper         |
 
-3. WEB CRAWLING VS WEB SCRAPING
-============================================================
+### Easy way to remember
 
-বিষয়              Web Crawling        Web Scraping
-------------------------------------------------------------
-উদ্দেশ্য           URL/Page খোঁজা      Data বের করা
-Focus              Structure           Content
-কাজ                Link follow         Data extraction
-Output             URLs/Pages          Structured Data
-ব্যবহার             Indexing            Analysis/Research
-Example             Googlebot           Python Scraper
+```text
+Crawler = Where is it?
 
+Scraper = What is inside it?
+```
 
-সহজভাবে:
+---
 
-Crawler = কোথায় আছে?
+# 4. Crawling + Scraping
 
-Scraper = কী আছে?
+A real project can use both crawling and scraping.
 
-
-
-4. CRAWLING + SCRAPING
-============================================================
-
-একটি project-এ দুটো একসাথে ব্যবহার করা যায়:
-
+```text
 Crawler
    ↓
 Find URLs
@@ -131,182 +124,259 @@ Extract Data
 Clean Data
    ↓
 Store Data
+```
 
+For example:
 
+```text
+Website
+   ↓
+Find product pages
+   ↓
+Visit product pages
+   ↓
+Extract name, price, rating
+   ↓
+Save to CSV/Database
+```
 
-5. WEB CRAWLING-এর ব্যবহার
-============================================================
+---
 
-- Search Engine Indexing
-- Website Structure Analysis
-- Link Discovery
-- SEO Analysis
-- Research
-- Broken Link Detection
-- Website Monitoring
-- Content Discovery
+# 5. Uses of Web Crawling
 
+Web crawling can be used for:
 
+* Search engine indexing
+* Website structure analysis
+* Link discovery
+* SEO analysis
+* Research
+* Broken-link detection
+* Website monitoring
+* Content discovery
 
-6. WEB SCRAPING-এর ব্যবহার
-============================================================
+---
 
-- Product Information
-- Price Monitoring
-- News Data
-- Job Data
-- Research Data
-- Real Estate Data
-- Public Data Collection
-- Data Analysis
+# 6. Uses of Web Scraping
 
+Web scraping can be used for:
 
+* Product information
+* Price monitoring
+* News data
+* Job data
+* Research data
+* Real-estate data
+* Public data collection
+* Data analysis
 
-7. PYTHON WEB CRAWLING LIBRARIES
-============================================================
+Always follow the target site's terms, access rules, and applicable laws.
 
-Basic:
+---
 
+# 7. Python Web Crawling Libraries
+
+Python has many useful libraries for crawling and scraping.
+
+### Basic HTTP
+
+```text
 requests
+```
+
+### HTML Parsing
+
+```text
 BeautifulSoup
 lxml
+```
 
-Crawling Framework:
+### Crawling Framework
 
+```text
 Scrapy
+```
 
-Browser Automation:
+### Browser Automation
 
+```text
 Selenium
 Playwright
+```
 
-Async HTTP:
+### Async HTTP
 
+```text
 aiohttp
 httpx
+```
 
-Data Processing:
+### Data Processing
 
+```text
 pandas
 csv
 json
+```
 
-Helper:
+### Helpers
 
+```text
 urllib
 re
 time
+```
 
+---
 
+# 8. Which Library Should You Use?
 
-8. কোন LIBRARY কখন ব্যবহার করব?
-============================================================
+| Task                  | Library                   |
+| --------------------- | ------------------------- |
+| HTTP request          | `requests`                |
+| HTML parsing          | `BeautifulSoup`           |
+| Fast HTML/XML parsing | `lxml`                    |
+| Large-scale crawling  | `Scrapy`                  |
+| JavaScript websites   | `Selenium` / `Playwright` |
+| Async HTTP            | `aiohttp` / `httpx`       |
+| Data analysis         | `pandas`                  |
+| CSV files             | `csv`                     |
+| JSON files            | `json`                    |
 
-HTTP Request
-→ requests
+### Simple rule
 
-HTML Parsing
-→ BeautifulSoup
+```text
+requests
+→ Get web page
 
-Fast HTML/XML Parsing
-→ lxml
+BeautifulSoup
+→ Read HTML
 
-Large-scale Crawling
-→ Scrapy
+urljoin
+→ Build correct URLs
 
-JavaScript Website
-→ Selenium / Playwright
+Scrapy
+→ Large crawler
 
-Async HTTP
-→ aiohttp / httpx
+Selenium / Playwright
+→ Control a real browser
+```
 
-Data Analysis
-→ pandas
+---
 
-CSV
-→ csv
+# Part 1: Requests
 
-JSON
-→ json
+# 9. Install Requests
 
-
-
-9. REQUESTS INSTALL
-============================================================
-
+```bash
 pip install requests
-
+```
 
 Import:
 
+```python
 import requests
+```
 
+---
 
+# 10. Basic GET Request
 
-10. BASIC GET REQUEST
-============================================================
-
+```python
 import requests
 
 url = "https://example.com"
-
-response = requests.get(url)
-
-print(response.status_code)
-
-
-
-11. TIMEOUT
-============================================================
-
-Timeout ব্যবহার করা ভালো:
 
 response = requests.get(
     url,
     timeout=10
 )
 
-Timeout request-কে indefinitely অপেক্ষা করা থেকে
-রক্ষা করে।
-
-
-
-12. STATUS CODE
-============================================================
-
 print(response.status_code)
+```
 
+Here:
 
-Common Status Codes:
+```python
+requests.get()
+```
 
-200 → OK
-301 → Permanent Redirect
-302 → Temporary Redirect
-400 → Bad Request
-401 → Unauthorized
-403 → Forbidden
-404 → Not Found
-429 → Too Many Requests
-500 → Internal Server Error
-502 → Bad Gateway
-503 → Service Unavailable
+sends an HTTP GET request.
 
+The result is stored in:
 
+```python
+response
+```
 
-13. RAISE_FOR_STATUS()
-============================================================
+---
 
-response.raise_for_status()
+# 11. Why Use Timeout?
 
+Always use a timeout for network requests.
+
+```python
+response = requests.get(
+    url,
+    timeout=10
+)
+```
+
+Without a suitable timeout, a request may wait for a very long time if the network or server does not respond.
+
+### Easy Definition
+
+> **Timeout limits how long your program waits for a request.**
+
+---
+
+# 12. HTTP Status Codes
+
+Use:
+
+```python
+print(response.status_code)
+```
+
+Common status codes:
+
+| Code  | Meaning               |
+| ----- | --------------------- |
+| `200` | OK                    |
+| `301` | Permanent Redirect    |
+| `302` | Temporary Redirect    |
+| `400` | Bad Request           |
+| `401` | Unauthorized          |
+| `403` | Forbidden             |
+| `404` | Not Found             |
+| `429` | Too Many Requests     |
+| `500` | Internal Server Error |
+| `502` | Bad Gateway           |
+| `503` | Service Unavailable   |
+
+### Most important
+
+```text
+2xx → Success
+3xx → Redirect
+4xx → Client error
+5xx → Server error
+```
+
+---
+
+# 13. `raise_for_status()`
+
+`raise_for_status()` raises an exception when the HTTP response indicates an error.
 
 Example:
 
+```python
 import requests
 
 url = "https://example.com"
 
 try:
-
     response = requests.get(
         url,
         timeout=10
@@ -317,118 +387,203 @@ try:
     print(response.text)
 
 except requests.RequestException as e:
-
     print("Request failed:", e)
+```
 
+This makes error handling easier.
 
+---
 
-14. RESPONSE TEXT
-============================================================
+# 14. Response Text
 
+Use:
+
+```python
 print(response.text)
+```
 
+`response.text` gives the response body as decoded text.
 
-HTML content সাধারণত text হিসেবে পাওয়া যায়।
+For an HTML page, it usually contains the HTML source.
 
+---
 
+# 15. Response Content
 
-15. RESPONSE CONTENT
-============================================================
+Use:
 
+```python
 print(response.content)
+```
 
+`response.content` returns the response body as **bytes**.
 
-এটি bytes আকারে content দেয়।
+This can be useful when working with binary data.
 
+---
 
+# 16. Response Headers
 
-16. RESPONSE HEADERS
-============================================================
+Print all headers:
 
+```python
 print(response.headers)
+```
 
+Get one header:
 
-নির্দিষ্ট header:
-
+```python
 print(
     response.headers.get("Content-Type")
 )
+```
 
+Print all headers:
 
-সব headers:
-
+```python
 for key, value in response.headers.items():
-
     print(
-        f"Key: {key} <-------> Value: {value}"
+        f"{key} <-------> {value}"
     )
+```
 
+---
 
+# 17. Response URL
 
-17. RESPONSE URL
-============================================================
-
+```python
 print(response.url)
+```
 
+This shows the final URL associated with the response.
 
+This can be useful when redirects are involved.
 
-18. RESPONSE HISTORY
-============================================================
+---
 
+# 18. Response History
+
+```python
 print(response.history)
+```
 
+This shows previous redirect responses.
 
-Redirect history দেখতে ব্যবহার করা হয়।
+For example:
 
+```text
+URL A
+ ↓
+301 Redirect
+ ↓
+URL B
+ ↓
+200 OK
+```
 
+`response.history` can help inspect the redirect chain.
 
-19. RESPONSE TIME
-============================================================
+---
 
+# 19. Response Time
+
+```python
 print(response.elapsed)
+```
 
+This gives the approximate time taken for the request/response exchange as measured by Requests.
 
+---
 
-20. REQUEST OBJECT
-============================================================
+# 20. Request Object
 
+You can inspect the request:
+
+```python
 print(response.request)
+```
 
+For example, you can inspect:
 
+```python
+response.request.method
+response.request.url
+```
 
-21. COOKIES
-============================================================
+---
 
+# 21. Cookies
+
+Use:
+
+```python
 print(response.cookies)
+```
 
+Cookies may contain information sent by the server.
 
+For persistent session state, a `requests.Session()` is often more useful.
 
-22. JSON RESPONSE
-============================================================
+---
 
+# 22. JSON Response
+
+If the server returns valid JSON:
+
+```python
 data = response.json()
 
 print(data)
+```
 
+Example API response:
 
-API response JSON হলে এটি ব্যবহার করা যায়।
+```json
+{
+    "name": "Python",
+    "version": "3.14"
+}
+```
 
+Then:
 
+```python
+data = response.json()
 
-23. RAW RESPONSE
-============================================================
+print(data["name"])
+```
 
+---
+
+# 23. Raw Response
+
+You can access the underlying raw response:
+
+```python
 print(response.raw)
+```
 
+For example:
+
+```python
 print(
     response.raw.read()
 )
+```
 
+This is more advanced and usually not needed for normal scraping.
 
+---
 
-24. REQUESTS SESSION
-============================================================
+# Part 2: Requests Session
 
+# 24. `requests.Session()`
+
+A session allows you to reuse settings and maintain session state such as cookies.
+
+Example:
+
+```python
 import requests
 
 session = requests.Session()
@@ -443,12 +598,24 @@ response = session.get(
 )
 
 print(response.status_code)
+```
 
+### Benefits
 
+* Reuse connection-related resources
+* Reuse headers
+* Maintain cookies
+* Keep common request settings
 
-25. USER-AGENT
-============================================================
+---
 
+# 25. User-Agent
+
+A crawler should identify itself appropriately.
+
+Example:
+
+```python
 import requests
 
 headers = {
@@ -462,276 +629,46 @@ response = requests.get(
 )
 
 print(response.status_code)
+```
 
+For a real production crawler, use a descriptive User-Agent.
 
-Production crawler-এ descriptive User-Agent ব্যবহার করা
-ভালো।
+Also follow the website's:
 
-Site-এর access rules, terms এবং applicable restrictions
-মেনে crawling করতে হবে।
+* Terms
+* Access rules
+* Robots instructions where applicable
+* Rate limits
+* Applicable laws
 
+---
 
+# Part 3: BeautifulSoup
 
-26. BEAUTIFULSOUP
-============================================================
+# 26. What is BeautifulSoup?
+
+**BeautifulSoup** is a Python library used to parse HTML and XML-like markup and extract information from it.
 
 Install:
 
+```bash
 pip install beautifulsoup4
-
+```
 
 Import:
 
+```python
 from bs4 import BeautifulSoup
+```
 
+---
 
+# 27. Parse HTML
 
-27. HTML PARSE করা
-============================================================
-
+```python
 import requests
 
 from bs4 import BeautifulSoup
-
-url = "https://example.com"
-
-response = requests.get(
-    url,
-    timeout=10
-)
-
-soup = BeautifulSoup(
-    response.text,
-    "html.parser"
-)
-
-print(soup)
-
-
-
-28. PAGE TITLE
-============================================================
-
-title = soup.title
-
-print(title)
-
-
-শুধু text:
-
-print(
-    soup.title.get_text(strip=True)
-)
-
-
-Safe version:
-
-title = (
-    soup.title.get_text(strip=True)
-    if soup.title
-    else "No Title"
-)
-
-
-
-29. HEADING বের করা
-============================================================
-
-for heading in soup.find_all("h1"):
-
-    print(
-        heading.get_text(strip=True)
-    )
-
-
-
-30. PARAGRAPH বের করা
-============================================================
-
-for paragraph in soup.find_all("p"):
-
-    print(
-        paragraph.get_text(strip=True)
-    )
-
-
-
-31. LINKS বের করা
-============================================================
-
-for link in soup.find_all(
-    "a",
-    href=True
-):
-
-    print(
-        link["href"]
-    )
-
-
-
-32. IMAGES বের করা
-============================================================
-
-for image in soup.find_all(
-    "img",
-    src=True
-):
-
-    print(
-        image["src"]
-    )
-
-
-
-33. HTML ATTRIBUTES
-============================================================
-
-HTML:
-
-<a href="/about" class="menu">
-    About
-</a>
-
-
-Python:
-
-link = soup.find("a")
-
-print(
-    link.get("href")
-)
-
-print(
-    link.get("class")
-)
-
-
-
-34. FIND()
-============================================================
-
-প্রথম matching element:
-
-heading = soup.find("h1")
-
-print(heading)
-
-
-
-35. FIND_ALL()
-============================================================
-
-সব matching elements:
-
-headings = soup.find_all("h1")
-
-for heading in headings:
-
-    print(
-        heading.get_text(strip=True)
-    )
-
-
-
-36. CSS SELECTOR
-============================================================
-
-Class:
-
-items = soup.select(".product")
-
-for item in items:
-
-    print(
-        item.get_text(strip=True)
-    )
-
-
-ID:
-
-element = soup.select_one("#main")
-
-
-Class:
-
-element = soup.select_one(".product")
-
-
-
-37. URL HANDLING
-============================================================
-
-from urllib.parse import (
-    urljoin,
-    urlparse
-)
-
-
-
-38. RELATIVE URL
-============================================================
-
-ধরা যাক:
-
-Base URL:
-
-https://example.com
-
-Link:
-
-/about
-
-
-Convert:
-
-from urllib.parse import urljoin
-
-full_url = urljoin(
-    "https://example.com",
-    "/about"
-)
-
-print(full_url)
-
-
-Output:
-
-https://example.com/about
-
-
-
-39. URLPARSE()
-============================================================
-
-from urllib.parse import urlparse
-
-url = "https://example.com/products?id=10"
-
-parsed = urlparse(url)
-
-print(parsed.scheme)
-print(parsed.netloc)
-print(parsed.path)
-print(parsed.query)
-
-
-Conceptually:
-
-scheme = https
-netloc = example.com
-path = /products
-query = id=10
-
-
-
-40. BASIC WEB CRAWLER
-============================================================
-
-import requests
-
-from bs4 import BeautifulSoup
-
 
 url = "https://example.com"
 
@@ -742,27 +679,397 @@ response = requests.get(
 
 response.raise_for_status()
 
+soup = BeautifulSoup(
+    response.text,
+    "html.parser"
+)
+
+print(soup)
+```
+
+Here:
+
+```text
+requests
+    ↓
+Downloads HTML
+
+BeautifulSoup
+    ↓
+Parses HTML
+```
+
+---
+
+# 28. Get Page Title
+
+Get the complete `<title>` tag:
+
+```python
+title = soup.title
+
+print(title)
+```
+
+Get only the text:
+
+```python
+print(
+    soup.title.get_text(strip=True)
+)
+```
+
+Safe version:
+
+```python
+title = (
+    soup.title.get_text(strip=True)
+    if soup.title
+    else "No Title"
+)
+```
+
+---
+
+# 29. Extract Headings
+
+```python
+for heading in soup.find_all("h1"):
+    print(
+        heading.get_text(strip=True)
+    )
+```
+
+This extracts all `<h1>` elements.
+
+---
+
+# 30. Extract Paragraphs
+
+```python
+for paragraph in soup.find_all("p"):
+    print(
+        paragraph.get_text(strip=True)
+    )
+```
+
+---
+
+# 31. Extract Links
+
+```python
+for link in soup.find_all(
+    "a",
+    href=True
+):
+    print(
+        link["href"]
+    )
+```
+
+Example HTML:
+
+```html
+<a href="/about">About</a>
+```
+
+The result is:
+
+```text
+/about
+```
+
+---
+
+# 32. Extract Images
+
+```python
+for image in soup.find_all(
+    "img",
+    src=True
+):
+    print(
+        image["src"]
+    )
+```
+
+---
+
+# 33. HTML Attributes
+
+Suppose the HTML is:
+
+```html
+<a href="/about" class="menu">
+    About
+</a>
+```
+
+Python:
+
+```python
+link = soup.find("a")
+
+print(
+    link.get("href")
+)
+
+print(
+    link.get("class")
+)
+```
+
+Output may be:
+
+```text
+/about
+['menu']
+```
+
+---
+
+# 34. `find()`
+
+`find()` returns the **first matching element**.
+
+Example:
+
+```python
+heading = soup.find("h1")
+
+print(heading)
+```
+
+---
+
+# 35. `find_all()`
+
+`find_all()` returns **all matching elements**.
+
+Example:
+
+```python
+headings = soup.find_all("h1")
+
+for heading in headings:
+    print(
+        heading.get_text(strip=True)
+    )
+```
+
+### Remember
+
+```text
+find()
+→ First matching element
+
+find_all()
+→ All matching elements
+```
+
+---
+
+# 36. CSS Selectors
+
+BeautifulSoup also supports CSS selectors.
+
+### Class
+
+```python
+items = soup.select(".product")
+
+for item in items:
+    print(
+        item.get_text(strip=True)
+    )
+```
+
+### ID
+
+```python
+element = soup.select_one("#main")
+```
+
+### One class element
+
+```python
+element = soup.select_one(".product")
+```
+
+### Important CSS syntax
+
+```text
+.product
+→ class="product"
+
+#main
+→ id="main"
+
+a
+→ all <a> elements
+```
+
+---
+
+# Part 4: URL Handling
+
+# 37. `urllib.parse`
+
+Python provides URL tools through `urllib.parse`.
+
+Import:
+
+```python
+from urllib.parse import (
+    urljoin,
+    urlparse
+)
+```
+
+---
+
+# 38. Relative URL
+
+Suppose:
+
+```text
+Base URL:
+https://example.com
+
+Link:
+/about
+```
+
+The link is relative.
+
+Use `urljoin()`:
+
+```python
+from urllib.parse import urljoin
+
+full_url = urljoin(
+    "https://example.com",
+    "/about"
+)
+
+print(full_url)
+```
+
+Output:
+
+```text
+https://example.com/about
+```
+
+### Easy Definition
+
+> **`urljoin()` converts a relative URL into the correct absolute URL.**
+
+This is very important in web crawling.
+
+---
+
+# 39. `urlparse()`
+
+`urlparse()` breaks a URL into different parts.
+
+Example:
+
+```python
+from urllib.parse import urlparse
+
+url = "https://example.com/products?id=10"
+
+parsed = urlparse(url)
+
+print(parsed.scheme)
+print(parsed.netloc)
+print(parsed.path)
+print(parsed.query)
+```
+
+Output:
+
+```text
+https
+example.com
+/products
+id=10
+```
+
+### Main parts
+
+```text
+scheme
+→ https
+
+netloc
+→ example.com
+
+path
+→ /products
+
+query
+→ id=10
+```
+
+---
+
+# Part 5: Basic Web Crawler
+
+# 40. Basic Crawler
+
+```python
+import requests
+
+from bs4 import BeautifulSoup
+
+url = "https://example.com"
+
+response = requests.get(
+    url,
+    timeout=10
+)
+
+response.raise_for_status()
 
 soup = BeautifulSoup(
     response.text,
     "html.parser"
 )
 
-
 for link in soup.find_all(
     "a",
     href=True
 ):
-
     print(
         link["href"]
     )
+```
 
+This crawler:
 
+```text
+Request page
+    ↓
+Get HTML
+    ↓
+Parse HTML
+    ↓
+Find <a> tags
+    ↓
+Extract links
+```
 
-41. MULTI-PAGE CRAWLER
-============================================================
+---
 
+# Part 6: Multi-Page Crawler
+
+# 41. Recursive Crawler
+
+A simple recursive crawler can look like this:
+
+```python
 import requests
 
 from bs4 import BeautifulSoup
@@ -783,13 +1090,9 @@ def crawl(url, depth):
 
     visited.add(url)
 
-    print(
-        "Crawling:",
-        url
-    )
+    print("Crawling:", url)
 
     try:
-
         response = requests.get(
             url,
             timeout=10
@@ -798,15 +1101,12 @@ def crawl(url, depth):
         response.raise_for_status()
 
     except requests.RequestException:
-
         return
-
 
     soup = BeautifulSoup(
         response.text,
         "html.parser"
     )
-
 
     for link in soup.find_all(
         "a",
@@ -828,42 +1128,78 @@ crawl(
     "https://example.com",
     depth=2
 )
+```
 
+### Main idea
 
+```text
+Start URL
+   ↓
+Visit page
+   ↓
+Find links
+   ↓
+Visit links
+   ↓
+Find more links
+   ↓
+Continue
+```
 
-42. VISITED SET কেন দরকার?
-============================================================
+---
 
-ধরা যাক:
+# 42. Why Do We Need `visited`?
 
+Imagine:
+
+```text
 A → B
 B → C
 C → A
+```
 
+Without a visited set:
 
-Visited না থাকলে:
-
+```text
 A → B → C → A → B → C → ...
+```
 
+This can create an endless loop.
 
-এভাবে infinite loop হতে পারে।
+So we use:
 
-তাই:
-
+```python
 visited = set()
+```
 
+Before crawling:
 
+```python
+if url in visited:
+    return
+```
 
-43. DEPTH CONTROL
-============================================================
+Then:
 
-max_depth = 2
+```python
+visited.add(url)
+```
 
+### Easy Definition
+
+> **`visited` prevents the crawler from processing the same URL repeatedly.**
+
+---
+
+# 43. Depth Control
+
+Depth limits how far the crawler can go.
 
 Example:
 
+```text
 Depth 0
-Start
+Start page
 
 Depth 1
  ├── A
@@ -875,12 +1211,25 @@ Depth 2
  ├── A2
  ├── B1
  └── C1
+```
 
+For example:
 
+```python
+max_depth = 2
+```
 
-44. QUEUE-BASED CRAWLER
-============================================================
+Depth control prevents the crawler from exploring an unlimited number of pages.
 
+---
+
+# Part 7: Queue-Based Crawler
+
+# 44. BFS-Style Crawler
+
+Instead of recursion, we can use a queue.
+
+```python
 import requests
 
 from bs4 import BeautifulSoup
@@ -905,22 +1254,17 @@ while queue:
 
     url, depth = queue.popleft()
 
-
     if depth > max_depth:
         continue
-
 
     if url in visited:
         continue
 
-
     visited.add(url)
-
 
     print(
         f"Crawling ({depth}): {url}"
     )
-
 
     try:
 
@@ -935,12 +1279,10 @@ while queue:
 
         continue
 
-
     soup = BeautifulSoup(
         response.text,
         "html.parser"
     )
-
 
     for link in soup.find_all(
         "a",
@@ -952,7 +1294,6 @@ while queue:
             link["href"]
         )
 
-
         if next_url not in visited:
 
             queue.append(
@@ -961,32 +1302,86 @@ while queue:
                     depth + 1
                 )
             )
+```
 
+This is similar to **Breadth-First Search (BFS)**.
 
+### Why use `deque`?
 
-45. DOMAIN RESTRICTION
-============================================================
+Because:
 
-Crawler যেন অন্য website-এ না যায়।
+```python
+queue.popleft()
+```
 
+is efficient.
+
+---
+
+# Part 8: Domain Restriction
+
+# 45. Why Restrict the Domain?
+
+Suppose you start from:
+
+```text
+https://example.com
+```
+
+The page may contain links to:
+
+```text
+https://google.com
+https://youtube.com
+https://example.com/about
+```
+
+You may want to crawl only:
+
+```text
+example.com
+```
+
+---
+
+# 46. Same-Domain Check
+
+```python
 from urllib.parse import urlparse
 
 
-def is_same_domain(
-    url,
-    domain
-):
+def is_same_domain(url, domain):
 
     return (
         urlparse(url).netloc
         == domain
     )
+```
 
+Example:
 
+```python
+domain = "example.com"
 
-46. DOMAIN-RESTRICTED CRAWLER
-============================================================
+print(
+    is_same_domain(
+        "https://example.com/about",
+        domain
+    )
+)
+```
 
+Result:
+
+```text
+True
+```
+
+---
+
+# 47. Domain-Restricted Crawler
+
+```python
 import requests
 
 from bs4 import BeautifulSoup
@@ -998,7 +1393,6 @@ from urllib.parse import (
 
 
 visited = set()
-
 
 start_url = "https://example.com"
 
@@ -1022,7 +1416,6 @@ def crawl(url):
         url
     )
 
-
     try:
 
         response = requests.get(
@@ -1036,12 +1429,10 @@ def crawl(url):
 
         return
 
-
     soup = BeautifulSoup(
         response.text,
         "html.parser"
     )
-
 
     for link in soup.find_all(
         "a",
@@ -1058,39 +1449,64 @@ def crawl(url):
             1
         )[0]
 
-
         crawl(next_url)
 
 
 crawl(start_url)
+```
 
+---
 
+# Part 9: URL Fragment
 
-47. URL FRAGMENT
-============================================================
+# 48. What is a URL Fragment?
 
 Example:
 
+```text
 https://example.com/about#team
+```
 
-এখানে:
+Here:
 
+```text
 #team
+```
 
-হলো fragment।
+is the **fragment**.
 
-Crawler-এ fragment remove করা যায়:
+For crawling, the fragment often does not identify a different server resource.
 
+We can remove it:
+
+```python
 url = url.split(
     "#",
     1
 )[0]
+```
 
+Example:
 
+```text
+https://example.com/about#team
+```
 
-48. TITLE + LINKS DATA EXTRACTION
-============================================================
+becomes:
 
+```text
+https://example.com/about
+```
+
+This can reduce duplicate URLs.
+
+---
+
+# Part 10: Data Extraction
+
+# 49. Extract Title + Links
+
+```python
 import requests
 
 from bs4 import BeautifulSoup
@@ -1107,12 +1523,10 @@ response = requests.get(
 
 response.raise_for_status()
 
-
 soup = BeautifulSoup(
     response.text,
     "html.parser"
 )
-
 
 title = (
     soup.title.get_text(strip=True)
@@ -1120,9 +1534,7 @@ title = (
     else None
 )
 
-
 links = []
-
 
 for a in soup.find_all(
     "a",
@@ -1138,21 +1550,18 @@ for a in soup.find_all(
 
 
 data = {
-
     "title": title,
-
     "links": links
-
 }
 
-
 print(data)
+```
 
+---
 
+# 50. Extract Structured Data
 
-49. DATA EXTRACT
-============================================================
-
+```python
 import requests
 
 from bs4 import BeautifulSoup
@@ -1167,12 +1576,10 @@ response = requests.get(
 
 response.raise_for_status()
 
-
 soup = BeautifulSoup(
     response.text,
     "html.parser"
 )
-
 
 data = {
 
@@ -1194,25 +1601,22 @@ data = {
 
 }
 
-
 print(data)
+```
 
+---
 
+# Part 11: Save Data
 
-50. JSON SAVE
-============================================================
+# 51. Save as JSON
 
+```python
 import json
 
-
 data = {
-
     "name": "Python",
-
     "type": "Programming Language"
-
 }
-
 
 with open(
     "data.json",
@@ -1226,25 +1630,20 @@ with open(
         indent=4,
         ensure_ascii=False
     )
+```
 
+---
 
+# 52. Save as CSV
 
-51. CSV SAVE
-============================================================
-
+```python
 import csv
 
-
 data = [
-
     ["Name", "Price"],
-
     ["Product A", "100"],
-
     ["Product B", "200"]
-
 ]
-
 
 with open(
     "products.csv",
@@ -1256,52 +1655,59 @@ with open(
     writer = csv.writer(file)
 
     writer.writerows(data)
+```
 
+---
 
-
-52. PANDAS SAVE
-============================================================
+# 53. Save with Pandas
 
 Install:
 
+```bash
 pip install pandas
-
+```
 
 Code:
 
+```python
 import pandas as pd
 
-
 data = [
-
     {
         "name": "Product A",
         "price": 100
     },
-
     {
         "name": "Product B",
         "price": 200
     }
-
 ]
-
 
 df = pd.DataFrame(data)
 
 print(df)
 
-
 df.to_csv(
     "products.csv",
     index=False
 )
+```
 
+### When is Pandas useful?
 
+Pandas is especially useful when you want to:
 
-53. HTML FILE SAVE
-============================================================
+* Clean data
+* Analyze data
+* Filter data
+* Sort data
+* Export structured data
 
+---
+
+# 54. Save HTML
+
+```python
 import os
 
 import requests
@@ -1316,12 +1722,10 @@ response = requests.get(
 
 response.raise_for_status()
 
-
 os.makedirs(
     "websites",
     exist_ok=True
 )
-
 
 with open(
     "websites/index.html",
@@ -1332,19 +1736,27 @@ with open(
     file.write(
         response.text
     )
+```
 
+---
 
+# Part 12: Rate Limiting
 
-54. RATE LIMITING
-============================================================
+# 55. What is Rate Limiting?
 
+Rate limiting controls how frequently the crawler sends requests.
+
+Simple example:
+
+```python
 import time
 
 time.sleep(1)
-
+```
 
 Example:
 
+```python
 for url in urls:
 
     response = requests.get(
@@ -1353,16 +1765,21 @@ for url in urls:
     )
 
     time.sleep(1)
+```
 
+### Why?
 
-Rate limiting server-এর উপর অতিরিক্ত load কমাতে সাহায্য
-করে।
+It helps reduce excessive load on the server.
 
+In real crawlers, rate limits should be designed according to the site's policies and technical constraints.
 
+---
 
-55. ERROR HANDLING
-============================================================
+# Part 13: Error Handling
 
+# 56. Handle Request Errors
+
+```python
 try:
 
     response = requests.get(
@@ -1377,12 +1794,19 @@ except requests.RequestException as e:
     print(
         f"Error: {e}"
     )
+```
 
+This prevents one failed request from crashing the entire crawler.
 
+---
 
-56. RETRY
-============================================================
+# 57. Retry
 
+Temporary network failures may happen.
+
+A simple retry function:
+
+```python
 import time
 
 import requests
@@ -1393,9 +1817,7 @@ def fetch(
     retries=3
 ):
 
-    for attempt in range(
-        retries
-    ):
+    for attempt in range(retries):
 
         try:
 
@@ -1416,14 +1838,30 @@ def fetch(
 
             time.sleep(2)
 
-
     return None
+```
 
+### Better production approach
 
+A production crawler may use:
 
-57. THREADING
-============================================================
+```text
+Retry
++
+Exponential Backoff
++
+Maximum Retry Limit
+```
 
+---
+
+# Part 14: Threading
+
+# 58. Basic Threading
+
+Threads can be useful for I/O-bound crawling.
+
+```python
 import threading
 
 
@@ -1435,7 +1873,6 @@ def worker():
 
 
 threads = []
-
 
 for _ in range(5):
 
@@ -1451,12 +1888,21 @@ for _ in range(5):
 for thread in threads:
 
     thread.join()
+```
 
+### Important
 
+Threading does not automatically make every program faster.
 
-58. QUEUE + THREADING
-============================================================
+It is most useful here when work spends significant time waiting for I/O.
 
+---
+
+# Part 15: Queue + Threading
+
+# 59. Worker Queue
+
+```python
 from queue import Queue
 
 import threading
@@ -1471,19 +1917,16 @@ def worker():
 
         item = queue.get()
 
-
         if item is None:
 
             queue.task_done()
 
             break
 
-
         print(
             "Processing:",
             item
         )
-
 
         queue.task_done()
 
@@ -1494,7 +1937,6 @@ for item in range(10):
 
 
 threads = []
-
 
 for _ in range(3):
 
@@ -1518,42 +1960,72 @@ for _ in threads:
 for thread in threads:
 
     thread.join()
+```
 
+### Architecture
 
+```text
+              Queue
+          /      |      \
+         ↓       ↓       ↓
+     Worker 1 Worker 2 Worker 3
+         ↓       ↓       ↓
+        Task    Task    Task
+```
 
-59. THREADING + VISITED LOCK
-============================================================
+This is a common worker-based pattern.
 
+---
+
+# Part 16: Thread Safety
+
+# 60. `Lock` + Visited Set
+
+When multiple threads access shared data, synchronization may be necessary.
+
+Example:
+
+```python
 import threading
-
 
 visited = set()
 
 lock = threading.Lock()
-
 
 with lock:
 
     if url not in visited:
 
         visited.add(url)
+```
 
+The lock protects the check-and-add operation from concurrent access.
 
-Multiple threads একই URL process করা থেকে prevent
-করতে lock ব্যবহার করা যায়।
+### Important
 
+> **When multiple threads share mutable data, think about thread safety.**
 
+---
 
-60. ROBOTS.TXT
-============================================================
+# Part 17: Robots.txt
 
-Website crawler rules দেখতে:
+# 61. What is `robots.txt`?
 
+Many websites publish crawler instructions at:
+
+```text
 https://example.com/robots.txt
+```
 
+Python provides:
 
-Python:
+```python
+from urllib.robotparser import RobotFileParser
+```
 
+Example:
+
+```python
 from urllib.robotparser import RobotFileParser
 
 
@@ -1565,96 +2037,126 @@ rp.set_url(
 
 rp.read()
 
-
 allowed = rp.can_fetch(
     "MyCrawler/1.0",
     "https://example.com/page"
 )
 
-
 print(allowed)
+```
 
+### Main idea
 
-Robots.txt-এর নির্দেশনা respect করা উচিত।
+```text
+robots.txt
+    ↓
+Crawler access instructions
+    ↓
+Check whether crawling is allowed
+```
 
+You should respect the site's published crawling instructions and applicable access restrictions.
 
+---
 
-61. DYNAMIC WEBSITE
-============================================================
+# Part 18: Dynamic Websites
 
-কিছু website-এর initial HTML-এ actual data থাকে না।
+# 62. Static vs Dynamic Website
 
-Flow:
+Some websites do not contain the actual data in the initial HTML.
 
+The page may work like:
+
+```text
 Browser
    ↓
-HTML
+Initial HTML
    ↓
 JavaScript
    ↓
-API
+API Request
    ↓
 Data
    ↓
 DOM Update
+```
 
+In these cases, simple `requests + BeautifulSoup` may not be enough.
 
-এক্ষেত্রে ব্যবহার করা যেতে পারে:
+Possible tools:
 
+```text
 Selenium
 Playwright
+```
 
+But first check whether the data is available through a public API or direct HTTP request.
 
-তবে আগে public API/network request ব্যবহার করা সম্ভব কিনা
-দেখা ভালো।
+---
 
+# Part 19: Selenium
 
+# 63. What is Selenium?
 
-62. SELENIUM
-============================================================
+Selenium is a browser automation tool.
 
 Install:
 
+```bash
 pip install selenium
+```
 
+Basic example:
 
-Basic:
-
+```python
 from selenium import webdriver
 
 
 driver = webdriver.Chrome()
 
-
 driver.get(
     "https://example.com"
 )
-
 
 print(
     driver.title
 )
 
-
 driver.quit()
+```
 
+### Selenium can
 
+* Open a browser
+* Visit pages
+* Click buttons
+* Fill forms
+* Execute JavaScript
+* Read rendered page content
 
-63. PLAYWRIGHT
-============================================================
+---
+
+# Part 20: Playwright
+
+# 64. What is Playwright?
+
+Playwright is another browser automation tool.
 
 Install:
 
+```bash
 pip install playwright
+```
 
+Install browser binaries:
 
-Browser install:
-
+```bash
 playwright install
+```
 
+Example:
 
-Code:
-
+```python
 from playwright.sync_api import sync_playwright
 
 
@@ -1673,67 +2175,79 @@ with sync_playwright() as p:
     )
 
     browser.close()
+```
 
+### Selenium vs Playwright
 
+Both can automate browsers.
 
-64. SCRAPY
-============================================================
+Playwright is especially popular for modern web applications and supports multiple browser engines.
+
+---
+
+# Part 21: Scrapy
+
+# 65. What is Scrapy?
+
+**Scrapy** is a Python framework designed for web crawling and web scraping.
+
+It provides many features out of the box:
+
+* Request scheduling
+* Concurrency
+* Spiders
+* Item pipelines
+* Middleware
+* Feed exports
+* Crawling structure
 
 Install:
 
+```bash
 pip install scrapy
-
+```
 
 Create project:
 
+```bash
 scrapy startproject mycrawler
-
+```
 
 Create spider:
 
+```bash
 scrapy genspider example example.com
+```
 
+---
 
+# 66. Basic Scrapy Spider
 
-65. BASIC SCRAPY SPIDER
-============================================================
-
+```python
 import scrapy
 
 
-class ExampleSpider(
-    scrapy.Spider
-):
+class ExampleSpider(scrapy.Spider):
 
     name = "example"
-
 
     allowed_domains = [
         "example.com"
     ]
 
-
     start_urls = [
         "https://example.com"
     ]
 
-
-    def parse(
-        self,
-        response
-    ):
+    def parse(self, response):
 
         title = response.css(
             "title::text"
         ).get()
 
-
         yield {
-
             "title": title
-
         }
-
 
         for link in response.css(
             "a::attr(href)"
@@ -1743,48 +2257,95 @@ class ExampleSpider(
                 link,
                 callback=self.parse
             )
+```
 
+### Important Scrapy concepts
 
+```text
+Spider
+→ Crawling logic
 
-66. REQUESTS + BEAUTIFULSOUP VS SCRAPY
-============================================================
+Request
+→ Web request
 
-Feature             Requests + BS4      Scrapy
-------------------------------------------------
-Learning             Easy               Medium
-Small Project        Good               Good
-Large Crawler        Limited            Excellent
-Queue                Manual             Built-in
-Pipeline             Manual             Built-in
-Middleware           Manual             Built-in
-Concurrency          Manual             Built-in
-Project Structure    Simple             Structured
+Response
+→ Server response
 
+Item
+→ Extracted data
 
+Pipeline
+→ Process/store data
 
-67. ASYNC CRAWLING
-============================================================
+Middleware
+→ Modify request/response behavior
+```
 
-অনেক HTTP request concurrently করতে:
+---
 
+# Part 22: Requests + BeautifulSoup vs Scrapy
+
+# 67. Comparison
+
+| Feature           | Requests + BeautifulSoup | Scrapy                  |
+| ----------------- | ------------------------ | ----------------------- |
+| Learning          | Easy                     | Medium                  |
+| Small project     | Excellent                | Good                    |
+| Large crawler     | More manual work         | Excellent               |
+| Queue             | Manual                   | Built-in                |
+| Pipeline          | Manual                   | Built-in                |
+| Middleware        | Manual                   | Built-in                |
+| Concurrency       | Manual                   | Built-in                |
+| Project structure | Simple                   | Structured              |
+| Best for          | Small/custom scripts     | Large crawling projects |
+
+### Simple Rule
+
+```text
+Small project
+→ Requests + BeautifulSoup
+
+Large crawler
+→ Scrapy
+```
+
+---
+
+# Part 23: Async Crawling
+
+# 68. Async HTTP Crawling
+
+For many HTTP requests, asynchronous programming can be useful.
+
+Popular tools:
+
+```text
 asyncio
 aiohttp
 httpx
+```
 
+Conceptually:
 
-Concept:
-
+```text
 Request 1 ──┐
 Request 2 ──┤
 Request 3 ──┼── Async Event Loop
 Request 4 ──┤
 Request 5 ──┘
+```
 
+Async crawling is especially useful when the workload is heavily I/O-bound.
 
+---
 
-68. PRODUCTION CRAWLER ARCHITECTURE
-============================================================
+# Part 24: Production Crawler Architecture
 
+# 69. Production Crawler
+
+A production crawler may have this architecture:
+
+```text
 START URL
     ↓
 URL Scheduler
@@ -1806,48 +2367,54 @@ URL Normalize                 Data Cleaning
 Duplicate Check               Data Storage
  ↓
 URL Scheduler
+```
 
+---
 
+# Part 25: Production Features
 
-69. PRODUCTION CRAWLER FEATURES
-============================================================
+# 70. Basic Features
 
-Basic:
-
+```text
 ✓ Requests
 ✓ BeautifulSoup
 ✓ Queue
-✓ Visited
-✓ Depth
+✓ Visited Set
+✓ Depth Control
 ✓ Domain Filtering
+```
 
+### Intermediate Features
 
-Intermediate:
-
+```text
 ✓ Headers
 ✓ Timeout
 ✓ Error Handling
 ✓ Retry
 ✓ Rate Limiting
 ✓ URL Normalization
+```
 
+### Advanced Features
 
-Advanced:
-
+```text
 ✓ Threading
-✓ Async
+✓ Async I/O
 ✓ Logging
 ✓ Persistent Queue
 ✓ Database
 ✓ Duplicate Detection
 ✓ Robots.txt
 ✓ Content-Type Validation
+```
 
+---
 
+# Part 26: Complete Crawler
 
-70. COMPLETE PRODUCTION CRAWLER
-============================================================
+# 71. Production-Style Crawler Example
 
+```python
 import os
 
 import requests
@@ -1930,24 +2497,20 @@ class ProductionCrawler:
 
         parsed_url = urlparse(url)
 
-
         domain_folder = (
             parsed_url.netloc
             .replace(":", "_")
         )
-
 
         folder_path = os.path.join(
             self.base_folder,
             domain_folder
         )
 
-
         os.makedirs(
             folder_path,
             exist_ok=True
         )
-
 
         return folder_path
 
@@ -1964,15 +2527,12 @@ class ProductionCrawler:
             )
         )
 
-
         if (
             url.rstrip("/")
             == self.start_url
         ):
 
-            file_name = (
-                "index.html"
-            )
+            file_name = "index.html"
 
         else:
 
@@ -1980,12 +2540,10 @@ class ProductionCrawler:
                 f"{abs(hash(url))}.html"
             )
 
-
         file_path = os.path.join(
             folder_path,
             file_name
         )
-
 
         with open(
             file_path,
@@ -1994,7 +2552,6 @@ class ProductionCrawler:
         ) as file:
 
             file.write(html)
-
 
         return file_path
 
@@ -2013,12 +2570,9 @@ class ProductionCrawler:
                 )
             )
 
-
             response.raise_for_status()
 
-
             return response
-
 
         except requests.RequestException as e:
 
@@ -2041,7 +2595,6 @@ class ProductionCrawler:
                 self.queue.popleft()
             )
 
-
             if (
                 depth
                 > self.max_depth
@@ -2049,14 +2602,11 @@ class ProductionCrawler:
 
                 continue
 
-
             if url in self.visited:
 
                 continue
 
-
             self.visited.add(url)
-
 
             print(
                 f"[{depth}/"
@@ -2064,14 +2614,11 @@ class ProductionCrawler:
                 f"Crawling: {url}"
             )
 
-
             response = self.fetch(url)
-
 
             if response is None:
 
                 continue
-
 
             file_path = (
                 self.save_html(
@@ -2080,11 +2627,9 @@ class ProductionCrawler:
                 )
             )
 
-
             print(
                 f"Saved: {file_path}"
             )
-
 
             if (
                 depth
@@ -2093,12 +2638,10 @@ class ProductionCrawler:
 
                 continue
 
-
             soup = BeautifulSoup(
                 response.text,
                 "html.parser"
             )
-
 
             for tag in soup.find_all(
                 "a",
@@ -2110,14 +2653,12 @@ class ProductionCrawler:
                     tag["href"]
                 )
 
-
                 next_url = (
                     next_url.split(
                         "#",
                         1
                     )[0]
                 )
-
 
                 if not next_url.startswith(
                     (
@@ -2128,13 +2669,11 @@ class ProductionCrawler:
 
                     continue
 
-
                 if not self.is_same_domain(
                     next_url
                 ):
 
                     continue
-
 
                 if (
                     next_url
@@ -2155,23 +2694,21 @@ if __name__ == "__main__":
         "https://example.com"
     )
 
-
     crawler = ProductionCrawler(
-
         start_url=start_url,
-
         max_depth=2
-
     )
 
-
     crawler.crawl()
+```
 
+---
 
+# Part 27: Production Crawler Flow
 
-71. PRODUCTION CRAWLER FLOW
-============================================================
+# 72. How Does It Work?
 
+```text
 Start URL
     ↓
 Queue
@@ -2203,61 +2740,95 @@ Visited Check
 Queue
     ↓
 Next Page
+```
 
+---
 
+# Part 28: Important Python Data Structures
 
-72. IMPORTANT PYTHON DATA STRUCTURES
-============================================================
+# 73. `set`
 
-Set:
-
+```python
 visited = set()
+```
 
-Purpose:
-Duplicate URL prevent করা।
+### Purpose
 
+Avoid duplicate URLs.
 
-List:
+Example:
 
+```text
+A
+B
+C
+A  ← Duplicate
+```
+
+The set keeps only unique values.
+
+---
+
+# 74. `list`
+
+```python
 urls = []
+```
 
-Purpose:
-Simple collection।
+### Purpose
 
+Simple collection of URLs or data.
 
-Dictionary:
+---
 
+# 75. `dict`
+
+```python
 data = {
     "title": "Python",
     "url": "https://example.com"
 }
+```
 
-Purpose:
-Structured data।
+### Purpose
 
+Store structured data.
 
-Queue:
+---
 
+# 76. `Queue`
+
+```python
 from queue import Queue
+```
 
-Purpose:
-Worker-based processing।
+Useful for worker-based processing, especially with threads.
 
+---
 
-Deque:
+# 77. `deque`
 
+```python
 from collections import deque
+```
 
-Purpose:
-Fast queue operations / BFS crawling।
+Useful for efficient queue operations such as:
 
+```python
+queue.popleft()
+```
 
+It is especially useful for BFS-style crawling.
 
-73. CRAWLER-এর IMPORTANT CONCEPT
-============================================================
+---
 
-Crawler-এর core:
+# Part 29: Crawler Core
 
+# 78. Core Concept
+
+The basic crawler process is:
+
+```text
 URL
  ↓
 Request
@@ -2268,22 +2839,25 @@ HTML
  ↓
 Parse
  ↓
-Links
+Find Links
  ↓
 Queue
  ↓
 Visited
  ↓
 Next URL
+```
 
+---
 
+# Part 30: Scraper Core
 
-74. SCRAPER-এর CORE
-============================================================
+# 79. Core Scraping Process
 
+```text
 URL
  ↓
-Request
+HTTP Request
  ↓
 HTML
  ↓
@@ -2295,153 +2869,249 @@ Extract Data
  ↓
 Clean Data
  ↓
-JSON/CSV/Database
+JSON / CSV / Database
+```
 
+---
 
+# Part 31: Common Mistakes
 
-75. COMMON MISTAKES
-============================================================
+# 80. Mistake 1 — No Timeout
 
-Mistake 1:
+Bad:
 
+```python
 requests.get(url)
+```
 
 Better:
 
+```python
 requests.get(
     url,
     timeout=10
 )
+```
 
+---
 
-Mistake 2:
+# 81. Mistake 2 — No Visited Set
 
-visited না রাখা।
+Without:
 
-Result:
+```python
+visited = set()
+```
 
+the crawler may process the same pages repeatedly.
+
+Possible result:
+
+```text
 Infinite Loop
+```
 
+---
 
-Mistake 3:
+# 82. Mistake 3 — Not Handling Relative URLs
 
-Relative URL handle না করা।
+Bad:
 
-Wrong:
-
+```python
 next_url = link["href"]
+```
+
+If the link is:
+
+```text
+/about
+```
+
+this is not a complete URL.
 
 Better:
 
+```python
 next_url = urljoin(
     current_url,
     link["href"]
 )
+```
 
+---
 
-Mistake 4:
+# 83. Mistake 4 — Crawling External Domains
 
-External domain crawl করা।
+A page may contain links to other websites.
+
+Use domain filtering:
+
+```python
+if not is_same_domain(next_url):
+    continue
+```
+
+---
+
+# 84. Mistake 5 — No Error Handling
+
+Bad:
+
+```python
+response = requests.get(url)
+```
 
 Better:
 
-Domain filtering ব্যবহার করা।
-
-
-Mistake 5:
-
-Error handling না করা।
-
-Better:
-
+```python
 try:
-    ...
+
+    response = requests.get(
+        url,
+        timeout=10
+    )
+
+    response.raise_for_status()
+
 except requests.RequestException:
-    ...
+    pass
+```
 
+---
 
-Mistake 6:
+# 85. Mistake 6 — Sending Requests Too Quickly
 
-অতিরিক্ত দ্রুত request পাঠানো।
+Bad crawler:
+
+```text
+Request
+Request
+Request
+Request
+Request
+Request
+...
+```
 
 Better:
 
-Rate limiting
+```text
+Rate Limiting
++
 Retry
++
 Backoff
+```
 
+This helps reduce unnecessary load and handles temporary failures more responsibly.
 
+---
 
-76. URL NORMALIZATION
-============================================================
+# Part 32: URL Normalization
 
-Crawler-এ একই resource-এর duplicate URL আসতে পারে।
+# 86. Why Normalize URLs?
+
+The same resource may appear in different URL forms.
 
 Example:
 
+```text
 https://example.com/page
-
 https://example.com/page#section
+```
 
-Fragment remove করলে duplicate কমে:
+The fragment can be removed:
 
+```python
 url = url.split(
     "#",
     1
 )[0]
+```
 
-আর প্রয়োজন অনুযায়ী query parameters, trailing slash,
-case sensitivity ইত্যাদিও project-এর requirements অনুযায়ী
-normalize করা যায়।
+Depending on the project, you may also need to consider:
 
+* Query parameters
+* Trailing slashes
+* URL encoding
+* Case sensitivity
+* Default ports
 
+### Important
 
-77. CRAWLER OPTIMIZATION
-============================================================
+URL normalization rules depend on the application. Do not blindly remove query parameters because they may identify different resources.
 
-Optimization:
+---
 
-1. Session ব্যবহার
-2. Connection reuse
-3. URL deduplication
-4. Domain filtering
-5. Depth limiting
-6. Rate limiting
-7. Concurrent requests
-8. Async I/O
-9. Efficient parser
-10. Database indexing
-11. Retry
-12. Logging
+# Part 33: Crawler Optimization
 
+# 87. Optimization Techniques
 
+Useful optimizations include:
 
-78. DATA STORAGE
-============================================================
+1. Use a `Session`
+2. Reuse connections
+3. Deduplicate URLs
+4. Restrict domains
+5. Limit depth
+6. Use rate limiting
+7. Use concurrency carefully
+8. Use async I/O when appropriate
+9. Use an efficient parser
+10. Add database indexes
+11. Use retry logic
+12. Add logging
 
-Small Project:
+---
 
+# Part 34: Data Storage
+
+# 88. Where Should We Store Scraped Data?
+
+### Small Project
+
+```text
 JSON
 CSV
+```
 
+### Medium Project
 
-Medium Project:
-
+```text
 SQLite
+```
 
+### Large Project
 
-Large Project:
-
+```text
 PostgreSQL
 MongoDB
+```
 
+### Simple Rule
 
+```text
+Small data
+→ JSON / CSV
 
-79. DYNAMIC WEBSITE
-============================================================
+Structured application data
+→ SQLite / PostgreSQL
 
-Static Website:
+Large-scale or document-oriented data
+→ MongoDB or another suitable database
+```
 
+Choose the storage system based on the project requirements.
+
+---
+
+# Part 35: Static vs Dynamic Website
+
+# 89. Static Website
+
+For a simple static website:
+
+```text
 Requests
    ↓
 HTML
@@ -2449,11 +3119,16 @@ HTML
 BeautifulSoup
    ↓
 Data
+```
 
+---
 
-Dynamic Website:
+# 90. Dynamic Website
 
-Requests
+For a JavaScript-heavy website:
+
+```text
+Browser
    ↓
 HTML
    ↓
@@ -2462,56 +3137,86 @@ JavaScript
 API
    ↓
 Data
+```
 
+Possible tools:
 
-এই ক্ষেত্রে:
-
+```text
 Selenium
 Playwright
+```
 
-ব্যবহার করা যায়।
+But if a public API or direct HTTP endpoint provides the required data, that is often simpler and more efficient than browser automation.
 
+---
 
+# Part 36: Crawler vs Spider
 
-80. CRAWLER বনাম SPIDER
-============================================================
+# 91. Crawler vs Spider
 
-Crawler:
+### Crawler
 
-General concept
+A general concept.
 
+```text
 Find URLs
 Visit URLs
 Follow Links
+```
 
+### Spider
 
-Spider:
+In Scrapy, a **Spider** is a class that defines crawling and extraction logic.
 
-Scrapy-এর context-এ crawler logic implement করা
-একটি component/class।
+Example:
 
+```python
+class ExampleSpider(scrapy.Spider):
+    ...
+```
 
+### Easy way to remember
 
-81. CRAWLER বনাম SCRAPER
-============================================================
+```text
+Crawler
+→ General concept
 
-Crawler:
+Spider
+→ Scrapy crawling component
+```
 
+---
+
+# Part 37: Crawler vs Scraper
+
+# 92. Crawler vs Scraper
+
+### Crawler
+
+Main focus:
+
+```text
 URL Discovery
 Page Navigation
+```
 
+### Scraper
 
-Scraper:
+Main focus:
 
+```text
 Data Extraction
 Data Cleaning
 Data Storage
+```
 
+---
 
+# Part 38: Web Crawling Roadmap
 
-82. WEB CRAWLING ROADMAP
-============================================================
+# 93. Learning Roadmap
 
+```text
 STEP 01
 HTTP Basics
     ↓
@@ -2552,7 +3257,7 @@ STEP 13
 Threading / Queue
     ↓
 STEP 14
-Async
+Async I/O
     ↓
 STEP 15
 Selenium / Playwright
@@ -2562,204 +3267,470 @@ Scrapy
     ↓
 STEP 17
 Production Crawler
+```
 
+---
 
+# Part 39: Practice Projects
 
-83. PRACTICE PROJECTS
-============================================================
-
-Project 1:
-Link Extractor
+# 94. Project 1 — Link Extractor
 
 Input:
+
+```text
 Website URL
+```
 
 Output:
+
+```text
 All Links
+```
 
+---
 
-Project 2:
-Website Crawler
+# 95. Project 2 — Website Crawler
 
 Input:
+
+```text
 Start URL
+```
 
 Output:
+
+```text
 Visited URLs
+```
 
+---
 
-Project 3:
-Website Structure Mapper
+# 96. Project 3 — Website Structure Mapper
 
+```text
 URL
  ↓
 Links
  ↓
 Tree Structure
+```
 
+---
 
-Project 4:
-News Scraper
+# 97. Project 4 — News Scraper
 
+Extract:
+
+```text
 Title
 Author
 Date
 URL
+```
 
+---
 
-Project 5:
-Product Scraper
+# 98. Project 5 — Product Scraper
 
+Extract:
+
+```text
 Product
 Price
 Rating
 URL
+```
 
+---
 
-Project 6:
-Job Scraper
+# 99. Project 6 — Job Scraper
 
+Extract:
+
+```text
 Job Title
 Company
 Location
 URL
+```
 
+---
 
-Project 7:
-Multi-threaded Crawler
+# 100. Project 7 — Multi-threaded Crawler
 
+Use:
+
+```text
 Queue
 +
 Threads
 +
-Visited
+Visited Set
+```
 
+---
 
-Project 8:
-Scrapy Project
+# 101. Project 8 — Scrapy Project
 
+Use:
+
+```text
 Spider
 Pipeline
 Middleware
 Database
+```
 
+---
 
+# Part 40: Required Packages
 
-84. REQUIRED PACKAGES
-============================================================
+# 102. Basic
 
-Basic:
-
+```bash
 pip install requests beautifulsoup4
+```
 
+### Pandas
 
-Pandas:
-
+```bash
 pip install pandas
+```
 
+### Selenium
 
-Selenium:
-
+```bash
 pip install selenium
+```
 
+### Playwright
 
-Playwright:
-
+```bash
 pip install playwright
-
 playwright install
+```
 
+### Scrapy
 
-Scrapy:
-
+```bash
 pip install scrapy
+```
 
+### Optional
 
-Optional:
-
+```bash
 pip install lxml
-
 pip install aiohttp
-
 pip install httpx
+```
 
+---
 
+# Part 41: Short Revision
 
-85. SHORT REVISION
-============================================================
+# 103. Quick Revision
 
+```text
 Web Crawling
-→ Discover and visit pages.
+→ Discover and visit web pages
+```
 
-
+```text
 Web Scraping
-→ Extract information from pages.
+→ Extract useful data from web pages
+```
 
-
+```text
 Requests
-→ Send HTTP requests.
+→ Send HTTP requests
+```
 
-
+```text
 BeautifulSoup
-→ Parse HTML.
+→ Parse HTML and extract data
+```
 
-
+```text
 urljoin()
-→ Relative URL → Absolute URL.
+→ Convert relative URL to absolute URL
+```
 
-
+```text
 urlparse()
-→ Analyze URL.
+→ Break URL into components
+```
 
-
+```text
 Set
-→ Avoid duplicate URLs.
+→ Prevent duplicate URLs
+```
 
-
+```text
 Queue / deque
-→ Manage URLs.
+→ Manage URLs
+```
 
-
+```text
 Depth
-→ Control crawling levels.
+→ Control crawling levels
+```
 
-
+```text
 Domain Restriction
-→ Stay inside target website.
+→ Stay inside the target domain
+```
 
-
+```text
 Session
-→ Reuse HTTP connections/session state.
+→ Reuse settings and maintain session state
+```
 
-
+```text
 Timeout
-→ Prevent indefinite waiting.
+→ Prevent requests from waiting indefinitely
+```
 
-
+```text
 Retry
-→ Handle temporary failures.
+→ Handle temporary failures
+```
 
-
+```text
 Rate Limiting
-→ Control request frequency.
+→ Control request frequency
+```
 
+```text
+robots.txt
+→ Check published crawler access rules
+```
 
-Robots.txt
-→ Check crawler access rules.
-
-
+```text
 Selenium / Playwright
-→ Browser automation.
+→ Automate browsers
+```
 
-
+```text
 Scrapy
-→ Large-scale crawling/scraping framework.
+→ Framework for larger crawling/scraping projects
+```
 
+---
 
+# Part 42: Interview Questions
 
-86. FINAL MENTAL MODEL
-============================================================
+# 104. What is Web Crawling?
 
+### Answer
+
+> **Web crawling is the automated process of discovering and visiting web pages, usually by following links.**
+
+---
+
+# 105. What is Web Scraping?
+
+### Answer
+
+> **Web scraping is the automated process of extracting useful data from web pages.**
+
+---
+
+# 106. What is the difference between Crawling and Scraping?
+
+### Answer
+
+```text
+Crawling
+→ Finds and visits pages
+
+Scraping
+→ Extracts data from pages
+```
+
+---
+
+# 107. Why is `requests` used?
+
+### Answer
+
+`requests` is used to send HTTP requests and receive HTTP responses.
+
+Example:
+
+```python
+response = requests.get(
+    url,
+    timeout=10
+)
+```
+
+---
+
+# 108. Why use BeautifulSoup?
+
+### Answer
+
+BeautifulSoup is used to parse HTML and extract elements such as:
+
+```text
+Title
+Headings
+Paragraphs
+Links
+Images
+Attributes
+```
+
+---
+
+# 109. What is `urljoin()`?
+
+### Answer
+
+`urljoin()` combines a base URL with a relative URL.
+
+Example:
+
+```python
+urljoin(
+    "https://example.com",
+    "/about"
+)
+```
+
+Result:
+
+```text
+https://example.com/about
+```
+
+---
+
+# 110. Why do we use a `visited` set?
+
+### Answer
+
+To prevent processing the same URL multiple times and to reduce the chance of infinite crawling loops.
+
+---
+
+# 111. Why do we need depth control?
+
+### Answer
+
+Depth control limits how far the crawler can explore.
+
+It prevents uncontrolled crawling.
+
+---
+
+# 112. Why use domain restriction?
+
+### Answer
+
+To prevent the crawler from leaving the target website/domain.
+
+---
+
+# 113. What is `robots.txt`?
+
+### Answer
+
+`robots.txt` is a file that can publish instructions about which parts of a site automated crawlers may access.
+
+---
+
+# 114. What is Scrapy?
+
+### Answer
+
+> **Scrapy is a Python framework for building web crawlers and web scrapers.**
+
+It provides features such as:
+
+```text
+Spiders
+Request scheduling
+Concurrency
+Pipelines
+Middleware
+Feed exports
+```
+
+---
+
+# 115. When should you use Selenium or Playwright?
+
+### Answer
+
+Use browser automation when the required content or interaction depends on browser-side JavaScript and cannot be conveniently obtained through direct HTTP requests.
+
+---
+
+# 116. Why use a `Session`?
+
+### Answer
+
+A `requests.Session()` can:
+
+* Reuse connections
+* Reuse headers
+* Maintain cookies
+* Keep common request settings
+
+---
+
+# 117. Why is timeout important?
+
+### Answer
+
+A timeout prevents a network request from waiting indefinitely.
+
+---
+
+# 118. Why use retry?
+
+### Answer
+
+Network requests can fail temporarily.
+
+Retry logic gives the request another chance.
+
+Production systems often combine:
+
+```text
+Retry
++
+Backoff
++
+Maximum Attempts
+```
+
+---
+
+# 119. What is the difference between threading and async?
+
+### Simple Answer
+
+Both can help with I/O-bound work, but they use different models.
+
+```text
+Threading
+→ Multiple threads execute work
+
+Async
+→ An event loop manages cooperative asynchronous tasks
+```
+
+For many network operations, async can be very efficient, while threads can be easier for some existing synchronous code.
+
+---
+
+# Part 43: Final Mental Model
+
+# 120. Complete Web Crawling System
+
+```text
                          WEB
                           |
                           ↓
@@ -2803,32 +3774,47 @@ Scrapy
                                        |
                                        ↓
                               Production Crawler
+```
 
+---
 
+# 121. Final Formula
 
-87. FINAL FORMULA
-============================================================
+## Crawler
 
+```text
 Crawler
+=
+URL Discovery
++
+Queue
++
+Visited
++
+HTTP Request
++
+Link Following
+```
 
-= URL Discovery
-+ Queue
-+ Visited
-+ HTTP Request
-+ Link Following
+## Scraper
 
-
+```text
 Scraper
+=
+HTTP Request
++
+HTML Parsing
++
+Data Extraction
++
+Data Cleaning
++
+Data Storage
+```
 
-= HTTP Request
-+ HTML Parsing
-+ Data Extraction
-+ Data Cleaning
-+ Data Storage
+## Complete Web Scraping System
 
-
-Complete Web Scraping System
-
+```text
 Crawler
    ↓
 URL Discovery
@@ -2844,9 +3830,116 @@ Data Cleaning
 Data Storage
    ↓
 Database / CSV / JSON
+```
 
+---
 
-============================================================
-                    END OF NOTES
-============================================================
+# 122. Final Cheat Sheet
+
+```text
+┌─────────────────────────────────────────────┐
+│       WEB CRAWLING & WEB SCRAPING           │
+├─────────────────────────────────────────────┤
+│                                             │
+│ Crawler                                     │
+│ → Find and visit pages                      │
+│                                             │
+│ Scraper                                     │
+│ → Extract useful data                       │
+│                                             │
+│ requests                                    │
+│ → HTTP requests                             │
+│                                             │
+│ BeautifulSoup                               │
+│ → HTML parsing                              │
+│                                             │
+│ urljoin()                                   │
+│ → Relative → Absolute URL                   │
+│                                             │
+│ urlparse()                                  │
+│ → Analyze URL                               │
+│                                             │
+│ visited set                                 │
+│ → Avoid duplicates                          │
+│                                             │
+│ Queue / deque                               │
+│ → Manage URLs                               │
+│                                             │
+│ Depth                                       │
+│ → Control crawl level                       │
+│                                             │
+│ Domain filtering                            │
+│ → Stay inside target domain                 │
+│                                             │
+│ Session                                     │
+│ → Reuse settings / session state            │
+│                                             │
+│ Timeout                                     │
+│ → Limit waiting time                        │
+│                                             │
+│ Retry + Backoff                             │
+│ → Handle temporary failures                 │
+│                                             │
+│ Rate Limiting                               │
+│ → Control request frequency                 │
+│                                             │
+│ robots.txt                                  │
+│ → Check published crawl instructions       │
+│                                             │
+│ Selenium / Playwright                       │
+│ → Browser automation                        │
+│                                             │
+│ Scrapy                                      │
+│ → Large-scale crawling framework            │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+# One-Line Memory
+
+```text
+Crawler = Find Pages
+Scraper = Extract Data
+Requests = Get HTML
+BeautifulSoup = Parse HTML
+urljoin = Fix URLs
+Set = Remove Duplicates
+Queue = Manage URLs
+Depth = Limit Crawling
+Session = Reuse Connection/State
+Timeout = Stop Waiting Too Long
+Retry = Try Again
+Rate Limit = Slow Down Requests
+Selenium/Playwright = Control Browser
+Scrapy = Build Large Crawlers
+```
+
+## Most Important Concept
+
+> **Web Crawling finds and visits pages. Web Scraping extracts useful information from those pages.**
+
+The basic workflow is:
+
+```text
+URL
+ ↓
+HTTP Request
+ ↓
+Response
+ ↓
+HTML
+ ↓
+Parse
+ ↓
+Find Links / Data
+ ↓
+Normalize URLs
+ ↓
+Visited Check
+ ↓
+Queue
+ ↓
+Next Page
+```
+
 """
