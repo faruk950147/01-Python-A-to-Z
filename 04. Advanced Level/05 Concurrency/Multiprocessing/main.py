@@ -1,11 +1,11 @@
 """
-# Python Multiprocessing — Full Notes
+# Python Processing & Multiprocessing — Full Notes
 
 ## 1. What is Processing?
 
-**Processing** হলো কোনো input/data-এর উপর বিভিন্ন operation প্রয়োগ করে সেটিকে পরিবর্তন, বিশ্লেষণ বা useful output-এ রূপান্তর করার প্রক্রিয়া।
+**Processing** is the process of applying different operations to input/data in order to transform, analyze, or convert it into useful output.
 
-Python-এ processing করার বিভিন্ন উপায় আছে:
+In Python, there are several ways to perform processing:
 
 * Single Processing
 * Multithreading
@@ -16,17 +16,17 @@ Python-এ processing করার বিভিন্ন উপায় আছে:
 
 # 2. What is Multiprocessing?
 
-**Multiprocessing** হলো এমন একটি technique যেখানে একটি Python program-এর কাজ একাধিক **independent process**-এর মাধ্যমে execute করা হয়।
+**Multiprocessing** is a technique where the tasks of a Python program are executed using multiple **independent processes**.
 
-প্রতিটি process-এর সাধারণত **নিজস্ব memory space** থাকে এবং multiprocessing ব্যবহার করে একাধিক CPU core-এ কাজ parallelভাবে চালানো সম্ভব।
+Each process generally has its **own memory space**, and multiprocessing can allow tasks to run in parallel on multiple CPU cores.
 
-Multiprocessing বিশেষভাবে **CPU-bound tasks**-এর জন্য useful।
+Multiprocessing is especially useful for **CPU-bound tasks**.
 
 ### Examples
 
 * Image Processing
 * Video Processing
-* Large Mathematical Calculation
+* Large Mathematical Calculations
 * Scientific Computation
 * Data Processing
 * Machine Learning Computation
@@ -55,11 +55,11 @@ if __name__ == "__main__":
 
 # 3. What is a Process?
 
-**Process** হলো একটি program-এর বর্তমানে চলমান instance।
+A **Process** is a currently running instance of a program.
 
-যখন আমরা Python program run করি, operating system সেটিকে একটি process হিসেবে চালায়।
+When we run a Python program, the operating system runs it as a process.
 
-একটি program থেকে একাধিক process তৈরি করা যেতে পারে।
+Multiple processes can be created from a single program.
 
 ```text
 Python Program
@@ -78,7 +78,7 @@ Main Process
 
 # 4. Main Process
 
-যে process থেকে Python program-এর execution শুরু হয় তাকে সাধারণত **Main Process** বলা হয়।
+The process from which the execution of a Python program starts is generally called the **Main Process**.
 
 ```python
 import multiprocessing
@@ -99,13 +99,13 @@ Possible Output:
 
 # 5. multiprocessing.current_process()
 
-বর্তমানে যে process code execute করছে তার `Process` object পাওয়ার জন্য:
+To get the `Process` object representing the process that is currently executing the code:
 
 ```python
 multiprocessing.current_process()
 ```
 
-ব্যবহার করা হয়।
+is used.
 
 ### Example
 
@@ -122,13 +122,13 @@ print(process)
 
 # 6. Process Name
 
-Process-এর নাম দেখতে:
+To get the name of a process:
 
 ```python
 process.name
 ```
 
-ব্যবহার করা হয়।
+is used.
 
 ### Example
 
@@ -147,7 +147,7 @@ Output:
 MainProcess
 ```
 
-Child process-এর default name সাধারণত এমন হতে পারে:
+The default name of child processes may look like:
 
 ```text
 Process-1
@@ -159,9 +159,9 @@ Process-3
 
 # 7. Process ID — PID
 
-প্রতিটি running process-এর একটি **Process ID (PID)** থাকে।
+Every running process has a **Process ID (PID)**.
 
-Python-এ PID পাওয়ার জন্য:
+In Python, the PID can be obtained using:
 
 ```python
 import os
@@ -186,7 +186,7 @@ print("PID:", os.getpid())
 
 # 8. Process `ident`
 
-`multiprocessing.Process` object-এর `ident` attribute process-এর identifier দেয়।
+The `ident` attribute of a `multiprocessing.Process` object provides the process identifier.
 
 ```python
 import multiprocessing
@@ -199,27 +199,27 @@ print(process.ident)
 
 ### Important
 
-`ident` এবং OS-এর PID একই concept নয়।
+`ident` and the OS-level PID are not exactly the same concept.
 
-OS-level process ID দেখতে:
+To get the OS-level process ID:
 
 ```python
 os.getpid()
 ```
 
-ব্যবহার করা যায়।
+can be used.
 
 ---
 
 # 9. `is_alive()`
 
-কোনো process বর্তমানে running অবস্থায় আছে কিনা জানতে:
+To check whether a process is currently running:
 
 ```python
 process.is_alive()
 ```
 
-ব্যবহার করা হয়।
+is used.
 
 ### Example
 
@@ -255,7 +255,7 @@ False
 
 # 10. Child Process
 
-Main/Parent process থেকে তৈরি হওয়া process-কে **Child Process** বলা হয়।
+A process created by a main/parent process is called a **Child Process**.
 
 ```text
 Parent Process
@@ -285,13 +285,13 @@ if __name__ == "__main__":
 
 # 11. `multiprocessing.Process()`
 
-নতুন process তৈরি করার জন্য:
+To create a new process:
 
 ```python
 multiprocessing.Process()
 ```
 
-ব্যবহার করা হয়।
+is used.
 
 ### Basic Syntax
 
@@ -312,7 +312,7 @@ multiprocessing.Process(
 )
 ```
 
-সবচেয়ে বেশি ব্যবহৃত parameters:
+The most commonly used parameters are:
 
 ```text
 target
@@ -326,7 +326,7 @@ daemon
 
 # 12. `target`
 
-`target` হলো সেই **callable/function**, যেটি child process-এ execute হবে।
+`target` is the **callable/function** that will be executed in the child process.
 
 ### Example
 
@@ -338,19 +338,19 @@ def task():
 process = multiprocessing.Process(target=task)
 ```
 
-এখানে:
+Here:
 
 ```python
 target=task
 ```
 
-মানে child process `task` function execute করবে।
+means that the child process will execute the `task` function.
 
 ---
 
 # 13. `target=task` vs `target=task()`
 
-এটি খুব গুরুত্বপূর্ণ।
+This is very important.
 
 ### Correct
 
@@ -358,7 +358,7 @@ target=task
 process = multiprocessing.Process(target=task)
 ```
 
-এখানে `task` function-এর reference দেওয়া হচ্ছে।
+Here, a reference to the `task` function is passed.
 
 ### Incorrect
 
@@ -366,27 +366,25 @@ process = multiprocessing.Process(target=task)
 process = multiprocessing.Process(target=task())
 ```
 
-এখানে `task()` আগে execute হয়ে যাবে এবং তার return value `target` হিসেবে চলে যাবে।
+Here, `task()` is executed immediately, and its return value is passed as the `target`.
 
-তাই সাধারণভাবে:
+Therefore, normally use:
 
 ```python
 target=task
 ```
 
-ব্যবহার করতে হবে।
-
 ---
 
 # 14. `start()`
 
-Process শুরু করার জন্য:
+To start a process:
 
 ```python
 process.start()
 ```
 
-ব্যবহার করা হয়।
+is used.
 
 ### Example
 
@@ -404,19 +402,19 @@ if __name__ == "__main__":
     process.start()
 ```
 
-`start()` call করার পর নতুন process তৈরি হয়ে target function execute করার জন্য শুরু হয়।
+After calling `start()`, a new process is created and begins execution of the target callable.
 
 ---
 
 # 15. `join()`
 
-কোনো child process শেষ না হওয়া পর্যন্ত calling process-কে অপেক্ষা করানোর জন্য:
+To make the calling process wait until a child process finishes:
 
 ```python
 process.join()
 ```
 
-ব্যবহার করা হয়।
+is used.
 
 ### Example
 
@@ -439,13 +437,13 @@ if __name__ == "__main__":
     print("Main finished")
 ```
 
-এখানে:
+Here:
 
 ```python
 process.join()
 ```
 
-এর কারণে main process child process শেষ হওয়া পর্যন্ত অপেক্ষা করবে।
+causes the main process to wait until the child process finishes.
 
 ---
 
@@ -457,10 +455,10 @@ process.join()
 process.start()
 ```
 
-কাজ:
+Purpose:
 
 ```text
-নতুন process শুরু করে
+Starts the new process
 ```
 
 ### `join()`
@@ -469,13 +467,13 @@ process.start()
 process.join()
 ```
 
-কাজ:
+Purpose:
 
 ```text
-Process শেষ হওয়া পর্যন্ত wait করে
+Waits for the process to finish
 ```
 
-সহজভাবে:
+Simply:
 
 ```text
 start() = Start the process
@@ -485,9 +483,9 @@ join() = Wait for the process to finish
 
 ---
 
-# 17. Windows-এ `if __name__ == "__main__":`
+# 17. Windows and `if __name__ == "__main__":`
 
-Windows-এ multiprocessing ব্যবহার করার সময় **main guard** ব্যবহার করা অত্যন্ত গুরুত্বপূর্ণ।
+When using multiprocessing, especially on Windows, using the **main guard** is extremely important.
 
 ### Recommended Structure
 
@@ -508,21 +506,19 @@ if __name__ == "__main__":
 
 ---
 
-# 18. Main Guard কেন দরকার?
+# 18. Why is the Main Guard Necessary?
 
-বিশেষ করে Windows-এর `spawn` start method-এর ক্ষেত্রে child process একটি নতুন Python interpreter দিয়ে শুরু হয়।
+Especially with the Windows `spawn` start method, a child process starts with a fresh Python interpreter.
 
-যদি process creation code module-এর top level-এ থাকে, child process আবার সেই code execute করার চেষ্টা করতে পারে।
+If process-creation code exists at the top level of the module, the child process may try to execute that code again.
 
-ফলে unwanted recursive process creation হতে পারে।
+This can cause unwanted recursive process creation.
 
-তাই:
+Therefore, it is recommended to use:
 
 ```python
 if __name__ == "__main__":
 ```
-
-ব্যবহার করা recommended।
 
 ### Incorrect
 
@@ -605,7 +601,7 @@ Main Process continues
 
 # 20. Parent and Child Process
 
-একটি process যখন অন্য process তৈরি করে:
+When one process creates another process:
 
 ```text
 Parent Process
@@ -635,33 +631,31 @@ if __name__ == "__main__":
     process.join()
 ```
 
-এখানে:
+Here:
 
 ```python
 os.getpid()
 ```
 
-বর্তমান process-এর PID দেয়।
+returns the PID of the current process.
 
-এবং:
+And:
 
 ```python
 os.getppid()
 ```
 
-parent process-এর PID দেয়।
+returns the PID of the parent process.
 
 ---
 
-# 21. Child Process-এর Name
+# 21. Child Process Name
 
-Child process-এর default name সাধারণত:
+The default name of a child process may look like:
 
 ```text
 Process-1
 ```
-
-এর মতো হতে পারে।
 
 ### Example
 
@@ -686,7 +680,7 @@ if __name__ == "__main__":
 
 # 22. Custom Process Name
 
-নিজের মতো process name দেওয়া যায়।
+You can give a process a custom name.
 
 ```python
 process = multiprocessing.Process(
@@ -727,7 +721,7 @@ Process Name: Worker-1
 
 # 23. Multiple Child Processes
 
-একাধিক child process তৈরি করা যায়।
+Multiple child processes can be created.
 
 ```python
 import multiprocessing
@@ -763,7 +757,7 @@ if __name__ == "__main__":
     p3.join()
 ```
 
-Output-এর order fixed নয়:
+The output order is not fixed:
 
 ```text
 Task: 2
@@ -771,7 +765,7 @@ Task: 1
 Task: 3
 ```
 
-অথবা:
+or:
 
 ```text
 Task: 1
@@ -779,19 +773,19 @@ Task: 3
 Task: 2
 ```
 
-কারণ process scheduling operating system-এর উপর নির্ভর করে।
+because process scheduling depends on the operating system and runtime conditions.
 
 ---
 
 # 24. `args`
 
-Child process-এর target function-এ positional arguments পাঠাতে:
+To pass positional arguments to the target function of a child process:
 
 ```python
 args=
 ```
 
-ব্যবহার করা হয়।
+is used.
 
 ### Example
 
@@ -821,19 +815,19 @@ Hello Faruk
 
 ### Important
 
-একটি argument হলেও tuple-এ comma দিতে হবে:
+Even when passing one argument, a comma is required to create a tuple:
 
 ```python
 args=("Faruk",)
 ```
 
-কারণ:
+Because:
 
 ```python
 ("Faruk")
 ```
 
-এটি tuple নয়; এটি string।
+is a string, not a tuple.
 
 ---
 
@@ -862,13 +856,13 @@ if __name__ == "__main__":
 
 # 26. `kwargs`
 
-Keyword arguments পাঠানোর জন্য:
+To pass keyword arguments:
 
 ```python
 kwargs=
 ```
 
-ব্যবহার করা যায়।
+can be used.
 
 ### Example
 
@@ -899,13 +893,13 @@ if __name__ == "__main__":
 
 # 27. `terminate()`
 
-কোনো running process manually terminate করতে:
+To manually terminate a running process:
 
 ```python
 process.terminate()
 ```
 
-ব্যবহার করা যায়।
+can be used.
 
 ### Example
 
@@ -936,21 +930,21 @@ if __name__ == "__main__":
 
 ### Important
 
-`terminate()` process-কে graceful cleanup করার সুযোগ নাও দিতে পারে।
+`terminate()` may not give the process an opportunity to perform graceful cleanup.
 
-তাই files, locks, resources ইত্যাদি ব্যবহার করলে সতর্ক থাকতে হবে।
+Therefore, be careful when the process is using files, locks, resources, etc.
 
 ---
 
 # 28. `kill()`
 
-Process forcefully terminate করার জন্য:
+To forcefully terminate a process:
 
 ```python
 process.kill()
 ```
 
-ব্যবহার করা যায়।
+can be used.
 
 ### Example
 
@@ -961,22 +955,20 @@ process.kill()
 ### `terminate()` vs `kill()`
 
 ```text
-terminate() → Process terminate করে
+terminate() → Terminates the process
 
-kill() → আরও forceful ভাবে Process terminate করে
+kill() → Forcefully terminates the process
 ```
 
 ---
 
 # 29. `exitcode`
 
-Process শেষ হওয়ার পরে তার exit code:
+After a process finishes, its exit code can be obtained using:
 
 ```python
 process.exitcode
 ```
-
-দিয়ে পাওয়া যায়।
 
 ### Example
 
@@ -998,21 +990,19 @@ if __name__ == "__main__":
     print("Exit Code:", process.exitcode)
 ```
 
-সফলভাবে শেষ হলে সাধারণত:
+When the process finishes successfully, the exit code is typically:
 
 ```text
 0
 ```
 
-পাওয়া যায়।
-
-Error-এর কারণে process শেষ হলে non-zero exit code পাওয়া যেতে পারে।
+If the process terminates because of an error, a non-zero exit code may be returned.
 
 ---
 
 # 30. Process Lifecycle
 
-একটি process-এর সাধারণ lifecycle:
+The general lifecycle of a process is:
 
 ```text
 Process Object Created
@@ -1030,7 +1020,7 @@ Process Object Created
        join()
 ```
 
-সহজভাবে:
+Simply:
 
 ```text
 Process()
@@ -1046,9 +1036,9 @@ join() returns
 
 ---
 
-# 31. `start()` একবারই ব্যবহার করা যায়
+# 31. `start()` Can Normally Be Used Only Once
 
-একটি `Process` object-এর উপর `start()` সাধারণভাবে একবারই call করা যায়।
+The `start()` method can normally be called only once on a particular `Process` object.
 
 ### Incorrect
 
@@ -1057,35 +1047,35 @@ process.start()
 process.start()
 ```
 
-একই process object পুনরায় start করা যাবে না।
+The same process object cannot be started again.
 
-আবার process চালাতে হলে নতুন `Process` object তৈরি করতে হবে।
+To run another process, create a new `Process` object.
 
 ---
 
-# 32. `join()` Process বন্ধ করে না
+# 32. `join()` Does Not Stop a Process
 
-এটি খুব important।
+This is very important.
 
 ```python
 process.join()
 ```
 
-Process terminate করে না।
+does not terminate the process.
 
-`join()` শুধু calling process-কে অপেক্ষা করায় যতক্ষণ না target process শেষ হয়।
+`join()` only makes the calling process wait until the target process finishes.
 
 ```text
-start() → Process শুরু করে
+start() → Starts the process
 
-join() → Process শেষ হওয়া পর্যন্ত wait করে
+join() → Waits until the process finishes
 ```
 
 ---
 
 # 33. CPU-Bound Task
 
-যে task-এর execution time মূলত CPU computation-এর উপর নির্ভর করে তাকে **CPU-bound task** বলা হয়।
+A task whose execution time mainly depends on CPU computation is called a **CPU-bound task**.
 
 ### Examples
 
@@ -1098,13 +1088,13 @@ Complex Algorithms
 CPU-heavy Data Processing
 ```
 
-CPU-bound কাজের জন্য multiprocessing ভালো option হতে পারে।
+Multiprocessing can be a good option for CPU-bound work.
 
 ---
 
 # 34. I/O-Bound Task
 
-যে task-এ execution-এর বড় অংশ input/output operation-এর জন্য অপেক্ষা করে তাকে **I/O-bound task** বলা হয়।
+A task where a large portion of execution time is spent waiting for input/output operations is called an **I/O-bound task**.
 
 ### Examples
 
@@ -1113,32 +1103,32 @@ File Read/Write
 Network Request
 Database Query
 API Request
-Waiting for External Service
+Waiting for External Services
 ```
 
-I/O-bound কাজের জন্য অনেক ক্ষেত্রে:
+For I/O-bound tasks, in many cases:
 
 ```text
 Threading
 Asyncio
 ```
 
-বেশি উপযোগী হতে পারে।
+may be more suitable.
 
-তবে multiprocessing দিয়েও I/O-bound কাজ করা সম্ভব।
+However, I/O-bound tasks can also be implemented using multiprocessing.
 
 ---
 
-# 35. Multiprocessing কেন ব্যবহার করব?
+# 35. Why Use Multiprocessing?
 
-Multiprocessing বিশেষভাবে **CPU-bound workload**-এর জন্য useful।
+Multiprocessing is especially useful for **CPU-bound workloads**.
 
 ### Examples
 
 ```text
 Image Processing
 Video Processing
-Large Mathematical Calculation
+Large Mathematical Calculations
 Scientific Computation
 Machine Learning Computation
 CPU-heavy Algorithms
@@ -1147,15 +1137,15 @@ Data Processing
 
 ---
 
-# 36. Multiprocessing এবং Python GIL
+# 36. Multiprocessing and Python GIL
 
-Python-এর **CPython** implementation-এ **GIL (Global Interpreter Lock)** একই process-এর মধ্যে একাধিক thread-এর Python bytecode execution-কে একই সময়ে চালাতে সীমাবদ্ধ করে।
+In **CPython**, the **GIL (Global Interpreter Lock)** limits multiple threads within the same process from executing Python bytecode simultaneously.
 
-Multiprocessing-এর ক্ষেত্রে প্রতিটি process-এর আলাদা Python interpreter এবং সাধারণত আলাদা memory space থাকে।
+With multiprocessing, each process has its own Python interpreter and generally its own memory space.
 
-তাই CPU-bound কাজের ক্ষেত্রে multiple processes একাধিক CPU core ব্যবহার করতে পারে।
+Therefore, for CPU-bound workloads, multiple processes can use multiple CPU cores.
 
-সহজভাবে:
+Simply:
 
 ```text
 Threading
@@ -1180,16 +1170,16 @@ Multiple CPU Cores
 
 # 37. Multiprocessing vs Multithreading
 
-| Feature           | Multiprocessing   | Multithreading           |
-| ----------------- | ----------------- | ------------------------ |
-| Unit              | Process           | Thread                   |
-| Memory            | Separate          | Shared                   |
-| CPU-bound         | ভালো choice       | CPython-এ GIL limitation |
-| I/O-bound         | Possible          | Often suitable           |
-| Communication     | তুলনামূলক complex | তুলনামূলক easy           |
-| Memory usage      | বেশি              | কম                       |
-| Isolation         | বেশি              | কম                       |
-| Creation overhead | বেশি              | কম                       |
+| Feature           | Multiprocessing    | Multithreading            |
+| ----------------- | ------------------ | ------------------------- |
+| Unit              | Process            | Thread                    |
+| Memory            | Separate           | Shared                    |
+| CPU-bound         | Good choice        | GIL limitation in CPython |
+| I/O-bound         | Possible           | Often suitable            |
+| Communication     | Relatively complex | Relatively easy           |
+| Memory usage      | Higher             | Lower                     |
+| Isolation         | Higher             | Lower                     |
+| Creation overhead | Higher             | Lower                     |
 
 ### General Rule
 
@@ -1203,13 +1193,13 @@ I/O-bound
 Threading / Asyncio
 ```
 
-এটি একটি general guideline, absolute rule নয়।
+This is a general guideline, not an absolute rule.
 
 ---
 
-# 38. Process-এর আলাদা Memory
+# 38. Separate Memory in Processes
 
-Multiprocessing-এর গুরুত্বপূর্ণ বৈশিষ্ট্য হলো process-গুলোর memory সাধারণভাবে আলাদা থাকে।
+An important feature of multiprocessing is that processes generally have separate memory spaces.
 
 ### Example
 
@@ -1231,17 +1221,17 @@ if __name__ == "__main__":
     process.join()
 ```
 
-Child process variable-এর একটি process-specific copy পেতে পারে।
+The child process may have its own process-specific copy of the variable.
 
-Child process-এর পরিবর্তন সরাসরি parent process-এর ordinary Python variable পরিবর্তন করে না।
+A change to an ordinary Python variable in the child process does not directly change the corresponding variable in the parent process.
 
 ---
 
-# 39. Process-এর মধ্যে Data Sharing
+# 39. Sharing Data Between Processes
 
-Process-গুলোর memory আলাদা হওয়ায় ordinary Python variable সরাসরি share করা যায় না।
+Because processes have separate memory spaces, ordinary Python variables cannot be directly shared between processes.
 
-Python `multiprocessing` কিছু IPC/data-sharing mechanism দেয়:
+Python's `multiprocessing` module provides several IPC/data-sharing mechanisms:
 
 ```text
 Queue
@@ -1256,13 +1246,13 @@ Shared Memory
 
 # 40. `multiprocessing.Queue`
 
-এক process থেকে অন্য process-এ data/message পাঠানোর জন্য:
+To send data/messages from one process to another:
 
 ```python
 multiprocessing.Queue()
 ```
 
-ব্যবহার করা যায়।
+can be used.
 
 ### Example
 
@@ -1300,13 +1290,13 @@ Hello from child
 
 # 41. `multiprocessing.Pipe`
 
-দুই process-এর মধ্যে communication-এর জন্য:
+For communication between two processes:
 
 ```python
 multiprocessing.Pipe()
 ```
 
-ব্যবহার করা যায়।
+can be used.
 
 ### Basic Idea
 
@@ -1355,13 +1345,13 @@ Hello from child
 
 # 42. `multiprocessing.Pool`
 
-অনেকগুলো একই ধরনের task worker processes-এর মধ্যে distribute করার জন্য:
+To distribute many similar tasks among worker processes:
 
 ```python
 multiprocessing.Pool
 ```
 
-ব্যবহার করা যায়।
+can be used.
 
 ### Example
 
@@ -1395,13 +1385,13 @@ Output:
 
 # 43. `Pool.map()`
 
-একটি iterable-এর প্রতিটি item-এর উপর একই function চালাতে:
+To execute the same function on every item of an iterable:
 
 ```python
 pool.map(function, iterable)
 ```
 
-ব্যবহার করা হয়।
+is used.
 
 ### Example
 
@@ -1422,13 +1412,13 @@ Conceptually:
 5 → square()
 ```
 
-Result হিসেবে একটি list পাওয়া যায়।
+A list of results is returned.
 
 ---
 
-# 44. Pool কেন ব্যবহার করব?
+# 44. Why Use a Pool?
 
-যদি অনেকগুলো একই ধরনের independent task থাকে, তাহলে manually:
+If there are many similar independent tasks, instead of manually writing:
 
 ```python
 p1 = Process(...)
@@ -1437,7 +1427,7 @@ p3 = Process(...)
 p4 = Process(...)
 ```
 
-লেখার পরিবর্তে `Pool` ব্যবহার করা সহজ হতে পারে।
+you can use a `Pool`.
 
 ```text
 Many Tasks
@@ -1451,64 +1441,64 @@ Results
 
 ---
 
-# 45. Multiprocessing-এর সুবিধা
+# 45. Advantages of Multiprocessing
 
-### 1. CPU-bound Performance
+### 1. CPU-Bound Performance
 
-CPU-intensive workload parallelize করতে সাহায্য করে।
+It helps parallelize CPU-intensive workloads.
 
 ### 2. Multiple CPU Cores
 
-একাধিক process একাধিক CPU core ব্যবহার করতে পারে।
+Multiple processes can use multiple CPU cores.
 
 ### 3. Process Isolation
 
-একটি process-এর memory সাধারণত অন্য process-এর memory থেকে আলাদা।
+A process generally has a separate memory space from other processes.
 
 ### 4. Fault Isolation
 
-একটি child process crash করলেও parent process সবসময় crash করবে এমন নয়।
+If a child process crashes, the parent process does not necessarily crash.
 
 ### 5. Parallel Execution
 
-Independent tasks একই সময়ে execute করা যায়।
+Independent tasks can execute concurrently.
 
 ---
 
-# 46. Multiprocessing-এর অসুবিধা
+# 46. Disadvantages of Multiprocessing
 
-### 1. বেশি Memory Usage
+### 1. Higher Memory Usage
 
-প্রতিটি process-এর আলাদা memory space থাকে।
+Each process generally has its own memory space.
 
 ### 2. Process Creation Overhead
 
-Thread-এর তুলনায় process তৈরি করা তুলনামূলক expensive।
+Creating processes is generally more expensive than creating threads.
 
 ### 3. Communication Complexity
 
-Process-এর মধ্যে data share করতে IPC mechanism প্রয়োজন হতে পারে।
+IPC mechanisms may be required to exchange data between processes.
 
 ### 4. Serialization Overhead
 
-Process-এর মধ্যে data পাঠানোর সময় অনেক ক্ষেত্রে object serialization/pickling-এর overhead হয়।
+When data is sent between processes, object serialization/pickling may introduce overhead.
 
 ### 5. Debugging Complexity
 
-একাধিক process একসাথে চলায় debugging তুলনামূলক কঠিন হতে পারে।
+Debugging can be more difficult because multiple processes may execute simultaneously.
 
 ---
 
-# 47. কখন Multiprocessing ব্যবহার করব?
+# 47. When Should You Use Multiprocessing?
 
-Multiprocessing ব্যবহার করার কথা ভাবতে পারো যখন:
+Consider using multiprocessing when:
 
 ```text
-✓ Task CPU-intensive
-✓ Tasks independent
-✓ Multiple CPU cores available
-✓ Parallel execution beneficial
-✓ Large computation করতে হবে
+✓ The task is CPU-intensive
+✓ Tasks are independent
+✓ Multiple CPU cores are available
+✓ Parallel execution is beneficial
+✓ Large computations need to be performed
 ```
 
 Examples:
@@ -1523,9 +1513,9 @@ CPU-heavy Data Processing
 
 ---
 
-# 48. কখন Multiprocessing ব্যবহার না করাই ভালো?
+# 48. When Should You Avoid Multiprocessing?
 
-যদি task খুব ছোট হয় এবং process তৈরির overhead task-এর computation-এর চেয়ে বেশি হয়, তাহলে multiprocessing performance improve করার পরিবর্তে slow করতে পারে।
+If the task is very small and the overhead of creating processes is greater than the computation itself, multiprocessing may make the program slower instead of faster.
 
 Examples:
 
@@ -1540,33 +1530,33 @@ Tasks Requiring Frequent Shared-State Access
 
 # 49. Important Process Methods
 
-| Method              | Purpose                                 |
-| ------------------- | --------------------------------------- |
-| `start()`           | Process শুরু করে                        |
-| `join()`            | Process শেষ হওয়া পর্যন্ত wait করে       |
-| `is_alive()`        | Process alive কিনা check করে            |
-| `terminate()`       | Process terminate করে                   |
-| `kill()`            | Process forcefully terminate করে        |
-| `close()`           | Process object-এর resources release করে |
-| `run()`             | Target callable execute করার method     |
-| `current_process()` | Current process-এর object দেয়           |
+| Method              | Purpose                                               |
+| ------------------- | ----------------------------------------------------- |
+| `start()`           | Starts the process                                    |
+| `join()`            | Waits for the process to finish                       |
+| `is_alive()`        | Checks whether the process is alive                   |
+| `terminate()`       | Terminates the process                                |
+| `kill()`            | Forcefully terminates the process                     |
+| `close()`           | Releases resources associated with the process object |
+| `run()`             | Runs the target callable                              |
+| `current_process()` | Returns the current process object                    |
 
 ---
 
 # 50. Important Process Attributes
 
-| Attribute    | Purpose                |
-| ------------ | ---------------------- |
-| `name`       | Process-এর নাম         |
-| `pid`        | OS Process ID          |
-| `ident`      | Process identifier     |
-| `exitcode`   | Process-এর exit status |
-| `daemon`     | Daemon process কিনা    |
-| `is_alive()` | Process running কিনা   |
+| Attribute    | Purpose                                  |
+| ------------ | ---------------------------------------- |
+| `name`       | Process name                             |
+| `pid`        | OS Process ID                            |
+| `ident`      | Process identifier                       |
+| `exitcode`   | Process exit status                      |
+| `daemon`     | Indicates whether it is a daemon process |
+| `is_alive()` | Checks whether the process is running    |
 
 ### PID
 
-`Process` object থেকেও PID পাওয়া যায়:
+The PID can also be obtained from a `Process` object:
 
 ```python
 process.pid
@@ -1632,13 +1622,13 @@ Task 2 finished
 All processes finished
 ```
 
-Output-এর exact order guaranteed নয়।
+The exact output order is not guaranteed.
 
 ---
 
 # 52. Multiprocessing Mental Model
 
-সবচেয়ে সহজভাবে:
+The simplest mental model is:
 
 ```text
                  Python Program
@@ -1655,87 +1645,87 @@ Output-এর exact order guaranteed নয়।
        CPU Core     CPU Core     CPU Core
 ```
 
-প্রতিটি process-এর থাকে:
+Each process has:
 
 ```text
-নিজস্ব execution
+Its own execution
        +
-নিজস্ব memory space
+Its own memory space
        +
-নিজস্ব process ID
+Its own process ID
 ```
 
 ---
 
 # 53. Multiprocessing Short Revision
 
-### Process কী?
+### What is a Process?
 
-Running program-এর একটি instance।
+A running instance of a program.
 
-### Multiprocessing কী?
+### What is Multiprocessing?
 
-একাধিক process ব্যবহার করে task execute করার technique।
+A technique of executing tasks using multiple processes.
 
-### `Process()` কী?
+### What is `Process()`?
 
-নতুন process তৈরি করে।
+It creates a new process.
 
-### `start()` কী?
+### What is `start()`?
 
-Process শুরু করে।
+It starts the process.
 
-### `join()` কী?
+### What is `join()`?
 
-Process শেষ হওয়া পর্যন্ত wait করে।
+It waits for the process to finish.
 
-### `target` কী?
+### What is `target`?
 
-Child process-এ execute হওয়া callable।
+The callable executed by the child process.
 
-### `args` কী?
+### What is `args`?
 
-Positional arguments পাঠায়।
+It passes positional arguments.
 
-### `kwargs` কী?
+### What is `kwargs`?
 
-Keyword arguments পাঠায়।
+It passes keyword arguments.
 
-### `terminate()` কী?
+### What is `terminate()`?
 
-Process terminate করে।
+It terminates a process.
 
-### `kill()` কী?
+### What is `kill()`?
 
-Process forcefully terminate করে।
+It forcefully terminates a process.
 
-### `is_alive()` কী?
+### What is `is_alive()`?
 
-Process বর্তমানে alive কিনা check করে।
+It checks whether a process is currently alive.
 
-### `exitcode` কী?
+### What is `exitcode`?
 
-Process শেষ হওয়ার status code।
+The process's exit status code.
 
-### `pid` কী?
+### What is `pid`?
 
-Process-এর OS-level Process ID।
+The OS-level Process ID.
 
-### `current_process()` কী?
+### What is `current_process()`?
 
-Current process-এর object দেয়।
+It returns the current process object.
 
-### `Queue` কী?
+### What is `Queue`?
 
-Process-এর মধ্যে data/message exchange করতে সাহায্য করে।
+It helps exchange data/messages between processes.
 
-### `Pipe` কী?
+### What is `Pipe`?
 
-Process-to-process communication-এর জন্য ব্যবহৃত হয়।
+It provides communication between processes.
 
-### `Pool` কী?
+### What is `Pool`?
 
-অনেকগুলো task worker processes-এর মধ্যে distribute করতে সাহায্য করে।
+It distributes multiple tasks among worker processes.
 
 ---
 
@@ -1778,7 +1768,7 @@ Separate Memory
        ↓
 Multiple CPU Cores
        ↓
-Best for CPU-bound Tasks
+Best suited for CPU-bound Tasks
 ```
 
 ```text
