@@ -7,7 +7,7 @@
 
 সহজভাবে:
 
-> একাধিক Process ব্যবহার করে কাজকে parallelভাবে execute করাকে Multiprocessing বলে।
+> একাধিক Process ব্যবহার করে কাজকে parallel ভাবে execute করাকে Multiprocessing বলে।
 
 Python-এ multiprocessing করার জন্য built-in `multiprocessing` module ব্যবহার করা হয়।
 
