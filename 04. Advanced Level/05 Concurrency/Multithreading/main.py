@@ -1,235 +1,520 @@
 """
-# Python Multithreading — Bangla Notes
-
-## 1. Multithreading কী?
-
-**Multithreading** হলো একটি program-এর ভিতরে একাধিক **Thread** ব্যবহার করে একাধিক কাজ concurrently সম্পন্ন করার technique।
-
-সহজভাবে:
-
-> একটি Process-এর ভিতরে একাধিক Thread থাকে এবং প্রত্যেক Thread একটি নির্দিষ্ট কাজ করতে পারে।
-
-Python-এ Multithreading করার জন্য:
-
-```python
-import threading
-```
-
-ব্যবহার করা হয়।
-
-### Basic Structure
-
-```text
-Program
-   │
-   ├── Main Thread
-   ├── Thread 1
-   ├── Thread 2
-   └── Thread 3
-```
+# Python Threading & Multithreading — বাংলা নোট
 
 ---
 
-# 2. Process এবং Thread
+# 1. Thread কী?
 
-## Process
+**Thread** হলো একটি Process-এর ভিতরে execution-এর একটি ছোট unit।
 
-একটি running program হলো একটি **Process**।
-
-```text
-Python Program
-      ↓
-   Process
-```
-
-## Thread
-
-একটি Process-এর ভিতরে execution-এর ছোট unit হলো **Thread**।
+সহজভাবে:
 
 ```text
 Process
-   │
-   ├── Main Thread
-   ├── Thread 1
-   ├── Thread 2
-   └── Thread 3
+│
+├── Main Thread
+├── Thread 1 → Task A
+├── Thread 2 → Task B
+└── Thread 3 → Task C
 ```
 
 একটি Python program শুরু হলে সাধারণত একটি **Main Thread** থাকে।
 
 ---
 
-# 3. Thread তৈরি করা
+# 2. Threading কী?
 
-Python-এ Thread তৈরি করতে:
+Python-এ **Threading** হলো একটি Process-এর মধ্যে একাধিক Thread ব্যবহার করে একাধিক কাজকে **concurrently** execute করার পদ্ধতি।
 
-```python
-threading.Thread()
+Threading বিশেষ করে **I/O-bound task**-এর জন্য useful।
+
+উদাহরণ:
+
+* API Request
+* Network Request
+* File Read/Write
+* Database Operation
+* Web Scraping
+* Waiting-based Tasks
+
+---
+
+# 3. Concurrency কী?
+
+**Concurrency** হলো একাধিক কাজের execution এমনভাবে পরিচালনা করা যাতে কাজগুলো overlapping করতে পারে।
+
+উদাহরণ:
+
+```text
+Task A ─────────────
+Task B ─────────
+Task C ────────────
 ```
 
-ব্যবহার করা হয়।
+এখানে Task A, B এবং C-এর execution overlap করতে পারে।
 
-### Example
+### গুরুত্বপূর্ণ
+
+**Concurrency মানেই Parallelism নয়।**
+
+```text
+Concurrency
+→ একাধিক কাজের progress overlapping
+
+Parallelism
+→ একাধিক কাজ সত্যিকার অর্থে একই সময়ে execute হওয়া
+```
+
+---
+
+# 4. Threading কেন ব্যবহার করব?
+
+ধরা যাক ৩টি I/O task আছে:
+
+```text
+Task A → 3 seconds
+Task B → 3 seconds
+Task C → 3 seconds
+```
+
+Sequential execution:
+
+```text
+Task A → 3 sec
+Task B → 3 sec
+Task C → 3 sec
+
+Total ≈ 9 sec
+```
+
+Threading ব্যবহার করলে I/O অপেক্ষার সময় অন্য Thread কাজ করতে পারে:
+
+```text
+Task A ─────────
+Task B ─────────
+Task C ─────────
+
+Total ≈ 3 sec
+```
+
+তবে exact execution time সবসময় এমন হবে না। এটি task, network, system এবং scheduling-এর উপর নির্ভর করে।
+
+---
+
+# 5. threading Module
+
+Python-এ Thread তৈরি করার জন্য built-in `threading` module ব্যবহার করা হয়।
+
+```python
+import threading
+```
+
+---
+
+# 6. Basic Thread তৈরি
+
+```python
+import threading
+
+
+def task():
+    print("Task is running")
+
+
+thread = threading.Thread(target=task)
+
+thread.start()
+```
+
+এখানে:
+
+```python
+threading.Thread(target=task)
+```
+
+একটি Thread object তৈরি করে।
+
+আর:
+
+```python
+thread.start()
+```
+
+Thread-এর execution শুরু করে।
+
+---
+
+# 7. start() বনাম run()
+
+## start()
+
+```python
+thread.start()
+```
+
+`start()` নতুন Thread-এর execution শুরু করে।
+
+## run()
+
+```python
+thread.run()
+```
+
+`run()` Thread-এর target কাজ execute করে।
+
+কিন্তু `run()` সরাসরি call করলে নতুন OS-level Thread শুরু হয় না; এটি current Thread-এর execution context-এ চলে।
+
+### সাধারণভাবে ব্যবহার:
+
+```python
+thread.start()
+```
+
+---
+
+# 8. join() কী?
+
+`join()` ব্যবহার করা হয় কোনো Thread শেষ হওয়া পর্যন্ত calling Thread-কে অপেক্ষা করানোর জন্য।
 
 ```python
 import threading
 import time
 
 
-def first_program():
-    for i in range(5):
-        print("First Program:", i)
-        time.sleep(1)
+def task():
+    time.sleep(2)
+    print("Task completed")
 
 
-def second_program():
-    for i in range(5):
-        print("Second Program:", i)
-        time.sleep(1)
+thread = threading.Thread(target=task)
 
+thread.start()
+thread.join()
 
-t1 = threading.Thread(target=first_program)
-t2 = threading.Thread(target=second_program)
-
-t1.start()
-t2.start()
-
-t1.join()
-t2.join()
-
-print("Program Finished")
+print("Main thread finished")
 ```
 
 এখানে:
 
 ```python
-t1 = threading.Thread(target=first_program)
+thread.join()
 ```
 
-মানে `first_program()` function চালানোর জন্য একটি Thread তৈরি করা।
-
-```python
-t2 = threading.Thread(target=second_program)
-```
-
-মানে `second_program()` চালানোর জন্য আরেকটি Thread তৈরি করা।
+এর কারণে Main Thread অপেক্ষা করবে যতক্ষণ না `thread` শেষ হয়।
 
 ---
 
-# 4. `start()` কী?
+# 9. Multiple Threads
 
 ```python
-t1.start()
-```
+import threading
+import time
 
-`start()` Thread-এর execution শুরু করে।
+
+def task(name):
+    print(f"{name} started")
+
+    time.sleep(2)
+
+    print(f"{name} finished")
+
+
+t1 = threading.Thread(
+    target=task,
+    args=("Thread 1",)
+)
+
+t2 = threading.Thread(
+    target=task,
+    args=("Thread 2",)
+)
+
+t3 = threading.Thread(
+    target=task,
+    args=("Thread 3",)
+)
+
+
+t1.start()
+t2.start()
+t3.start()
+
+
+t1.join()
+t2.join()
+t3.join()
+
+
+print("All tasks completed")
+```
 
 ### গুরুত্বপূর্ণ
 
+Output-এর exact order সবসময় একই নাও হতে পারে।
+
+কারণ Thread scheduling-এর order নির্দিষ্ট নয়।
+
+---
+
+# 10. args দিয়ে Argument পাঠানো
+
+Thread function-এ positional argument পাঠাতে `args` ব্যবহার করা হয়।
+
 ```python
+import threading
+
+
+def greet(name):
+    print(f"Hello {name}")
+
+
+thread = threading.Thread(
+    target=greet,
+    args=("Faruk",)
+)
+
 thread.start()
+thread.join()
 ```
 
-নতুন Thread তৈরি করে কাজ শুরু করে।
+Output:
+
+```text
+Hello Faruk
+```
+
+একটি argument হলেও comma দিতে হয়:
+
+```python
+args=("Faruk",)
+```
+
+কারণ:
+
+```python
+("Faruk",)
+```
+
+একটি Tuple।
 
 কিন্তু:
 
 ```python
-thread.run()
+("Faruk")
 ```
 
-সরাসরি `run()` method execute করে; এটি নতুন Thread তৈরি করে না।
+একটি String।
 
-তাই সাধারণত:
+---
+
+# 11. kwargs ব্যবহার
+
+Keyword argument পাঠানোর জন্য `kwargs` ব্যবহার করা যায়।
+
+```python
+import threading
+
+
+def student(name, age):
+    print(name, age)
+
+
+thread = threading.Thread(
+    target=student,
+    kwargs={
+        "name": "Faruk",
+        "age": 25
+    }
+)
+
+thread.start()
+thread.join()
+```
+
+---
+
+# 12. Thread Name
+
+Thread-এর নাম দেওয়া যায়।
+
+```python
+import threading
+
+
+def task():
+    print(threading.current_thread().name)
+
+
+thread = threading.Thread(
+    target=task,
+    name="Worker-1"
+)
+
+thread.start()
+thread.join()
+```
+
+Output:
+
+```text
+Worker-1
+```
+
+---
+
+# 13. current_thread()
+
+বর্তমানে যে Thread execute করছে সেটি পাওয়ার জন্য:
+
+```python
+threading.current_thread()
+```
+
+ব্যবহার করা হয়।
+
+Example:
+
+```python
+import threading
+
+
+def task():
+
+    current = threading.current_thread()
+
+    print("Name:", current.name)
+    print("ID:", current.ident)
+
+
+thread = threading.Thread(target=task)
+
+thread.start()
+thread.join()
+```
+
+---
+
+# 14. active_count()
+
+বর্তমানে active Thread-এর সংখ্যা জানার জন্য:
+
+```python
+threading.active_count()
+```
+
+ব্যবহার করা হয়।
+
+Example:
+
+```python
+import threading
+
+print(threading.active_count())
+```
+
+---
+
+# 15. Thread Lifecycle
+
+Thread-এর lifecycle সহজভাবে:
+
+```text
+New
+ │
+ ▼
+start()
+ │
+ ▼
+Runnable / Running
+ │
+ ▼
+Finished
+```
+
+Python-এ:
+
+```python
+thread = threading.Thread(...)
+```
+
+↓
 
 ```python
 thread.start()
 ```
 
-ব্যবহার করা হয়।
+↓
+
+Thread কাজ করে
+
+↓
+
+Thread শেষ হয়।
 
 ---
 
-# 5. `join()` কী?
+# 16. Daemon Thread
+
+**Daemon Thread** হলো এমন Thread যা background-এ কাজ করে এবং কোনো non-daemon Thread আর না থাকলে Python process-কে alive রাখে না।
+
+Daemon Thread তৈরি:
 
 ```python
-t1.join()
+thread = threading.Thread(
+    target=task,
+    daemon=True
+)
 ```
-
-`join()` calling Thread-কে অপেক্ষা করায় যতক্ষণ না নির্দিষ্ট Thread শেষ হয়।
 
 Example:
 
 ```python
-t1.start()
-t2.start()
+import threading
+import time
 
-t1.join()
-t2.join()
 
-print("Finished")
+def background_task():
+
+    while True:
+        print("Background running...")
+        time.sleep(1)
+
+
+thread = threading.Thread(
+    target=background_task,
+    daemon=True
+)
+
+thread.start()
+
+time.sleep(3)
+
+print("Main program finished")
 ```
 
-### সহজভাবে
+Main program shutdown হলে daemon Thread-ও process-এর সাথে শেষ হয়ে যেতে পারে।
 
-```text
-start()
-   ↓
-কাজ শুরু
+### Important
 
-join()
-   ↓
-কাজ শেষ হওয়া পর্যন্ত অপেক্ষা
-```
+Daemon Thread-এর কাজ program shutdown-এর সময় gracefully complete নাও হতে পারে।
+
+তাই important data save করার মতো কাজের জন্য daemon Thread ব্যবহারে সতর্ক থাকতে হবে।
 
 ---
 
-# 6. Race Condition কী?
+# 17. Non-Daemon Thread
 
-**Race Condition** হলো এমন একটি সমস্যা যেখানে একাধিক Thread একই **Shared Resource** একই সময়ে access বা modify করে এবং final result execution-এর timing/order-এর উপর নির্ভর করে।
-
-### সহজ Example
-
-ধরো:
+Defaultভাবে Python Thread সাধারণত non-daemon।
 
 ```python
-available_seats = 1
+thread = threading.Thread(target=task)
 ```
 
-দুইটি Thread একই সময়ে শেষ seat বুক করতে চাচ্ছে।
-
-```text
-Thread A → Seat আছে?
-Thread B → Seat আছে?
-```
-
-দুজনই যদি একই সময়ে দেখে:
-
-```text
-available_seats = 1
-```
-
-তাহলে দুজনই মনে করতে পারে:
-
-> Seat available!
-
-এটাই Race Condition-এর basic idea।
-
-### সংক্ষেপে
-
-```text
-Multiple Threads
-       ↓
-Shared Resource
-       ↓
-Unsafe Concurrent Access
-       ↓
-Race Condition
-```
+Main Thread শেষ হলেও non-daemon Thread running থাকলে Python process সাধারণত সেই Thread শেষ হওয়া পর্যন্ত alive থাকে।
 
 ---
 
-# 7. Shared Resource কী?
+# 18. Shared Resource
 
 যে data বা resource একাধিক Thread access করতে পারে তাকে **Shared Resource** বলে।
 
@@ -238,9 +523,9 @@ Examples:
 ```text
 Shared Resource
 │
+├── Counter
 ├── Bank Balance
 ├── Available Seats
-├── Counter
 ├── File
 ├── Database Record
 └── Shared Variable
@@ -249,14 +534,57 @@ Shared Resource
 Example:
 
 ```python
-available_seats = 5
+counter = 0
 ```
 
-যদি একাধিক Thread এই variable ব্যবহার করে, তাহলে synchronization দরকার হতে পারে।
+যদি একাধিক Thread `counter` modify করে, synchronization প্রয়োজন হতে পারে।
 
 ---
 
-# 8. Critical Section কী?
+# 19. Race Condition
+
+যখন একাধিক Thread একই Shared Resource access বা modify করে এবং final result execution timing/order-এর উপর নির্ভর করে, তখন তাকে **Race Condition** বলে।
+
+ধরা যাক:
+
+```python
+counter += 1
+```
+
+ধারণাগতভাবে:
+
+```text
+Read counter
+      ↓
+Calculate new value
+      ↓
+Write counter
+```
+
+দুই Thread একই সময়ে কাজ করলে update হারিয়ে যেতে পারে।
+
+```text
+Thread 1 → Read 0
+Thread 2 → Read 0
+Thread 1 → Write 1
+Thread 2 → Write 1
+
+Expected → 2
+Possible result → 1
+```
+
+### Solution
+
+Shared resource access করার সময় synchronization ব্যবহার করা যায়।
+
+```python
+with lock:
+    counter += 1
+```
+
+---
+
+# 20. Critical Section
 
 যে code অংশ Shared Resource access বা modify করে এবং synchronization প্রয়োজন হতে পারে তাকে **Critical Section** বলে।
 
@@ -264,46 +592,124 @@ Example:
 
 ```python
 with lock:
-    balance -= amount
+    counter += 1
 ```
 
 এখানে:
 
 ```python
-balance -= amount
+counter += 1
 ```
 
 হলো critical operation।
 
-### Flow
+---
 
-```text
-Thread
-   ↓
-Acquire Lock
-   ↓
-Critical Section
-   ↓
-Modify Shared Resource
-   ↓
-Release Lock
+# 21. Lock
+
+`Lock` হলো একটি synchronization mechanism যা একই সময়ে critical section-এ একাধিক Thread ঢোকা থেকে বাধা দেয়।
+
+```python
+import threading
+
+lock = threading.Lock()
 ```
 
 ---
 
-# 9. Lock কী?
+# 22. acquire() এবং release()
 
-**Lock** হলো একটি synchronization mechanism যা নিশ্চিত করে যে একই সময়ে শুধুমাত্র একটি Thread critical section-এ প্রবেশ করবে।
-
-Python-এ:
+Lock manually ব্যবহার করা যায়:
 
 ```python
-lock = threading.Lock()
+lock.acquire()
+
+# Critical Section
+
+lock.release()
 ```
 
-### সহজ উদাহরণ
+`acquire()` Lock নেওয়ার চেষ্টা করে।
 
-একটি bathroom-এর দরজা চিন্তা করো।
+`release()` Lock ছেড়ে দেয়।
+
+---
+
+# 23. Manual Lock — Safe Version
+
+Manual Lock ব্যবহার করলে `try/finally` ব্যবহার করা ভালো:
+
+```python
+lock.acquire()
+
+try:
+    counter += 1
+
+finally:
+    lock.release()
+```
+
+কারণ exception হলেও `finally` block execute হবে এবং Lock release হবে।
+
+---
+
+# 24. with lock — Recommended
+
+Lock ব্যবহারের সবচেয়ে clean উপায়:
+
+```python
+with lock:
+    counter += 1
+```
+
+Python automatically Lock acquire এবং release করার ব্যবস্থা করে।
+
+Complete Example:
+
+```python
+import threading
+
+
+counter = 0
+lock = threading.Lock()
+
+
+def increment():
+
+    global counter
+
+    for _ in range(100000):
+
+        with lock:
+            counter += 1
+
+
+t1 = threading.Thread(target=increment)
+t2 = threading.Thread(target=increment)
+
+
+t1.start()
+t2.start()
+
+
+t1.join()
+t2.join()
+
+
+print(counter)
+```
+
+Expected result:
+
+```text
+200000
+```
+
+---
+
+# 25. Lock-এর Real-Life Example
+
+একটি bathroom-এর দরজা চিন্তা করো:
 
 ```text
 Bathroom
@@ -311,8 +717,8 @@ Bathroom
   LOCK
    │
 Person A → ভিতরে
-Person B → বাইরে অপেক্ষা
-Person C → বাইরে অপেক্ষা
+Person B → অপেক্ষা
+Person C → অপেক্ষা
 ```
 
 একইভাবে:
@@ -325,469 +731,101 @@ Thread C → Wait
 
 ---
 
-# 10. `with lock`
+# 26. RLock
 
-Lock ব্যবহারের recommended উপায়:
+`RLock` = **Reentrant Lock**
 
-```python
-with lock:
-    balance -= amount
-```
-
-এখানে Python automatically:
-
-```text
-Enter with
-    ↓
-Lock Acquire
-    ↓
-Critical Section
-    ↓
-Lock Release
-```
-
-করবে।
-
-Exception হলেও context manager lock release করার ব্যবস্থা করে।
-
-তাই:
-
-```python
-with lock:
-```
-
-সাধারণত manual `acquire()` এবং `release()`-এর চেয়ে cleaner এবং safer।
-
----
-
-# 11. `acquire()` এবং `release()`
-
-Lock manually ব্যবহার করা যায়।
-
-```python
-lock.acquire()
-
-# Critical Section
-
-lock.release()
-```
-
-## `acquire()`
-
-Lock নেওয়ার চেষ্টা করে।
-
-যদি অন্য Thread lock ধরে রাখে, তাহলে সাধারণত অপেক্ষা করবে।
-
-## `release()`
-
-Lock ছেড়ে দেয় যাতে অন্য Thread lock নিতে পারে।
-
----
-
-# 12. Manual Lock
-
-Manual Lock ব্যবহারের সময়:
-
-```python
-lock.acquire()
-
-try:
-    balance -= amount
-
-finally:
-    lock.release()
-```
-
-এখানে `finally` গুরুত্বপূর্ণ।
-
-যদি exception হয়:
-
-```text
-acquire()
-   ↓
-Exception
-   ↓
-finally
-   ↓
-release()
-```
-
-তাহলে lock release হবে।
-
----
-
-# 13. Manual Lock বনাম `with lock`
-
-## Manual
-
-```python
-lock.acquire()
-
-try:
-    balance -= amount
-finally:
-    lock.release()
-```
-
-## Recommended
-
-```python
-with lock:
-    balance -= amount
-```
-
-### মনে রাখো
-
-```text
-with lock
-   ↓
-Clean
-Safe
-Readable
-```
-
----
-
-# 14. Bank Account Example
-
-ধরো:
-
-```python
-balance = 100
-lock = threading.Lock()
-```
-
-একটি Thread টাকা withdraw করছে:
-
-```python
-with lock:
-    balance -= amount
-```
-
-আরেকটি Thread টাকা deposit করছে:
-
-```python
-with lock:
-    balance += amount
-```
-
-এখানে:
-
-```text
-Thread 1 → Withdraw
-Thread 2 → Deposit
-             ↓
-          balance
-             ↑
-            Lock
-```
-
-`balance` হলো Shared Resource।
-
-Lock নিশ্চিত করে যে একই সময়ে দুই Thread critical section-এ ঢুকতে পারবে না।
-
----
-
-# 15. Object-Level Lock
-
-প্রতিটি Object-এর নিজের Lock থাকতে পারে।
+একই Thread একই Lock একাধিকবার acquire করতে পারে।
 
 ```python
 import threading
-
-
-class Account:
-
-    def __init__(self, balance):
-        self._balance = balance
-        self.lock = threading.Lock()
-
-    def withdraw(self, amount):
-        with self.lock:
-            self._balance -= amount
-
-    def deposit(self, amount):
-        with self.lock:
-            self._balance += amount
-
-    def get_balance(self):
-        with self.lock:
-            return self._balance
-```
-
-এখানে:
-
-```python
-self.lock
-```
-
-প্রতিটি Account Object-এর আলাদা Lock।
-
-```text
-Account A → Lock A
-Account B → Lock B
-Account C → Lock C
-```
-
-এতে independent Account-এর কাজ আলাদাভাবে concurrently করা যেতে পারে।
-
----
-
-# 16. `@property` + Lock
-
-Python-এর `@property` ব্যবহার করে balance access করা যায়।
-
-```python
-import threading
-
-
-class Account:
-
-    def __init__(self, balance):
-        self._balance = balance
-        self.lock = threading.Lock()
-
-    @property
-    def balance(self):
-
-        with self.lock:
-            return self._balance
-
-    def withdraw(self, amount):
-
-        with self.lock:
-            self._balance -= amount
-
-    def deposit(self, amount):
-
-        with self.lock:
-            self._balance += amount
-```
-
-তারপর:
-
-```python
-account.balance
-```
-
-দিয়ে balance পাওয়া যাবে।
-
----
-
-# 17. Thread-Safe Transfer
-
-দুইটি Account-এর মধ্যে টাকা transfer করার সময় দুই Account-এর state পরিবর্তন করতে হয়।
-
-যেমন:
-
-```text
-Account A → $100
-Account B → $50
-
-A → B
-$20 Transfer
-```
-
-দুই Account-এর Lock নেওয়ার সময় consistent order ব্যবহার করা গুরুত্বপূর্ণ।
-
-Example:
-
-```python
-def transfer(self, amount, other_account):
-
-    first, second = (
-        (self, other_account)
-        if id(self) < id(other_account)
-        else (other_account, self)
-    )
-
-    with first.lock:
-
-        with second.lock:
-
-            if self._balance >= amount:
-
-                self._balance -= amount
-                other_account._balance += amount
-
-            else:
-                print("Insufficient balance for transfer")
-```
-
----
-
-# 18. Deadlock কী?
-
-**Deadlock** হলো যখন দুই বা ততোধিক Thread একে অপরের Lock-এর জন্য অপেক্ষা করতে থাকে এবং কেউ এগোতে পারে না।
-
-Example:
-
-```text
-Thread 1:
-Lock A → Waiting for Lock B
-
-Thread 2:
-Lock B → Waiting for Lock A
-```
-
-Visual:
-
-```text
-Thread 1
-   │
-   ├── Lock A ✓
-   │
-   └── Wait for B
-             ↑
-             │
-Thread 2     │
-   │         │
-   ├── Lock B ✓
-   │
-   └── Wait for A
-```
-
-দুজনই আটকে গেছে।
-
----
-
-# 19. Deadlock Prevent করার একটি উপায়
-
-সব Thread যেন Lock একই order-এ নেয়।
-
-যেমন সবসময়:
-
-```text
-Lock A
-  ↓
-Lock B
-```
-
-কেউ যেন:
-
-```text
-Lock B
-  ↓
-Lock A
-```
-
-না নেয়।
-
-এজন্য consistent lock-acquisition order ব্যবহার করা হয়।
-
----
-
-# 20. RLock কী?
-
-`RLock` এর অর্থ:
-
-**Reentrant Lock**
-
-```python
-lock = threading.RLock()
-```
-
-এটি একই Thread-কে একই Lock একাধিকবার acquire করতে দেয়।
-
-Example:
-
-```python
-import threading
-
 
 lock = threading.RLock()
 
 
-def task(lock):
+def function_a():
 
-    lock.acquire()
-    print("First lock acquired")
-
-    lock.acquire()
-    print("Second lock acquired")
-
-    lock.release()
-    lock.release()
-
-    print("Lock released")
+    with lock:
+        function_b()
 
 
-t1 = threading.Thread(target=task, args=(lock,))
-t2 = threading.Thread(target=task, args=(lock,))
+def function_b():
 
-t1.start()
-t2.start()
+    with lock:
+        print("Running")
 
-t1.join()
-t2.join()
+
+function_a()
 ```
 
-### গুরুত্বপূর্ণ
+### Lock বনাম RLock
 
 ```text
 Lock
-→ Same thread আবার acquire করলে সমস্যা হতে পারে
+→ সাধারণ mutual exclusion
 
 RLock
-→ Same thread একই lock multiple times acquire করতে পারে
+→ একই Thread একই Lock multiple times acquire করতে পারে
 ```
 
 একই Thread যতবার `RLock` acquire করবে, ততবার release করতে হবে।
 
 ---
 
-# 21. Semaphore কী?
+# 27. Semaphore
 
-**Semaphore** হলো এমন একটি synchronization mechanism যা একসাথে কতগুলো Thread resource access করতে পারবে তা সীমাবদ্ধ করে।
+`Semaphore` ব্যবহার করা হয় একই সময়ে কতগুলো Thread resource ব্যবহার করতে পারবে তা সীমাবদ্ধ করার জন্য।
+
+```python
+import threading
+
+semaphore = threading.Semaphore(3)
+```
+
+এর অর্থ সর্বোচ্চ ৩টি Thread একই সময়ে Semaphore acquire করতে পারবে।
 
 Example:
 
 ```python
-semaphore = threading.Semaphore(3)
+import threading
+import time
+
+
+semaphore = threading.Semaphore(2)
+
+
+def task(number):
+
+    with semaphore:
+
+        print(f"Thread {number} entered")
+
+        time.sleep(2)
+
+        print(f"Thread {number} leaving")
+
+
+threads = []
+
+
+for i in range(5):
+
+    t = threading.Thread(
+        target=task,
+        args=(i,)
+    )
+
+    threads.append(t)
+    t.start()
+
+
+for t in threads:
+    t.join()
 ```
-
-এর অর্থ:
-
-> সর্বোচ্চ ৩টি Thread একই সময়ে semaphore acquire করতে পারবে।
 
 ---
 
-# 22. Semaphore-এর Real-Life Example
-
-ধরো একটি Computer Lab-এ ৩টি Computer আছে।
-
-```text
-Computer 1
-Computer 2
-Computer 3
-```
-
-কিন্তু Student আছে ৫ জন।
-
-```text
-Student 1 ──┐
-Student 2 ──┤
-Student 3 ──┼── Access
-            │
-Student 4 ──┤
-Student 5 ──┘
-             ↓
-           Wait
-```
-
-এখানে:
-
-```python
-Semaphore(3)
-```
-
-ব্যবহার করা যেতে পারে।
-
-কেউ বের হলে waiting Thread ঢুকবে।
-
----
-
-# 23. Lock বনাম Semaphore
+# 28. Lock বনাম Semaphore
 
 ## Lock
 
@@ -813,7 +851,7 @@ semaphore = threading.Semaphore(3)
 একবারে সর্বোচ্চ ৩ Thread
 ```
 
-### মনে রাখো
+মনে রাখো:
 
 ```text
 Lock
@@ -822,58 +860,54 @@ Lock
 
 Semaphore(3)
 ↓
-3 Threads
+Maximum 3 Threads
 ```
 
 ---
 
-# 24. Event কী?
+# 29. Event
 
-`Event` হলো Thread-এর মধ্যে simple **signal communication mechanism**।
+`Event` হলো Thread-এর মধ্যে simple signal communication mechanism।
 
 ```python
 event = threading.Event()
 ```
 
-ধরো Worker Thread বলছে:
+Worker Thread বলতে পারে:
 
-> "আমি অপেক্ষা করছি। কাজ শুরু করার signal দাও।"
-
-তখন:
+> "আমি signal-এর জন্য অপেক্ষা করছি।"
 
 ```python
 event.wait()
 ```
 
-অন্য Thread বলবে:
+অন্য Thread signal দিতে পারে:
 
 ```python
 event.set()
 ```
-
-তারপর waiting Thread কাজ শুরু করতে পারবে।
 
 ---
 
-# 25. Event-এর Methods
+# 30. Event-এর গুরুত্বপূর্ণ Methods
 
-## `set()`
+## set()
 
 ```python
 event.set()
 ```
 
-Event signal ON করে।
+Event set করে।
 
-## `clear()`
+## clear()
 
 ```python
 event.clear()
 ```
 
-Event signal OFF করে।
+Event reset করে।
 
-## `wait()`
+## wait()
 
 ```python
 event.wait()
@@ -881,36 +915,37 @@ event.wait()
 
 Event set হওয়া পর্যন্ত অপেক্ষা করে।
 
-## `is_set()`
+## is_set()
 
 ```python
 event.is_set()
 ```
 
-Event বর্তমানে set আছে কিনা check করে।
+Event set আছে কিনা check করে।
 
 ---
 
-# 26. Event Example
+# 31. Event Example
 
 ```python
 import threading
 import time
 
 
-def task(event):
+def worker(event):
 
-    print("Thread is waiting for the event.")
+    print("Thread is waiting...")
 
     event.wait()
 
-    print("Thread received the signal and is processing.")
+    print("Thread received the signal!")
 
 
 event = threading.Event()
 
+
 thread = threading.Thread(
-    target=task,
+    target=worker,
     args=(event,)
 )
 
@@ -918,32 +953,34 @@ thread.start()
 
 time.sleep(2)
 
+print("Sending signal...")
+
 event.set()
 
 thread.join()
 ```
 
-### Flow
+Flow:
 
 ```text
 Worker Thread
       │
-      ↓
+      ▼
 event.wait()
       │
       │ Waiting
-      ↓
+      ▼
 event.set()
       │
-      ↓
+      ▼
 Continue Execution
 ```
 
 ---
 
-# 27. Condition কী?
+# 32. Condition
 
-`Condition` এমন একটি synchronization primitive যা Thread-কে কোনো নির্দিষ্ট condition/state পরিবর্তন হওয়া পর্যন্ত অপেক্ষা করতে এবং অন্য Thread-কে notify করতে সাহায্য করে।
+`Condition` এমন একটি synchronization mechanism যা Thread-কে কোনো state/condition-এর জন্য wait করতে এবং অন্য Thread-কে notify করতে সাহায্য করে।
 
 ```python
 condition = threading.Condition()
@@ -952,72 +989,76 @@ condition = threading.Condition()
 Common methods:
 
 ```python
-condition.acquire()
 condition.wait()
 condition.notify()
 condition.notify_all()
-condition.release()
+```
+
+Example:
+
+```python
+import threading
+import time
+
+
+condition = threading.Condition()
+
+
+def consumer():
+
+    with condition:
+
+        print("Consumer waiting...")
+
+        condition.wait()
+
+        print("Consumer received signal")
+
+
+def producer():
+
+    time.sleep(2)
+
+    with condition:
+
+        print("Producer sending signal")
+
+        condition.notify()
+
+
+t1 = threading.Thread(target=consumer)
+t2 = threading.Thread(target=producer)
+
+
+t1.start()
+t2.start()
+
+
+t1.join()
+t2.join()
 ```
 
 ---
 
-# 28. Condition-এর Basic Structure
-
-Producer:
-
-```python
-with condition:
-
-    # Update shared state
-
-    condition.notify_all()
-```
-
-Consumer:
-
-```python
-with condition:
-
-    condition.wait()
-
-    # Continue working
-```
-
-### সহজভাবে
-
-```text
-Condition
-    ↓
-Wait for condition
-    ↓
-Condition changes
-    ↓
-Notify
-    ↓
-Continue
-```
-
----
-
-# 29. Event বনাম Condition
+# 33. Event বনাম Condition
 
 ## Event
 
 Simple signal:
 
 ```text
-"আমি signal দিলাম!"
+"Signal দেওয়া হয়েছে!"
 ```
 
 ## Condition
 
-কোনো state/condition-এর জন্য অপেক্ষা:
+State/condition-এর জন্য wait এবং notify:
 
 ```text
 "Data available হলে আমাকে জানাও।"
 ```
 
-### মনে রাখো
+মনে রাখো:
 
 ```text
 Event
@@ -1029,68 +1070,33 @@ Condition
 
 ---
 
-# 30. Producer-Consumer
+# 34. Queue
 
-Producer data তৈরি করে।
-
-Consumer data ব্যবহার করে।
-
-```text
-Producer
-    │
-    │ Produces Data
-    ↓
-  Queue
-    │
-    │ Consumes Data
-    ↓
-Consumer
-```
-
-Example:
-
-```text
-Customer Order
-      ↓
-Producer
-      ↓
-Queue
-      ↓
-Worker
-      ↓
-Process Order
-```
-
----
-
-# 31. Queue কী?
-
-Python-এ Thread-safe data/task exchange-এর জন্য:
+Thread-এর মধ্যে safely data/task exchange করার জন্য Python-এর:
 
 ```python
 from queue import Queue
 ```
 
-ব্যবহার করা হয়।
+ব্যবহার করা যায়।
 
 ```python
 queue = Queue()
 ```
 
-Data যোগ করতে:
+Data যোগ:
 
 ```python
 queue.put("Task 1")
-queue.put("Task 2")
 ```
 
-Data নিতে:
+Data নেওয়া:
 
 ```python
 queue.get()
 ```
 
-### Example
+Example:
 
 ```python
 from queue import Queue
@@ -1114,33 +1120,126 @@ Task 2
 
 ---
 
-# 32. Queue কেন গুরুত্বপূর্ণ?
+# 35. Producer-Consumer Pattern
 
-ধরো ১০০টি Task আছে।
+Producer data তৈরি করে।
+
+Consumer data ব্যবহার করে।
 
 ```text
 Producer
-   │
-   ├── Task 1
-   ├── Task 2
-   ├── Task 3
-   ├── ...
-   └── Task 100
-          ↓
-        Queue
-          ↓
-   ┌──────┼──────┐
-   ↓      ↓      ↓
-Worker1 Worker2 Worker3
+    │
+    │ Produces Task
+    ▼
+  Queue
+    │
+    │ Consumes Task
+    ▼
+Consumer
 ```
 
-এটি backend development-এ খুব useful concept।
+Example:
+
+```text
+Customer Order
+      ↓
+Producer
+      ↓
+Queue
+      ↓
+Worker
+      ↓
+Process Order
+```
+
+Backend development-এ এই pattern খুব গুরুত্বপূর্ণ।
 
 ---
 
-# 33. Thread Exception Handling
+# 36. ThreadPoolExecutor
 
-Thread-এর ভিতরের exception handle করতে পারো:
+অনেকগুলো ছোট Task থাকলে manually অনেক Thread তৈরি করার পরিবর্তে `ThreadPoolExecutor` ব্যবহার করা সুবিধাজনক।
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+```
+
+Example:
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+import time
+
+
+def task(number):
+
+    time.sleep(1)
+
+    return number * number
+
+
+with ThreadPoolExecutor(max_workers=3) as executor:
+
+    results = executor.map(
+        task,
+        [1, 2, 3, 4, 5]
+    )
+
+    for result in results:
+        print(result)
+```
+
+Output:
+
+```text
+1
+4
+9
+16
+25
+```
+
+---
+
+# 37. submit() এবং Future
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+import time
+
+
+def task(x):
+
+    time.sleep(2)
+
+    return x * x
+
+
+with ThreadPoolExecutor(max_workers=3) as executor:
+
+    future = executor.submit(task, 5)
+
+    print("Task submitted")
+
+    result = future.result()
+
+    print(result)
+```
+
+Output:
+
+```text
+Task submitted
+25
+```
+
+`Future` হলো একটি asynchronous operation-এর result handle।
+
+---
+
+# 38. Thread Exception Handling
+
+Thread-এর ভিতরের exception handle করা যায়:
 
 ```python
 import threading
@@ -1149,10 +1248,13 @@ import threading
 def task():
 
     try:
+
         result = 10 / 0
+
         print(result)
 
     except Exception as e:
+
         print("Error:", e)
 
 
@@ -1170,9 +1272,55 @@ Error: division by zero
 
 ---
 
-# 34. Thread Information
+# 39. Thread-এর ভিতরের Return Value
 
-Python-এ বর্তমান Thread সম্পর্কে information পাওয়া যায়:
+সাধারণ `threading.Thread` থেকে সরাসরি function-এর return value পাওয়া যায় না।
+
+Example:
+
+```python
+def task():
+    return 100
+```
+
+Thread দিয়ে চালালে:
+
+```python
+thread = threading.Thread(target=task)
+```
+
+`thread` object থেকে সরাসরি `100` পাওয়া যাবে না।
+
+Result প্রয়োজন হলে `ThreadPoolExecutor` এবং `Future` ব্যবহার করা সুবিধাজনক।
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+
+
+def task():
+    return 100
+
+
+with ThreadPoolExecutor(max_workers=1) as executor:
+
+    future = executor.submit(task)
+
+    result = future.result()
+
+    print(result)
+```
+
+Output:
+
+```text
+100
+```
+
+---
+
+# 40. Thread Information
+
+বর্তমান Thread সম্পর্কে information:
 
 ```python
 import threading
@@ -1180,19 +1328,18 @@ import threading
 
 current = threading.current_thread()
 
-print(current)
 print(current.name)
 print(current.ident)
 print(current.is_alive())
 ```
 
-### Important
+### গুরুত্বপূর্ণ
 
 ```python
 threading.current_thread()
 ```
 
-বর্তমান Thread return করে।
+Current Thread return করে।
 
 ```python
 current.name
@@ -1210,51 +1357,143 @@ Thread identifier।
 current.is_alive()
 ```
 
-Thread বর্তমানে alive কিনা check করে।
+Thread alive কিনা check করে।
 
 ---
 
-# 35. Daemon Thread কী?
+# 41. Thread-safe কী?
 
-**Daemon Thread** হলো একটি background Thread যা সব non-daemon Thread শেষ হওয়ার পর Python program-কে alive রাখে না।
+যে code বা resource একাধিক Thread থেকে safely ব্যবহার করা যায় তাকে **Thread-safe** বলা হয়।
 
 Example:
 
 ```python
-thread = threading.Thread(
-    target=task,
-    daemon=True
-)
+with lock:
+    shared_data.append(item)
 ```
 
-এখানে:
-
-```python
-daemon=True
-```
-
-দিয়ে Thread-কে daemon করা হয়েছে।
-
-### সাধারণ ব্যবহার
-
-```text
-Monitoring
-Logging
-Background Polling
-Periodic Status Checking
-```
-
-### গুরুত্বপূর্ণ
-
-Daemon Thread-এর কাজ program shutdown-এর সময় শেষ নাও হতে পারে।
-
-তাই important data save করার মতো কাজের জন্য daemon Thread ব্যবহারে সতর্ক থাকতে হবে।
+এখানে Lock shared data access synchronize করছে।
 
 ---
 
-# 36. Multithreading with a Class
+# 42. Deadlock
 
-`threading.Thread` inherit করে custom Thread তৈরি করা যায়।
+যখন দুই বা তার বেশি Thread একে অপরের Lock/resource-এর জন্য অপেক্ষা করতে থাকে এবং কেউ এগোতে পারে না, তখন **Deadlock** হয়।
+
+Example:
+
+```text
+Thread A
+   │
+   ├── Lock 1 ✓
+   │
+   └── Waiting for Lock 2
+
+
+Thread B
+   │
+   ├── Lock 2 ✓
+   │
+   └── Waiting for Lock 1
+```
+
+ফলে:
+
+```text
+A waits for B
+B waits for A
+```
+
+Program আটকে যায়।
+
+---
+
+# 43. Deadlock Prevent করার উপায়
+
+### 1. Consistent Lock Ordering
+
+সব Thread যেন একই order-এ Lock নেয়।
+
+```text
+Lock A
+   ↓
+Lock B
+```
+
+কেউ যেন:
+
+```text
+Lock B
+   ↓
+Lock A
+```
+
+না নেয়।
+
+### 2. Lock-এর Scope ছোট রাখা
+
+প্রয়োজনের চেয়ে বেশি সময় Lock ধরে রাখা উচিত নয়।
+
+### 3. অপ্রয়োজনীয় Lock এড়িয়ে চলা
+
+যেখানে synchronization প্রয়োজন নেই সেখানে Lock ব্যবহার না করা।
+
+### 4. Timeout ব্যবহার করা
+
+প্রয়োজনে Lock acquisition-এ timeout ব্যবহার করা যায়।
+
+---
+
+# 44. Web Request-এর Example
+
+Threading I/O-bound কাজের একটি common example:
+
+```python
+import threading
+import requests
+
+
+def download(url):
+
+    response = requests.get(url)
+
+    print(url, response.status_code)
+
+
+urls = [
+    "https://example.com",
+    "https://python.org",
+    "https://github.com"
+]
+
+
+threads = []
+
+
+for url in urls:
+
+    thread = threading.Thread(
+        target=download,
+        args=(url,)
+    )
+
+    threads.append(thread)
+
+    thread.start()
+
+
+for thread in threads:
+
+    thread.join()
+```
+
+এখানে প্রতিটি URL-এর জন্য একটি Thread ব্যবহার করা হয়েছে।
+
+---
+
+# 45. Class দিয়ে Thread তৈরি
+
+`threading.Thread` inherit করে custom Thread class তৈরি করা যায়।
 
 ```python
 import threading
@@ -1271,14 +1510,11 @@ class VideoUploader(threading.Thread):
 
         print(f"Started uploading {self.video}")
 
-        time.sleep(0.5)
+        time.sleep(1)
 
-        print(f"Video uploaded {self.video}")
-```
+        print(f"Video uploaded: {self.video}")
 
-Thread তৈরি:
 
-```python
 thread = VideoUploader("video1.mp4")
 
 thread.start()
@@ -1295,7 +1531,7 @@ run()
 
 ---
 
-# 37. Multiple Video Upload Threads
+# 46. Multiple Threads with Class
 
 ```python
 import threading
@@ -1312,9 +1548,9 @@ class VideoUploader(threading.Thread):
 
         print(f"Started uploading {self.video}")
 
-        time.sleep(0.5)
+        time.sleep(1)
 
-        print(f"Video uploaded {self.video}")
+        print(f"Video uploaded: {self.video}")
 
 
 videos = [
@@ -1337,126 +1573,102 @@ for video in videos:
 
 
 for thread in threads:
+
     thread.join()
 
 
-print("All videos uploaded successfully!")
-```
-
-### Flow
-
-```text
-Main Thread
-    │
-    ├── VideoUploader 1
-    ├── VideoUploader 2
-    └── VideoUploader 3
+print("All videos uploaded!")
 ```
 
 ---
 
-# 38. Important Threading Methods
+# 47. CPU-bound বনাম I/O-bound
 
-| Method       | Purpose                          |
-| ------------ | -------------------------------- |
-| `start()`    | Thread শুরু করে                  |
-| `run()`      | Thread-এর কাজ ধারণ করে           |
-| `join()`     | Thread শেষ হওয়া পর্যন্ত wait করে |
-| `acquire()`  | Lock/Semaphore acquire করে       |
-| `release()`  | Lock/Semaphore release করে       |
-| `wait()`     | Event/Condition-এর জন্য wait করে |
-| `set()`      | Event set করে                    |
-| `clear()`    | Event clear করে                  |
-| `is_set()`   | Event set আছে কিনা check করে     |
-| `is_alive()` | Thread alive কিনা check করে      |
+## CPU-bound
 
----
-
-# 39. Lock vs RLock vs Semaphore vs Event vs Condition vs Queue
-
-| Tool        | Main Purpose                                             |
-| ----------- | -------------------------------------------------------- |
-| `Lock`      | Critical Section protect করা                             |
-| `RLock`     | একই Thread-কে একই Lock multiple times acquire করতে দেওয়া |
-| `Semaphore` | Concurrent Thread-এর সংখ্যা সীমাবদ্ধ করা                 |
-| `Event`     | Simple signal পাঠানো                                     |
-| `Condition` | Wait + Notify করা                                        |
-| `Queue`     | Thread-safe data/task exchange                           |
-
----
-
-# 40. GIL কী?
-
-**GIL = Global Interpreter Lock**
-
-Standard CPython-এ GIL-এর কারণে একটি Process-এর মধ্যে একই সময়ে একাধিক Thread Python bytecode execute করতে পারে না।
-
-সহজভাবে:
-
-```text
-Thread 1 → Python bytecode
-Thread 2 → অপেক্ষা
-Thread 3 → অপেক্ষা
-```
-
-একটি Thread Python bytecode execute করার সময় GIL ধরে রাখে।
-
-তবে I/O-এর ক্ষেত্রে Threading অনেক useful।
-
----
-
-# 41. Threading কোথায় বেশি Useful?
-
-Threading বিশেষভাবে **I/O-bound tasks**-এর জন্য useful।
+যেখানে CPU বেশি কাজ করে।
 
 Examples:
 
 ```text
-Network Requests
-File I/O
-Database Operations
-API Calls
-Waiting for External Services
+Large Mathematical Calculation
+Heavy Computation
+CPU-intensive Processing
 ```
 
-কারণ Thread যখন I/O-এর জন্য অপেক্ষা করে, তখন অন্য Thread কাজ করতে পারে।
+Standard CPython-এ এই ধরনের Python code-এর ক্ষেত্রে Threading সাধারণত multiple CPU cores-এর full parallel execution দেয় না।
 
----
-
-# 42. CPU-bound Task
-
-CPU-bound task হলো যেখানে program-এর বেশিরভাগ সময় CPU calculation-এ যায়।
-
-Examples:
-
-```text
-Heavy Mathematical Calculation
-Large Computation
-CPU-heavy Processing
-```
-
-Standard CPython-এ এই ধরনের Python code-এর জন্য Threading সাধারণত multiple CPU cores-এর full parallel execution দেয় না।
-
-CPU-bound কাজের জন্য:
+এক্ষেত্রে অনেক সময়:
 
 ```python
 multiprocessing
 ```
 
-অনেক সময় বেশি suitable।
+বেশি suitable।
 
 ---
 
-# 43. Multithreading বনাম Multiprocessing
+# 48. I/O-bound
 
-| Feature           | Multithreading          | Multiprocessing                      |
-| ----------------- | ----------------------- | ------------------------------------ |
-| Unit              | Thread                  | Process                              |
-| Memory            | Process-এর মধ্যে shared | Separate memory                      |
-| Communication     | তুলনামূলক সহজ           | বেশি overhead                        |
-| I/O-bound         | খুব useful              | Useful                               |
-| CPU-bound Python  | GIL-এর কারণে limited    | Multiple CPU cores ব্যবহার করতে পারে |
-| Creation Overhead | Lower                   | Higher                               |
+যেখানে program-এর অনেক সময় external I/O-এর জন্য অপেক্ষা করতে হয়।
+
+Examples:
+
+```text
+API Request
+Network Request
+Database Operation
+File I/O
+Web Scraping
+HTTP Request
+```
+
+একটি Thread I/O-এর জন্য অপেক্ষা করার সময় অন্য Thread কাজ করতে পারে।
+
+তাই I/O-bound task-এর ক্ষেত্রে Threading useful হতে পারে।
+
+---
+
+# 49. GIL কী?
+
+**GIL = Global Interpreter Lock**
+
+CPython-এর traditional execution model-এ GIL একই সময়ে একটি Thread-কে Python bytecode execution-এর জন্য interpreter lock ধরে রাখতে দেয়।
+
+তাই CPU-bound Python code-এর ক্ষেত্রে একাধিক Thread ব্যবহার করে সাধারণত multiple CPU core-এ একই সময়ে Python bytecode execute করা যায় না।
+
+তবে I/O-bound কাজের ক্ষেত্রে Threading এখনও খুব useful।
+
+### সহজভাবে:
+
+```text
+CPU-bound
+   ↓
+GIL limitation
+   ↓
+Threading → সাধারণত ideal নয়
+
+
+I/O-bound
+   ↓
+I/O waiting
+   ↓
+Threading → Useful
+```
+
+---
+
+# 50. Threading বনাম Multiprocessing
+
+| Feature           | Threading                   | Multiprocessing         |
+| ----------------- | --------------------------- | ----------------------- |
+| Unit              | Thread                      | Process                 |
+| Memory            | একই Process-এর মধ্যে shared | Separate                |
+| Creation Overhead | কম                          | বেশি                    |
+| I/O-bound         | ভালো                        | ভালো                    |
+| CPU-bound Python  | GIL-এর কারণে limited        | ভালো                    |
+| Communication     | তুলনামূলক সহজ               | তুলনামূলক বেশি overhead |
+| Memory Usage      | তুলনামূলক কম                | তুলনামূলক বেশি          |
 
 ### Simple Rule
 
@@ -1470,14 +1682,131 @@ CPU-bound
 Multiprocessing
 ```
 
-এটি একটি useful starting rule, তবে বাস্তব system-এর design-এর উপর choice নির্ভর করে।
+এটি একটি useful starting rule; actual architecture task-এর requirements-এর উপর নির্ভর করে।
 
 ---
 
-# 44. Complete Concept Map
+# 51. Important Threading Methods
+
+| Method       | কাজ                              |
+| ------------ | -------------------------------- |
+| `start()`    | Thread শুরু করে                  |
+| `run()`      | Thread-এর কাজ execute করে        |
+| `join()`     | Thread শেষ হওয়া পর্যন্ত wait করে |
+| `is_alive()` | Thread alive কিনা check করে      |
+| `acquire()`  | Lock/Semaphore acquire করে       |
+| `release()`  | Lock release করে                 |
+| `wait()`     | Event/Condition-এর জন্য wait করে |
+| `set()`      | Event set করে                    |
+| `clear()`    | Event clear করে                  |
+| `is_set()`   | Event set আছে কিনা check করে     |
+
+---
+
+# 52. Important Threading Classes
+
+Python-এর গুরুত্বপূর্ণ threading classes:
 
 ```text
-Python Multithreading
+Thread
+Lock
+RLock
+Semaphore
+BoundedSemaphore
+Event
+Condition
+Barrier
+Timer
+```
+
+Thread-related task management-এর জন্য:
+
+```text
+ThreadPoolExecutor
+Future
+Queue
+```
+
+খুব গুরুত্বপূর্ণ।
+
+---
+
+# 53. Lock vs RLock vs Semaphore vs Event vs Condition vs Queue
+
+| Tool        | Main Purpose                                              |
+| ----------- | --------------------------------------------------------- |
+| `Lock`      | Critical Section protect করা                              |
+| `RLock`     | Same Thread-কে একই Lock multiple times acquire করতে দেওয়া |
+| `Semaphore` | Concurrent access limit করা                               |
+| `Event`     | Simple signal পাঠানো                                      |
+| `Condition` | Wait + Notify                                             |
+| `Queue`     | Thread-safe data/task exchange                            |
+
+---
+
+# 54. Threading-এর Complete Example
+
+```python
+import threading
+import time
+
+
+def task(name):
+
+    print(f"{name} started")
+
+    time.sleep(2)
+
+    print(f"{name} finished")
+
+
+threads = []
+
+
+for i in range(3):
+
+    thread = threading.Thread(
+        target=task,
+        args=(f"Thread-{i}",)
+    )
+
+    threads.append(thread)
+
+    thread.start()
+
+
+for thread in threads:
+
+    thread.join()
+
+
+print("All threads completed")
+```
+
+Flow:
+
+```text
+Main Thread
+    │
+    ├── Thread-0
+    │
+    ├── Thread-1
+    │
+    └── Thread-2
+           │
+           ▼
+        Complete
+           │
+           ▼
+    Main Thread continues
+```
+
+---
+
+# 55. Python Threading Concept Map
+
+```text
+Python Threading
 │
 ├── Thread Creation
 │   ├── threading.Thread()
@@ -1496,7 +1825,7 @@ Python Multithreading
 │   ├── RLock
 │   └── Semaphore
 │
-├── Thread Communication
+├── Communication
 │   ├── Event
 │   ├── Condition
 │   └── Queue
@@ -1510,100 +1839,63 @@ Python Multithreading
 ├── Background Thread
 │   └── daemon=True
 │
-└── Python Concurrency
+└── Concurrency
     ├── GIL
+    ├── ThreadPoolExecutor
     └── Multiprocessing
 ```
 
 ---
 
-# 45. Easy Way to Remember
+# 56. Interview Questions
 
-## Race Condition
+## Q1. Thread কী?
 
-```text
-Multiple Threads
-       ↓
-Shared Resource
-       ↓
-Unsafe Concurrent Access
-       ↓
-Race Condition
-```
+Thread হলো একটি Process-এর ভিতরে execution-এর একটি ছোট unit।
 
-## Lock
+---
 
-```text
-Lock
-  ↓
-একবারে একজন Thread
-```
+## Q2. Threading কী?
 
-## Semaphore
+একটি Process-এর মধ্যে একাধিক Thread ব্যবহার করে একাধিক কাজ concurrently execute করার technique।
 
-```text
-Semaphore(3)
-  ↓
-একবারে সর্বোচ্চ ৩ Thread
-```
+---
 
-## RLock
+## Q3. Python-এ Thread কীভাবে তৈরি করা হয়?
 
-```text
-RLock
-  ↓
-Same Thread
-  ↓
-Same Lock multiple times
-```
-
-## Event
-
-```text
-Event
-  ↓
-"Signal না দেওয়া পর্যন্ত অপেক্ষা করো"
-```
-
-## Condition
-
-```text
-Condition
-  ↓
-"Condition true হওয়া পর্যন্ত wait করো"
-```
-
-## Queue
-
-```text
-Queue
-  ↓
-Producer → Data → Consumer
+```python
+threading.Thread(target=function)
 ```
 
 ---
 
-# 46. Important Interview Questions
+## Q4. `start()` কী করে?
 
-## Q1. What is Multithreading?
-
-Multithreading is a programming technique where multiple Threads execute tasks concurrently within a Process.
+নতুন Thread-এর execution শুরু করে।
 
 ---
 
-## Q2. What is a Thread?
+## Q5. `run()` কী করে?
 
-Thread হলো Process-এর ভিতরে execution-এর smallest unit।
+Thread-এর target কাজ execute করে।
 
----
-
-## Q3. What is a Race Condition?
-
-যখন একাধিক Thread একই Shared Resource concurrently access/modify করে এবং result execution timing/order-এর উপর নির্ভর করে, তখন Race Condition হয়।
+তবে সরাসরি `run()` call করলে নতুন Thread তৈরি হয় না।
 
 ---
 
-## Q4. How can you prevent Race Condition?
+## Q6. `join()` কী করে?
+
+Calling Thread-কে নির্দিষ্ট Thread শেষ হওয়া পর্যন্ত অপেক্ষা করায়।
+
+---
+
+## Q7. Race Condition কী?
+
+Multiple Thread একই Shared Resource concurrently access বা modify করার কারণে execution timing/order-এর উপর নির্ভরশীল unexpected result হওয়া।
+
+---
+
+## Q8. Race Condition কীভাবে prevent করা যায়?
 
 Synchronization mechanism ব্যবহার করে।
 
@@ -1615,126 +1907,140 @@ threading.Lock()
 
 ---
 
-## Q5. What is a Critical Section?
+## Q9. Critical Section কী?
 
-যে code অংশ Shared Resource access বা modify করে এবং synchronization প্রয়োজন হতে পারে তাকে Critical Section বলে।
+Shared Resource access বা modify করা code-এর sensitive অংশ।
 
 ---
 
-## Q6. What is the difference between Lock and RLock?
+## Q10. Lock কী?
+
+Lock critical section-এ একই সময়ে একাধিক Thread ঢোকা থেকে বাধা দেয়।
+
+---
+
+## Q11. Lock এবং RLock-এর পার্থক্য কী?
 
 ```text
 Lock
-→ Normal mutual-exclusion lock
+→ সাধারণ mutual exclusion
 
 RLock
-→ Reentrant Lock
-→ Same Thread multiple times acquire করতে পারে
+→ একই Thread একই Lock multiple times acquire করতে পারে
 ```
 
 ---
 
-## Q7. What is a Semaphore?
+## Q12. Semaphore কী?
 
 Semaphore concurrent access-এর সংখ্যা সীমাবদ্ধ করে।
-
-Example:
 
 ```python
 threading.Semaphore(3)
 ```
 
-সর্বোচ্চ ৩টি Thread একই সময়ে semaphore acquire করতে পারে।
+সর্বোচ্চ ৩টি Thread একই সময়ে Semaphore acquire করতে পারবে।
 
 ---
 
-## Q8. What is an Event?
+## Q13. Event কী?
 
 Event হলো Thread-এর মধ্যে simple signaling mechanism।
 
 ---
 
-## Q9. What is `join()`?
+## Q14. Condition কী?
 
-`join()` calling Thread-কে নির্দিষ্ট Thread শেষ হওয়া পর্যন্ত অপেক্ষা করায়।
-
----
-
-## Q10. What is a Daemon Thread?
-
-Daemon Thread হলো background Thread যা সব non-daemon Thread শেষ হওয়ার পর Python program-কে alive রাখে না।
+Condition Thread-কে কোনো state/condition-এর জন্য wait এবং অন্য Thread-কে notify করতে সাহায্য করে।
 
 ---
 
-## Q11. What is the difference between `start()` and `run()`?
+## Q15. Queue কেন ব্যবহার করা হয়?
+
+Thread-safe data/task exchange এবং Producer-Consumer pattern implement করার জন্য।
+
+---
+
+## Q16. Daemon Thread কী?
+
+Daemon Thread হলো background Thread যা non-daemon Thread শেষ হওয়ার পর Python process-কে alive রাখে না।
+
+---
+
+## Q17. GIL কী?
+
+GIL বা Global Interpreter Lock হলো CPython-এর একটি mechanism যা একই সময়ে Python bytecode execution-এর জন্য Thread access সীমাবদ্ধ করে।
+
+---
+
+## Q18. Threading কখন ব্যবহার করা উচিত?
+
+মূলত I/O-bound task-এর ক্ষেত্রে।
+
+---
+
+## Q19. CPU-bound task-এর জন্য Threading কি ideal?
+
+Standard CPython-এ সাধারণত নয়। CPU-bound Python code-এর ক্ষেত্রে GIL-এর কারণে multiprocessing অনেক সময় বেশি suitable।
+
+---
+
+## Q20. Deadlock কী?
+
+দুই বা তার বেশি Thread একে অপরের Lock/resource-এর জন্য অপেক্ষা করতে থাকলে এবং কেউ এগোতে না পারলে Deadlock হয়।
+
+---
+
+# 57. Quick Revision
 
 ```text
+Thread
+  ↓
+Process-এর ভিতরের execution unit
+
+Threading
+  ↓
+Multiple concurrent tasks
+
 start()
-→ নতুন Thread-এর execution শুরু করে।
+  ↓
+Thread শুরু
 
 run()
-→ Thread-এর task method।
+  ↓
+Thread-এর কাজ
 
-run() সরাসরি call করলে নতুন Thread তৈরি হয় না।
-```
+join()
+  ↓
+Thread শেষ হওয়া পর্যন্ত wait
 
----
-
-## Q12. What is GIL?
-
-GIL বা Global Interpreter Lock হলো CPython-এর একটি mechanism যা একটি Process-এর মধ্যে একই সময়ে একাধিক Thread-এর Python bytecode execution সীমাবদ্ধ করে।
-
----
-
-# 47. Final Summary
-
-Python Multithreading-এর সবচেয়ে গুরুত্বপূর্ণ concepts:
-
-```text
-1. Process
-2. Thread
-3. threading.Thread()
-4. start()
-5. run()
-6. join()
-7. Shared Resource
-8. Race Condition
-9. Critical Section
-10. Lock
-11. acquire()
-12. release()
-13. RLock
-14. Semaphore
-15. Event
-16. Condition
-17. Queue
-18. Thread Exception Handling
-19. Thread Information
-20. Daemon Thread
-21. GIL
-22. Multithreading vs Multiprocessing
-```
-
-### Core Relationship
-
-```text
-Multiple Threads
-       ↓
 Shared Resource
-       ↓
+  ↓
+একাধিক Thread-এর common data/resource
+
 Race Condition
-       ↓
-Synchronization
-       ↓
-Lock / RLock / Semaphore
-```
+  ↓
+Unsafe concurrent access
 
-### Thread Communication
+Critical Section
+  ↓
+Shared resource access-এর sensitive code
 
-```text
+Lock
+  ↓
+একবারে একটি Thread
+
+RLock
+  ↓
+Same Thread একই Lock multiple times নিতে পারে
+
+Semaphore
+  ↓
+Concurrent access limit
+
 Event
   ↓
-Simple Signaling
+Simple Signal
 
 Condition
   ↓
@@ -1742,17 +2048,83 @@ Wait + Notify
 
 Queue
   ↓
-Producer → Consumer
+Producer → Queue → Consumer
+
+ThreadPoolExecutor
+  ↓
+Thread pool management
+
+Daemon
+  ↓
+Background Thread
+
+GIL
+  ↓
+CPython Python-bytecode execution limitation
+
+I/O-bound
+  ↓
+Threading useful
+
+CPU-bound
+  ↓
+Multiprocessing often useful
 ```
 
-### Final Mental Model
+---
+
+# 58. Final Important Topics
+
+Python Threading শেখার সময় এই Topics অবশ্যই ভালোভাবে শিখতে হবে:
 
 ```text
-                Python Multithreading
+1. Process
+2. Thread
+3. Threading
+4. threading.Thread
+5. start()
+6. run()
+7. join()
+8. args
+9. kwargs
+10. Thread Name
+11. current_thread()
+12. is_alive()
+13. Shared Resource
+14. Race Condition
+15. Critical Section
+16. Lock
+17. acquire()
+18. release()
+19. with lock
+20. RLock
+21. Semaphore
+22. Event
+23. Condition
+24. Queue
+25. Producer-Consumer
+26. Daemon Thread
+27. Thread Exception Handling
+28. ThreadPoolExecutor
+29. Future
+30. GIL
+31. I/O-bound
+32. CPU-bound
+33. Threading vs Multiprocessing
+34. Deadlock
+35. Thread-safe Code
+```
+
+---
+
+# Final Mental Model
+
+```text
+                  Python Threading
                         │
           ┌─────────────┴─────────────┐
           ↓                           ↓
-     Thread Creation             Thread Control
+   Thread Creation              Thread Control
           │                           │
    Thread() / Class             start() / join()
           │
@@ -1760,14 +2132,14 @@ Producer → Consumer
     Shared Resources
           │
           ↓
-    Race Conditions
+    Race Condition
           │
           ↓
     Synchronization
-     ┌────┼────┐
-     ↓    ↓    ↓
-   Lock RLock Semaphore
-
+       ┌──┼────┐
+       ↓  ↓    ↓
+     Lock RLock Semaphore
+       
           ↓
    Thread Communication
       ┌────┼────┐
@@ -1775,24 +2147,65 @@ Producer → Consumer
     Event Condition Queue
 ```
 
-# Final One-Line Revision
+# One-Line Revision
 
 ```text
-Thread       → Worker
-start()      → Start
-run()        → Task
-join()       → Wait
-Shared Data  → Common Resource
-Race         → Unsafe Access
-Lock         → One at a time
-RLock        → Same Thread can re-enter
-Semaphore    → Limited number of Threads
-Event        → Signal
-Condition    → Wait + Notify
-Queue        → Producer → Consumer
-Daemon       → Background Thread
-GIL          → CPython Python-bytecode execution limitation
-Multiprocessing → CPU-bound parallelism-এর জন্য useful
+Thread
+→ Worker
+
+Threading
+→ Concurrent task execution
+
+start()
+→ Start Thread
+
+run()
+→ Execute Thread task
+
+join()
+→ Wait for Thread
+
+Shared Resource
+→ Common data/resource
+
+Race Condition
+→ Unsafe concurrent access
+
+Critical Section
+→ Sensitive shared-data code
+
+Lock
+→ One Thread at a time
+
+RLock
+→ Same Thread can re-enter
+
+Semaphore
+→ Limited concurrent access
+
+Event
+→ Simple signal
+
+Condition
+→ Wait + Notify
+
+Queue
+→ Producer → Consumer
+
+Daemon
+→ Background Thread
+
+ThreadPoolExecutor
+→ Manage worker threads
+
+GIL
+→ CPython Python-bytecode execution limitation
+
+I/O-bound
+→ Threading is often useful
+
+CPU-bound
+→ Multiprocessing is often useful
 ```
 
 """
