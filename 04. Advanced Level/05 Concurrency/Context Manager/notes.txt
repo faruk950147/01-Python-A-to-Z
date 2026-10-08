@@ -1,0 +1,1116 @@
+# Python Context Manager
+
+## ১. Context Manager কী?
+
+**Context Manager** হলো Python-এর একটি feature, যা **resource-কে নিরাপদভাবে এবং automatically manage** করতে ব্যবহার করা হয়।
+
+এটি নিশ্চিত করে যে কোনো resource:
+
+1. ব্যবহারের আগে Open বা Acquire করা হবে।
+2. নির্দিষ্ট block-এর মধ্যে ব্যবহার করা হবে।
+3. ব্যবহার শেষে সঠিকভাবে Close বা Release করা হবে।
+
+Context Manager সাধারণত **`with` statement**-এর সাথে ব্যবহার করা হয়।
+
+### Basic Syntax
+
+```python
+with expression as variable:
+    # resource ব্যবহার করুন
+```
+
+### Example
+
+```python
+with open("file.txt", "r") as file:
+    data = file.read()
+    print(data)
+```
+
+এখানে:
+
+```text
+open() → File open করে
+with   → File-টি manage করে
+read() → File read করে
+exit   → File automatically close হয়
+```
+
+আমাদের manually লিখতে হয় না:
+
+```python
+file.close()
+```
+
+---
+
+# ২. Context Manager কেন ব্যবহার করি?
+
+Context Manager ছাড়া:
+
+```python
+file = open("file.txt", "r")
+
+data = file.read()
+
+file.close()
+```
+
+এখানে সমস্যা হলো, `file.close()` করার আগেই যদি কোনো error ঘটে, তাহলে file open অবস্থায় থেকে যেতে পারে।
+
+Context Manager ব্যবহার করলে:
+
+```python
+with open("file.txt", "r") as file:
+    data = file.read()
+```
+
+Python automatically cleanup handle করে।
+
+### প্রধান সুবিধা
+
+```text
+Context Manager
+      │
+      ├── Resource setup / acquire
+      ├── Resource ব্যবহার
+      ├── Automatic cleanup
+      └── Exception হলেও cleanup
+```
+
+### যেসব Resource manage করা যায়
+
+Context Manager দিয়ে বিভিন্ন resource manage করা যায়:
+
+```text
+File
+Database Connection
+Network Connection
+Lock
+Socket
+Temporary Resource
+```
+
+---
+
+# ৩. Python `open()` এবং File Modes
+
+`open()` function ব্যবহার করে file open করা হয়।
+
+```python
+open("file.txt", mode)
+```
+
+Common file modes:
+
+| Mode | অর্থ                 |
+| ---- | -------------------- |
+| `r`  | Read                 |
+| `w`  | Write / overwrite    |
+| `a`  | Append               |
+| `x`  | নতুন file তৈরি       |
+| `r+` | Read এবং Write       |
+| `b`  | Binary mode modifier |
+| `t`  | Text mode modifier   |
+
+### গুরুত্বপূর্ণ
+
+`b` এবং `t` সাধারণত অন্য mode-এর সাথে ব্যবহার করা হয়।
+
+Examples:
+
+```text
+rb → Read binary
+wb → Write binary
+rt → Read text
+wt → Write text
+```
+
+---
+
+# ৪. Read Mode — `r`
+
+`r` মানে **Read**।
+
+এটি একটি existing file reading-এর জন্য open করে।
+
+```python
+with open("file.txt", "r") as file:
+    data = file.read()
+    print(data)
+```
+
+যদি file-এর অস্তিত্ব না থাকে, Python:
+
+```python
+FileNotFoundError
+```
+
+দেবে।
+
+### মনে রাখুন
+
+```text
+r → Read
+```
+
+---
+
+# ৫. Write Mode — `w`
+
+`w` মানে **Write**।
+
+File না থাকলে এটি নতুন file তৈরি করে।
+
+কিন্তু file আগে থেকেই থাকলে তার পুরোনো content **মুছে গিয়ে নতুন content দিয়ে replace হবে**।
+
+```python
+with open("file.txt", "w") as file:
+    file.write("Hello, World!")
+```
+
+### Example
+
+আগে ছিল:
+
+```text
+Hello
+Python
+```
+
+`w` mode ব্যবহার করার পরে:
+
+```text
+Hello, World!
+```
+
+### মনে রাখুন
+
+```text
+w → Write + Overwrite
+```
+
+---
+
+# ৬. Append Mode — `a`
+
+`a` মানে **Append**।
+
+এটি file-এর **শেষে নতুন data যোগ করে**।
+
+পুরোনো content মুছে যায় না।
+
+```python
+with open("file.txt", "a") as file:
+    file.write("Hello, World!")
+```
+
+যদি file-এর মধ্যে থাকে:
+
+```text
+Hello
+```
+
+Append করার পরে হবে:
+
+```text
+Hello
+Hello, World!
+```
+
+যদি নতুন text নতুন line-এ লিখতে চান, তাহলে `\n` ব্যবহার করুন:
+
+```python
+with open("file.txt", "a") as file:
+    file.write("\nHello, World!")
+```
+
+### মনে রাখুন
+
+```text
+a → File-এর শেষে নতুন data যোগ করা
+```
+
+---
+
+# ৭. Read এবং Write Mode — `r+`
+
+`r+` দিয়ে একই file-এ:
+
+```text
+Read
+Write
+```
+
+দুটিই করা যায়।
+
+File-টি আগে থেকেই থাকতে হবে।
+
+```python
+with open("file.txt", "r+") as file:
+    data = file.read()
+    print(data)
+
+    file.write("Hello, World!")
+```
+
+### গুরুত্বপূর্ণ
+
+`r+` automatically append করে না।
+
+Write হবে **বর্তমান file position** থেকে।
+
+উদাহরণস্বরূপ:
+
+```python
+file.read()
+```
+
+করার পরে file position সাধারণত file-এর শেষে চলে যায়।
+
+তাই এরপর write করলে সাধারণত সেখানে write হবে।
+
+যদি স্পষ্টভাবে file-এর শেষে write করতে চান:
+
+```python
+with open("file.txt", "r+") as file:
+    data = file.read()
+
+    file.seek(0, 2)
+    file.write("Hello, World!")
+```
+
+এখানে:
+
+```python
+file.seek(0, 2)
+```
+
+file position-কে file-এর শেষে নিয়ে যায়।
+
+### মনে রাখুন
+
+```text
+r  → Read
+r+ → Read + Write
+```
+
+---
+
+# ৮. Create Mode — `x`
+
+`x` মানে **Exclusive Creation**।
+
+এটি একটি নতুন file তৈরি করে।
+
+```python
+with open("file.txt", "x") as file:
+    file.write("Hello, World!")
+```
+
+যদি file আগে থেকেই থাকে, Python:
+
+```python
+FileExistsError
+```
+
+দেবে।
+
+### মনে রাখুন
+
+```text
+x → শুধুমাত্র নতুন file তৈরি
+```
+
+---
+
+# ৯. Binary Mode — `b`
+
+`b` মানে **Binary Mode**।
+
+এটি সাধারণত অন্য mode-এর সাথে ব্যবহার করা হয়।
+
+### Read Binary
+
+```python
+with open("image.jpg", "rb") as file:
+    data = file.read()
+```
+
+এখানে:
+
+```text
+r → read
+b → binary
+
+rb → read binary
+```
+
+### Write Binary
+
+```python
+with open("image.jpg", "wb") as file:
+    file.write(binary_data)
+```
+
+Common binary modes:
+
+```text
+rb
+wb
+ab
+rb+
+wb+
+```
+
+সাধারণত এটিকে একা ব্যবহার করা হয় না:
+
+```python
+open("file.txt", "b")
+```
+
+---
+
+# ১০. Text Mode — `t`
+
+`t` মানে **Text Mode**।
+
+সাধারণ text file-এর জন্য text mode default।
+
+আপনি লিখতে পারেন:
+
+```python
+with open("file.txt", "rt") as file:
+    data = file.read()
+```
+
+কিন্তু সাধারণত আমরা লিখি:
+
+```python
+with open("file.txt", "r") as file:
+    data = file.read()
+```
+
+দুটিই text mode।
+
+Common combinations:
+
+```text
+rt → Read text
+wt → Write text
+at → Append text
+```
+
+### মনে রাখুন
+
+```text
+t → Text
+b → Binary
+```
+
+---
+
+# ১১. File Reading-এর সাথে Context Manager
+
+Example:
+
+```python
+with open("file.txt", "r") as file:
+    data = file.read()
+
+print(data)
+```
+
+`with` block শেষ হওয়ার পরে file automatically close হয়ে যায়।
+
+আমরা check করতে পারি:
+
+```python
+with open("file.txt", "r") as file:
+    print(file.read())
+
+print(file.closed)
+```
+
+Output:
+
+```text
+True
+```
+
+এর অর্থ file closed।
+
+---
+
+# ১২. Automatic Cleanup কীভাবে কাজ করে?
+
+ধরুন:
+
+```python
+with open("file.txt", "r") as file:
+    data = file.read()
+```
+
+সাধারণ process হলো:
+
+```text
+Context Enter
+      ↓
+Resource Open
+      ↓
+Resource ব্যবহার
+      ↓
+Context Leave
+      ↓
+Resource Cleanup
+```
+
+`with` block-এর ভিতরে exception হলেও Context Manager cleanup করার সুযোগ পায়।
+
+এটাই Context Manager-এর সবচেয়ে বড় সুবিধাগুলোর একটি।
+
+---
+
+# ১৩. Context Manager কীভাবে কাজ করে?
+
+একটি custom Context Manager তৈরি করতে দুটি special method ব্যবহার করা যায়:
+
+```python
+__enter__()
+__exit__()
+```
+
+এই method দুটি **Context Manager Protocol**-এর অংশ।
+
+### Basic Example
+
+```python
+class MyContext:
+
+    def __enter__(self):
+        print("Entering context")
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Exiting context")
+
+
+with MyContext() as obj:
+    print("Inside context")
+```
+
+Output:
+
+```text
+Entering context
+Inside context
+Exiting context
+```
+
+### Flow
+
+```text
+with MyContext()
+       ↓
+__enter__()
+       ↓
+with block
+       ↓
+__exit__()
+```
+
+---
+
+# ১৪. `__enter__()` Method
+
+`__enter__()` method Python যখন `with` block-এ প্রবেশ করে তখন call হয়।
+
+Example:
+
+```python
+def __enter__(self):
+    print("Entering context")
+    return self
+```
+
+এটি সাধারণত ব্যবহার করা হয়:
+
+```text
+Resource Open করা
+Resource Allocate করা
+কোনো কিছু Initialize করা
+Lock Acquire করা
+Connection Open করা
+```
+
+`__enter__()` যে value return করে, `as`-এর পরের variable-এ সেই value পাওয়া যায়।
+
+Example:
+
+```python
+with MyContext() as obj:
+    print(obj)
+```
+
+এখানে `obj` পাবে:
+
+```python
+__enter__()
+```
+
+এর return করা value।
+
+---
+
+# ১৫. `__exit__()` Method
+
+`__exit__()` method Python যখন `with` block থেকে বের হয় তখন call হয়।
+
+```python
+def __exit__(self, exc_type, exc_value, traceback):
+    print("Exiting context")
+```
+
+এটি সাধারণত ব্যবহার করা হয়:
+
+```text
+Resource Close করা
+Lock Release করা
+Connection Close করা
+Resource Cleanup করা
+```
+
+### `__exit__()` Parameters
+
+```python
+__exit__(self, exc_type, exc_value, traceback)
+```
+
+এগুলো exception সম্পর্কে information দেয়, যদি কোনো exception ঘটে।
+
+```text
+exc_type    → Exception-এর type
+exc_value   → Exception object / value
+traceback   → Traceback information
+```
+
+যদি কোনো exception না ঘটে, সাধারণত এগুলোর value হবে:
+
+```text
+None
+None
+None
+```
+
+---
+
+# ১৬. Custom Context Manager Example
+
+```python
+class MyContext:
+
+    def __enter__(self):
+        print("Resource acquired")
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Resource released")
+
+
+with MyContext():
+    print("Working with resource")
+```
+
+Output:
+
+```text
+Resource acquired
+Working with resource
+Resource released
+```
+
+### সহজ Flow
+
+```text
+__enter__()
+    ↓
+Resource acquired
+    ↓
+with block
+    ↓
+__exit__()
+    ↓
+Resource released
+```
+
+---
+
+# ১৭. `contextlib` ব্যবহার করে Context Manager
+
+Python-এ `contextlib` নামে একটি module আছে।
+
+এটি Context Manager সহজে তৈরি করতে সাহায্য করে।
+
+আমরা `@contextmanager` decorator ব্যবহার করতে পারি।
+
+```python
+from contextlib import contextmanager
+
+
+@contextmanager
+def my_context():
+
+    print("Resource acquired")
+
+    try:
+        yield
+
+    finally:
+        print("Resource released")
+
+
+with my_context():
+    print("Working with resource")
+```
+
+Output:
+
+```text
+Resource acquired
+Working with resource
+Resource released
+```
+
+---
+
+# ১৮. `yield` সহ Context Manager
+
+`@contextmanager` ব্যবহার করলে `yield` **setup এবং cleanup** অংশকে আলাদা করে।
+
+Example:
+
+```python
+from contextlib import contextmanager
+
+
+@contextmanager
+def my_context():
+
+    # Setup
+    print("Start")
+
+    try:
+        yield
+
+    finally:
+        # Cleanup
+        print("End")
+```
+
+Flow:
+
+```text
+Setup
+  ↓
+yield
+  ↓
+with block execute
+  ↓
+finally
+  ↓
+Cleanup
+```
+
+### সহজভাবে মনে রাখুন
+
+```text
+yield-এর আগে → Setup
+yield-এর পরে → Cleanup
+```
+
+---
+
+# ১৯. Context Manager এবং Exception
+
+Context Manager-এর একটি বড় সুবিধা হলো exception ঘটলেও cleanup হয়।
+
+Example:
+
+```python
+class MyContext:
+
+    def __enter__(self):
+        print("Resource acquired")
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Resource released")
+
+
+with MyContext():
+    print("Working")
+
+    raise ValueError("Something went wrong")
+```
+
+Exception report হওয়ার আগে output হবে:
+
+```text
+Resource acquired
+Working
+Resource released
+```
+
+কেন?
+
+কারণ `with` block থেকে বের হওয়ার সময় Python:
+
+```python
+__exit__()
+```
+
+call করে।
+
+Exception ঘটলেও `__exit__()` call করা হয়।
+
+### গুরুত্বপূর্ণ
+
+`__exit__()` exception suppress করতেও পারে।
+
+যদি এটি:
+
+```python
+True
+```
+
+return করে, তাহলে exception suppress করা যেতে পারে।
+
+আর যদি:
+
+```python
+False
+```
+
+অথবা:
+
+```python
+None
+```
+
+return করে, তাহলে exception সাধারণত আবার propagate করবে।
+
+---
+
+# ২০. Important File Modes
+
+Quick revision:
+
+```text
+r   → Read
+w   → Write / Overwrite
+a   → Append
+x   → নতুন File Create
+r+  → Read + Write
+b   → Binary mode
+t   → Text mode
+```
+
+### Common Combinations
+
+```text
+rb   → Read binary
+wb   → Write binary
+ab   → Append binary
+
+rt   → Read text
+wt   → Write text
+at   → Append text
+
+rb+  → Read + Write binary
+```
+
+---
+
+# ২১. Context Manager মনে রাখার সহজ উপায়
+
+```text
+Context Manager
+       ↓
+      with
+       ↓
+Resource Acquire
+       ↓
+Resource ব্যবহার
+       ↓
+Automatic Cleanup
+```
+
+File-এর ক্ষেত্রে:
+
+```text
+with open(...)
+       ↓
+   Read / Write
+       ↓
+File automatically
+     close
+```
+
+### এক লাইনের সংজ্ঞা
+
+> **Context Manager এমন একটি Python mechanism যা resource manage করে এবং `with` block শেষ হলে automatically cleanup করে।**
+
+---
+
+# ২২. Context Manager বনাম Manual Resource Management
+
+### Context Manager ছাড়া
+
+```python
+file = open("file.txt", "r")
+
+try:
+    data = file.read()
+finally:
+    file.close()
+```
+
+এখানে আমাদের manually file close করতে হচ্ছে।
+
+### Context Manager ব্যবহার করে
+
+```python
+with open("file.txt", "r") as file:
+    data = file.read()
+```
+
+দ্বিতীয় পদ্ধতিটি:
+
+```text
+Shorter
+Cleaner
+Safer
+সহজে বোঝা যায়
+```
+
+File-এর মতো resource manage করার জন্য সাধারণত দ্বিতীয় পদ্ধতিই preferred।
+
+---
+
+# ২৩. Important Interview Questions
+
+## Q1. Context Manager কী?
+
+Context Manager হলো Python-এর একটি mechanism, যা resource-কে নিরাপদভাবে এবং automatically manage করে। সাধারণত এটি `with` statement-এর সাথে ব্যবহার করা হয়।
+
+---
+
+## Q2. Context Manager-এর সাথে কোন keyword ব্যবহার করা হয়?
+
+```python
+with
+```
+
+Example:
+
+```python
+with open("file.txt") as file:
+    data = file.read()
+```
+
+---
+
+## Q3. কোন method দুটি Context Manager Protocol implement করে?
+
+```python
+__enter__()
+__exit__()
+```
+
+---
+
+## Q4. Context Manager কেন ব্যবহার করি?
+
+Resource যেন সঠিকভাবে cleanup হয়, এমনকি exception ঘটলেও—এটি নিশ্চিত করার জন্য Context Manager ব্যবহার করি।
+
+---
+
+## Q5. `contextlib.contextmanager` কী?
+
+`contextlib.contextmanager` হলো একটি decorator, যা generator function ব্যবহার করে সহজে Context Manager তৈরি করতে দেয়।
+
+Example:
+
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def my_context():
+    # setup
+    yield
+    # cleanup
+```
+
+---
+
+## Q6. `w` এবং `a`-এর মধ্যে পার্থক্য কী?
+
+```text
+w → পুরোনো content overwrite করে
+a → file-এর শেষে নতুন content যোগ করে
+```
+
+---
+
+## Q7. `r` এবং `r+`-এর মধ্যে পার্থক্য কী?
+
+```text
+r  → শুধুমাত্র Read
+r+ → Read + Write
+```
+
+---
+
+## Q8. `x` কী করে?
+
+`x` একটি নতুন file তৈরি করে।
+
+যদি file আগে থেকেই থাকে:
+
+```python
+FileExistsError
+```
+
+উঠবে।
+
+---
+
+## Q9. `__enter__()` এবং `__exit__()`-এর মধ্যে পার্থক্য কী?
+
+```text
+__enter__() → with block-এ প্রবেশ করার সময় চলে
+__exit__()  → with block থেকে বের হওয়ার সময় চলে
+```
+
+সহজে মনে রাখুন:
+
+```text
+ENTER → Start / Setup
+EXIT  → Cleanup
+```
+
+---
+
+## Q10. `with` block-এর ভিতরে exception হলে কী হয়?
+
+Context Manager-এর:
+
+```python
+__exit__()
+```
+
+method call হয়।
+
+তাই resource cleanup করা সম্ভব হয়।
+
+---
+
+# ২৪. Final Summary
+
+সবচেয়ে গুরুত্বপূর্ণ বিষয়গুলো:
+
+```text
+Context Manager
+│
+├── with
+│
+├── Resource Management
+│   ├── File
+│   ├── Database
+│   ├── Lock
+│   └── Network Connection
+│
+├── Context Manager Protocol
+│   ├── __enter__()
+│   └── __exit__()
+│
+└── contextlib
+    └── @contextmanager
+```
+
+### সবচেয়ে গুরুত্বপূর্ণ Example
+
+```python
+with open("file.txt", "r") as file:
+    data = file.read()
+    print(data)
+```
+
+মূল ধারণা:
+
+```text
+Acquire
+   ↓
+Use
+   ↓
+Cleanup
+```
+
+---
+
+# Quick Revision Cheat Sheet
+
+| Concept           | অর্থ                                |
+| ----------------- | ----------------------------------- |
+| `with`            | Context Manager ব্যবহার করে         |
+| `__enter__()`     | Setup / Resource acquire            |
+| `__exit__()`      | Cleanup / Resource release          |
+| `@contextmanager` | সহজে Context Manager তৈরি করার উপায় |
+| `yield`           | Setup এবং Cleanup আলাদা করে         |
+| `r`               | Read                                |
+| `w`               | Write / Overwrite                   |
+| `a`               | Append                              |
+| `x`               | নতুন File Create                    |
+| `r+`              | Read + Write                        |
+| `b`               | Binary                              |
+| `t`               | Text                                |
+
+### Final Mental Model
+
+```text
+          CONTEXT MANAGER
+                 │
+                 ▼
+              with
+                 │
+                 ▼
+        Acquire Resource
+                 │
+                 ▼
+            Use Resource
+                 │
+          ┌──────┴──────┐
+          │             │
+       Success       Exception
+          │             │
+          └──────┬──────┘
+                 ▼
+          Cleanup Resource
+                 │
+                 ▼
+              Finished
+```
+
+### মনে রাখার সবচেয়ে সহজ formula
+
+```text
+Context Manager
+       ↓
+   Acquire
+       ↓
+      Use
+       ↓
+   Cleanup
+```
+
+> **Context Manager-এর মূল উদ্দেশ্য হলো: Acquire → Use → Cleanup automatically করা।**

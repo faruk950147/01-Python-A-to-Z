@@ -1,0 +1,2620 @@
+# Python Regular Expression (RegEx)
+
+---
+
+# ১. Regular Expression কী?
+
+**Regular Expression (RegEx)** হলো এমন একটি **Pattern**, যার মাধ্যমে কোনো Text-এর মধ্যে নির্দিষ্ট কিছু খোঁজা, শনাক্ত করা, যাচাই করা, বের করা, পরিবর্তন করা বা ভাগ করা যায়।
+
+Python-এ Regular Expression নিয়ে কাজ করার জন্য `re` module ব্যবহার করা হয়।
+
+```python
+import re
+```
+
+## RegEx-এর ব্যবহার
+
+RegEx ব্যবহার করে আমরা:
+
+* Text Search করতে পারি
+* নির্দিষ্ট Pattern খুঁজতে পারি
+* Data Validate করতে পারি
+* Information Extract করতে পারি
+* Text Replace করতে পারি
+* String Split করতে পারি
+
+---
+
+# ২. গুরুত্বপূর্ণ Regex Symbol
+
+| Symbol  | অর্থ                  |
+| ------- | --------------------- |
+| `.`     | যেকোনো একটি Character |
+| `^`     | String-এর শুরু        |
+| `$`     | String-এর শেষ         |
+| `*`     | শূন্য বা তার বেশি     |
+| `+`     | এক বা তার বেশি        |
+| `?`     | শূন্য বা একটি         |
+| `\|`    | OR                    |
+| `\w`    | Word Character        |
+| `\W`    | Non-word Character    |
+| `\d`    | Digit                 |
+| `\D`    | Non-digit             |
+| `\s`    | Whitespace            |
+| `\S`    | Non-whitespace        |
+| `[]`    | Character Class       |
+| `()`    | Group                 |
+| `{n}`   | ঠিক `n` বার           |
+| `{n,}`  | কমপক্ষে `n` বার       |
+| `{n,m}` | `n` থেকে `m` বার      |
+
+---
+
+# ৩. `.` — Dot
+
+`.` দ্বারা **যেকোনো একটি Character** বোঝায়। তবে সাধারণভাবে এটি Newline-এর সাথে Match করে না।
+
+```python
+import re
+
+text = "Bangladesh"
+
+match = re.search(r".", text)
+
+if match:
+    print(match.group())
+```
+
+Output:
+
+```text
+B
+```
+
+Pattern:
+
+```text
+.
+```
+
+এর অর্থ:
+
+```text
+যেকোনো একটি Character
+```
+
+## Example
+
+```python
+text = "Bangladesh"
+
+match = re.search(r"B.n", text)
+
+if match:
+    print(match.group())
+```
+
+Output:
+
+```text
+Ban
+```
+
+এখানে:
+
+```text
+B.n
+
+│ │
+│ └── যেকোনো একটি Character
+└──── B
+```
+
+অর্থাৎ:
+
+```text
+B + যেকোনো একটি Character + n
+```
+
+তাই `Ban` Pattern-এর সাথে Match করে।
+
+---
+
+# ৪. `^` — String-এর শুরু
+
+`^` দ্বারা **String-এর শুরু** বোঝায়।
+
+```python
+import re
+
+text = "Bangladesh"
+
+match = re.search(r"^B", text)
+
+if match:
+    print(match.group())
+```
+
+Output:
+
+```text
+B
+```
+
+## Example
+
+```python
+text = "Bangladesh India"
+
+match = re.search(r"^\w+", text)
+
+print(match.group())
+```
+
+Output:
+
+```text
+Bangladesh
+```
+
+এখানে:
+
+```text
+^
+```
+
+নিশ্চিত করে যে Match অবশ্যই String-এর **শুরু থেকে** হতে হবে।
+
+---
+
+# ৫. `$` — String-এর শেষ
+
+`$` দ্বারা **String-এর শেষ** বোঝায়।
+
+```python
+import re
+
+text = "Bangladesh"
+
+match = re.search(r"d$", text)
+
+if match:
+    print(match.group())
+```
+
+Output:
+
+```text
+d
+```
+
+## Example
+
+```python
+text = "Bangladesh India Iceland"
+
+match = re.search(r"\w+$", text)
+
+print(match.group())
+```
+
+Output:
+
+```text
+Iceland
+```
+
+এখানে:
+
+```text
+\w+
+```
+
+এক বা একাধিক Word Character খুঁজে।
+
+আর:
+
+```text
+$
+```
+
+নিশ্চিত করে যে Match-টি String-এর **শেষে** থাকতে হবে।
+
+---
+
+# ৬. `*` — Zero or More
+
+`*` অর্থ হলো আগের Pattern-টি **শূন্য বা তার বেশি বার** থাকতে পারে।
+
+```python
+import re
+
+text = "Bdddd"
+
+match = re.search(r"Bd*", text)
+
+if match:
+    print(match.group())
+```
+
+Output:
+
+```text
+Bdddd
+```
+
+এখানে:
+
+```text
+d*
+```
+
+এর অর্থ:
+
+```text
+শূন্য বা তার বেশি d
+```
+
+তাই নিচের সবগুলো Match করতে পারে:
+
+```text
+B
+Bd
+Bdd
+Bddd
+Bdddd
+```
+
+মনে রাখুন:
+
+```text
+* → 0 বা তার বেশি
+```
+
+---
+
+# ৭. `+` — One or More
+
+`+` অর্থ হলো **এক বা তার বেশি**।
+
+```python
+import re
+
+text = "12345"
+
+match = re.search(r"\d+", text)
+
+print(match.group())
+```
+
+Output:
+
+```text
+12345
+```
+
+## পার্থক্য
+
+```text
+\d* → শূন্য বা তার বেশি Digit
+
+\d+ → এক বা তার বেশি Digit
+```
+
+অর্থাৎ:
+
+```text
+\d*
+```
+
+শূন্য Digit-ও Match করতে পারে।
+
+কিন্তু:
+
+```text
+\d+
+```
+
+অবশ্যই কমপক্ষে একটি Digit Match করবে।
+
+---
+
+# ৮. `?` — Zero or One
+
+`?` সাধারণভাবে আগের Pattern-টি **শূন্য বা একবার** থাকতে পারে বোঝায়।
+
+Example:
+
+```python
+import re
+
+text = "color"
+
+match = re.search(r"colou?r", text)
+
+print(match.group())
+```
+
+এই Pattern নিচের দুটো Match করতে পারে:
+
+```text
+color
+colour
+```
+
+কারণ:
+
+```text
+u?
+```
+
+এর অর্থ:
+
+```text
+u শূন্য বা একবার থাকতে পারে
+```
+
+তাই:
+
+```text
+color  → u 0 বার আছে
+
+colour → u 1 বার আছে
+```
+
+---
+
+# ৯. `|` — OR
+
+`|` দ্বারা **OR** বোঝায়।
+
+```python
+import re
+
+pattern = r"(abc|def)"
+
+text = "abc def ghi"
+
+match = re.findall(pattern, text)
+
+print(match)
+```
+
+Output:
+
+```text
+['abc', 'def']
+```
+
+Pattern-এর অর্থ:
+
+```text
+abc OR def
+```
+
+অর্থাৎ `abc` অথবা `def`—যেকোনো একটি Match করবে।
+
+---
+
+# ১০. `\w` — Word Character
+
+`\w` দ্বারা একটি **Word Character** বোঝায়।
+
+Python-এ সাধারণভাবে এটি:
+
+* Letter
+* Digit
+* Underscore `_`
+
+Match করে।
+
+Example:
+
+```python
+import re
+
+text = "Bangladesh"
+
+match = re.search(r"\w+", text)
+
+print(match.group())
+```
+
+Output:
+
+```text
+Bangladesh
+```
+
+## `\w+`
+
+```text
+\w+ → এক বা একাধিক Word Character
+```
+
+যেমন:
+
+```text
+Hello
+Python123
+user_name
+```
+
+এগুলো Word Character দিয়ে তৈরি।
+
+---
+
+# ১১. `\W` — Non-Word Character
+
+`\W` হলো `\w`-এর বিপরীত।
+
+এটি এমন Character Match করে যা **Word Character নয়**।
+
+উদাহরণ:
+
+```text
+space
+@
+#
+$
+%
+!
+```
+
+Example:
+
+```python
+import re
+
+text = "Hello World"
+
+match = re.search(r"\W+", text)
+
+print(repr(match.group()))
+```
+
+Output:
+
+```text
+' '
+```
+
+এখানে Space একটি Non-word Character।
+
+---
+
+# ১২. `\d` — Digit
+
+`\d` একটি Digit Match করে।
+
+```text
+0-9
+```
+
+Example:
+
+```python
+import re
+
+text = "My age is 25"
+
+match = re.search(r"\d+", text)
+
+print(match.group())
+```
+
+Output:
+
+```text
+25
+```
+
+এখানে:
+
+```text
+\d  → একটি Digit
+
+\d+ → এক বা একাধিক Digit
+```
+
+---
+
+# ১৩. `\D` — Non-Digit
+
+`\D` এমন Character Match করে যা **Digit নয়**।
+
+Example:
+
+```python
+import re
+
+text = "abc123"
+
+match = re.search(r"\D+", text)
+
+print(match.group())
+```
+
+Output:
+
+```text
+abc
+```
+
+এখানে:
+
+```text
+\D+ → এক বা একাধিক Non-digit Character
+```
+
+---
+
+# ১৪. `\s` — Whitespace
+
+`\s` দ্বারা Whitespace Character বোঝায়।
+
+উদাহরণ:
+
+* Space
+* Tab
+* Newline
+
+Example:
+
+```python
+import re
+
+text = "Hello World"
+
+match = re.search(r"\s+", text)
+
+print(repr(match.group()))
+```
+
+Output:
+
+```text
+' '
+```
+
+এখানে:
+
+```text
+\s+ → এক বা একাধিক Whitespace
+```
+
+---
+
+# ১৫. `\S` — Non-Whitespace
+
+`\S` এমন Character Match করে যা **Whitespace নয়**।
+
+Example:
+
+```python
+import re
+
+text = "Hello World"
+
+match = re.search(r"\S+", text)
+
+print(match.group())
+```
+
+Output:
+
+```text
+Hello
+```
+
+এখানে:
+
+```text
+\S+ → এক বা একাধিক Non-whitespace Character
+```
+
+---
+
+# ১৬. Character Class `[]`
+
+**Character Class** দ্বারা একটি নির্দিষ্ট সেটের Character বোঝানো হয়।
+
+এটি Square Bracket দিয়ে লেখা হয়:
+
+```text
+[]
+```
+
+## `[0-9]`
+
+একটি Digit Match করে।
+
+```python
+import re
+
+text = "abc 123"
+
+match = re.findall(r"[0-9]", text)
+
+print(match)
+```
+
+Output:
+
+```text
+['1', '2', '3']
+```
+
+---
+
+## `[a-z]`
+
+Lowercase Letter Match করে।
+
+```python
+import re
+
+text = "abc DEF 123"
+
+match = re.findall(r"[a-z]", text)
+
+print(match)
+```
+
+Output:
+
+```text
+['a', 'b', 'c']
+```
+
+---
+
+## `[A-Z]`
+
+Uppercase Letter Match করে।
+
+```python
+import re
+
+text = "abc DEF 123"
+
+match = re.findall(r"[A-Z]", text)
+
+print(match)
+```
+
+Output:
+
+```text
+['D', 'E', 'F']
+```
+
+---
+
+## `[a-zA-Z0-9]`
+
+Letter অথবা Digit Match করে।
+
+```python
+import re
+
+text = "abc DEF 123"
+
+match = re.findall(r"[a-zA-Z0-9]", text)
+
+print(match)
+```
+
+Output:
+
+```text
+['a', 'b', 'c', 'D', 'E', 'F', '1', '2', '3']
+```
+
+---
+
+# ১৭. Group `()`
+
+Parentheses `()` ব্যবহার করে একটি **Group** তৈরি করা হয়।
+
+Example:
+
+```python
+import re
+
+pattern = r"(abc|def)"
+
+text = "abc def ghi"
+
+match = re.findall(pattern, text)
+
+print(match)
+```
+
+Output:
+
+```text
+['abc', 'def']
+```
+
+Group তখন উপকারী যখন একাধিক Character বা Pattern-কে **একটি Unit হিসেবে** বিবেচনা করতে চাই।
+
+উদাহরণ:
+
+```text
+(abc)
+
+(def)
+
+(abc|def)
+```
+
+---
+
+# ১৮. Quantifier `{}`
+
+Curly Braces `{}` দিয়ে আগের Pattern-টি **কতবার থাকবে** তা নির্ধারণ করা হয়।
+
+যেমন:
+
+```text
+\d
+```
+
+অর্থ:
+
+```text
+একটি Digit
+```
+
+আর:
+
+```text
+\d{2}
+```
+
+অর্থ:
+
+```text
+ঠিক 2টি Digit
+```
+
+---
+
+## `{n}` — Exactly n Times
+
+`{n}` অর্থ আগের Pattern-টি **ঠিক `n` বার** থাকতে হবে।
+
+```python
+import re
+
+text = "123456"
+
+match = re.findall(r"\d{2}", text)
+
+print(match)
+```
+
+Output:
+
+```text
+['12', '34', '56']
+```
+
+কারণ:
+
+```text
+123456
+
+↓↓ ↓↓ ↓↓
+
+12 34 56
+```
+
+অতএব:
+
+```text
+\d{2}
+```
+
+মানে:
+
+```text
+ঠিক 2টি Digit
+```
+
+### আরও উদাহরণ
+
+```text
+\d{1} → ঠিক 1টি Digit
+
+\d{2} → ঠিক 2টি Digit
+
+\d{3} → ঠিক 3টি Digit
+
+\d{4} → ঠিক 4টি Digit
+```
+
+---
+
+# `{n,}` — n বা তার বেশি
+
+`{n,}` অর্থ আগের Pattern-টি **কমপক্ষে `n` বার** থাকতে হবে।
+
+এর কোনো Maximum নেই।
+
+Example:
+
+```python
+import re
+
+text = "123456"
+
+match = re.findall(r"\d{3,}", text)
+
+print(match)
+```
+
+Output:
+
+```text
+['123456']
+```
+
+এখানে:
+
+```text
+\d{3,}
+```
+
+এর অর্থ:
+
+```text
+কমপক্ষে 3টি Digit
+```
+
+এটি Match করতে পারে:
+
+```text
+123
+1234
+12345
+123456
+1234567
+...
+```
+
+কিন্তু:
+
+```text
+12
+```
+
+Match করবে না, কারণ এখানে 3টির কম Digit আছে।
+
+---
+
+# `{n,m}` — n থেকে m বার
+
+`{n,m}` অর্থ:
+
+> Minimum `n` বার এবং Maximum `m` বার।
+
+Example:
+
+```python
+import re
+
+text = "123456"
+
+match = re.findall(r"\d{2,4}", text)
+
+print(match)
+```
+
+Output:
+
+```text
+['1234', '56']
+```
+
+এখানে:
+
+```text
+\d{2,4}
+```
+
+অর্থ:
+
+```text
+Minimum 2টি Digit
+
+Maximum 4টি Digit
+```
+
+তাই এটি Match করতে পারে:
+
+```text
+12
+123
+1234
+```
+
+`123456`-এর ক্ষেত্রে প্রথম Match সর্বোচ্চ 4টি Digit নেবে:
+
+```text
+1234
+```
+
+বাকি থাকবে:
+
+```text
+56
+```
+
+তাই Output:
+
+```python
+['1234', '56']
+```
+
+## সহজ নিয়ম
+
+```text
+{n}     → ঠিক n
+
+{n,}    → n বা তার বেশি
+
+{n,m}   → n থেকে m
+```
+
+উদাহরণ:
+
+```text
+\d{2}    → ঠিক 2টি Digit
+
+\d{3,}   → 3 বা তার বেশি Digit
+
+\d{2,4}  → 2 থেকে 4টি Digit
+```
+
+---
+
+# ১৯. `re.findall()`
+
+`re.findall()` একটি String-এর **সবগুলো non-overlapping Match একটি List হিসেবে** Return করে।
+
+```python
+import re
+
+text = "Bangladesh India New Zealand Netherlands Iceland"
+
+matches = re.findall(r"\w+", text)
+
+print(matches)
+```
+
+Output:
+
+```text
+['Bangladesh', 'India', 'New', 'Zealand', 'Netherlands', 'Iceland']
+```
+
+## Example: Date Extract করা
+
+```python
+import re
+
+text = "2025-10-21 the conference will be held on 2025-10-21"
+
+matches = re.findall(r"\d{4}-\d{2}-\d{2}", text)
+
+print(matches)
+```
+
+Output:
+
+```text
+['2025-10-21', '2025-10-21']
+```
+
+এখানে:
+
+```text
+\d{4} → 4টি Digit
+
+- → Literal Hyphen
+
+\d{2} → 2টি Digit
+
+- → Literal Hyphen
+
+\d{2} → 2টি Digit
+```
+
+---
+
+# ২০. `re.search()`
+
+`re.search()` পুরো String-এর মধ্যে Search করে এবং **প্রথম Match** Return করে।
+
+```python
+import re
+
+text = "Bangladesh India New Zealand"
+
+match = re.search(r"\w+", text)
+
+if match:
+    print(match.group())
+else:
+    print("Not found")
+```
+
+Output:
+
+```text
+Bangladesh
+```
+
+### মনে রাখুন
+
+```text
+re.search()
+
+      ↓
+
+পুরো String-এ Search
+
+      ↓
+
+প্রথম Match Return
+```
+
+---
+
+# ২১. `re.match()`
+
+`re.match()` শুধুমাত্র String-এর **শুরুতে** Match খোঁজে।
+
+```python
+import re
+
+text = "America Bangladesh"
+
+match = re.match(r"America", text)
+
+if match:
+    print(match.group())
+else:
+    print("Not found")
+```
+
+Output:
+
+```text
+America
+```
+
+কিন্তু:
+
+```python
+text = "Bangladesh America"
+
+match = re.match(r"America", text)
+```
+
+Return করবে:
+
+```text
+None
+```
+
+কারণ `America` String-এর শুরুতে নেই।
+
+## সহজ পার্থক্য
+
+```text
+search()     → যেকোনো জায়গায় Search করে
+
+match()      → শুধু শুরুতে Check করে
+
+fullmatch()  → পুরো String Match করতে হবে
+```
+
+---
+
+# ২২. `re.fullmatch()`
+
+`re.fullmatch()`-এর ক্ষেত্রে **পুরো String-কে Pattern-এর সাথে Match করতে হবে**।
+
+```python
+import re
+
+pattern = r"\d+"
+
+text = "12345"
+
+match = re.fullmatch(pattern, text)
+
+if match:
+    print("Valid")
+else:
+    print("Invalid")
+```
+
+Output:
+
+```text
+Valid
+```
+
+কিন্তু:
+
+```text
+12345abc
+```
+
+হলে:
+
+```text
+Invalid
+```
+
+কারণ পুরো String Digit দিয়ে তৈরি নয়।
+
+---
+
+# ২৩. `match.group()`
+
+`group()` Match হওয়া **Text Return করে**।
+
+```python
+import re
+
+text = "My age is 25"
+
+match = re.search(r"\d+", text)
+
+if match:
+    print(match.group())
+```
+
+Output:
+
+```text
+25
+```
+
+এখানে:
+
+```text
+match
+  ↓
+25
+```
+
+আর:
+
+```python
+match.group()
+```
+
+Return করবে:
+
+```text
+25
+```
+
+---
+
+# ২৪. `re.IGNORECASE`
+
+`re.IGNORECASE` অথবা `re.I` ব্যবহার করলে **Uppercase এবং Lowercase-এর পার্থক্য উপেক্ষা করে** Match করা হয়।
+
+```python
+import re
+
+pattern = r"america"
+
+text = "America Bangladesh"
+
+match = re.search(pattern, text, re.IGNORECASE)
+
+if match:
+    print(match.group())
+```
+
+Output:
+
+```text
+America
+```
+
+`re.IGNORECASE` ছাড়া:
+
+```text
+america
+```
+
+সাধারণভাবে:
+
+```text
+America
+```
+
+এর সাথে Match করবে না।
+
+---
+
+# ২৫. Raw String `r""`
+
+Python-এ Regex Pattern লেখার সময় **Raw String ব্যবহার করা Recommended**।
+
+উদাহরণ:
+
+```python
+r"\d+"
+
+r"\w+"
+
+r"\s+"
+
+r"\."
+```
+
+Example:
+
+```python
+pattern = r"\d+"
+```
+
+এখানে `r` Python-কে বলে যে String-এর Backslash-গুলোকে তুলনামূলকভাবে সরাসরি রাখতে।
+
+ফলে Regex Pattern লেখা সহজ হয়।
+
+---
+
+# ২৬. `*` বনাম `\*`
+
+এটি খুব গুরুত্বপূর্ণ।
+
+## `*`
+
+`*` হলো Regex-এর একটি **Quantifier**।
+
+এর অর্থ:
+
+```text
+0 বা তার বেশি
+```
+
+Example:
+
+```python
+r"\d*"
+```
+
+অর্থ:
+
+```text
+শূন্য বা তার বেশি Digit
+```
+
+---
+
+## `\*`
+
+`\*` দিয়ে আসল `*` Character Match করা হয়।
+
+```python
+r"\*"
+```
+
+এর অর্থ:
+
+```text
+একটি Literal *
+```
+
+### তাই
+
+```text
+\d* → শূন্য বা তার বেশি Digit
+
+\d\* → Digit-এর পরে একটি আসল *
+```
+
+Backslash `\` ব্যবহার করলে `*`-এর Regex-এর বিশেষ অর্থ পরিবর্তন হয়ে Literal Character হিসেবে কাজ করে।
+
+---
+
+# ২৭. `\.` — Literal Dot
+
+Regex-এ:
+
+```text
+. → যেকোনো Character
+```
+
+কিন্তু আপনি যদি সত্যিকারের Dot `.` Match করতে চান, তাহলে Escape করতে হবে:
+
+```text
+\.
+```
+
+Example:
+
+```python
+import re
+
+text = "Hello World .1235"
+
+match = re.findall(r"\.", text)
+
+print(match)
+```
+
+Output:
+
+```text
+['.']
+```
+
+তাই:
+
+```text
+.  → যেকোনো Character
+
+\. → আসল Dot
+```
+
+---
+
+# ২৮. `re.compile()`
+
+`re.compile()` একটি **Reusable Regex Pattern** তৈরি করে।
+
+একই Pattern বারবার ব্যবহার করলে এটি উপকারী।
+
+```python
+import re
+
+pattern = re.compile(r"\d+")
+
+text = "My numbers are 123 and 456"
+
+matches = pattern.findall(text)
+
+print(matches)
+```
+
+Output:
+
+```text
+['123', '456']
+```
+
+Pattern বারবার লেখার পরিবর্তে:
+
+```python
+pattern
+```
+
+Reuse করা যায়।
+
+---
+
+# ২৯. বাংলাদেশের Phone Number Validation
+
+বাংলাদেশের একটি সাধারণ Mobile Number Format:
+
+```text
+01XXXXXXXXX
+```
+
+একটি সাধারণ Regex:
+
+```python
+r"^01[3-9]\d{8}$"
+```
+
+Example:
+
+```python
+import re
+
+phone = "01712345678"
+
+pattern = r"^01[3-9]\d{8}$"
+
+if re.fullmatch(pattern, phone):
+    print("Valid Bangladeshi phone number")
+else:
+    print("Invalid phone number")
+```
+
+Output:
+
+```text
+Valid Bangladeshi phone number
+```
+
+## Pattern Breakdown
+
+```text
+^
+
+↓
+
+Start
+
+01
+
+↓
+
+Literal 01
+
+[3-9]
+
+↓
+
+3 থেকে 9-এর মধ্যে একটি Digit
+
+\d{8}
+
+↓
+
+আরও ঠিক 8টি Digit
+
+$
+
+↓
+
+End
+```
+
+অর্থাৎ:
+
+```text
+01 + 3-9-এর মধ্যে একটি Digit + আরও 8টি Digit
+```
+
+মোট:
+
+```text
+11টি Digit
+```
+
+---
+
+# ৩০. বাংলাদেশের Phone Number `+880` সহ
+
+International Format:
+
+```text
++8801712345678
+```
+
+Pattern:
+
+```python
+r"^\+8801[3-9]\d{8}$"
+```
+
+Example:
+
+```python
+import re
+
+phone = "+8801712345678"
+
+pattern = r"^\+8801[3-9]\d{8}$"
+
+if re.fullmatch(pattern, phone):
+    print("Valid Bangladeshi phone number")
+else:
+    print("Invalid phone number")
+```
+
+এখানে:
+
+```text
+\+
+```
+
+একটি Literal `+` Match করে।
+
+---
+
+# ৩১. Indian Phone Number Validation
+
+ভারতের একটি সাধারণ Mobile Number Format:
+
+```text
+10 digits
+```
+
+প্রথম Digit:
+
+```text
+6-9
+```
+
+Regex:
+
+```python
+r"^[6-9]\d{9}$"
+```
+
+Example:
+
+```python
+import re
+
+phone = "9876543210"
+
+pattern = r"^[6-9]\d{9}$"
+
+if re.fullmatch(pattern, phone):
+    print("Valid Indian phone number")
+else:
+    print("Invalid phone number")
+```
+
+---
+
+# ৩২. Bangladesh / India Phone Detection
+
+```python
+import re
+
+text = "+8801712345678"
+
+bd_pattern = r"^\+8801[3-9]\d{8}$"
+
+in_pattern = r"^\+91[6-9]\d{9}$"
+
+if re.fullmatch(bd_pattern, text):
+    print("Valid Bangladeshi phone number")
+
+elif re.fullmatch(in_pattern, text):
+    print("Valid Indian phone number")
+
+else:
+    print("Invalid phone number")
+```
+
+এখানে:
+
+```text
+bd_pattern
+```
+
+বাংলাদেশের Format Check করে।
+
+আর:
+
+```text
+in_pattern
+```
+
+ভারতের Format Check করে।
+
+---
+
+# ৩৩. Date Extraction
+
+এই Format-এর Date:
+
+```text
+YYYY-MM-DD
+```
+
+এর জন্য ব্যবহার করা যায়:
+
+```python
+r"\d{4}-\d{2}-\d{2}"
+```
+
+Example:
+
+```python
+import re
+
+text = "2025-10-21 and 2026-01-15"
+
+dates = re.findall(r"\d{4}-\d{2}-\d{2}", text)
+
+print(dates)
+```
+
+Output:
+
+```text
+['2025-10-21', '2026-01-15']
+```
+
+## গুরুত্বপূর্ণ
+
+এই Regex শুধুমাত্র **Format Check** করে।
+
+এটি এমন Date-ও Match করতে পারে:
+
+```text
+2025-99-99
+```
+
+বাস্তব Calendar Date Validation-এর জন্য Python-এর `datetime` module ব্যবহার করা ভালো।
+
+---
+
+# ৩৪. Email Validation
+
+একটি সাধারণ **Basic Email Validation** Pattern:
+
+```python
+r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+```
+
+Example:
+
+```python
+import re
+
+pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+
+email = "faruk950147@gmail.com"
+
+if re.fullmatch(pattern, email):
+    print("Valid email address")
+else:
+    print("Invalid email address")
+```
+
+Output:
+
+```text
+Valid email address
+```
+
+## Pattern Breakdown
+
+```text
+[A-Za-z0-9._%+-]+
+
+        ↓
+
+Username
+
+@
+
+        ↓
+
+At symbol
+
+[A-Za-z0-9.-]+
+
+        ↓
+
+Domain
+
+\.
+
+        ↓
+
+Literal dot
+
+[A-Za-z]{2,}
+
+        ↓
+
+Domain extension
+```
+
+Example:
+
+```text
+faruk950147@gmail.com
+
+│          │     │
+│          │     └── com
+│          └──────── gmail
+└─────────────────── username
+```
+
+> এটি একটি Basic Validation Pattern। Email-এর সব ধরনের বৈধ Syntax এটি সম্পূর্ণভাবে যাচাই করে না।
+
+---
+
+# ৩৫. Password Validation
+
+ধরি আমরা Password-এ Allow করতে চাই:
+
+* Letters
+* Digits
+* `$`
+* `@`
+* Minimum 6 Characters
+
+Pattern:
+
+```python
+r"^[0-9a-zA-Z$@]{6,}$"
+```
+
+Example:
+
+```python
+import re
+
+password = input("Enter a password: ")
+
+pattern = r"^[0-9a-zA-Z$@]{6,}$"
+
+if re.fullmatch(pattern, password):
+    print("Password is valid")
+else:
+    print("Password is not valid")
+```
+
+## Pattern Breakdown
+
+```text
+^
+
+↓
+
+Start
+
+[0-9a-zA-Z$@]
+
+↓
+
+Allowed Characters
+
+{6,}
+
+↓
+
+Minimum 6 Characters
+
+$
+
+↓
+
+End
+```
+
+অর্থাৎ শুধুমাত্র নিচের Character ব্যবহার করা যাবে:
+
+```text
+0-9
+
+a-z
+
+A-Z
+
+$
+
+@
+```
+
+এবং Length হতে হবে:
+
+```text
+6 বা তার বেশি Character
+```
+
+> এই Pattern শুধুমাত্র Allowed Character এবং Minimum Length Check করে। এটি Uppercase, Lowercase, Digit এবং Special Character—সবগুলো অবশ্যই থাকতে হবে এমন শর্ত দেয় না।
+
+---
+
+# ৩৬. Text থেকে Number Extract করা
+
+```python
+import re
+
+text = "phone number: 08801712345678"
+
+match = re.search(r"\d+", text)
+
+if match:
+    print(match.group())
+else:
+    print("Not found")
+```
+
+Output:
+
+```text
+08801712345678
+```
+
+এখানে:
+
+```text
+\d+
+```
+
+এর অর্থ:
+
+```text
+এক বা একাধিক Digit
+```
+
+যদি **সব Number** Extract করতে চান:
+
+```python
+re.findall(r"\d+", text)
+```
+
+ব্যবহার করুন।
+
+---
+
+# ৩৭. `\d`, `\D`, `\s`, `\S`, `\w`, `\W` এর সাথে `+`
+
+এই Combination-গুলো খুব বেশি ব্যবহার করা হয়।
+
+```text
+\d+ → এক বা একাধিক Digit
+
+\D+ → এক বা একাধিক Non-digit
+
+\s+ → এক বা একাধিক Whitespace
+
+\S+ → এক বা একাধিক Non-whitespace
+
+\w+ → এক বা একাধিক Word Character
+
+\W+ → এক বা একাধিক Non-word Character
+```
+
+Example:
+
+```python
+import re
+
+text = "Hello World .1235"
+
+print(re.findall(r"\d+", text))
+
+print(re.findall(r"\D+", text))
+
+print(re.findall(r"\s+", text))
+
+print(re.findall(r"\S+", text))
+
+print(re.findall(r"\w+", text))
+
+print(re.findall(r"\W+", text))
+```
+
+মনে রাখুন:
+
+```text
+\d → Character-এর Type
+
++  → এক বা একাধিক
+```
+
+উদাহরণ:
+
+```text
+\d+
+
+│ │
+│ └── এক বা একাধিক
+└──── Digit
+```
+
+---
+
+# ৩৮. `re.sub()` — Text Replace করা
+
+`re.sub()` Pattern-এর সাথে Match করা Text-কে Replace করে।
+
+Example:
+
+```python
+import re
+
+text = "Hello     World"
+
+result = re.sub(r"\s+", " ", text)
+
+print(result)
+```
+
+Output:
+
+```text
+Hello World
+```
+
+এখানে:
+
+```text
+\s+
+```
+
+এক বা একাধিক Whitespace খুঁজে।
+
+তারপর:
+
+```text
+" "
+```
+
+দিয়ে সেগুলো Replace করে।
+
+---
+
+## Phone Number থেকে Separator Remove করা
+
+```python
+import re
+
+phone = "+880-1712-345678"
+
+clean_phone = re.sub(r"[-\s]", "", phone)
+
+print(clean_phone)
+```
+
+Output:
+
+```text
++8801712345678
+```
+
+এখানে:
+
+```text
+[-\s]
+```
+
+Match করে:
+
+```text
+-
+```
+
+অথবা:
+
+```text
+Whitespace
+```
+
+তারপর:
+
+```text
+""
+```
+
+দিয়ে Replace করা হয়, অর্থাৎ কিছুই রাখা হয় না।
+
+---
+
+# ৩৯. `re.split()` — Regex দিয়ে Split করা
+
+`re.split()` Regex Pattern ব্যবহার করে String-কে বিভিন্ন অংশে ভাগ করে।
+
+```python
+import re
+
+text = "apple,banana;orange apple"
+
+result = re.split(r"[,; ]+", text)
+
+print(result)
+```
+
+Output:
+
+```text
+['apple', 'banana', 'orange', 'apple']
+```
+
+এখানে:
+
+```text
+[,; ]+
+```
+
+এর অর্থ:
+
+```text
+comma
+
+OR
+
+semicolon
+
+OR
+
+space
+
+এক বা একাধিকবার
+```
+
+---
+
+# ৪০. `re.finditer()`
+
+`re.finditer()` একটি Iterator Return করে, যার মধ্যে **Match Object** থাকে।
+
+```python
+import re
+
+text = "There are 12 apples and 25 oranges."
+
+matches = re.finditer(r"\d+", text)
+
+for match in matches:
+    print(match.group())
+```
+
+Output:
+
+```text
+12
+25
+```
+
+প্রতিটি Match-এর Position-ও পাওয়া যায়:
+
+```python
+for match in matches:
+    print(match.group(), match.start(), match.end())
+```
+
+একটি Match Object থেকে পাওয়া যায়:
+
+```text
+group() → Match হওয়া Text
+
+start() → শুরু Position
+
+end()   → শেষ Position
+```
+
+---
+
+# ৪১. Greedy বনাম Non-Greedy
+
+এটি Regex-এর একটি গুরুত্বপূর্ণ Advanced Concept।
+
+## Greedy
+
+```text
+.*
+```
+
+যতটা সম্ভব বেশি Text Match করার চেষ্টা করে, তবে সম্পূর্ণ Pattern Match হওয়ার শর্ত বজায় রাখে।
+
+Example:
+
+```python
+import re
+
+text = "Bangladesh India"
+
+match = re.search(r"B.*a", text)
+
+print(match.group())
+```
+
+Greedy `.*` যত বেশি সম্ভব Text নিতে চেষ্টা করবে, যতক্ষণ না বাকি Pattern-ও Match করতে পারে।
+
+---
+
+## Non-Greedy
+
+```text
+.*?
+```
+
+যতটা সম্ভব কম Text Match করার চেষ্টা করে, তবে সম্পূর্ণ Pattern Match হতে হবে।
+
+Example:
+
+```python
+match = re.search(r"B.*?a", text)
+
+print(match.group())
+```
+
+## গুরুত্বপূর্ণ
+
+`?` কোথায় ব্যবহার করা হয়েছে তার ওপর এর অর্থ পরিবর্তিত হতে পারে।
+
+```text
+u?  → u Optional
+
++?  → + এর Non-greedy Version
+
+*?  → * এর Non-greedy Version
+
+??  → ? এর Non-greedy Version
+```
+
+তাই:
+
+```text
+?
+```
+
+সবসময় শুধুমাত্র "শূন্য বা একটি" বোঝায় না।
+
+---
+
+# ৪২. Common Regex Examples
+
+## শুধু Digit
+
+```python
+r"^\d+$"
+```
+
+অর্থ:
+
+```text
+Start → এক বা একাধিক Digit → End
+```
+
+---
+
+## শুধু Letter
+
+```python
+r"^[A-Za-z]+$"
+```
+
+---
+
+## Letter এবং Digit
+
+```python
+r"^[A-Za-z0-9]+$"
+```
+
+---
+
+## Bangladesh Mobile Number
+
+```python
+r"^01[3-9]\d{8}$"
+```
+
+---
+
+## Bangladesh International Mobile Number
+
+```python
+r"^\+8801[3-9]\d{8}$"
+```
+
+---
+
+## Indian Mobile Number
+
+```python
+r"^[6-9]\d{9}$"
+```
+
+---
+
+## Date: `YYYY-MM-DD`
+
+```python
+r"^\d{4}-\d{2}-\d{2}$"
+```
+
+---
+
+## Basic Email
+
+```python
+r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+```
+
+---
+
+## Minimum 8 Characters
+
+```python
+r".{8,}"
+```
+
+---
+
+# ৪৩. Common Regex Methods
+
+| Method           | কাজ                                        |
+| ---------------- | ------------------------------------------ |
+| `re.search()`    | String-এর যেকোনো জায়গায় প্রথম Match খুঁজে  |
+| `re.match()`     | শুধুমাত্র String-এর শুরুতে Match Check করে |
+| `re.fullmatch()` | পুরো String Match করতে হবে                 |
+| `re.findall()`   | সব Match List হিসেবে Return করে            |
+| `re.finditer()`  | Match Object Return করে                    |
+| `re.sub()`       | Match হওয়া Text Replace করে                |
+| `re.split()`     | Regex ব্যবহার করে String Split করে         |
+| `re.compile()`   | Reusable Regex Pattern তৈরি করে            |
+
+---
+
+# ৪৪. Regex Cheat Sheet
+
+```text
+CHARACTERS
+────────────────────────────
+
+.       → যেকোনো একটি Character
+
+\d      → Digit
+
+\D      → Non-digit
+
+\w      → Word Character
+
+\W      → Non-word Character
+
+\s      → Whitespace
+
+\S      → Non-whitespace
+
+
+QUANTIFIERS
+────────────────────────────
+
+*       → 0 বা তার বেশি
+
++       → 1 বা তার বেশি
+
+?       → 0 বা 1
+
+{n}     → ঠিক n বার
+
+{n,}    → কমপক্ষে n বার
+
+{n,m}   → n থেকে m বার
+
+
+POSITION
+────────────────────────────
+
+^       → String-এর শুরু
+
+$       → String-এর শেষ
+
+
+GROUPING / CHOICE
+────────────────────────────
+
+[]      → Character Class
+
+()      → Group
+
+|       → OR
+
+
+ESCAPING
+────────────────────────────
+
+\.      → Literal Dot
+
+\*      → Literal *
+
+\+      → Literal +
+
+\?      → Literal ?
+```
+
+---
+
+# ৪৫. সবচেয়ে গুরুত্বপূর্ণ Concept
+
+নিচেরগুলো অবশ্যই মনে রাখুন:
+
+```text
+.       → যেকোনো Character
+
+^       → Start
+
+$       → End
+
+*       → 0 বা তার বেশি
+
++       → 1 বা তার বেশি
+
+?       → 0 বা 1
+
+\d      → Digit
+
+\w      → Word Character
+
+\s      → Whitespace
+
+[]      → Character Class
+
+()      → Group
+
+|       → OR
+
+{}      → নির্দিষ্ট সংখ্যক Repetition
+```
+
+---
+
+# ৪৬. Final Mental Model
+
+Regex বোঝার জন্য মূলত চারটি বিষয় মনে রাখুন:
+
+```text
+Character
+
+    +
+
+Quantity
+
+    +
+
+Position
+
+    +
+
+Grouping
+```
+
+উদাহরণ:
+
+```python
+r"^01[3-9]\d{8}$"
+```
+
+Breakdown:
+
+```text
+^
+
+↓
+
+Start
+
+01
+
+↓
+
+Literal "01"
+
+[3-9]
+
+↓
+
+3 থেকে 9-এর মধ্যে একটি Digit
+
+\d{8}
+
+↓
+
+ঠিক আরও 8টি Digit
+
+$
+
+↓
+
+End
+```
+
+অর্থাৎ:
+
+```text
+01 + 3-9-এর মধ্যে একটি Digit + 8টি Digit
+```
+
+এভাবে একটি 11-digit Bangladeshi Mobile Number Pattern তৈরি হয়।
+
+---
+
+# ৪৭. Quick Revision
+
+```text
+re.search()
+
+    → পুরো String-এ Search করে
+
+    → প্রথম Match Return করে
+
+
+re.match()
+
+    → শুধু শুরু থেকে Check করে
+
+
+re.fullmatch()
+
+    → পুরো String Match করতে হয়
+
+
+re.findall()
+
+    → সব Match List হিসেবে Return করে
+
+
+re.finditer()
+
+    → সব Match Object Return করে
+
+
+re.sub()
+
+    → Match Replace করে
+
+
+re.split()
+
+    → Regex ব্যবহার করে Split করে
+
+
+re.compile()
+
+    → Reusable Pattern তৈরি করে
+```
+
+---
+
+# Final Summary
+
+Regex শেখার সময় প্রথমে সবচেয়ে গুরুত্বপূর্ণ Concept হলো:
+
+```text
+\d      → Digit
+
+\w      → Word Character
+
+\s      → Whitespace
+
+.       → যেকোনো Character
+
+*       → 0 বা তার বেশি
+
++       → 1 বা তার বেশি
+
+?       → 0 বা 1
+
+^       → Start
+
+$       → End
+
+[]      → Character Class
+
+()      → Group
+
+|       → OR
+
+{n}     → ঠিক n বার
+
+{n,}    → n বা তার বেশি
+
+{n,m}   → n থেকে m
+```
+
+Python-এর সবচেয়ে গুরুত্বপূর্ণ Regex Function:
+
+```text
+re.search()
+
+re.match()
+
+re.fullmatch()
+
+re.findall()
+
+re.finditer()
+
+re.sub()
+
+re.split()
+
+re.compile()
+```
+
+## শেখার সবচেয়ে ভালো Order
+
+Regex নিচের ক্রমে শেখা ভালো:
+
+```text
+1. \d \w \s
+
+       ↓
+
+2. . ^ $
+
+       ↓
+
+3. * + ?
+
+       ↓
+
+4. {}
+
+       ↓
+
+5. []
+
+       ↓
+
+6. ()
+
+       ↓
+
+7. |
+
+       ↓
+
+8. search / match / fullmatch
+
+       ↓
+
+9. findall / finditer
+
+       ↓
+
+10. sub / split
+
+       ↓
+
+11. Real-world Validation
+
+       ↓
+
+12. Greedy / Non-Greedy
+```
+
+Regex শেখার মূল Flow:
+
+```text
+Characters
+
+    ↓
+
+Quantifiers
+
+    ↓
+
+Positions
+
+    ↓
+
+Character Classes
+
+    ↓
+
+Groups
+
+    ↓
+
+Regex Functions
+
+    ↓
+
+Real-world Problems
+```
+
+## সবচেয়ে গুরুত্বপূর্ণ কথা
+
+Regex-কে প্রথমে কঠিন মনে হলেও মূলত এটি কয়েকটি ছোট Concept-এর সমন্বয়:
+
+```text
+Character
+   +
+কতবার থাকবে
+   +
+কোথায় থাকবে
+   +
+কীভাবে Group হবে
+```
+
+এই চারটি বিষয় ভালোভাবে বুঝে গেলে Phone Number, Email, Date, Password, Username, URL ইত্যাদি বাস্তব সমস্যায় Regex ব্যবহার করা অনেক সহজ হয়ে যাবে।

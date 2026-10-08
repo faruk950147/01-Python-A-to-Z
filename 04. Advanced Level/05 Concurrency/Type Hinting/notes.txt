@@ -1,0 +1,1629 @@
+# Python Type Hinting and Annotations — বাংলা নোট
+
+## 1. Type Hinting কী?
+
+**Type Hinting** হলো Python code-এ কোনো variable, function parameter বা return value-এর **কী ধরনের data থাকার কথা**, সেটা উল্লেখ করা।
+
+সহজভাবে:
+
+> **Type Hinting = আমরা কোন type-এর data আশা করছি সেটা জানানো।**
+
+এটি code-কে:
+
+* পড়তে সহজ করে
+* বুঝতে সহজ করে
+* maintain করতে সহজ করে
+* IDE-এর analysis সহজ করে
+* `mypy`, `pyright` ইত্যাদি tool দিয়ে type checking করতে সাহায্য করে
+
+### Example
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+```
+
+এখানে:
+
+```text
+a: int
+↓
+a-এর মধ্যে integer আশা করছি
+
+b: int
+↓
+b-এর মধ্যে integer আশা করছি
+
+-> int
+↓
+function একটি integer return করবে আশা করছি
+```
+
+---
+
+## 2. Type Annotation কী?
+
+**Type Annotation** হলো type লেখার syntax।
+
+Basic syntax:
+
+```python
+variable: type
+```
+
+Example:
+
+```python
+x: int = 10
+
+name: str = "John"
+
+price: float = 10.5
+```
+
+এখানে:
+
+```text
+x       → int
+name    → str
+price   → float
+```
+
+অর্থাৎ:
+
+```python
+x: int
+```
+
+মানে `x` একটি integer হবে—এটা আমরা **expect করছি**।
+
+---
+
+## 3. Function Annotations
+
+Function-এর parameter এবং return value-এর type নির্দিষ্ট করা যায়।
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+```
+
+এখানে:
+
+```text
+a: int
+↓
+parameter-এর type
+
+b: int
+↓
+parameter-এর type
+
+-> int
+↓
+return value-এর type
+```
+
+Example:
+
+```python
+result: int = add(10, 20)
+
+print(result)
+```
+
+Output:
+
+```text
+30
+```
+
+---
+
+## 4. List-এর Type Hint
+
+Modern Python-এ সরাসরি `list[int]` ব্যবহার করা যায়।
+
+```python
+numbers: list[int] = [1, 2, 3, 4]
+```
+
+এর অর্থ:
+
+```text
+numbers
+   ↓
+একটি list
+   ↓
+যেখানে integer থাকবে
+```
+
+আরেকটি example:
+
+```python
+names: list[str] = ["John", "Bob", "Alex"]
+```
+
+অর্থাৎ:
+
+```text
+names → list
+       ↓
+       string values
+```
+
+---
+
+## 5. Tuple-এর Type Hint
+
+Example:
+
+```python
+point: tuple[int, int] = (10, 20)
+```
+
+এর অর্থ:
+
+```text
+point
+ ↓
+tuple
+ ↓
+প্রথম value → int
+দ্বিতীয় value → int
+```
+
+আরেকটি:
+
+```python
+data: tuple[str, int, float] = ("John", 25, 75.5)
+```
+
+এখানে:
+
+```text
+প্রথম → str
+দ্বিতীয় → int
+তৃতীয় → float
+```
+
+---
+
+## 6. Set-এর Type Hint
+
+```python
+numbers: set[int] = {1, 2, 3, 4}
+```
+
+অর্থাৎ:
+
+```text
+numbers
+   ↓
+set
+   ↓
+integer values
+```
+
+আরেকটি:
+
+```python
+names: set[str] = {"John", "Bob", "Alex"}
+```
+
+এখানে `names` একটি string-এর set।
+
+---
+
+## 7. Dictionary-এর Type Hint
+
+Example:
+
+```python
+student: dict[str, int] = {
+    "age": 25,
+    "score": 90
+}
+```
+
+এর অর্থ:
+
+```text
+key   → str
+value → int
+```
+
+অর্থাৎ:
+
+```text
+"age"   → str
+25      → int
+
+"score" → str
+90      → int
+```
+
+---
+
+## 8. Class-এর সাথে Type Hinting
+
+Class-এর ক্ষেত্রেও type hint ব্যবহার করা যায়।
+
+```python
+class Person:
+
+    def __init__(self, name: str, age: int) -> None:
+        self.name: str = name
+        self.age: int = age
+
+    def __str__(self) -> str:
+        return f"Person(name={self.name}, age={self.age})"
+```
+
+Object তৈরি:
+
+```python
+person: Person = Person("John", 30)
+
+print(person)
+```
+
+এখানে:
+
+```python
+person: Person
+```
+
+এর অর্থ:
+
+> `person` variable-এর মধ্যে একটি `Person` object থাকার কথা।
+
+---
+
+## 9. `-> None` কী?
+
+যদি কোনো function কোনো useful value return না করে, তাহলে:
+
+```python
+-> None
+```
+
+ব্যবহার করা হয়।
+
+Example:
+
+```python
+def greet(name: str) -> None:
+    print(f"Hello, {name}")
+```
+
+এই function কিছু print করে, কিন্তু কোনো value return করে না।
+
+তাই:
+
+```python
+-> None
+```
+
+ব্যবহার করা হয়েছে।
+
+---
+
+## 10. Type Alias
+
+**Type Alias** হলো কোনো type-এর জন্য অন্য একটি নাম তৈরি করা।
+
+Example:
+
+```python
+UserId = int
+```
+
+এখন:
+
+```python
+user_id: UserId = 1001
+```
+
+এখানে:
+
+```text
+UserId
+   ↓
+int-এর আরেকটি নাম
+```
+
+⚠️ এটি নতুন type তৈরি করে না।
+
+অর্থাৎ:
+
+```python
+UserId = int
+```
+
+মানে `UserId` এবং `int` একই type।
+
+---
+
+## 11. `TypeAlias`
+
+Python-এর `typing` module-এর `TypeAlias` ব্যবহার করে স্পষ্টভাবে বলা যায় যে এটি একটি type alias।
+
+```python
+from typing import TypeAlias
+
+UserId: TypeAlias = int
+```
+
+এখন:
+
+```python
+user_id: UserId = 123
+```
+
+আরেকটি example:
+
+```python
+Server: TypeAlias = dict[str, str | int]
+```
+
+এখন:
+
+```python
+server: Server = {
+    "hostName": "localhost",
+    "address": "127.0.0.1",
+    "port": 8000
+}
+```
+
+এখানে `Server` হলো:
+
+```text
+dict[str, str | int]
+```
+
+এর একটি নাম।
+
+---
+
+## 12. Complex Type Alias
+
+ধরো আমরা বারবার লিখছি:
+
+```python
+dict[str, str | int]
+```
+
+এতে code কিছুটা কঠিন হয়ে যায়।
+
+তাই alias তৈরি করতে পারি:
+
+```python
+from typing import TypeAlias
+
+Server: TypeAlias = dict[str, str | int]
+
+Network: TypeAlias = list[Server]
+```
+
+এখন:
+
+```python
+server: Server = {
+    "hostName": "localhost",
+    "address": "127.0.0.1",
+    "port": 8000
+}
+```
+
+এবং:
+
+```python
+network: Network = [
+    {
+        "hostName": "localhost",
+        "address": "127.0.0.1",
+        "port": 8000
+    }
+]
+```
+
+এতে code অনেক readable হয়।
+
+---
+
+## 13. TypedDict
+
+`TypedDict` ব্যবহার করা হয় যখন আমরা একটি dictionary-এর **নির্দিষ্ট structure** type hint করতে চাই।
+
+Example:
+
+```python
+from typing import TypedDict
+
+class Server(TypedDict):
+    hostName: str
+    address: str
+    port: int
+```
+
+এখন:
+
+```python
+server: Server = {
+    "hostName": "localhost",
+    "address": "127.0.0.1",
+    "port": 8080
+}
+```
+
+Expected structure:
+
+```text
+Server
+│
+├── hostName → str
+├── address  → str
+└── port     → int
+```
+
+---
+
+## 14. কেন TypedDict ব্যবহার করব?
+
+সাধারণ dictionary:
+
+```python
+server: dict[str, str | int]
+```
+
+এটি শুধু বলে:
+
+```text
+key   → str
+value → str অথবা int
+```
+
+কিন্তু কোন key থাকতে হবে সেটা বলে না।
+
+অন্যদিকে:
+
+```python
+class Server(TypedDict):
+    hostName: str
+    address: str
+    port: int
+```
+
+এখানে আমরা স্পষ্টভাবে বলছি:
+
+```text
+hostName → str
+address  → str
+port     → int
+```
+
+অর্থাৎ dictionary-এর **expected structure** নির্দিষ্ট করা হয়েছে।
+
+---
+
+## 15. Type Alias vs TypedDict
+
+### Type Alias
+
+```python
+Server: TypeAlias = dict[str, str | int]
+```
+
+মানে:
+
+```text
+একটি dictionary
+
+key   → str
+value → str অথবা int
+```
+
+### TypedDict
+
+```python
+class Server(TypedDict):
+    hostName: str
+    address: str
+    port: int
+```
+
+মানে:
+
+```text
+Server
+│
+├── hostName → str
+├── address  → str
+└── port     → int
+```
+
+### সহজ নিয়ম
+
+```text
+Type Alias
+    ↓
+একটি general type-এর অন্য নাম
+
+TypedDict
+    ↓
+একটি নির্দিষ্ট dictionary structure
+```
+
+---
+
+## 16. NewType
+
+`NewType` static type checking-এর জন্য একটি **আলাদা conceptual type** তৈরি করতে সাহায্য করে।
+
+Example:
+
+```python
+from typing import NewType
+
+UserId = NewType("UserId", int)
+```
+
+এখন:
+
+```python
+user_id = UserId(123)
+```
+
+Runtime-এ:
+
+```python
+print(type(user_id))
+```
+
+Output:
+
+```text
+<class 'int'>
+```
+
+অর্থাৎ runtime-এ এটি integer-এর মতোই আচরণ করে।
+
+কিন্তু static type checker-এর কাছে:
+
+```text
+UserId
+```
+
+এবং
+
+```text
+int
+```
+
+আলাদা concept হিসেবে ধরা হয়।
+
+---
+
+## 17. কেন NewType ব্যবহার করব?
+
+ধরো:
+
+```python
+UserId = NewType("UserId", int)
+
+ProductId = NewType("ProductId", int)
+```
+
+দুটিই runtime-এ integer-এর উপর ভিত্তি করে।
+
+কিন্তু conceptually:
+
+```text
+UserId
+   ↓
+User-এর ID
+
+ProductId
+   ↓
+Product-এর ID
+```
+
+এতে ভুল করে `ProductId` যেখানে দরকার সেখানে `UserId` ব্যবহার করার মতো ভুল static type checker ধরতে সাহায্য করতে পারে।
+
+---
+
+## 18. NewType-এর গুরুত্বপূর্ণ নিয়ম
+
+`NewType` runtime-এ data convert বা validate করে না।
+
+ভুল ধারণা:
+
+```python
+UserId = NewType("UserId", int)
+
+user_id = UserId("123")
+```
+
+এটি `"123"` string-কে integer-এ convert করবে—এমন নয়।
+
+আগে convert করতে হবে:
+
+```python
+user_id = UserId(int("123"))
+```
+
+অথবা:
+
+```python
+user_id = UserId(123)
+```
+
+মনে রাখবে:
+
+```text
+NewType
+   ↓
+Static type checking-এর জন্য
+
+NewType নয়
+   ↓
+Runtime validation/conversion
+```
+
+---
+
+## 19. ClassVar
+
+`ClassVar` type checker-কে জানায় যে কোনো attribute **class-level attribute** হিসেবে ব্যবহারের উদ্দেশ্য।
+
+Example:
+
+```python
+from typing import ClassVar
+
+class Person:
+
+    species: ClassVar[str] = "Human"
+
+    def __init__(self, name: str):
+        self.name: str = name
+```
+
+এখানে:
+
+```text
+species
+   ↓
+ClassVar
+
+name
+   ↓
+Instance variable
+```
+
+ব্যবহার:
+
+```python
+print(Person.species)
+```
+
+এবং:
+
+```python
+person = Person("John")
+
+print(person.name)
+```
+
+---
+
+## 20. Class Variable vs Instance Variable
+
+```python
+class Person:
+
+    species: ClassVar[str] = "Human"
+
+    def __init__(self, name: str, age: int):
+        self.name: str = name
+        self.age: int = age
+```
+
+Structure:
+
+```text
+Person
+│
+├── species → ClassVar
+│
+├── name → instance attribute
+│
+└── age → instance attribute
+```
+
+সহজ নিয়ম:
+
+```text
+ClassVar
+   ↓
+Class-level/shared information
+
+self.name
+self.age
+   ↓
+প্রতিটি object-এর নিজস্ব information
+```
+
+---
+
+## 21. Final
+
+`Final` static type checker-কে বলে যে কোনো name/value **পুনরায় assign করা উচিত নয়**।
+
+Example:
+
+```python
+from typing import Final
+
+COUNTRY: Final[str] = "Bangladesh"
+```
+
+এখন:
+
+```python
+COUNTRY = "India"
+```
+
+এটি type checker-এর কাছে ভুল হিসেবে ধরা পড়তে পারে।
+
+⚠️ কিন্তু `Final` runtime-এ value-কে সম্পূর্ণ immutable করে না।
+
+অর্থাৎ:
+
+```text
+Final
+   ↓
+Should not be reassigned
+```
+
+এটি মূলত developer এবং type checker-এর জন্য একটি নির্দেশনা।
+
+---
+
+## 22. Object Type Annotation
+
+Class-এর নামও type হিসেবে ব্যবহার করা যায়।
+
+```python
+class Calculator:
+
+    def __init__(self, x: int, y: int):
+        self.x: int = x
+        self.y: int = y
+
+    def add(self) -> int:
+        return self.x + self.y
+```
+
+এখন:
+
+```python
+calculator: Calculator = Calculator(10, 20)
+
+print(calculator.add())
+```
+
+Output:
+
+```text
+30
+```
+
+এখানে:
+
+```python
+calculator: Calculator
+```
+
+মানে:
+
+> `calculator` একটি `Calculator` object হবে বলে আশা করা হচ্ছে।
+
+---
+
+## 23. Instance Attribute Annotation
+
+Instance attribute-ও annotate করা যায়।
+
+```python
+class Person:
+
+    def __init__(self, name: str, age: int):
+        self.name: str = name
+        self.age: int = age
+```
+
+এখানে:
+
+```python
+self.name: str
+self.age: int
+```
+
+দুটিই instance attribute annotation।
+
+---
+
+## 24. Assignment ছাড়া Attribute Annotation
+
+এভাবেও লেখা যায়:
+
+```python
+class Person:
+
+    name: str
+    age: int
+```
+
+এতে type checker বুঝবে:
+
+```text
+name → str
+age → int
+```
+
+কিন্তু এটি নিজে থেকে value তৈরি করে না।
+
+সাধারণত পরে initialize করা হয়:
+
+```python
+class Person:
+
+    name: str
+    age: int
+
+    def __init__(self, name: str, age: int):
+        self.name = name
+        self.age = age
+```
+
+---
+
+## 25. Union Types
+
+কখনো একটি variable-এর একাধিক possible type থাকতে পারে।
+
+Modern Python-এ `|` ব্যবহার করা হয়।
+
+```python
+value: int | str
+```
+
+এর অর্থ:
+
+```text
+value হতে পারে:
+
+int
+
+অথবা
+
+str
+```
+
+Example:
+
+```python
+def process(value: int | str) -> None:
+    print(value)
+```
+
+দুটিই valid:
+
+```python
+process(100)
+
+process("Hello")
+```
+
+---
+
+## 26. Type Alias with Union
+
+Union type-এরও alias তৈরি করা যায়।
+
+```python
+from typing import TypeAlias
+
+ServerValue: TypeAlias = str | int
+```
+
+এখন:
+
+```python
+server: dict[str, ServerValue] = {
+    "hostName": "localhost",
+    "address": "127.0.0.1",
+    "port": 8000
+}
+```
+
+এখানে:
+
+```text
+ServerValue
+     ↓
+str অথবা int
+```
+
+---
+
+## 27. Generic Collections
+
+Modern Python-এ collection-এর generic type সরাসরি লেখা যায়।
+
+Examples:
+
+```python
+list[int]
+
+dict[str, int]
+
+set[str]
+
+tuple[int, str]
+```
+
+আগে সাধারণত লেখা হতো:
+
+```python
+List[int]
+
+Dict[str, int]
+
+Set[str]
+
+Tuple[int, str]
+```
+
+Modern Python-এ built-in syntax ব্যবহার করাই সাধারণত preferred।
+
+---
+
+## 28. Old vs Modern Syntax
+
+### পুরোনো Style
+
+```python
+from typing import List, Dict, Tuple, Set
+
+numbers: List[int] = [1, 2, 3]
+
+student: Dict[str, int] = {
+    "age": 25
+}
+
+point: Tuple[int, int] = (10, 20)
+
+names: Set[str] = {"John", "Bob"}
+```
+
+### Modern Style
+
+```python
+numbers: list[int] = [1, 2, 3]
+
+student: dict[str, int] = {
+    "age": 25
+}
+
+point: tuple[int, int] = (10, 20)
+
+names: set[str] = {"John", "Bob"}
+```
+
+সহজ নিয়ম:
+
+```text
+Modern Python
+     ↓
+list[int]
+
+dict[str, int]
+
+tuple[int, int]
+
+set[str]
+```
+
+---
+
+## 29. `__annotations__`
+
+Python class/module-এর annotations `__annotations__`-এ সংরক্ষণ করতে পারে।
+
+Example:
+
+```python
+x: int = 10
+name: str = "John"
+
+print(__annotations__)
+```
+
+Output-এর মতো দেখতে পারে:
+
+```python
+{
+    'x': <class 'int'>,
+    'name': <class 'str'>
+}
+```
+
+Class-এর ক্ষেত্রেও:
+
+```python
+class Person:
+    name: str
+    age: int
+```
+
+তারপর:
+
+```python
+print(Person.__annotations__)
+```
+
+এখানে class-এর annotation দেখা যাবে।
+
+---
+
+## 30. Type Hinting vs Type Annotation
+
+দুটো term খুব কাছাকাছি।
+
+### Type Annotation
+
+এটি হলো **actual syntax**:
+
+```python
+name: str
+```
+
+### Type Hinting
+
+এটি হলো code-এ type information ব্যবহার করার **সাধারণ practice**।
+
+```python
+def greet(name: str) -> str:
+    return f"Hello {name}"
+```
+
+সহজভাবে:
+
+```text
+Type Annotation
+      ↓
+Type লেখার syntax
+
+Type Hinting
+      ↓
+Type information ব্যবহার করার practice
+```
+
+---
+
+## 31. Type Hints সাধারণত Runtime-এ Validate করে না
+
+এটি খুব গুরুত্বপূর্ণ।
+
+ধরো:
+
+```python
+def square(number: int) -> int:
+    return number * number
+```
+
+এখানে আমরা বলেছি:
+
+```text
+number → int হওয়া উচিত
+```
+
+কিন্তু Python সাধারণত নিজে থেকে type check করে না।
+
+যেমন:
+
+```python
+square("5")
+```
+
+এখানে `"5" * "5"` invalid হওয়ায় runtime error হবে।
+
+কিন্তু type annotation-এর কারণে Python আগে থেকেই function call বন্ধ করে দেয় না।
+
+আর:
+
+```python
+square(5.5)
+```
+
+Python এটিও type annotation দেখে automatically reject করে না।
+
+তাই মনে রাখবে:
+
+```text
+Type Hint
+   ↓
+Expected Type
+
+Type Hint
+   ≠
+Runtime Validation
+```
+
+Runtime validation দরকার হলে explicit validation অথবা validation library ব্যবহার করতে হবে।
+
+---
+
+## 32. Type Checkers
+
+Type hinting সবচেয়ে বেশি useful হয় **static type checking**-এর সময়।
+
+Popular tools:
+
+```text
+mypy
+pyright
+Pylance
+```
+
+Example:
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+
+result = add("10", "20")
+```
+
+Type checker বলতে পারে:
+
+```text
+Expected: int
+Got: str
+```
+
+অর্থাৎ program run করার আগেই সম্ভাব্য type error খুঁজে পাওয়া যায়।
+
+---
+
+## 33. Common Mistakes
+
+### Mistake 1: Type Hint type force করে মনে করা
+
+ভুল ধারণা:
+
+```python
+x: int
+```
+
+মানে Python string দিলে automatically reject করবে।
+
+সঠিক ধারণা:
+
+```text
+Type hint
+    ↓
+Expected type জানায়
+
+Normally runtime-এ
+type enforce করে না
+```
+
+---
+
+### Mistake 2: Type Alias এবং NewType গুলিয়ে ফেলা
+
+#### Type Alias
+
+```python
+from typing import TypeAlias
+
+UserId: TypeAlias = int
+```
+
+অর্থ:
+
+```text
+UserId = int-এর আরেকটি নাম
+```
+
+#### NewType
+
+```python
+from typing import NewType
+
+UserId = NewType("UserId", int)
+```
+
+অর্থ:
+
+```text
+UserId = static type checking-এর জন্য distinct type
+```
+
+সহজ নিয়ম:
+
+```text
+TypeAlias
+    ↓
+অন্য একটি নাম
+
+NewType
+    ↓
+আলাদা conceptual/static type
+```
+
+---
+
+### Mistake 3: Final data immutable মনে করা
+
+```python
+name: Final[str] = "John"
+```
+
+এর অর্থ:
+
+```text
+name-কে পুনরায় assign করা উচিত নয়
+```
+
+এটি object-কে immutable বানায় না।
+
+---
+
+### Mistake 4: ClassVar class variable তৈরি করে মনে করা
+
+```python
+class Person:
+
+    species: ClassVar[str] = "Human"
+```
+
+এখানে `= "Human"` assignment-টি class attribute তৈরি করেছে।
+
+`ClassVar` শুধু type checker-কে বলে:
+
+> এই attribute-টি class-level হিসেবে intended।
+
+---
+
+## 34. Quick Comparison
+
+| Feature          | সহজ অর্থ                               |
+| ---------------- | -------------------------------------- |
+| Type Annotation  | Type information যোগ করে               |
+| Type Hinting     | Type information ব্যবহার করার practice |
+| Type Alias       | Type-এর অন্য নাম                       |
+| `TypeAlias`      | স্পষ্টভাবে type alias ঘোষণা করে        |
+| `TypedDict`      | Dictionary-এর নির্দিষ্ট structure      |
+| `NewType`        | Static checking-এর জন্য distinct type  |
+| `ClassVar`       | Class-level attribute নির্দেশ করে      |
+| `Final`          | Reassignment করা উচিত নয়               |
+| `list[int]`      | Integer-এর list                        |
+| `dict[str, int]` | String key, integer value              |
+| `int \| str`     | Integer অথবা string                    |
+
+---
+
+## 35. Easy Mental Model
+
+Python typing-কে এভাবে মনে রাখতে পারো:
+
+```text
+Python Typing
+│
+├── Type Annotation
+│   │
+│   ├── Variable
+│   ├── Function
+│   ├── Class
+│   └── Collection
+│
+├── Type Alias
+│   │
+│   ├── TypeAlias
+│   └── NewType
+│
+└── Special Typing Tools
+    │
+    ├── TypedDict
+    ├── ClassVar
+    └── Final
+```
+
+---
+
+## 36. Easy Memory Rules
+
+এইগুলো মুখস্থ রাখলে অনেকটাই clear হয়ে যাবে:
+
+```text
+Annotation
+    ↓
+Type information যোগ করে
+
+Type Hinting
+    ↓
+Type information ব্যবহার করার practice
+
+Type Alias
+    ↓
+একটি type-এর অন্য নাম
+
+TypedDict
+    ↓
+Dictionary-এর নির্দিষ্ট structure
+
+NewType
+    ↓
+Distinct static/conceptual type
+
+ClassVar
+    ↓
+Class-level attribute
+
+Final
+    ↓
+Reassign করা উচিত নয়
+```
+
+---
+
+# 37. Interview Questions
+
+## 1. Type Hinting কী?
+
+Type Hinting হলো variable, parameter এবং return value-এর expected type প্রকাশ করার পদ্ধতি।
+
+Example:
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+```
+
+---
+
+## 2. Python কি runtime-এ type hints enforce করে?
+
+**না, সাধারণভাবে করে না।**
+
+Python type hints automatically enforce করে না।
+
+`mypy`, `pyright`, `Pylance` ইত্যাদি static type checker এগুলো check করতে পারে।
+
+---
+
+## 3. Type Annotation কী?
+
+Type information প্রকাশ করার syntax-কে Type Annotation বলে।
+
+Example:
+
+```python
+name: str
+```
+
+---
+
+## 4. Type Alias কী?
+
+কোনো existing type-এর অন্য একটি নামকে Type Alias বলে।
+
+```python
+from typing import TypeAlias
+
+UserId: TypeAlias = int
+```
+
+---
+
+## 5. TypedDict কী?
+
+`TypedDict` dictionary-এর expected keys এবং তাদের value types নির্দিষ্ট করতে ব্যবহার করা হয়।
+
+```python
+class Server(TypedDict):
+    hostName: str
+    address: str
+    port: int
+```
+
+---
+
+## 6. NewType কী?
+
+`NewType` static type checking-এর জন্য একটি distinct type তৈরি করতে ব্যবহার করা হয়।
+
+```python
+UserId = NewType("UserId", int)
+```
+
+---
+
+## 7. ClassVar কী?
+
+`ClassVar` type checker-কে বলে কোনো attribute class-level হিসেবে intended।
+
+```python
+class Person:
+    species: ClassVar[str] = "Human"
+```
+
+---
+
+## 8. Final কী?
+
+`Final` বলে কোনো name-কে পুনরায় assign করা উচিত নয়।
+
+```python
+COUNTRY: Final[str] = "Bangladesh"
+```
+
+---
+
+## 9. `-> None` কী বোঝায়?
+
+Function কোনো useful value return করবে না—এটি বোঝাতে `-> None` ব্যবহার করা হয়।
+
+```python
+def greet(name: str) -> None:
+    print(name)
+```
+
+---
+
+## 10. TypedDict এবং সাধারণ dict-এর পার্থক্য কী?
+
+সাধারণ:
+
+```python
+dict[str, str | int]
+```
+
+এটি বলে:
+
+```text
+key   → str
+value → str অথবা int
+```
+
+কিন্তু নির্দিষ্ট key বলে না।
+
+`TypedDict`:
+
+```python
+class Server(TypedDict):
+    hostName: str
+    address: str
+    port: int
+```
+
+এটি dictionary-এর নির্দিষ্ট structure বলে দেয়।
+
+---
+
+# 38. Final Summary
+
+সবচেয়ে গুরুত্বপূর্ণগুলো একসাথে:
+
+```text
+Variable Annotation
+        ↓
+x: int
+
+
+Function Annotation
+        ↓
+def add(a: int, b: int) -> int
+
+
+Object Annotation
+        ↓
+person: Person
+
+
+List
+        ↓
+list[int]
+
+
+Dictionary
+        ↓
+dict[str, int]
+
+
+Tuple
+        ↓
+tuple[int, str]
+
+
+Type Alias
+        ↓
+TypeAlias
+
+
+Dictionary Structure
+        ↓
+TypedDict
+
+
+Distinct Static Type
+        ↓
+NewType
+
+
+Class Attribute
+        ↓
+ClassVar
+
+
+No Reassignment
+        ↓
+Final
+
+
+Multiple Types
+        ↓
+int | str
+```
+
+## ⭐ সবচেয়ে গুরুত্বপূর্ণ বিষয়
+
+> **Type hints আমাদের বলে কোন type-এর data আমরা expect করছি। কিন্তু সাধারণভাবে Python runtime-এ type hint enforce বা validate করে না।**
+
+সহজ ভাষায়:
+
+```text
+Type Hint
+    ↓
+"আমি আশা করছি এই value এই type-এর হবে।"
+
+কিন্তু Type Hint এর অর্থ নয়:
+
+"Python অন্য কোনো type কখনোই allow করবে না।"
+```
+
+তাই:
+
+```text
+Type Hinting
+     =
+Expected Type Information
+```
+
+## 🔥 এক লাইনে পুরো বিষয়
+
+```text
+Annotation → Type-এর information লিখি
+
+Type Hinting → সেই information ব্যবহার করি
+
+TypeAlias → Type-এর অন্য নাম
+
+TypedDict → Dictionary-এর structure
+
+NewType → আলাদা conceptual/static type
+
+ClassVar → Class-level attribute
+
+Final → Reassign করা উচিত নয়
+
+Union (|) → একাধিক possible type
+
+Type Checker → Type ভুল আগে থেকে ধরতে সাহায্য করে
+```

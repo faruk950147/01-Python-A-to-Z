@@ -1,0 +1,800 @@
+# ============================================================
+
+# Python Debugging Tools — সহজ বাংলা নোট
+
+# ============================================================
+
+# Debugging Tools কী?
+
+# -------------------
+
+# Debugging tools হলো এমন tools যা আমাদের code-এর error
+
+# (bug) খুঁজে বের করতে এবং ঠিক করতে সাহায্য করে।
+
+#
+
+# এগুলোর সাহায্যে আমরা:
+
+# - Variable-এর value check করতে পারি
+
+# - কোথায় error হচ্ছে তা খুঁজে বের করতে পারি
+
+# - Program execution pause করতে পারি
+
+# - Program flow trace করতে পারি
+
+# - Code সঠিকভাবে কাজ করছে কিনা test করতে পারি
+
+# Common Python Debugging / Testing Tools
+
+# ---------------------------------------
+
+# 1. print()
+
+# 2. breakpoint()
+
+# 3. pdb
+
+# 4. assert
+
+# 5. PyCharm Debugger
+
+# 6. VSCode Debugger
+
+# 7. unittest
+
+# 8. pytest
+
+# ============================================================
+
+# 1. print() Statement
+
+# ============================================================
+
+# print() হলো সবচেয়ে সহজ debugging tool।
+
+# এটি variable-এর value check করতে এবং
+
+# code কী করছে তা বুঝতে সাহায্য করে।
+
+# Example:
+
+def add(a, b):
+print("a =", a)
+print("b =", b)
+print("Result =", a + b)
+
+add(1, 2)
+
+# Output:
+
+# a = 1
+
+# b = 2
+
+# Result = 3
+
+# কখন ব্যবহার করবেন:
+
+# - ছোট program-এর ক্ষেত্রে
+
+# - দ্রুত debugging-এর জন্য
+
+# - Variable-এর value check করার জন্য
+
+# ============================================================
+
+# 2. breakpoint()
+
+# ============================================================
+
+# breakpoint() একটি নির্দিষ্ট জায়গায় program-এর execution
+
+# pause করে।
+
+#
+
+# এর সাহায্যে আমরা variable inspect করতে পারি এবং
+
+# interactive debugging command ব্যবহার করতে পারি।
+
+# Example:
+
+def add(a, b):
+breakpoint()
+print(a + b)
+
+add(1, 2)
+
+# Program যখন breakpoint() পর্যন্ত পৌঁছাবে,
+
+# তখন execution pause হয়ে যাবে।
+
+# Useful for:
+
+# - Variable-এর value check করা
+
+# - কোথায় problem হচ্ছে তা খুঁজে বের করা
+
+# - Step-by-step debugging
+
+# ============================================================
+
+# 3. pdb (Python Debugger)
+
+# ============================================================
+
+# pdb হলো Python-এর built-in debugger module।
+
+#
+
+# এটি program execution থামিয়ে
+
+# line-by-line debugging করতে সাহায্য করে।
+
+import pdb
+
+def add(a, b):
+pdb.set_trace()
+print(a + b)
+
+add(1, 2)
+
+# Common pdb Commands:
+
+#
+
+# n  -> পরবর্তী line-এ যাওয়া
+
+# c  -> Execution চালিয়ে যাওয়া
+
+# p  -> কোনো variable-এর value print করা
+
+# q  -> Debugger থেকে বের হয়ে যাওয়া
+
+# l  -> Current code দেখানো
+
+# s  -> কোনো function-এর ভিতরে প্রবেশ করা
+
+# Example:
+
+#
+
+# p a
+
+# p b
+
+#
+
+# এই command-গুলো a এবং b-এর value দেখাবে।
+
+# ============================================================
+
+# 4. assert
+
+# ============================================================
+
+# assert ব্যবহার করা হয় কোনো condition True কিনা
+
+# তা check করার জন্য।
+
+#
+
+# যদি condition True হয়:
+
+# Program চলতে থাকবে।
+
+#
+
+# যদি condition False হয়:
+
+# Python AssertionError তৈরি করবে।
+
+# Syntax:
+
+#
+
+# assert condition
+
+# Example:
+
+age = 20
+
+assert age >= 18
+
+print("You are an adult")
+
+# Output:
+
+# You are an adult
+
+# Error Example:
+
+age = 15
+
+assert age >= 18
+
+print("You are an adult")
+
+# Output:
+
+# AssertionError
+
+# আমরা চাইলে একটি message-ও দিতে পারি:
+
+age = 15
+
+assert age >= 18, "Age must be 18 or above"
+
+# Output:
+
+# AssertionError: Age must be 18 or above
+
+# assert কখন ব্যবহার করবেন:
+
+# - কোনো assumption check করতে
+
+# - Development-এর সময় bug খুঁজতে
+
+# - কোনো condition সঠিক কিনা verify করতে
+
+# - Function-এর result check করতে
+
+# Example:
+
+def square(n):
+result = n * n
+assert result >= 0
+return result
+
+print(square(5))
+
+# Important:
+
+# assert মূলত debugging এবং internal check-এর জন্য ব্যবহার করা হয়।
+
+#
+
+# গুরুত্বপূর্ণ user input validation-এর জন্য assert ব্যবহার করা উচিত নয়,
+
+# কারণ optimization-এর মাধ্যমে Python assertions disable করতে পারে।
+
+# ============================================================
+
+# 5. Logical Error
+
+# ============================================================
+
+# Logical Error তখন হয় যখন program successfully run করে,
+
+# কিন্তু ভুল result দেয়।
+
+#
+
+# এখানে syntax error থাকে না।
+
+# সাধারণত runtime error-ও থাকে না।
+
+# Problem থাকে program-এর logic-এর মধ্যে।
+
+# Example:
+
+def calculate_average(a, b):
+return a + b / 2
+
+print(calculate_average(10, 20))
+
+# Expected:
+
+# 15
+
+# কিন্তু actual result:
+
+# 20.0
+
+# কেন?
+
+#
+
+# Python operator precedence অনুসরণ করে:
+
+#
+
+# a + b / 2
+
+#
+
+# এটি calculate হয়:
+
+#
+
+# a + (b / 2)
+
+#
+
+# Correct code:
+
+def calculate_average(a, b):
+return (a + b) / 2
+
+print(calculate_average(10, 20))
+
+# Output:
+
+# 15.0
+
+# Common Error-এর ধরন:
+
+#
+
+# 1. Syntax Error
+
+# -> ভুল Python syntax
+
+#
+
+# 2. Runtime Error
+
+# -> Program চলার সময় error ঘটে
+
+#
+
+# 3. Logical Error
+
+# -> Program চলে কিন্তু ভুল result দেয়
+
+# ============================================================
+
+# 6. PyCharm Debugger
+
+# ============================================================
+
+# PyCharm একটি powerful visual debugger প্রদান করে।
+
+#
+
+# এর সাহায্যে আমরা:
+
+# - Breakpoint set করতে পারি
+
+# - Debug Mode-এ code run করতে পারি
+
+# - Variable check করতে পারি
+
+# - Code step-by-step execute করতে পারি
+
+# - Expression watch করতে পারি
+
+# - Call Stack inspect করতে পারি
+
+# Example:
+
+def add(a, b):
+result = a + b
+return result
+
+result = add(10, 20)
+print(result)
+
+# আমরা breakpoint দিতে পারি:
+
+#
+
+# result = a + b
+
+#
+
+# এরপর Debug Mode ব্যবহার করে program run করতে পারি।
+
+# ============================================================
+
+# 7. VSCode Debugger
+
+# ============================================================
+
+# VSCode-এও একটি built-in visual debugger রয়েছে।
+
+#
+
+# এর সাহায্যে আমরা:
+
+# - Breakpoint set করতে পারি
+
+# - Debugging শুরু করতে পারি
+
+# - Code step over করতে পারি
+
+# - Function-এর ভিতরে step into করতে পারি
+
+# - Variable inspect করতে পারি
+
+# - Call Stack দেখতে পারি
+
+# Example:
+
+def multiply(a, b):
+result = a * b
+return result
+
+result = multiply(5, 4)
+print(result)
+
+# আমরা multiply() function-এর ভিতরে breakpoint দিতে পারি
+
+# এবং a, b এবং result-এর value inspect করতে পারি।
+
+# ============================================================
+
+# 8. unittest
+
+# ============================================================
+
+# unittest হলো Python-এর built-in testing framework।
+
+#
+
+# এটি program-এর বিভিন্ন অংশ test করতে ব্যবহৃত হয়।
+
+#
+
+# একটি ছোট test-কে test case বলা হয়।
+
+# Example:
+
+import unittest
+
+def add(a, b):
+return a + b
+
+class TestAdd(unittest.TestCase):
+
+```
+def test_add(self):
+    self.assertEqual(add(2, 3), 5)
+```
+
+# Test run করতে:
+
+#
+
+# python filename.py
+
+# Common unittest methods:
+
+#
+
+# assertEqual(a, b)
+
+# -> Check করে a == b কিনা
+
+#
+
+# assertNotEqual(a, b)
+
+# -> Check করে a != b কিনা
+
+#
+
+# assertTrue(condition)
+
+# -> Check করে condition True কিনা
+
+#
+
+# assertFalse(condition)
+
+# -> Check করে condition False কিনা
+
+#
+
+# assertIsNone(value)
+
+# -> Check করে value None কিনা
+
+#
+
+# assertRaises(Error)
+
+# -> Check করে কোনো error raise হয় কিনা
+
+# Example:
+
+class TestCalculator(unittest.TestCase):
+
+```
+def test_add(self):
+    self.assertEqual(add(2, 3), 5)
+
+def test_not_equal(self):
+    self.assertNotEqual(add(2, 3), 10)
+```
+
+# ============================================================
+
+# 9. pytest
+
+# ============================================================
+
+# pytest হলো একটি জনপ্রিয় Python testing framework।
+
+#
+
+# unittest-এর তুলনায় pytest দিয়ে test লেখা
+
+# সহজ এবং ছোট হয়।
+
+# প্রথমে pytest install করুন:
+
+#
+
+# pip install pytest
+
+# Example:
+
+def add(a, b):
+return a + b
+
+def test_add():
+assert add(2, 3) == 5
+
+# File save করুন, যেমন:
+
+#
+
+# test_calculator.py
+
+#
+
+# তারপর run করুন:
+
+#
+
+# pytest
+
+# pytest automatically test file এবং test function খুঁজে বের করে।
+
+# Example:
+
+def multiply(a, b):
+return a * b
+
+def test_multiply():
+assert multiply(3, 4) == 12
+
+def test_add():
+assert add(10, 20) == 30
+
+# Run:
+
+#
+
+# pytest
+
+# ============================================================
+
+# unittest vs pytest
+
+# ============================================================
+
+# unittest:
+
+# - Python-এর সাথে built-in
+
+# - Class ব্যবহার করে
+
+# - unittest.TestCase ব্যবহার করে
+
+# - assertEqual() এর মতো method ব্যবহার করে
+
+#
+
+# pytest:
+
+# - External package
+
+# - সহজ syntax
+
+# - সাধারণ Python function ব্যবহার করে
+
+# - Python-এর assert statement ব্যবহার করে
+
+# - Real-world Python project-এ খুব জনপ্রিয়
+
+# Example comparison:
+
+# unittest:
+
+import unittest
+
+class TestMath(unittest.TestCase):
+
+```
+def test_add(self):
+    self.assertEqual(2 + 3, 5)
+```
+
+# pytest:
+
+def test_add():
+assert 2 + 3 == 5
+
+# pytest সাধারণত ছোট এবং পড়তে সহজ।
+
+# ============================================================
+
+# Debugging vs Testing
+
+# ============================================================
+
+# Debugging:
+
+# -> Bug খুঁজে বের করা এবং ঠিক করা।
+
+#
+
+# Testing:
+
+# -> Program সঠিকভাবে কাজ করছে কিনা check করা।
+
+# Example:
+
+#
+
+# একটি test fail করল:
+
+#
+
+# assert add(2, 3) == 5
+
+#
+
+# এরপর problem খুঁজে বের করার জন্য আমরা debugging tools ব্যবহার করতে পারি:
+
+#
+
+# print()
+
+# breakpoint()
+
+# pdb
+
+# PyCharm Debugger
+
+# VSCode Debugger
+
+#
+
+# এগুলোর সাহায্যে problem কোথায় তা খুঁজে বের করা যায়।
+
+# ============================================================
+
+# Summary
+
+# ============================================================
+
+# Tool          Type             Purpose
+
+# ------------------------------------------------------------
+
+# print()       Built-in         দ্রুত value check করা
+
+# breakpoint()  Built-in         Execution pause করে inspect করা
+
+# pdb           Module           Terminal থেকে debugging
+
+# assert        Built-in         Condition/assumption check করা
+
+# PyCharm       IDE              Visual debugging
+
+# VSCode        IDE              Visual debugging
+
+# unittest      Framework        Unit testing
+
+# pytest        Framework        সহজ এবং powerful testing
+
+# ============================================================
+
+# Recommended Workflow
+
+# ============================================================
+
+# ছোট problem-এর জন্য:
+
+#
+
+# print()
+
+# ↓
+
+# breakpoint()
+
+#
+
+#
+
+# Deeper debugging-এর জন্য:
+
+#
+
+# pdb
+
+# ↓
+
+# PyCharm / VSCode Debugger
+
+#
+
+#
+
+# Testing-এর জন্য:
+
+#
+
+# unittest
+
+# অথবা
+
+# pytest
+
+#
+
+#
+
+# Assumption check করার জন্য:
+
+#
+
+# assert
+
+#
+
+#
+
+# যদি program run করে কিন্তু wrong answer দেয়:
+
+#
+
+# Logical Error check করুন
+
+# ============================================================
+
+# Quick Revision
+
+# ============================================================
+
+# print()
+
+# -> Value দেখায়।
+
+# breakpoint()
+
+# -> Program pause করে।
+
+# pdb
+
+# -> Terminal থেকে code debug করে।
+
+# assert
+
+# -> একটি condition check করে।
+
+# Logical Error
+
+# -> Code run করে কিন্তু wrong result দেয়।
+
+# PyCharm
+
+# -> PyCharm-এর মধ্যে visual debugging।
+
+# VSCode
+
+# -> VSCode-এর মধ্যে visual debugging।
+
+# unittest
+
+# -> Python-এর built-in testing framework।
+
+# pytest
+
+# -> সহজ এবং powerful testing framework।

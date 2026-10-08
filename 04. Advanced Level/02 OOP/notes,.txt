@@ -1,0 +1,4257 @@
+# Python OOP — Complete Structured Notes
+
+## সূচিপত্র
+
+1. OOP Introduction
+2. Class
+3. Object
+4. Class vs Object
+5. Object Creation
+6. `__new__()` এবং `__init__()`
+7. `self`
+8. Attributes
+
+   * Instance Attribute
+   * Class Attribute
+9. Methods
+
+   * Instance Method
+   * Class Method
+   * Static Method
+10. Method Binding
+11. Alternative Constructor
+12. Encapsulation
+13. Public, `_name`, `__name`
+14. Name Mangling
+15. Inheritance
+16. Types of Inheritance
+17. Method Overriding
+18. `super()`
+19. MRO
+20. Polymorphism
+21. Duck Typing
+22. Dynamic Typing vs Duck Typing
+23. Abstraction
+24. Abstract Base Class
+25. Method Overloading
+26. `*args` এবং `**kwargs`
+27. Magic / Dunder Methods
+28. `__str__()` এবং `__repr__()`
+29. Operator Overloading
+30. `__eq__()`
+31. `@property`
+32. Property Setter
+33. Composition
+34. Aggregation
+35. Association
+36. Inheritance vs Composition
+37. Nested Class
+38. `__call__()`
+39. Callable Objects
+40. Stateful Callable Objects
+41. Class-Based Decorator
+42. `isinstance()`
+43. `issubclass()`
+44. `id()`
+45. `del`
+46. Python Memory Model
+47. Reference Counting
+48. Garbage Collection
+49. `__name__ == "__main__"`
+50. Complete OOP Example
+51. OOP Concept Comparison
+52. Quick Revision
+53. Learning Roadmap
+54. Interview Questions
+55. Final Memory Formula
+
+# 1. OOP কী?
+
+**OOP = Object-Oriented Programming**
+
+OOP হলো এমন একটি Programming Paradigm যেখানে program মূলত **Class এবং Object**-কে কেন্দ্র করে তৈরি করা হয়।
+
+বাস্তব জীবনের উদাহরণ:
+
+```text
+Student
+Employee
+Car
+Bank Account
+Book
+Mobile
+Product
+University
+Department
+```
+
+OOP-এর চারটি প্রধান Pillar:
+
+```text
+1. Encapsulation
+2. Inheritance
+3. Polymorphism
+4. Abstraction
+```
+
+Python OOP-এর আরও গুরুত্বপূর্ণ বিষয়:
+
+```text
+Class
+Object
+self
+Class/Instance Attributes
+Instance/Class/Static Methods
+Method Binding
+Method Overriding
+super()
+MRO
+Duck Typing
+Dunder Methods
+@property
+Composition
+Aggregation
+Association
+Nested Class
+Callable Objects
+```
+
+# 2. Class
+
+**Class** হলো Object তৈরি করার জন্য একটি **Blueprint বা Template**।
+
+```python
+class Student:
+    pass
+```
+
+এখানে:
+
+```text
+Student → Class
+```
+
+একটি Class-এর মধ্যে থাকতে পারে:
+
+```text
+Attributes
+Methods
+Properties
+Class-level behavior
+```
+
+### গুরুত্বপূর্ণ
+
+Python-এ একটি Class নিজেও একটি Object।
+
+```python
+class Student:
+    pass
+
+print(type(Student))
+```
+
+Output:
+
+```text
+<class 'type'>
+```
+
+অর্থাৎ:
+
+```text
+Student
+   ↓
+Class Object
+   ↓
+type
+```
+
+`type` হলো সাধারণ Python Class-এর Metaclass।
+
+# 3. Object
+
+**Object হলো কোনো Class-এর Instance।**
+
+```python
+class Student:
+    pass
+
+s1 = Student()
+s2 = Student()
+```
+
+এখানে:
+
+```text
+Student → Class
+
+s1 → Object / Instance
+s2 → Object / Instance
+```
+
+একই Class থেকে একাধিক Object তৈরি করা যায়।
+
+প্রতিটি Object-এর নিজস্ব State থাকতে পারে।
+
+# 4. Class vs Object
+
+| Class                             | Object                          |
+| --------------------------------- | ------------------------------- |
+| Blueprint / Template              | Instance                        |
+| Structure এবং behavior define করে | Concrete instance represent করে |
+| Object তৈরি করতে ব্যবহৃত হয়       | Class থেকে তৈরি হয়              |
+| `Student`                         | `s1`, `s2`                      |
+
+# 5. Object তৈরি করা
+
+সাধারণ Syntax:
+
+```python
+object_name = ClassName()
+```
+
+Example:
+
+```python
+class Student:
+    pass
+
+s1 = Student()
+```
+
+Conceptually:
+
+```text
+Student()
+   ↓
+New Instance
+   ↓
+s1 সেই Instance-কে reference করে
+```
+
+এখানে `s1` হলো একটি **name/reference**, যা Object-এর সাথে associated।
+
+# 6. `__new__()` এবং `__init__()`
+
+Object creation-এর সময় এই দুটি Special Method গুরুত্বপূর্ণ।
+
+```text
+__new__()
+   ↓
+Instance তৈরি/return করে
+
+__init__()
+   ↓
+Instance initialize করে
+```
+
+Example:
+
+```python
+class Student:
+
+    def __new__(cls, name):
+        print("__new__() called")
+        instance = super().__new__(cls)
+        return instance
+
+    def __init__(self, name):
+        print("__init__() called")
+        self.name = name
+
+
+student = Student("Faruk")
+```
+
+Output:
+
+```text
+__new__() called
+__init__() called
+```
+
+### গুরুত্বপূর্ণ
+
+Beginner-level tutorial-এ অনেক সময় `__init__()`-কে Constructor বলা হয়।
+
+কিন্তু technically:
+
+```text
+__new__()
+→ Instance তৈরি/return করার দায়িত্ব পালন করে
+
+__init__()
+→ Instance initialize করার দায়িত্ব পালন করে
+```
+
+সাধারণ Python development-এ সাধারণত শুধু `__init__()` ব্যবহার করাই যথেষ্ট।
+
+# 7. `__init__()` with Parameters
+
+```python
+class Student:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+s1 = Student("Faruk", 25)
+
+print(s1.name)
+print(s1.age)
+```
+
+Output:
+
+```text
+Faruk
+25
+```
+
+# 8. `self` কী?
+
+`self` হলো বর্তমানে যে **Instance-এর সাথে Method কাজ করছে**, তার reference।
+
+Example:
+
+```python
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+```
+
+যখন:
+
+```python
+s1 = Student("Faruk")
+```
+
+চলে, তখন conceptually:
+
+```text
+self → s1
+```
+
+তাই:
+
+```python
+self.name
+```
+
+মানে:
+
+```text
+বর্তমান Object-এর name attribute
+```
+
+# 9. `self` একটি Convention
+
+Python-এ Instance Method-এর প্রথম parameter-এর নাম অবশ্যই `self` হতে হবে—এমন কোনো বাধ্যবাধকতা নেই।
+
+Example:
+
+```python
+class Student:
+
+    def show(current):
+        print("Hello")
+```
+
+এটিও কাজ করবে:
+
+```python
+student = Student()
+student.show()
+```
+
+তবে Python-এর standard convention হলো:
+
+```python
+def show(self):
+```
+
+তাই সবসময় `self` ব্যবহার করাই ভালো।
+
+# 10. Instance Attribute
+
+**Instance Attribute** কোনো নির্দিষ্ট Object-এর সাথে সম্পর্কিত।
+
+```python
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+```
+
+এখানে:
+
+```python
+self.name
+```
+
+হলো Instance Attribute।
+
+Example:
+
+```python
+s1 = Student("Faruk")
+s2 = Student("Rahim")
+
+print(s1.name)
+print(s2.name)
+```
+
+Output:
+
+```text
+Faruk
+Rahim
+```
+
+Conceptually:
+
+```text
+s1 → name = "Faruk"
+
+s2 → name = "Rahim"
+```
+
+# 11. Class Attribute
+
+Class-এর body-এর মধ্যে সরাসরি define করা Attribute হলো **Class Attribute**।
+
+```python
+class Student:
+
+    school = "TMSS"
+
+    def __init__(self, name):
+        self.name = name
+```
+
+এখানে:
+
+```text
+school → Class Attribute
+name   → Instance Attribute
+```
+
+Access:
+
+```python
+print(Student.school)
+```
+
+Instance দিয়েও access করা যায়:
+
+```python
+s1 = Student("Faruk")
+
+print(s1.school)
+```
+
+` s1.school` access করার সময় Python প্রথমে Instance-এ খুঁজে এবং প্রয়োজন হলে Class-এ খুঁজে।
+
+# 12. Instance Attribute vs Class Attribute
+
+## Instance Attribute
+
+```python
+self.name
+```
+
+বৈশিষ্ট্য:
+
+* নির্দিষ্ট Instance-এর সাথে যুক্ত
+* প্রতিটি Instance-এর value আলাদা হতে পারে
+* Object-specific state represent করে
+
+## Class Attribute
+
+```python
+Student.school
+```
+
+বৈশিষ্ট্য:
+
+* Class-এর মধ্যে define করা হয়
+* Instance থেকেও access করা যায়, যদি shadow না করা হয়
+* Class-level data-এর জন্য ব্যবহার করা যায়
+
+Example:
+
+```python
+class Student:
+
+    school = "TMSS"
+
+    def __init__(self, name):
+        self.name = name
+
+
+s1 = Student("Faruk")
+s2 = Student("Rahim")
+
+print(s1.name)
+print(s2.name)
+
+print(s1.school)
+print(s2.school)
+```
+
+Output:
+
+```text
+Faruk
+Rahim
+TMSS
+TMSS
+```
+
+# 13. Instance Method
+
+Instance Method সাধারণত প্রথম parameter হিসেবে `self` গ্রহণ করে।
+
+```python
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+
+    def show(self):
+        print(self.name)
+```
+
+ব্যবহার:
+
+```python
+s1 = Student("Faruk")
+
+s1.show()
+```
+
+Output:
+
+```text
+Faruk
+```
+
+Conceptually:
+
+```python
+s1.show()
+```
+
+এর effect এমন:
+
+```python
+Student.show(s1)
+```
+
+অর্থাৎ `s1` automatically `self` হিসেবে পাঠানো হয়।
+
+# 14. Class Method
+
+Class Method সরাসরি **Class-এর সাথে কাজ করে**, নির্দিষ্ট Instance-এর সাথে নয়।
+
+এটি তৈরি করতে:
+
+```python
+@classmethod
+```
+
+ব্যবহার করা হয়।
+
+Class Method-এর প্রথম argument conventionally `cls`।
+
+Example:
+
+```python
+class Student:
+
+    school = "TMSS"
+
+    @classmethod
+    def change_school(cls, name):
+        cls.school = name
+```
+
+ব্যবহার:
+
+```python
+Student.change_school("ABC School")
+
+print(Student.school)
+```
+
+Output:
+
+```text
+ABC School
+```
+
+মনে রাখো:
+
+```text
+self → Current Instance
+cls  → Current Class
+```
+
+# 15. Static Method
+
+Static Method automatically `self` বা `cls` গ্রহণ করে না।
+
+ব্যবহার:
+
+```python
+@staticmethod
+```
+
+Example:
+
+```python
+class Math:
+
+    @staticmethod
+    def add(a, b):
+        return a + b
+```
+
+ব্যবহার:
+
+```python
+print(Math.add(5, 3))
+```
+
+Output:
+
+```text
+8
+```
+
+যখন কোনো operation-এর জন্য Instance বা Class-এর state প্রয়োজন হয় না, কিন্তু logically সেটি Class-এর সাথে সম্পর্কিত, তখন Static Method ব্যবহার করা যায়।
+
+# 16. তিন ধরনের Method
+
+| Method          | Automatic First Argument | মূল উদ্দেশ্য            |
+| --------------- | ------------------------ | ----------------------- |
+| Instance Method | `self`                   | Instance behavior       |
+| Class Method    | `cls`                    | Class-level behavior    |
+| Static Method   | কিছুই নয়                 | Utility/helper behavior |
+
+সহজে মনে রাখো:
+
+```text
+Instance Method
+    ↓
+self
+    ↓
+Object
+
+
+Class Method
+    ↓
+cls
+    ↓
+Class
+
+
+Static Method
+    ↓
+No automatic self/cls
+    ↓
+Utility
+```
+
+# 17. একই Class-এ তিন ধরনের Method
+
+```python
+class Student:
+
+    school = "TMSS"
+
+    def __init__(self, name):
+        self.name = name
+
+    # Instance method
+    def show(self):
+        print(self.name)
+
+    # Class method
+    @classmethod
+    def change_school(cls, school):
+        cls.school = school
+
+    # Static method
+    @staticmethod
+    def info():
+        print("This is Student class.")
+```
+
+# 18. Alternative Constructor
+
+`@classmethod`-এর একটি গুরুত্বপূর্ণ ব্যবহার হলো **Alternative Constructor** তৈরি করা।
+
+```python
+class Student:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    @classmethod
+    def from_string(cls, data):
+        name, age = data.split("-")
+        return cls(name, int(age))
+```
+
+ব্যবহার:
+
+```python
+student = Student.from_string("Faruk-25")
+
+print(student.name)
+print(student.age)
+```
+
+Output:
+
+```text
+Faruk
+25
+```
+
+### কেন `cls(...)`?
+
+কারণ `cls` হলো যে Class-এর উপর Class Method call করা হয়েছে সেই Class-এর reference।
+
+এটি Subclass-এর ক্ষেত্রেও ভালোভাবে কাজ করে।
+
+# 19. Method Binding
+
+Instance-এর মাধ্যমে কোনো Instance Method access করলে Python একটি **Bound Method** তৈরি করে।
+
+```python
+class Student:
+
+    def show(self):
+        print("Hello")
+
+
+s = Student()
+
+s.show()
+```
+
+Conceptually:
+
+```python
+Student.show(s)
+```
+
+অর্থাৎ:
+
+```text
+s.show
+   ↓
+Bound Method
+   ↓
+Method + s Instance
+```
+
+Instance automatically `self` হিসেবে পাঠানো হয়।
+
+# 20. `Student.show` vs `s.show`
+
+### Class-এর মাধ্যমে
+
+```python
+Student.show
+```
+
+এটি Class থেকে function retrieve করে।
+
+### Instance-এর মাধ্যমে
+
+```python
+s.show
+```
+
+এটি একটি **Bound Method** তৈরি করে, যেখানে `s` automatically প্রথম argument হিসেবে যুক্ত হয়।
+
+Python 3-এ `Student.show`-কে সাধারণত "unbound method" বলা হয় না। এটি Class থেকে পাওয়া একটি function।
+
+# 21. Encapsulation
+
+**Encapsulation** বলতে related state এবং behavior একসাথে রাখা এবং internal state কীভাবে access বা modify করা হবে তা manage করাকে বোঝায়।
+
+Example:
+
+```python
+class BankAccount:
+
+    def __init__(self, balance):
+        self.__balance = balance
+
+    def get_balance(self):
+        return self.__balance
+```
+
+এখানে:
+
+```python
+self.__balance
+```
+
+Python-এর **Name Mangling** mechanism ব্যবহার করছে।
+
+# 22. Public, `_name`, এবং `__name`
+
+Python-এ Java/C++-এর মতো strict access modifier নেই।
+
+## Public
+
+```python
+self.name
+```
+
+সাধারণ Public Attribute।
+
+## Single Underscore
+
+```python
+self._name
+```
+
+Conventionally বোঝায়:
+
+```text
+Internal / non-public API
+```
+
+Python এটি enforce করে না।
+
+## Double Underscore
+
+```python
+self.__name
+```
+
+Name Mangling trigger করে।
+
+# 23. Name Mangling
+
+Class-এর ভিতরে `__` দিয়ে শুরু হওয়া Attribute বা Method-এর নাম Python internally পরিবর্তন করে।
+
+Example:
+
+```python
+class Student:
+
+    def __init__(self):
+        self.__name = "Faruk"
+```
+
+Conceptually:
+
+```text
+__name
+   ↓
+_Student__name
+```
+
+তাই:
+
+```python
+student = Student()
+
+print(student._Student__name)
+```
+
+Output:
+
+```text
+Faruk
+```
+
+### কেন Name Mangling?
+
+মূল উদ্দেশ্য হলো বিশেষ করে inheritance-এর ক্ষেত্রে accidental name collision কমানো।
+
+মনে রাখো:
+
+```text
+name
+ ↓
+Public
+
+
+_name
+ ↓
+Internal-use convention
+
+
+__name
+ ↓
+Name Mangling
+```
+
+`__name` সত্যিকারের strict private নয়।
+
+# 24. Inheritance
+
+Inheritance-এর মাধ্যমে একটি Subclass অন্য একটি Base Class-এর behavior reuse বা extend করতে পারে।
+
+```python
+class Animal:
+
+    def speak(self):
+        print("Animal speaks")
+
+
+class Dog(Animal):
+    pass
+
+
+dog = Dog()
+
+dog.speak()
+```
+
+Output:
+
+```text
+Animal speaks
+```
+
+Terminology:
+
+```text
+Animal → Parent / Base / Superclass
+Dog    → Child / Derived / Subclass
+```
+
+Inheritance সাধারণত:
+
+```text
+IS-A relationship
+```
+
+represent করে।
+
+```text
+Dog IS-A Animal
+```
+
+# 25. Inheritance-এর ধরন
+
+## 25.1 Single Inheritance
+
+একটি Child একটি Parent থেকে inherit করে।
+
+```python
+class Animal:
+    pass
+
+
+class Dog(Animal):
+    pass
+```
+
+```text
+Animal
+   ↓
+Dog
+```
+
+---
+
+## 25.2 Multilevel Inheritance
+
+একাধিক Level-এর মাধ্যমে inheritance হয়।
+
+```python
+class Animal:
+    pass
+
+
+class Dog(Animal):
+    pass
+
+
+class Puppy(Dog):
+    pass
+```
+
+```text
+Animal
+   ↓
+Dog
+   ↓
+Puppy
+```
+
+---
+
+## 25.3 Multiple Inheritance
+
+একটি Class একাধিক Base Class থেকে inherit করে।
+
+```python
+class Father:
+
+    def skills(self):
+        print("Programming")
+
+
+class Mother:
+
+    def talent(self):
+        print("Cooking")
+
+
+class Child(Father, Mother):
+    pass
+```
+
+ব্যবহার:
+
+```python
+child = Child()
+
+child.skills()
+child.talent()
+```
+
+Output:
+
+```text
+Programming
+Cooking
+```
+
+---
+
+## 25.4 Hierarchical Inheritance
+
+একটি Parent-এর একাধিক Child থাকে।
+
+```python
+class Animal:
+    pass
+
+
+class Dog(Animal):
+    pass
+
+
+class Cat(Animal):
+    pass
+```
+
+Diagram:
+
+```text
+       Animal
+       /    \
+     Dog    Cat
+```
+
+---
+
+## 25.5 Hybrid Inheritance
+
+একাধিক inheritance pattern-এর combination হলো Hybrid Inheritance।
+
+যেমন:
+
+```text
+Single
++
+Multiple
++
+Multilevel
+```
+
+Complex multiple-inheritance hierarchy বুঝতে MRO জানা গুরুত্বপূর্ণ।
+
+# 26. Method Overriding
+
+যখন Subclass inherited Method-এর নিজের implementation দেয়, তাকে **Method Overriding** বলে।
+
+```python
+class Animal:
+
+    def sound(self):
+        print("Animal sound")
+
+
+class Dog(Animal):
+
+    def sound(self):
+        print("Bark")
+
+
+dog = Dog()
+
+dog.sound()
+```
+
+Output:
+
+```text
+Bark
+```
+
+এখানে:
+
+```text
+Animal.sound()
+    ↓
+Inherited Method
+
+Dog.sound()
+    ↓
+New Implementation
+```
+
+# 27. `super()`
+
+`super()` MRO অনুযায়ী পরবর্তী Class-এর implementation access করতে সাহায্য করে।
+
+Example:
+
+```python
+class Animal:
+
+    def sound(self):
+        print("Animal sound")
+
+
+class Dog(Animal):
+
+    def sound(self):
+        super().sound()
+        print("Bark")
+
+
+dog = Dog()
+
+dog.sound()
+```
+
+Output:
+
+```text
+Animal sound
+Bark
+```
+
+Hierarchy:
+
+```text
+Dog
+ ↓
+Animal
+ ↓
+object
+```
+
+### গুরুত্বপূর্ণ
+
+এভাবে মনে করা ঠিক নয়:
+
+```text
+super()
+↓
+সবসময় parent
+```
+
+বরং:
+
+```text
+super()
+↓
+MRO অনুযায়ী next implementation
+```
+
+Multiple Inheritance-এর ক্ষেত্রে এটি বিশেষ গুরুত্বপূর্ণ।
+
+# 28. Method Resolution Order (MRO)
+
+MRO নির্ধারণ করে Python কোন order-এ Class hierarchy-এর মধ্যে Method বা Attribute খুঁজবে।
+
+Example:
+
+```python
+class A:
+    pass
+
+
+class B(A):
+    pass
+
+
+class C(B):
+    pass
+
+
+print(C.mro())
+```
+
+Conceptually:
+
+```text
+C
+↓
+B
+↓
+A
+↓
+object
+```
+
+দেখার জন্য:
+
+```python
+print(C.__mro__)
+```
+
+অথবা:
+
+```python
+print(C.mro())
+```
+
+Multiple Inheritance-এর ক্ষেত্রে Python **C3 Linearization** ব্যবহার করে MRO তৈরি করে।
+
+# 29. `object` Class
+
+Python-এর সাধারণ Class শেষ পর্যন্ত `object` Class থেকে inherit করে।
+
+```python
+class Student:
+    pass
+```
+
+Conceptually:
+
+```text
+Student
+   ↓
+object
+```
+
+দেখতে:
+
+```python
+print(Student.__mro__)
+```
+
+Typical output:
+
+```text
+(<class '__main__.Student'>, <class 'object'>)
+```
+
+# 30. Polymorphism
+
+**Polymorphism** মানে একই interface বা operation বিভিন্ন Object-এর ক্ষেত্রে ভিন্ন behavior দিতে পারে।
+
+Example:
+
+```python
+class Animal:
+    def speak(self):
+        pass
+
+
+class Dog(Animal):
+
+    def speak(self):
+        return "Woof!"
+
+
+class Cat(Animal):
+
+    def speak(self):
+        return "Meow!"
+
+
+class Bird(Animal):
+
+    def speak(self):
+        return "Chirp!"
+```
+
+ব্যবহার:
+
+```python
+animals = [
+    Dog(),
+    Cat(),
+    Bird()
+]
+
+for animal in animals:
+    print(animal.speak())
+```
+
+Output:
+
+```text
+Woof!
+Meow!
+Chirp!
+```
+
+একই interface:
+
+```python
+animal.speak()
+```
+
+কিন্তু behavior আলাদা:
+
+```text
+Dog   → Woof!
+Cat   → Meow!
+Bird  → Chirp!
+```
+
+# 31. Duck Typing
+
+Duck Typing হলো Python-এর এমন একটি programming style যেখানে Object-এর exact Class-এর চেয়ে Object প্রয়োজনীয় behavior support করছে কিনা সেটি বেশি গুরুত্বপূর্ণ।
+
+Classic idea:
+
+```text
+"If it behaves like a duck,
+we can use it like a duck."
+```
+
+Example:
+
+```python
+class Duck:
+
+    def quack(self):
+        print("Quack!")
+
+
+class Person:
+
+    def quack(self):
+        print("Person is quacking!")
+
+
+def make_it_quack(thing):
+    thing.quack()
+
+
+make_it_quack(Duck())
+make_it_quack(Person())
+```
+
+Function-এর দরকার শুধু:
+
+```python
+thing.quack()
+```
+
+Object অবশ্যই `Duck` Class-এর Instance হতে হবে—এমন requirement নেই।
+
+# 32. Duck Typing এবং `AttributeError`
+
+যদি required Method না থাকে:
+
+```python
+class Car:
+    pass
+
+
+def make_it_quack(thing):
+    thing.quack()
+
+
+car = Car()
+
+make_it_quack(car)
+```
+
+Python:
+
+```text
+AttributeError
+```
+
+দেবে।
+
+কারণ `Car`-এ `quack()` নেই।
+
+# 33. Dynamic Typing vs Duck Typing
+
+দুটি আলাদা Concept।
+
+## Dynamic Typing
+
+Python runtime-এ Object-এর Type নির্ধারণ করে।
+
+```python
+x = 10
+
+x = "Hello"
+
+x = [1, 2, 3]
+```
+
+একই name ভিন্ন সময়ে ভিন্ন Type-এর Object reference করতে পারে।
+
+## Duck Typing
+
+Code-এর প্রয়োজনীয় behavior-এর উপর গুরুত্ব দেয়।
+
+```python
+def process(obj):
+    obj.run()
+```
+
+এখানে function-এর requirement হলো:
+
+```python
+obj
+```
+
+এর `run()` Method থাকতে হবে।
+
+মনে রাখো:
+
+```text
+Dynamic Typing
+→ Type information runtime-এ handled হয়
+
+Duck Typing
+→ Required behavior/capability গুরুত্বপূর্ণ
+```
+
+# 34. Abstraction
+
+**Abstraction** হলো essential behavior/interface expose করা এবং unnecessary implementation details hide করা।
+
+Python-এ:
+
+```python
+abc
+ABC
+@abstractmethod
+```
+
+ব্যবহার করা যায়।
+
+Example:
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Animal(ABC):
+
+    @abstractmethod
+    def speak(self):
+        pass
+```
+
+এখানে Class নির্দেশ করছে যে concrete subclass-কে `speak()` implement করতে হবে।
+
+# 35. Abstract Class
+
+Abstract Base Class এমন একটি Class যেখানে Subclass-এর জন্য required Method define করা যায়।
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Shape(ABC):
+
+    @abstractmethod
+    def area(self):
+        pass
+```
+
+Concrete implementation:
+
+```python
+class Circle(Shape):
+
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return 3.1416 * self.radius ** 2
+```
+
+ব্যবহার:
+
+```python
+circle = Circle(5)
+
+print(circle.area())
+```
+
+যদি কোনো Subclass সব required abstract method implement না করে, তাহলে সেটি abstract-ই থাকবে এবং সাধারণভাবে তার Instance তৈরি করা যাবে না।
+
+# 36. Polymorphism + Abstract Base Class
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Animal(ABC):
+
+    @abstractmethod
+    def speak(self):
+        pass
+
+
+class Dog(Animal):
+
+    def speak(self):
+        return "Woof!"
+
+
+class Cat(Animal):
+
+    def speak(self):
+        return "Meow!"
+
+
+class Bird(Animal):
+
+    def speak(self):
+        return "Chirp!"
+```
+
+ব্যবহার:
+
+```python
+animals = [
+    Dog(),
+    Cat(),
+    Bird()
+]
+
+for animal in animals:
+    print(animal.speak())
+```
+
+Output:
+
+```text
+Woof!
+Meow!
+Chirp!
+```
+
+এখানে Abstract Base Class একটি common interface define করছে।
+
+# 37. নতুন Class যোগ করা
+
+```python
+class Cow(Animal):
+
+    def speak(self):
+        return "Moo!"
+```
+
+তারপর:
+
+```python
+animals.append(Cow())
+```
+
+একই loop:
+
+```python
+for animal in animals:
+    print(animal.speak())
+```
+
+Output:
+
+```text
+Woof!
+Meow!
+Chirp!
+Moo!
+```
+
+Loop-কে নতুন Concrete Class সম্পর্কে জানার প্রয়োজন নেই।
+
+# 38. Method Overloading
+
+Traditional Method Overloading বলতে বোঝায়:
+
+```text
+Same method name
++
+Different parameter signatures
+```
+
+Java/C++-এর মতো Language-এ signature-based method overloading আছে।
+
+Python একই Class-এ একই নামের Method-এর traditional parameter-based overloading সরাসরি support করে না।
+
+Example:
+
+```python
+class Calculator:
+
+    def add(self, a):
+        return a
+
+    def add(self, a, b):
+        return a + b
+```
+
+দ্বিতীয় `add()` প্রথমটিকে replace করে।
+
+তাই:
+
+```python
+calc = Calculator()
+
+calc.add(5)
+```
+
+দিলে:
+
+```text
+TypeError
+```
+
+হবে।
+
+# 39. Traditional Overloading-এর Alternative
+
+Python-এ সাধারণত ব্যবহার করা হয়:
+
+```text
+Default Arguments
+*args
+**kwargs
+Conditional Logic
+functools.singledispatch
+```
+
+Example:
+
+```python
+class Calculator:
+
+    def add(self, a, b=0, c=0):
+        return a + b + c
+
+
+calc = Calculator()
+
+print(calc.add(5))
+print(calc.add(5, 10))
+print(calc.add(5, 10, 15))
+```
+
+Output:
+
+```text
+5
+15
+30
+```
+
+এটি traditional signature-based overloading নয়; এটি flexible argument handling।
+
+# 40. `*args`
+
+`*args` extra positional arguments-গুলোকে একটি Tuple হিসেবে collect করে।
+
+```python
+class Calculator:
+
+    def add(self, *args):
+        return sum(args)
+
+
+calc = Calculator()
+
+print(calc.add(5))
+print(calc.add(5, 10))
+print(calc.add(5, 10, 15))
+```
+
+Conceptually:
+
+```python
+calc.add(5, 10, 15)
+```
+
+এর সময়:
+
+```python
+args = (5, 10, 15)
+```
+
+# 41. `**kwargs`
+
+`**kwargs` extra keyword arguments-গুলোকে একটি Dictionary হিসেবে collect করে।
+
+```python
+class Student:
+
+    def show(self, **kwargs):
+        for key, value in kwargs.items():
+            print(key, ":", value)
+
+
+student = Student()
+
+student.show(
+    name="Faruk",
+    age=22,
+    department="CSE"
+)
+```
+
+Conceptually:
+
+```text
+kwargs
+  ↓
+Dictionary
+```
+
+# 42. `*args` vs `**kwargs`
+
+```text
+*args
+ ↓
+Extra positional arguments
+ ↓
+Tuple
+
+
+**kwargs
+ ↓
+Extra keyword arguments
+ ↓
+Dictionary
+```
+
+# 43. Magic / Dunder Methods
+
+Special Methods-কে সাধারণত **Dunder Methods** বলা হয়, কারণ নামের শুরু এবং শেষে double underscore থাকে।
+
+Examples:
+
+```python
+__new__
+__init__
+__str__
+__repr__
+__len__
+__eq__
+__add__
+__call__
+```
+
+এগুলো ব্যবহার করে User-defined Class Python-এর syntax এবং built-in operation-এর সাথে কাজ করতে পারে।
+
+# 44. `__str__()`
+
+`__str__()` Object-এর user-friendly string representation দেয়।
+
+```python
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+
+student = Student("Faruk")
+
+print(student)
+```
+
+Output:
+
+```text
+Faruk
+```
+
+`print(obj)` সাধারণত:
+
+```python
+str(obj)
+```
+
+ব্যবহার করে, যা `__str__()`-কে invoke করতে পারে।
+
+# 45. `__repr__()`
+
+`__repr__()` সাধারণত Developer-oriented বা debugging-এর জন্য useful representation দেওয়ার উদ্দেশ্যে ব্যবহৃত হয়।
+
+```python
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return f"Student(name={self.name!r})"
+
+
+student = Student("Faruk")
+
+print(repr(student))
+```
+
+Output:
+
+```text
+Student(name='Faruk')
+```
+
+একটি ভালো `repr()` debugging এবং object inspection-এর জন্য উপকারী।
+
+# 46. `__str__()` vs `__repr__()`
+
+```text
+__str__()
+   ↓
+User-friendly representation
+
+
+__repr__()
+   ↓
+Developer/debugging representation
+```
+
+# 47. Operator Overloading
+
+Special Method ব্যবহার করে User-defined Class-এর Object-এর জন্য Operator-এর behavior define করা যায়।
+
+Example:
+
+```python
+class Number:
+
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return Number(self.value + other.value)
+```
+
+ব্যবহার:
+
+```python
+n1 = Number(10)
+n2 = Number(20)
+
+n3 = n1 + n2
+
+print(n3.value)
+```
+
+Output:
+
+```text
+30
+```
+
+Expression:
+
+```python
+n1 + n2
+```
+
+Python-এর addition protocol ব্যবহার করে এবং `__add__()` invoke করতে পারে।
+
+# 48. `__eq__()`
+
+`__eq__()` Object-এর equality behavior define করতে পারে।
+
+```python
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+
+    def __eq__(self, other):
+
+        if not isinstance(other, Student):
+            return NotImplemented
+
+        return self.name == other.name
+```
+
+ব্যবহার:
+
+```python
+s1 = Student("Faruk")
+s2 = Student("Faruk")
+
+print(s1 == s2)
+```
+
+Output:
+
+```text
+True
+```
+
+Custom equality implementation না থাকলে সাধারণ User-defined Object-এর equality সাধারণত identity-এর ভিত্তিতে হয়।
+
+# 49. `@property`
+
+`@property` Method-based logic-কে Attribute-এর মতো access করতে দেয়।
+
+```python
+class Student:
+
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+```
+
+ব্যবহার:
+
+```python
+student = Student("Faruk")
+
+print(student.name)
+```
+
+এর পরিবর্তে:
+
+```python
+student.name()
+```
+
+আমরা লিখি:
+
+```python
+student.name
+```
+
+# 50. Property Setter
+
+Setter Property-এর value assignment control করতে সাহায্য করে।
+
+```python
+class Student:
+
+    def __init__(self, age):
+        self._age = age
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+
+        if value >= 0:
+            self._age = value
+        else:
+            raise ValueError("Age cannot be negative")
+```
+
+ব্যবহার:
+
+```python
+student = Student(20)
+
+print(student.age)
+
+student.age = 25
+
+print(student.age)
+```
+
+Invalid value:
+
+```python
+student.age = -5
+```
+
+দিলে:
+
+```text
+ValueError
+```
+
+হবে।
+
+# 51. Composition
+
+Composition হলো একটি শক্তিশালী **HAS-A relationship**, যেখানে একটি Object তার implementation-এর অংশ হিসেবে অন্য Object ধারণ করে।
+
+Example:
+
+```python
+class Engine:
+
+    def start(self):
+        print("Engine started")
+
+
+class Car:
+
+    def __init__(self):
+        self.engine = Engine()
+
+    def start(self):
+        self.engine.start()
+```
+
+এখানে:
+
+```text
+Car
+ ↓
+HAS-A
+ ↓
+Engine
+```
+
+অর্থাৎ `Car` Object-এর ভিতরে একটি `Engine` Object আছে।
+
+# 52. Aggregation
+
+Aggregation হলো তুলনামূলকভাবে Loose **HAS-A relationship**, যেখানে contained Object independently exist করতে পারে।
+
+```python
+class Teacher:
+    pass
+
+
+class Department:
+
+    def __init__(self, teacher):
+        self.teacher = teacher
+```
+
+Teacher বাইরে তৈরি করা হয়েছে:
+
+```python
+teacher = Teacher()
+
+department = Department(teacher)
+```
+
+এখানে Department-এর বাইরে Teacher independently exist করতে পারে।
+
+### গুরুত্বপূর্ণ
+
+Composition এবং Aggregation হলো conceptual design relationship।
+
+Python এগুলোর জন্য আলাদা কোনো special syntax enforce করে না।
+
+# 53. Association
+
+Association হলো Objects-এর মধ্যে একটি general relationship বা interaction, যেখানে ownership থাকা বাধ্যতামূলক নয়।
+
+Examples:
+
+```text
+Teacher ↔ Student
+Doctor ↔ Patient
+Customer ↔ Bank
+```
+
+Association, Composition এবং Aggregation-এর চেয়ে broader concept।
+
+# 54. Composition vs Aggregation
+
+## Composition
+
+```text
+Stronger whole-part relationship
+```
+
+Example:
+
+```python
+class Car:
+
+    def __init__(self):
+        self.engine = Engine()
+```
+
+Conceptually:
+
+```text
+Car
+ ↓
+contains
+ ↓
+Engine
+```
+
+## Aggregation
+
+```text
+Looser whole-part relationship
+```
+
+Example:
+
+```python
+teacher = Teacher()
+
+department = Department(teacher)
+```
+
+Teacher independently exist করতে পারে।
+
+মনে রাখো:
+
+```text
+Composition
+→ Stronger whole-part relationship
+
+Aggregation
+→ Weaker whole-part relationship
+```
+
+# 55. Inheritance vs Composition
+
+## Inheritance
+
+Represent করে:
+
+```text
+IS-A
+```
+
+Example:
+
+```text
+Dog IS-A Animal
+```
+
+```python
+class Dog(Animal):
+    pass
+```
+
+## Composition
+
+Represent করে:
+
+```text
+HAS-A
+```
+
+Example:
+
+```text
+Car HAS-A Engine
+```
+
+```python
+class Car:
+
+    def __init__(self):
+        self.engine = Engine()
+```
+
+মনে রাখো:
+
+```text
+Inheritance → IS-A
+Composition → HAS-A
+```
+
+# IS-A, HAS-A, Inheritance & Composition
+
+## 1. IS-A Relationship
+
+**IS-A** মানে:
+
+> "একটি জিনিস অন্য একটি জিনিস।"
+
+যখন একটি Class অন্য Class-এর একটি Type, তখন IS-A relationship থাকে।
+
+Examples:
+
+```text
+Dog IS-A Animal
+Student IS-A Person
+Car IS-A Vehicle
+```
+
+Dog একটি Animal।
+
+Python:
+
+```python
+class Animal:
+
+    def eat(self):
+        print("Eating")
+
+
+class Dog(Animal):
+    pass
+```
+
+এখানে:
+
+```text
+Dog IS-A Animal
+```
+
+তাই **Inheritance** ব্যবহার করা হয়েছে।
+
+সহজ Trick:
+
+```text
+IS-A → "I am this"
+```
+
+Example:
+
+```text
+Dog IS-A Animal
+```
+
+মানে:
+
+> Dog একটি Animal।
+
+# 2. HAS-A Relationship
+
+**HAS-A** মানে:
+
+> "একটি জিনিসের মধ্যে অন্য একটি জিনিস আছে।"
+
+Examples:
+
+```text
+Car HAS-A Engine
+Student HAS-A Address
+Computer HAS-A CPU
+House HAS-A Room
+```
+
+Car Engine নয়।
+
+বরং:
+
+```text
+Car
+└── Engine
+```
+
+Car-এর Engine আছে।
+
+Python:
+
+```python
+class Engine:
+
+    def start(self):
+        print("Engine started")
+
+
+class Car:
+
+    def __init__(self):
+        self.engine = Engine()
+```
+
+এখানে:
+
+```text
+Car HAS-A Engine
+```
+
+# 3. Inheritance
+
+Inheritance সাধারণত **IS-A relationship** থাকলে ব্যবহার করা হয়।
+
+একটি Child Class Parent Class-এর Attribute এবং Method inherit করতে পারে।
+
+```python
+class Animal:
+
+    def eat(self):
+        print("Eating")
+
+
+class Dog(Animal):
+    pass
+```
+
+এখানে:
+
+```text
+Dog IS-A Animal
+```
+
+তাই:
+
+```text
+IS-A → Inheritance
+```
+
+Advantages:
+
+* Code reuse
+* Parent Method reuse
+* Method overriding
+* Class hierarchy তৈরি
+
+# 4. Composition
+
+Composition হলো একটি শক্তিশালী **HAS-A relationship**।
+
+একটি Object অন্য Object-কে contain করে।
+
+```python
+class Engine:
+
+    def start(self):
+        print("Engine started")
+
+
+class Car:
+
+    def __init__(self):
+        self.engine = Engine()
+
+    def start(self):
+        self.engine.start()
+```
+
+এখানে:
+
+```text
+Car HAS-A Engine
+```
+
+Car নিজেই Engine তৈরি করছে:
+
+```python
+self.engine = Engine()
+```
+
+তাই এটি Composition-এর example।
+
+# 5. Composition কেন ব্যবহার করব?
+
+Composition ব্যবহার করে একটি Class-কে অন্য Class-এর Object দিয়ে তৈরি করা যায়।
+
+Example:
+
+```text
+Car
+├── Engine
+├── Battery
+└── Wheel
+```
+
+অর্থাৎ:
+
+```text
+Car HAS-A Engine
+Car HAS-A Battery
+Car HAS-A Wheel
+```
+
+প্রতিটি Class-এর আলাদা responsibility থাকতে পারে:
+
+```text
+Car     → Car-related behavior
+Engine  → Engine-related behavior
+Battery → Battery-related behavior
+```
+
+এতে Code:
+
+```text
+Modular
+Maintainable
+Flexible
+```
+
+হয়।
+
+# 6. IS-A vs HAS-A
+
+| Feature      | IS-A                       | HAS-A                         |
+| ------------ | -------------------------- | ----------------------------- |
+| Meaning      | একটি জিনিস অন্য একটি জিনিস | একটি জিনিসের মধ্যে অন্যটি আছে |
+| Relationship | Type relationship          | Contains/uses relationship    |
+| OOP Concept  | Inheritance                | Composition/Aggregation       |
+| Example      | Dog IS-A Animal            | Car HAS-A Engine              |
+| প্রশ্ন       | "A কি B?"                  | "A-এর কি B আছে?"              |
+
+# 7. কীভাবে Identify করবে?
+
+দুটি Class দেখলে নিজেকে প্রশ্ন করো।
+
+### প্রশ্ন ১:
+
+```text
+"Is A a B?"
+```
+
+যদি উত্তর Yes হয়:
+
+```text
+A IS-A B
+```
+
+সাধারণত:
+
+```text
+Inheritance
+```
+
+Example:
+
+```text
+Is a Dog an Animal?
+
+Yes.
+
+Dog IS-A Animal
+```
+
+### প্রশ্ন ২:
+
+```text
+"Does A have a B?"
+```
+
+যদি উত্তর Yes হয়:
+
+```text
+A HAS-A B
+```
+
+সাধারণত:
+
+```text
+Composition/Aggregation
+```
+
+Example:
+
+```text
+Does a Car have an Engine?
+
+Yes.
+
+Car HAS-A Engine
+```
+
+# 8. Inheritance vs Composition
+
+Inheritance:
+
+```text
+IS-A
+ ↓
+"I am this"
+ ↓
+Inheritance
+```
+
+Example:
+
+```text
+Dog IS-A Animal
+```
+
+Composition:
+
+```text
+HAS-A
+ ↓
+"I have this"
+ ↓
+Composition
+```
+
+Example:
+
+```text
+Car HAS-A Engine
+```
+
+# 9. Composition কি Inheritance-এর Alternative?
+
+অনেক ক্ষেত্রে **হ্যাঁ**, কিন্তু দুটি একই জিনিস নয়।
+
+Inheritance:
+
+```text
+IS-A
+```
+
+Composition:
+
+```text
+HAS-A
+```
+
+সত্যিকারের IS-A relationship থাকলে Inheritance ব্যবহার করা উচিত।
+
+Object যদি অন্য Object-কে ধারণ বা ব্যবহার করে, তাহলে Composition ব্যবহার করা যায়।
+
+### ভুল Example
+
+```python
+class Car(Engine):
+    pass
+```
+
+এটি বোঝায়:
+
+```text
+Car IS-A Engine
+```
+
+যা logical নয়।
+
+### Better Example
+
+```python
+class Car:
+
+    def __init__(self):
+        self.engine = Engine()
+```
+
+এখন:
+
+```text
+Car HAS-A Engine
+```
+
+এটি Composition।
+
+# 10. Real-Life Examples
+
+## IS-A
+
+```text
+Dog IS-A Animal
+Cat IS-A Animal
+Student IS-A Person
+Manager IS-A Employee
+Car IS-A Vehicle
+```
+
+## HAS-A
+
+```text
+Car HAS-A Engine
+Car HAS-A Wheel
+Student HAS-A Address
+Computer HAS-A CPU
+House HAS-A Room
+```
+
+# 11. Easy Memory Trick
+
+এই দুটি Line মনে রাখো:
+
+```text
+IS-A  = "I am this"
+
+HAS-A = "I have this"
+```
+
+Example:
+
+```text
+Dog IS-A Animal
+```
+
+> Dog একটি Animal।
+
+```text
+Car HAS-A Engine
+```
+
+> Car-এর একটি Engine আছে।
+
+# Final Summary
+
+```text
+                OOP Relationships
+                     │
+             ┌───────┴───────┐
+             │               │
+           IS-A            HAS-A
+             │               │
+        "I am this"     "I have this"
+             │               │
+       Inheritance       Composition
+             │               │
+      Dog → Animal       Car → Engine
+```
+
+Key Points:
+
+> **IS-A → Inheritance**
+
+> **HAS-A → Composition/Aggregation**
+
+> **IS-A = "I am this"**
+
+> **HAS-A = "I have this"**
+
+# 56. Nested Class
+
+**Nested Class** হলো একটি Class-এর ভিতরে define করা অন্য একটি Class।
+
+Example:
+
+```python
+class University:
+
+    def __init__(self, name):
+        self.name = name
+
+    def display(self):
+        print(self.name)
+
+    class Department:
+
+        def __init__(self, name):
+            self.name = name
+
+        def display(self):
+            print(self.name)
+```
+
+ব্যবহার:
+
+```python
+if __name__ == "__main__":
+
+    university = University("TMSS Technical University")
+
+    university.display()
+
+    department1 = University.Department("CSE")
+    department2 = University.Department("EEE")
+
+    department1.display()
+    department2.display()
+```
+
+Output:
+
+```text
+TMSS Technical University
+CSE
+EEE
+```
+
+### গুরুত্বপূর্ণ
+
+`Department` হলো `University` Class-এর একটি Attribute।
+
+তাই:
+
+```python
+University.Department
+```
+
+Nested Class-কে refer করে।
+
+Instance দিয়েও:
+
+```python
+university.Department
+```
+
+access করা যায়, কারণ attribute lookup Class-এর মধ্যে `Department` খুঁজে পেতে পারে।
+
+# 57. Nested Class with Instance Attribute
+
+Nested Class-এর Object-কে Instance Attribute হিসেবে রাখা যায়।
+
+```python
+class University:
+
+    def __init__(self, name):
+        self.name = name
+        self.department = self.Department("Department")
+
+    def display(self):
+        print(self.name)
+
+    class Department:
+
+        def __init__(self, name):
+            self.name = name
+
+        def display(self):
+            print(self.name)
+
+
+if __name__ == "__main__":
+
+    university = University("TMSS Technical University")
+
+    university.display()
+    university.department.display()
+```
+
+Output:
+
+```text
+TMSS Technical University
+Department
+```
+
+এখানে:
+
+```text
+University
+    ↓
+Department Class
+    ↓
+Department Object
+    ↓
+university.department
+```
+
+Specific Department তৈরি:
+
+```python
+university.department1 = University.Department("CSE")
+university.department2 = University.Department("EEE")
+
+university.department1.display()
+university.department2.display()
+```
+
+Output:
+
+```text
+CSE
+EEE
+```
+
+### গুরুত্বপূর্ণ পার্থক্য
+
+এটি:
+
+```python
+class University:
+
+    class Department:
+        pass
+```
+
+মানে:
+
+```text
+Department Class
+University-এর ভিতরে define করা হয়েছে
+```
+
+আর এটি:
+
+```python
+self.department = self.Department("CSE")
+```
+
+মানে:
+
+```text
+University Instance
+এর মধ্যে
+Department Instance
+রয়েছে
+```
+
+দ্বিতীয়টি intended design অনুযায়ী Composition-এর মতো Object Relationship হতে পারে।
+
+# 58. `__call__()`
+
+`__call__()` একটি Object-কে Function-এর মতো call করতে সাহায্য করে।
+
+```python
+class Test:
+
+    def __call__(self):
+        print("Object called")
+
+
+t = Test()
+
+t()
+```
+
+Output:
+
+```text
+Object called
+```
+
+Conceptually:
+
+```python
+t()
+```
+
+Object-এর callable protocol ব্যবহার করে:
+
+```python
+t.__call__()
+```
+
+invoke করে।
+
+# 59. `__call__()` with Parameters
+
+```python
+class Add:
+
+    def __call__(self, a, b):
+        return a + b
+
+
+calc = Add()
+
+print(calc(5, 3))
+```
+
+Output:
+
+```text
+8
+```
+
+# 60. Callable Object
+
+যে Object-কে Function Call Syntax ব্যবহার করে call করা যায় তাকে **Callable Object** বলা হয়।
+
+```python
+class Test:
+
+    def __call__(self):
+        print("Called")
+
+
+t = Test()
+
+print(callable(t))
+```
+
+Output:
+
+```text
+True
+```
+
+`__call__()` না থাকলে:
+
+```python
+class Test:
+    pass
+
+
+t = Test()
+
+print(callable(t))
+```
+
+Output:
+
+```text
+False
+```
+
+এবং:
+
+```python
+t()
+```
+
+করলে:
+
+```text
+TypeError
+```
+
+হবে।
+
+# 61. Stateful Callable Object
+
+একটি Callable Object Call-এর মধ্যেও State maintain করতে পারে।
+
+```python
+class Counter:
+
+    def __init__(self):
+        self.count = 0
+
+    def __call__(self):
+        self.count += 1
+        return self.count
+
+
+counter = Counter()
+
+print(counter())
+print(counter())
+print(counter())
+```
+
+Output:
+
+```text
+1
+2
+3
+```
+
+Object তার State ধরে রাখে:
+
+```text
+count = 1
+count = 2
+count = 3
+```
+
+# 62. Multiple Stateful Callable Objects
+
+```python
+class Counter:
+
+    def __init__(self):
+        self.count = 0
+
+    def __call__(self):
+        self.count += 1
+        return self.count
+
+
+c1 = Counter()
+c2 = Counter()
+
+print(c1())
+print(c1())
+
+print(c2())
+print(c2())
+```
+
+Output:
+
+```text
+1
+2
+1
+2
+```
+
+কারণ:
+
+```text
+c1 → আলাদা Instance State
+c2 → আলাদা Instance State
+```
+
+# 63. `__init__()` vs `__call__()`
+
+Object Creation:
+
+```text
+Class()
+   ↓
+__new__()
+   ↓
+__init__()
+   ↓
+Initialized Instance
+```
+
+Existing Object call:
+
+```text
+obj()
+   ↓
+Callable Protocol
+   ↓
+__call__()
+```
+
+# 64. Class-Based Decorator
+
+`__call__()` ব্যবহার করে Class-based Decorator তৈরি করা যায়।
+
+```python
+class MyDecorator:
+
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self):
+        print("Before function")
+
+        self.func()
+
+        print("After function")
+```
+
+ব্যবহার:
+
+```python
+@MyDecorator
+def hello():
+    print("Hello")
+
+
+hello()
+```
+
+Output:
+
+```text
+Before function
+Hello
+After function
+```
+
+Conceptually:
+
+```python
+hello = MyDecorator(hello)
+```
+
+এখন:
+
+```text
+hello
+```
+
+একটি Callable `MyDecorator` Object-কে reference করে।
+
+# 65. `__call__()` + Polymorphism
+
+```python
+class Add:
+
+    def __call__(self, a, b):
+        return a + b
+
+
+class Multiply:
+
+    def __call__(self, a, b):
+        return a * b
+
+
+operations = [
+    Add(),
+    Multiply()
+]
+
+for operation in operations:
+    print(operation(5, 3))
+```
+
+Output:
+
+```text
+8
+15
+```
+
+দুটি Object-ই support করে:
+
+```python
+operation(a, b)
+```
+
+কিন্তু behavior আলাদা।
+
+# 66. `__call__()` + Duck Typing
+
+```python
+class Add:
+
+    def __call__(self, a, b):
+        return a + b
+
+
+class Multiply:
+
+    def __call__(self, a, b):
+        return a * b
+
+
+def calculate(operation, a, b):
+    return operation(a, b)
+```
+
+ব্যবহার:
+
+```python
+print(calculate(Add(), 5, 3))
+print(calculate(Multiply(), 5, 3))
+```
+
+Output:
+
+```text
+8
+15
+```
+
+`calculate()`-কে Concrete Class জানতে হয় না।
+
+তার প্রয়োজন শুধু:
+
+```text
+operation(a, b)
+```
+
+# 67. `isinstance()`
+
+`isinstance()` চেক করে কোনো Object নির্দিষ্ট Class বা তার Subclass-এর Instance কিনা।
+
+```python
+class Animal:
+    pass
+
+
+class Dog(Animal):
+    pass
+
+
+dog = Dog()
+
+print(isinstance(dog, Dog))
+print(isinstance(dog, Animal))
+```
+
+Output:
+
+```text
+True
+True
+```
+
+কারণ:
+
+```text
+Dog IS-A Animal
+```
+
+# 68. `issubclass()`
+
+`issubclass()` চেক করে একটি Class অন্য Class-এর Subclass কিনা।
+
+```python
+class Animal:
+    pass
+
+
+class Dog(Animal):
+    pass
+
+
+print(issubclass(Dog, Animal))
+```
+
+Output:
+
+```text
+True
+```
+
+# 69. `id()`
+
+`id()` Object-এর lifetime-এর মধ্যে তার identity value return করে।
+
+```python
+class Work:
+
+    def __init__(self, name):
+        self.name = name
+
+
+work1 = Work("John")
+work2 = Work("Alice")
+
+print(id(work1))
+print(id(work2))
+```
+
+সঠিকভাবে:
+
+```text
+id(object)
+→ Object-এর identity value
+```
+
+শুধু:
+
+```text
+id() = memory address
+```
+
+বলা উচিত নয়।
+
+CPython-এ identity সাধারণত memory address-এর সাথে সম্পর্কিত হতে পারে, কিন্তু এটি implementation detail।
+
+# 70. `del`
+
+`del` কোনো Name/Reference remove করতে পারে অথবা Attribute delete করতে পারে।
+
+Example:
+
+```python
+work = Work("John")
+
+del work
+```
+
+এটি Current Namespace থেকে `work` Name remove করে।
+
+এটি অবশ্যই Object-কে সঙ্গে সঙ্গে destroy করবে—এমন নয়।
+
+Example:
+
+```python
+work = Work("John")
+
+another = work
+
+del work
+```
+
+এখন:
+
+```text
+another
+   ↓
+Work Object
+```
+
+Object এখনও exist করছে, কারণ `another` reference করছে।
+
+# 71. Attribute Delete করা
+
+```python
+class Student:
+
+    def __init__(self):
+        self.name = "Faruk"
+
+
+student = Student()
+
+del student.name
+```
+
+এরপর:
+
+```python
+print(student.name)
+```
+
+দিলে:
+
+```text
+AttributeError
+```
+
+হবে।
+
+# 72. Python Memory Model
+
+Python-এর Memory Model-কে সবসময় এভাবে ব্যাখ্যা করা ঠিক নয়:
+
+```text
+Variable → Stack
+Object   → Heap
+```
+
+আরও নিরাপদ conceptual model:
+
+```text
+Name
+ ↓
+Object-এর Reference
+ ↓
+Python Object
+ ↓
+Implementation-managed Memory
+```
+
+CPython-এ Python Object সাধারণত Heap-managed memory-তে allocate হয়।
+
+তবে exact implementation details Python implementation অনুযায়ী পরিবর্তিত হতে পারে।
+
+# 73. Reference Counting
+
+CPython memory management-এর একটি গুরুত্বপূর্ণ অংশ হলো **Reference Counting**।
+
+Example:
+
+```python
+work = Work("John")
+
+another = work
+
+del work
+```
+
+`del work` করার পরেও:
+
+```text
+another
+   ↓
+Work Object
+```
+
+তাই Object-এর reference এখনও আছে।
+
+CPython-এ কোনো Object-এর reference count zero হলে সাধারণত সেটি দ্রুত deallocate করা যায়।
+
+# 74. Garbage Collection
+
+Python-এর Garbage Collector unreachable reference cycle detect এবং reclaim করতে পারে।
+
+Example:
+
+```text
+Object A → Object B
+   ↑          |
+   |__________|
+```
+
+Reference Counting একা এই Cycle reclaim করতে সমস্যায় পড়তে পারে।
+
+Python-এর cyclic garbage collector এই ধরনের unreachable cycle detect করতে পারে।
+
+তাই বলা উচিত নয়:
+
+```text
+"No reference = Garbage Collector immediately deletes object"
+```
+
+বরং:
+
+```text
+একটি unreachable object
+memory reclamation-এর জন্য eligible হতে পারে।
+
+ঠিক কখন memory reclaim হবে তা
+Python implementation/runtime-এর উপর নির্ভর করতে পারে।
+```
+
+# 75. `gc.collect()`
+
+Python-এর `gc` module ব্যবহার করা যায়।
+
+```python
+import gc
+
+gc.collect()
+```
+
+এটি Garbage Collection Cycle চালানোর জন্য request করে।
+
+এটিকে এভাবে বোঝা ঠিক নয়:
+
+```text
+"সব unused object সঙ্গে সঙ্গে delete করে"
+```
+
+# 76. `__name__ == "__main__"`
+
+প্রতিটি Python file একটি Module।
+
+Python প্রতিটি Module-এ একটি special variable রাখে:
+
+```python
+__name__
+```
+
+এর value নির্ভর করে Module কীভাবে ব্যবহার হচ্ছে তার উপর।
+
+| ব্যবহার      | `__name__`     |
+| ------------ | -------------- |
+| Directly Run | `"__main__"`   |
+| Import করা   | Module-এর name |
+
+Example:
+
+```python
+def hello():
+    print("Hello from function!")
+
+
+if __name__ == "__main__":
+    print("This code runs directly!")
+    hello()
+```
+
+Run:
+
+```bash
+python greet.py
+```
+
+Output:
+
+```text
+This code runs directly!
+Hello from function!
+```
+
+# 77. কেন `if __name__ == "__main__"` ব্যবহার করি?
+
+এটি এমন Code লিখতে সাহায্য করে যা শুধু File Directly Execute করলে চলবে।
+
+যখন:
+
+```python
+import greet
+```
+
+করা হয়, তখন:
+
+```python
+if __name__ == "__main__":
+```
+
+Block execute হবে না।
+
+কারণ:
+
+```python
+__name__ == "greet"
+```
+
+হবে।
+
+এর সুবিধা:
+
+```text
+Reusable Module তৈরি
+Unwanted execution এড়ানো
+Reusable code এবং script code আলাদা রাখা
+Test/Demo code আলাদা রাখা
+```
+
+# 78. Module Import Example
+
+### `greet.py`
+
+```python
+def hello():
+    print("Hello from function!")
+
+
+if __name__ == "__main__":
+    print("Running directly")
+    hello()
+```
+
+### `main.py`
+
+```python
+import greet
+
+greet.hello()
+```
+
+Output:
+
+```text
+Hello from function!
+```
+
+`greet.py`-এর direct execution block import করার সময় run হয় না।
+
+# 79. Real-World Example
+
+### `calculator.py`
+
+```python
+def add(a, b):
+    return a + b
+
+
+def subtract(a, b):
+    return a - b
+
+
+if __name__ == "__main__":
+    print("Testing calculator functions")
+    print(add(5, 3))
+    print(subtract(5, 3))
+```
+
+Directly run:
+
+```bash
+python calculator.py
+```
+
+Output:
+
+```text
+Testing calculator functions
+8
+2
+```
+
+অন্য File থেকে Import:
+
+```python
+import calculator
+
+print(calculator.add(10, 5))
+```
+
+Output:
+
+```text
+15
+```
+
+Test code automatically run করবে না।
+
+# 80. Complete OOP Example
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Person(ABC):
+
+    species = "Human"
+
+    def __init__(self, name, age):
+        self._name = name
+        self._age = age
+
+    @property
+    def name(self):
+        return self._name
+
+    @abstractmethod
+    def introduce(self):
+        pass
+
+
+class Student(Person):
+
+    school = "TMSS"
+
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+
+    def introduce(self):
+        print(
+            f"My name is {self.name}. "
+            f"I am {self._age} years old."
+        )
+
+    @classmethod
+    def change_school(cls, school):
+        cls.school = school
+
+    @staticmethod
+    def info():
+        print("This is Student class.")
+
+
+if __name__ == "__main__":
+
+    student = Student("Faruk", 25, 101)
+
+    student.introduce()
+
+    print(student.name)
+    print(student.student_id)
+
+    Student.change_school("ABC School")
+
+    print(Student.school)
+
+    Student.info()
+```
+
+এই Example-এ রয়েছে:
+
+```text
+Abstract Class
+Inheritance
+super()
+Instance Attributes
+Class Attributes
+@property
+Instance Method
+Class Method
+Static Method
+Polymorphism
+Encapsulation
+__name__ == "__main__"
+```
+
+# 81. Encapsulation vs Abstraction
+
+| Encapsulation                                         | Abstraction                                 |
+| ----------------------------------------------------- | ------------------------------------------- |
+| State এবং behavior একসাথে রাখে                        | Essential interface expose করে              |
+| State access manage করে                               | Unnecessary implementation details hide করে |
+| Property, convention, name mangling ব্যবহার করতে পারে | ABC এবং abstract method ব্যবহার করতে পারে   |
+| State organization/access-এর দিকে focus               | Interface/design-এর দিকে focus              |
+
+সহজে মনে রাখো:
+
+```text
+Encapsulation
+→ State কীভাবে organize এবং access হবে?
+
+Abstraction
+→ User কোন interface ব্যবহার করবে?
+```
+
+# 82. Overloading vs Overriding
+
+| Overloading                                     | Overriding                                |
+| ----------------------------------------------- | ----------------------------------------- |
+| Same name + different parameter signature       | Child নতুন implementation দেয়             |
+| Python-এ traditional form directly supported নয় | Python inheritance-এর মাধ্যমে support করে |
+| Inheritance প্রয়োজন নেই                         | Inheritance involved                      |
+| Default arguments, `*args` ইত্যাদি alternative  | Normal method dispatch                    |
+
+মনে রাখো:
+
+```text
+Overloading
+→ Same Name + Different Signatures
+
+Overriding
+→ Inherited Method + New Implementation
+```
+
+# 83. Polymorphism vs Duck Typing
+
+## Polymorphism
+
+```text
+Same Interface
++
+Different Implementations
+```
+
+## Duck Typing
+
+```text
+Required Behavior/Capability
++
+Concrete Type less important
+```
+
+Example:
+
+```python
+def make_sound(obj):
+    obj.speak()
+```
+
+এখানে Function-এর requirement:
+
+```python
+obj.speak()
+```
+
+# 84. OOP-এর চারটি Fundamental Concept
+
+```text
+1. Encapsulation
+   ↓
+State + Behavior একসাথে রাখা
+এবং access manage করা
+
+
+2. Inheritance
+   ↓
+IS-A relationship-এর মাধ্যমে
+Behavior reuse/extend করা
+
+
+3. Polymorphism
+   ↓
+Same Interface
+Different Behavior
+
+
+4. Abstraction
+   ↓
+Essential Interface expose করা
+Unnecessary details hide করা
+```
+
+# 85. Quick Revision
+
+```text
+Class
+    ↓
+Blueprint / Template
+
+
+Object
+    ↓
+Class-এর Instance
+
+
+self
+    ↓
+Current Instance-এর reference
+
+
+cls
+    ↓
+Current Class-এর reference
+
+
+__new__()
+    ↓
+Instance তৈরি/return করে
+
+
+__init__()
+    ↓
+Instance initialize করে
+
+
+Instance Attribute
+    ↓
+Object-specific State
+
+
+Class Attribute
+    ↓
+Class-level Attribute
+
+
+Instance Method
+    ↓
+self
+
+
+Class Method
+    ↓
+@classmethod + cls
+
+
+Static Method
+    ↓
+@staticmethod
+
+
+Encapsulation
+    ↓
+State + Behavior bundle
+এবং State access manage
+
+
+Inheritance
+    ↓
+IS-A
+
+
+Composition
+    ↓
+HAS-A
+
+
+Polymorphism
+    ↓
+Same Interface + Different Behavior
+
+
+Duck Typing
+    ↓
+Behavior/Capability গুরুত্বপূর্ণ
+
+
+Abstraction
+    ↓
+Essential Interface
+
+
+Method Overriding
+    ↓
+Child নতুন implementation দেয়
+
+
+super()
+    ↓
+MRO অনুযায়ী next implementation
+
+
+MRO
+    ↓
+Method Resolution Order
+
+
+@property
+    ↓
+Method-based logic
+attribute syntax-এর মাধ্যমে access
+
+
+__call__()
+    ↓
+Object-কে function-এর মতো call করা
+
+
+__name__ == "__main__"
+    ↓
+শুধু directly execute করলে code run করা
+```
+
+# 86. Python OOP Learning Roadmap
+
+```text
+1. Class
+   ↓
+2. Object
+   ↓
+3. __new__() এবং __init__()
+   ↓
+4. self
+   ↓
+5. Instance Attribute
+   ↓
+6. Class Attribute
+   ↓
+7. Instance Method
+   ↓
+8. Class Method
+   ↓
+9. Static Method
+   ↓
+10. Method Binding
+   ↓
+11. Encapsulation
+   ↓
+12. Inheritance
+   ↓
+13. super()
+   ↓
+14. Method Overriding
+   ↓
+15. Polymorphism
+   ↓
+16. Duck Typing
+   ↓
+17. Abstraction
+   ↓
+18. Dunder Methods
+   ↓
+19. @property / Setter
+   ↓
+20. Composition
+   ↓
+21. Aggregation / Association
+   ↓
+22. Nested Class
+   ↓
+23. MRO
+   ↓
+24. __call__ / Callable Objects
+   ↓
+25. Memory Management
+   ↓
+26. __name__ == "__main__"
+   ↓
+27. OOP Design Principles
+   ↓
+28. Projects + Practice
+```
+
+# 87. Interview Questions
+
+## Basic OOP
+
+```text
+1. OOP কী?
+2. Class কী?
+3. Object কী?
+4. Class এবং Object-এর মধ্যে পার্থক্য কী?
+5. self কী?
+6. __new__() কী?
+7. __init__() কী?
+8. __new__() এবং __init__()-এর পার্থক্য কী?
+9. Instance Attribute কী?
+10. Class Attribute কী?
+11. Instance Method কী?
+12. Class Method কী?
+13. Static Method কী?
+14. self এবং cls-এর মধ্যে পার্থক্য কী?
+```
+
+## Core OOP
+
+```text
+15. OOP-এর চারটি Pillar কী?
+16. Encapsulation কী?
+17. Inheritance কী?
+18. Inheritance-এর ধরন কী কী?
+19. Polymorphism কী?
+20. Abstraction কী?
+21. Abstract Class কী?
+22. Method Overriding কী?
+23. super() কী?
+24. MRO কী?
+25. Composition কী?
+26. Aggregation কী?
+27. Association কী?
+28. Nested Class কী?
+```
+
+## Python-Specific
+
+```text
+29. Python কি Traditional Method Overloading support করে?
+30. *args এবং **kwargs কী?
+31. Duck Typing কী?
+32. Dynamic Typing কী?
+33. Method Binding কী?
+34. Bound Method কী?
+35. Name Mangling কী?
+36. __name কি সত্যিকারের private?
+37. @property কী?
+38. Setter কী?
+39. Dunder Method কী?
+40. __str__() কী?
+41. __repr__() কী?
+42. __eq__() কী?
+43. Operator Overloading কী?
+44. __call__() কী?
+45. Callable Object কী?
+46. callable() কী করে?
+```
+
+## Runtime / Memory
+
+```text
+47. id() কী return করে?
+48. del obj ব্যবহার করলে কী হয়?
+49. Reference Counting কী?
+50. Garbage Collection কী?
+51. Reference Cycle কী?
+52. Python-এর Stack/Heap model C/C++-এর মতো সরাসরি explain করা উচিত নয় কেন?
+53. __name__ কী?
+54. if __name__ == "__main__" কেন ব্যবহার করি?
+```
+
+# 88. Final 20 Lines to Memorize
+
+```text
+1. Class → Blueprint / Template
+
+2. Object → Class-এর Instance
+
+3. self → Current Instance-এর Conventional Reference
+
+4. cls → Current Class-এর Conventional Reference
+
+5. __new__() → Instance তৈরি/return করে
+
+6. __init__() → Instance initialize করে
+
+7. Instance Attribute → Object-specific State
+
+8. Class Attribute → Class-এ Defined Attribute
+
+9. Instance Method → self গ্রহণ করে
+
+10. Class Method → @classmethod + cls
+
+11. Static Method → @staticmethod + automatic self/cls নেই
+
+12. Encapsulation → State + Behavior bundle এবং access manage
+
+13. Inheritance → IS-A relationship
+
+14. Composition → HAS-A relationship
+
+15. Polymorphism → Same Interface + Different Behavior
+
+16. Duck Typing → Behavior/Capability গুরুত্বপূর্ণ
+
+17. Abstraction → Essential Interface
+
+18. Overriding → Child নতুন implementation দেয়
+
+19. MRO → Method Resolution Order
+
+20. __call__() → Object-কে function-এর মতো call করতে দেয়
+```
+
+# 89. One-Line Definitions
+
+```text
+Class
+→ Object তৈরি করার Blueprint/Template।
+
+Object
+→ একটি Class-এর Instance।
+
+self
+→ Current Instance-এর Conventional Reference।
+
+cls
+→ Current Class-এর Conventional Reference।
+
+__new__()
+→ Instance তৈরি/return করার Special Method।
+
+__init__()
+→ Instance initialize করার Special Method।
+
+Encapsulation
+→ State এবং Behavior একসাথে রাখা এবং State access manage করা।
+
+Inheritance
+→ একটি Class-এর উপর ভিত্তি করে নতুন Class তৈরি করার mechanism।
+
+Polymorphism
+→ একই Interface/Operation বিভিন্ন Object-এর জন্য ভিন্ন behavior দেয়।
+
+Abstraction
+→ Essential behavior/interface expose এবং unnecessary implementation details hide করা।
+
+Duck Typing
+→ Concrete Type-এর বদলে supported behavior-এর উপর নির্ভর করা।
+
+Method Overriding
+→ Subclass inherited Method-এর নিজের implementation প্রদান করে।
+
+Composition
+→ Strong whole-part / HAS-A relationship।
+
+Aggregation
+→ Looser whole-part / HAS-A relationship যেখানে contained Object independently exist করতে পারে।
+
+Association
+→ Object-এর মধ্যে সাধারণ relationship বা interaction।
+
+Nested Class
+→ একটি Class-এর ভিতরে define করা Class।
+
+MRO
+→ Python যে order-এ Class hierarchy-তে Method/Attribute search করে।
+
+__call__()
+→ Object-কে () syntax দিয়ে call করার সুযোগ দেয়।
+
+@property
+→ Method-based logic-কে Attribute Syntax-এর মাধ্যমে access করতে দেয়।
+
+@classmethod
+→ এমন Method তৈরি করে যা Class-কে প্রথম argument হিসেবে গ্রহণ করে।
+
+@staticmethod
+→ এমন Method তৈরি করে যেখানে automatic instance/class argument থাকে না।
+
+__str__()
+→ User-oriented string representation দেয়।
+
+__repr__()
+→ Developer-oriented representation দেয়।
+
+__eq__()
+→ Equality behavior define করে।
+
+__add__()
+→ + Operator-এর behavior define করে।
+
+isinstance()
+→ Object কোনো Class বা তার Subclass-এর Instance কিনা check করে।
+
+issubclass()
+→ একটি Class অন্য Class-এর Subclass কিনা check করে।
+
+callable()
+→ Object-কে call করা যায় কিনা check করে।
+
+__name__
+→ Module-এর execution/import context নির্দেশ করে।
+```
+
+# 90. Final OOP Concept Map
+
+```text
+                         PYTHON OOP
+                             │
+          ┌──────────────────┼──────────────────┐
+          │                  │                  │
+        Class              Object            Methods
+          │                  │                  │
+          │                  │        ┌─────────┼─────────┐
+          │                  │        │         │         │
+          │                  │    Instance    Class     Static
+          │                  │       │          │         │
+          │                  │      self       cls        -
+          │                  │
+          └──────────────────┼────────────────────────────
+                             │
+                     Four Pillars
+                             │
+          ┌──────────────────┼──────────────────┐
+          │                  │                  │
+   Encapsulation        Inheritance       Polymorphism
+          │                  │                  │
+          │                  │          ┌───────┴────────┐
+          │                  │          │                │
+      Property             MRO       Overriding     Duck Typing
+   Name Mangling             │
+                             │
+                          super()
+                             │
+                        Abstraction
+                             │
+                   ABC / abstractmethod
+                             │
+                             │
+                  Object Relationships
+                             │
+          ┌──────────────────┼──────────────────┐
+          │                  │                  │
+      Composition        Aggregation       Association
+          │
+         HAS-A
+
+
+     Inheritance
+         │
+        IS-A
+
+
+   Special Methods
+         │
+         ├── __new__
+         ├── __init__
+         ├── __str__
+         ├── __repr__
+         ├── __eq__
+         ├── __add__
+         └── __call__
+
+
+   Python Runtime
+         │
+         ├── id()
+         ├── del
+         ├── Reference Counting
+         └── Garbage Collection
+
+
+   Modules
+         │
+         └── __name__ == "__main__"
+```
+
+# Final Memory Formula
+
+```text
+PYTHON OOP
+│
+├── Class
+│   └── Blueprint
+│
+├── Object
+│   └── Instance
+│
+├── Object Creation
+│   ├── __new__()
+│   └── __init__()
+│
+├── Methods
+│   ├── Instance → self
+│   ├── Class → cls
+│   └── Static → No automatic self/cls
+│
+├── Four Pillars
+│   ├── Encapsulation
+│   ├── Inheritance
+│   ├── Polymorphism
+│   └── Abstraction
+│
+├── Relationships
+│   ├── Inheritance → IS-A
+│   ├── Composition → HAS-A
+│   ├── Aggregation
+│   └── Association
+│
+├── Polymorphism
+│   ├── Overriding
+│   └── Duck Typing
+│
+├── Special Methods
+│   ├── __new__
+│   ├── __init__
+│   ├── __str__
+│   ├── __repr__
+│   ├── __eq__
+│   ├── __add__
+│   └── __call__
+│
+├── Encapsulation Tools
+│   ├── _name
+│   ├── __name
+│   ├── Name Mangling
+│   └── @property
+│
+├── Inheritance Tools
+│   ├── super()
+│   ├── MRO
+│   ├── isinstance()
+│   └── issubclass()
+│
+├── Callable Objects
+│   ├── __call__()
+│   └── callable()
+│
+├── Runtime
+│   ├── id()
+│   ├── del
+│   ├── Reference Counting
+│   └── Garbage Collection
+│
+└── Modules
+    └── __name__ == "__main__"
+```

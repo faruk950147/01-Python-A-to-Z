@@ -1,0 +1,1426 @@
+# Python Command Line Arguments
+
+## ১. Command Line Arguments কী?
+
+**Command Line Arguments** হলো এমন কিছু value, যা আমরা কোনো Python program-কে **command line বা terminal থেকে run করার সময়** দিয়ে থাকি।
+
+### Example
+
+```bash
+python main.py 10 20 hello
+```
+
+এখানে:
+
+```text
+main.py  → Python file / script
+10       → প্রথম argument
+20       → দ্বিতীয় argument
+hello    → তৃতীয় argument
+```
+
+Python program-এর ভিতর থেকে আমরা এই value-গুলো read করতে পারি।
+
+---
+
+# ২. `sys` Module
+
+Python-এ **command line arguments** নিয়ে কাজ করার জন্য `sys` module ব্যবহার করা যায়।
+
+প্রথমে `sys` import করতে হবে:
+
+```python
+import sys
+```
+
+Command line arguments-এর জন্য সবচেয়ে গুরুত্বপূর্ণ variable হলো:
+
+```python
+sys.argv
+```
+
+---
+
+# ৩. `sys.argv` কী?
+
+`sys.argv` হলো একটি **list**, যেখানে command line arguments সংরক্ষিত থাকে।
+
+### Example
+
+ধরা যাক আমরা run করলাম:
+
+```bash
+python main.py 10 20 hello
+```
+
+তাহলে:
+
+```python
+sys.argv
+```
+
+এর মধ্যে থাকবে:
+
+```python
+['main.py', '10', '20', 'hello']
+```
+
+### Index-এর অর্থ
+
+```text
+sys.argv[0] → script-এর নাম
+sys.argv[1] → প্রথম user argument
+sys.argv[2] → দ্বিতীয় user argument
+sys.argv[3] → তৃতীয় user argument
+```
+
+### গুরুত্বপূর্ণ
+
+প্রথম user-provided argument শুরু হয় **index 1** থেকে, index 0 থেকে নয়।
+
+---
+
+# ৪. Basic `sys.argv` Example
+
+### File: `main.py`
+
+```python
+import sys
+
+print(sys.argv)
+```
+
+Run:
+
+```bash
+python main.py 10 20 hello
+```
+
+Output:
+
+```text
+['main.py', '10', '20', 'hello']
+```
+
+তাহলে:
+
+```text
+sys.argv[0] → main.py
+sys.argv[1] → 10
+sys.argv[2] → 20
+sys.argv[3] → hello
+```
+
+---
+
+# ৫. গুরুত্বপূর্ণ: `sys.argv`-এর Value সবসময় String
+
+এটি সবচেয়ে গুরুত্বপূর্ণ বিষয়গুলোর একটি।
+
+সব command line arguments শুরুতে **string** হিসেবে Python-এ আসে।
+
+Example:
+
+```bash
+python main.py 10 20
+```
+
+Python পাবে:
+
+```python
+['main.py', '10', '20']
+```
+
+তাই:
+
+```python
+sys.argv[1]
+```
+
+এর value হলো:
+
+```text
+"10"
+```
+
+এটি:
+
+```text
+10
+```
+
+নয়।
+
+এর type হলো:
+
+```python
+<class 'str'>
+```
+
+### Example
+
+```python
+import sys
+
+num1 = sys.argv[1]
+num2 = sys.argv[2]
+
+print(num1)
+print(type(num1))
+
+print(num2)
+print(type(num2))
+```
+
+Run:
+
+```bash
+python main.py 10 20
+```
+
+Output:
+
+```text
+10
+<class 'str'>
+
+20
+<class 'str'>
+```
+
+---
+
+# ৬. Command Line Arguments Convert করা
+
+যেহেতু command line arguments string হিসেবে আসে, তাই অনেক সময় এগুলোকে number-এ convert করতে হয়।
+
+## Integer-এ Convert
+
+এর জন্য ব্যবহার করি:
+
+```python
+int()
+```
+
+Example:
+
+```python
+import sys
+
+num1 = int(sys.argv[1])
+num2 = int(sys.argv[2])
+
+print(num1 + num2)
+```
+
+Run:
+
+```bash
+python main.py 10 20
+```
+
+Output:
+
+```text
+30
+```
+
+---
+
+## Float-এ Convert
+
+এর জন্য ব্যবহার করি:
+
+```python
+float()
+```
+
+Example:
+
+```python
+import sys
+
+num1 = float(sys.argv[1])
+num2 = float(sys.argv[2])
+
+print(num1 + num2)
+```
+
+Run:
+
+```bash
+python main.py 10 20
+```
+
+Output:
+
+```text
+30.0
+```
+
+### মনে রাখবেন
+
+```text
+Command line
+     ↓
+  String
+     ↓
+int() / float()
+     ↓
+  Number
+```
+
+---
+
+# ৭. Basic `sys.argv` Example
+
+```python
+import sys
+
+args = sys.argv
+
+print(args)
+print(type(args))
+
+print(args[0])
+print(args[1])
+
+for arg in args:
+    print(arg)
+```
+
+Run:
+
+```bash
+python main.py 10 20 hello
+```
+
+Output:
+
+```text
+['main.py', '10', '20', 'hello']
+<class 'list'>
+main.py
+10
+main.py
+10
+20
+hello
+```
+
+### `main.py` দুইবার কেন এসেছে?
+
+কারণ:
+
+```python
+print(args[0])
+```
+
+এটি `main.py` print করছে।
+
+এরপর:
+
+```python
+for arg in args:
+```
+
+আবার পুরো list-এর উপর loop করছে।
+
+তাই `main.py` আবার print হয়েছে।
+
+---
+
+# ৮. `len(sys.argv)`
+
+`len(sys.argv)` আমাদের বলে `sys.argv` list-এর মধ্যে মোট কয়টি item আছে।
+
+Example:
+
+```python
+import sys
+
+print(sys.argv)
+print(len(sys.argv))
+```
+
+Run:
+
+```bash
+python main.py 10 20 hello
+```
+
+Output:
+
+```text
+['main.py', '10', '20', 'hello']
+4
+```
+
+কেন `4`?
+
+```text
+sys.argv[0] → main.py
+sys.argv[1] → 10
+sys.argv[2] → 20
+sys.argv[3] → hello
+```
+
+তাই মোট **৪টি item** আছে।
+
+### গুরুত্বপূর্ণ
+
+`len(sys.argv)`-এর মধ্যে **script-এর নামও count হয়**।
+
+---
+
+# ৯. Argument-এর সংখ্যা Check করা
+
+আমরা যখন:
+
+```python
+sys.argv[1]
+sys.argv[2]
+```
+
+ব্যবহার করব, তার আগে user প্রয়োজনীয় argument দিয়েছে কি না check করা ভালো।
+
+Example:
+
+```python
+import sys
+
+if len(sys.argv) < 3:
+    print("Usage: python main.py <num1> <num2>")
+    sys.exit(1)
+
+num1 = sys.argv[1]
+num2 = sys.argv[2]
+
+print(num1)
+print(num2)
+```
+
+যদি user run করে:
+
+```bash
+python main.py 10
+```
+
+তাহলে program দেখাবে:
+
+```text
+Usage: python main.py <num1> <num2>
+```
+
+এটি এমন error প্রতিরোধ করতে সাহায্য করে:
+
+```text
+IndexError: list index out of range
+```
+
+---
+
+# ১০. `sys.exit()`
+
+`sys.exit()` ব্যবহার করা হয় **program বন্ধ করার জন্য**।
+
+Example:
+
+```python
+import sys
+
+if len(sys.argv) < 3:
+    print("Not enough arguments!")
+    sys.exit(1)
+
+print("Program continues...")
+```
+
+যদি প্রয়োজনীয় argument না থাকে:
+
+```python
+sys.exit(1)
+```
+
+তাহলে program বন্ধ হয়ে যাবে।
+
+### Exit Codes
+
+সাধারণভাবে:
+
+```text
+sys.exit(0) → সফলভাবে program শেষ হয়েছে
+sys.exit(1) → Error / অসফলভাবে program শেষ হয়েছে
+```
+
+Non-zero exit code-এর নির্দিষ্ট অর্থ program অনুযায়ী আলাদা হতে পারে। তবে সাধারণ convention হলো:
+
+```text
+0 → Success
+Non-zero → Error
+```
+
+---
+
+# ১১. Command Line Arguments ব্যবহার করে File তৈরি করা
+
+আমরা terminal থেকে filename এবং text পাঠাতে পারি।
+
+### File: `file.py`
+
+```python
+import sys
+
+if len(sys.argv) < 3:
+    print("Usage: python file.py <filename> <text>")
+    sys.exit(1)
+
+filename = sys.argv[1]
+text = sys.argv[2]
+
+with open(filename, "w") as f:
+    f.write(text)
+
+print("File written successfully.")
+```
+
+Run:
+
+```bash
+python file.py filename.txt "Hello World"
+```
+
+এতে তৈরি হবে:
+
+```text
+filename.txt
+```
+
+এবং এর ভিতরে লেখা থাকবে:
+
+```text
+Hello World
+```
+
+---
+
+# ১২. Command Line Arguments ব্যবহার করে File Read করা
+
+আমরা terminal থেকে filename পাঠিয়ে file read-ও করতে পারি।
+
+```python
+import sys
+
+if len(sys.argv) < 2:
+    print("Usage: python file.py <filename>")
+    sys.exit(1)
+
+filename = sys.argv[1]
+
+with open(filename, "r") as f:
+    content = f.read()
+
+print(content)
+```
+
+Run:
+
+```bash
+python file.py filename.txt
+```
+
+Program file-এর content read করে print করবে।
+
+---
+
+# ১৩. File Write এবং Read একসাথে
+
+আমরা চাইলে দুইটি operation একসাথে করতে পারি।
+
+```python
+import sys
+
+if len(sys.argv) < 3:
+    print("Usage: python file.py <filename> <text>")
+    sys.exit(1)
+
+filename = sys.argv[1]
+text = sys.argv[2]
+
+# File-এ Write করা
+with open(filename, "w") as f:
+    f.write(text)
+
+# File Read করা
+with open(filename, "r") as f:
+    print(f.read())
+```
+
+Run:
+
+```bash
+python file.py filename.txt "Hello World"
+```
+
+Output:
+
+```text
+Hello World
+```
+
+---
+
+# ১৪. Space থাকা Text কীভাবে Handle করবেন?
+
+কোনো argument-এর মধ্যে space থাকলে **quotes** ব্যবহার করতে হবে।
+
+### সঠিক
+
+```bash
+python file.py message.txt "Hello World Python"
+```
+
+তাহলে:
+
+```text
+sys.argv[1] → message.txt
+sys.argv[2] → Hello World Python
+```
+
+কিন্তু quotes ছাড়া:
+
+```bash
+python file.py message.txt Hello World Python
+```
+
+Python পাবে:
+
+```text
+sys.argv[1] → message.txt
+sys.argv[2] → Hello
+sys.argv[3] → World
+sys.argv[4] → Python
+```
+
+### মনে রাখবেন
+
+```text
+"Hello World Python"
+        ↓
+একটি argument
+```
+
+কিন্তু quotes ছাড়া:
+
+```text
+Hello World Python
+        ↓
+তিনটি argument
+```
+
+---
+
+# ১৫. Simple Calculator
+
+আমরা command line arguments ব্যবহার করে একটি calculator তৈরি করতে পারি।
+
+### File: `calculator.py`
+
+```python
+import sys
+
+# Argument check করা
+if len(sys.argv) != 3:
+    print("Usage: python calculator.py <num1> <num2>")
+    sys.exit(1)
+
+# Arguments নেওয়া
+num1 = sys.argv[1]
+num2 = sys.argv[2]
+
+# Float-এ convert করা
+try:
+    num1 = float(num1)
+    num2 = float(num2)
+
+except ValueError:
+    print("Please provide valid numbers.")
+    sys.exit(1)
+
+# Addition
+result = num1 + num2
+
+print(f"The sum of {num1} and {num2} is {result}")
+```
+
+Run:
+
+```bash
+python calculator.py 10 20
+```
+
+Output:
+
+```text
+The sum of 10.0 and 20.0 is 30.0
+```
+
+---
+
+# ১৬. Operator সহ Calculator
+
+আমরা user-কে operator নির্বাচন করার সুযোগ দিতে পারি।
+
+### File: `calculator.py`
+
+```python
+import sys
+
+# Argument-এর সংখ্যা check করা
+if len(sys.argv) != 4:
+    print("Usage: python calculator.py <num1> <operator> <num2>")
+    print("Operators: +, -, *, /")
+    sys.exit(1)
+
+# Arguments নেওয়া
+num1 = sys.argv[1]
+operator = sys.argv[2]
+num2 = sys.argv[3]
+
+# Number convert করা
+try:
+    num1 = float(num1)
+    num2 = float(num2)
+
+except ValueError:
+    print("Please provide valid numbers.")
+    sys.exit(1)
+
+# Calculation করা
+if operator == "+":
+    result = num1 + num2
+
+elif operator == "-":
+    result = num1 - num2
+
+elif operator == "*":
+    result = num1 * num2
+
+elif operator == "/":
+
+    if num2 == 0:
+        print("Error: Division by zero is not allowed.")
+        sys.exit(1)
+
+    result = num1 / num2
+
+else:
+    print("Invalid operator!")
+    print("Use one of: +, -, *, /")
+    sys.exit(1)
+
+print(f"{num1} {operator} {num2} = {result}")
+```
+
+---
+
+# ১৭. Calculator Run করা
+
+## Addition
+
+```bash
+python calculator.py 10 + 20
+```
+
+Output:
+
+```text
+10.0 + 20.0 = 30.0
+```
+
+## Subtraction
+
+```bash
+python calculator.py 20 - 10
+```
+
+Output:
+
+```text
+20.0 - 10.0 = 10.0
+```
+
+## Multiplication
+
+অনেক shell-এ `*` বিশেষ অর্থ বহন করে। তাই `*`-কে quote করা নিরাপদ:
+
+```bash
+python calculator.py 10 "*" 20
+```
+
+Output:
+
+```text
+10.0 * 20.0 = 200.0
+```
+
+## Division
+
+```bash
+python calculator.py 20 / 5
+```
+
+Output:
+
+```text
+20.0 / 5.0 = 4.0
+```
+
+## Division by Zero
+
+```bash
+python calculator.py 20 / 0
+```
+
+Output:
+
+```text
+Error: Division by zero is not allowed.
+```
+
+---
+
+# ১৮. `*` কেন Quote করতে হয়?
+
+অনেক command-line shell-এ `*`-এর একটি বিশেষ অর্থ আছে।
+
+উদাহরণ:
+
+```bash
+python calculator.py 10 * 20
+```
+
+Shell `*`-কে current directory-এর file name দিয়ে replace করে দিতে পারে।
+
+তাই নিরাপদভাবে লিখুন:
+
+```bash
+python calculator.py 10 "*" 20
+```
+
+অথবা:
+
+```bash
+python calculator.py 10 '*' 20
+```
+
+### গুরুত্বপূর্ণ
+
+এটি মূলত **shell-এর behavior**, Python-এর সমস্যা নয়।
+
+---
+
+# ১৯. Command Line Arguments-এর সাথে `try-except`
+
+Command line arguments string হিসেবে আসে।
+
+যদি কোনো invalid string-কে number-এ convert করার চেষ্টা করি, তাহলে Python `ValueError` দেয়।
+
+Example:
+
+```python
+import sys
+
+if len(sys.argv) != 3:
+    print("Usage: python main.py <num1> <num2>")
+    sys.exit(1)
+
+try:
+    num1 = float(sys.argv[1])
+    num2 = float(sys.argv[2])
+
+except ValueError:
+    print("Please provide valid numbers.")
+    sys.exit(1)
+
+print(num1 + num2)
+```
+
+### Valid Input
+
+```bash
+python main.py 10 20
+```
+
+Output:
+
+```text
+30.0
+```
+
+### Invalid Input
+
+```bash
+python main.py abc 20
+```
+
+Output:
+
+```text
+Please provide valid numbers.
+```
+
+### `try-except` কেন ব্যবহার করি?
+
+কারণ:
+
+```python
+float("abc")
+```
+
+চালালে:
+
+```text
+ValueError
+```
+
+হয়।
+
+`try-except` ব্যবহার করলে আমরা এই error সুন্দরভাবে handle করতে পারি।
+
+---
+
+# ২০. Complete Calculator Example
+
+```python
+import sys
+
+# Argument-এর সংখ্যা check করা
+if len(sys.argv) != 4:
+    print("Usage: python calculator.py <num1> <operator> <num2>")
+    print("Example: python calculator.py 10 + 20")
+    sys.exit(1)
+
+# Arguments নেওয়া
+num1 = sys.argv[1]
+operator = sys.argv[2]
+num2 = sys.argv[3]
+
+# Number convert করা
+try:
+    num1 = float(num1)
+    num2 = float(num2)
+
+except ValueError:
+    print("Error: Please provide valid numbers.")
+    sys.exit(1)
+
+# Calculation
+if operator == "+":
+    result = num1 + num2
+
+elif operator == "-":
+    result = num1 - num2
+
+elif operator == "*":
+    result = num1 * num2
+
+elif operator == "/":
+
+    if num2 == 0:
+        print("Error: Division by zero is not allowed.")
+        sys.exit(1)
+
+    result = num1 / num2
+
+else:
+    print("Error: Invalid operator.")
+    print("Valid operators: +, -, *, /")
+    sys.exit(1)
+
+# Output
+print(f"{num1} {operator} {num2} = {result}")
+```
+
+---
+
+# ২১. Command Line Argument-এর Flow
+
+ধরা যাক আমরা run করলাম:
+
+```bash
+python calculator.py 10 + 20
+```
+
+### Step ১: Python Program শুরু করে
+
+Python শুরু করবে:
+
+```text
+calculator.py
+```
+
+### Step ২: `sys.argv` value গ্রহণ করবে
+
+```python
+[
+    'calculator.py',
+    '10',
+    '+',
+    '20'
+]
+```
+
+### Step ৩: Arguments access করা
+
+```text
+sys.argv[1] → '10'
+sys.argv[2] → '+'
+sys.argv[3] → '20'
+```
+
+### Step ৪: Number convert করা
+
+```text
+'10' → 10.0
+'20' → 20.0
+```
+
+### Step ৫: Operator check করা
+
+```text
++
+```
+
+### Step ৬: Calculation করা
+
+```text
+10.0 + 20.0
+```
+
+### Step ৭: Result দেখানো
+
+```text
+30.0
+```
+
+### সম্পূর্ণ Flow
+
+```text
+Terminal
+   ↓
+python calculator.py 10 + 20
+   ↓
+sys.argv
+   ↓
+['calculator.py', '10', '+', '20']
+   ↓
+Arguments নেওয়া
+   ↓
+Number convert করা
+   ↓
+Operator check করা
+   ↓
+Calculation
+   ↓
+Result print
+```
+
+---
+
+# ২২. গুরুত্বপূর্ণ Rules
+
+## Rule 1: `sys` Import করতে হবে
+
+```python
+import sys
+```
+
+---
+
+## Rule 2: `sys.argv` ব্যবহার করতে হবে
+
+Command line arguments access করতে:
+
+```python
+sys.argv
+```
+
+ব্যবহার করা হয়।
+
+---
+
+## Rule 3: `sys.argv[0]` সাধারণত Script-এর নাম
+
+```python
+sys.argv[0]
+```
+
+Example:
+
+```text
+calculator.py
+```
+
+---
+
+## Rule 4: প্রথম user argument শুরু হয় index 1 থেকে
+
+```python
+sys.argv[1]
+```
+
+---
+
+## Rule 5: Arguments String হিসেবে আসে
+
+Example:
+
+```python
+sys.argv[1]
+```
+
+এর মধ্যে থাকতে পারে:
+
+```text
+"10"
+```
+
+number হিসেবে ব্যবহার করতে:
+
+```python
+int(sys.argv[1])
+```
+
+অথবা:
+
+```python
+float(sys.argv[1])
+```
+
+---
+
+## Rule 6: Argument-এর সংখ্যা Check করুন
+
+ব্যবহার করুন:
+
+```python
+len(sys.argv)
+```
+
+এতে ভুল index access করার কারণে:
+
+```text
+IndexError
+```
+
+হওয়ার সম্ভাবনা কমে।
+
+---
+
+## Rule 7: প্রয়োজন হলে `sys.exit()` ব্যবহার করুন
+
+Example:
+
+```python
+sys.exit(1)
+```
+
+এটি program বন্ধ করে দেয়।
+
+---
+
+## Rule 8: Space থাকা Argument-এর জন্য Quotes ব্যবহার করুন
+
+Example:
+
+```bash
+python file.py "Hello World"
+```
+
+Quotes না দিলে `Hello` এবং `World` আলাদা argument হয়ে যেতে পারে।
+
+---
+
+# ২৩. Quick Reference
+
+### Command
+
+```bash
+python script.py arg1 arg2 arg3
+```
+
+### `sys.argv`
+
+```python
+[
+    'script.py',
+    'arg1',
+    'arg2',
+    'arg3'
+]
+```
+
+### Index
+
+```text
+sys.argv[0] → script.py
+sys.argv[1] → arg1
+sys.argv[2] → arg2
+sys.argv[3] → arg3
+```
+
+### মোট Item-এর সংখ্যা
+
+```python
+len(sys.argv)
+```
+
+### Program বন্ধ করা
+
+```python
+sys.exit(1)
+```
+
+### Integer-এ Convert
+
+```python
+int(sys.argv[1])
+```
+
+### Float-এ Convert
+
+```python
+float(sys.argv[1])
+```
+
+---
+
+# ২৪. গুরুত্বপূর্ণ Interview Questions
+
+## Q1. Command Line Arguments কী?
+
+**Command Line Arguments** হলো এমন value যা command line থেকে Python program run করার সময় program-কে দেওয়া হয়।
+
+---
+
+## Q2. Basic command line arguments-এর জন্য কোন module ব্যবহার করা হয়?
+
+```python
+sys
+```
+
+Example:
+
+```python
+import sys
+```
+
+---
+
+## Q3. `sys.argv` কী?
+
+`sys.argv` হলো একটি list, যেখানে Python program-এ pass করা command line arguments থাকে।
+
+---
+
+## Q4. `sys.argv[0]` কী ধারণ করে?
+
+সাধারণত এটি Python script-কে যে name বা path দিয়ে run করা হয়েছে, সেটি ধারণ করে।
+
+---
+
+## Q5. প্রথম user argument কোথা থেকে শুরু হয়?
+
+এটি শুরু হয়:
+
+```python
+sys.argv[1]
+```
+
+থেকে।
+
+---
+
+## Q6. Command line arguments-এর type কী?
+
+শুরুতে এগুলো **string** হয়।
+
+Example:
+
+```python
+sys.argv[1]
+```
+
+এর মধ্যে থাকতে পারে:
+
+```text
+"100"
+```
+
+number হিসেবে ব্যবহার করতে:
+
+```python
+int(sys.argv[1])
+```
+
+---
+
+## Q7. `len(sys.argv)` কী কাজে ব্যবহার করা হয়?
+
+`sys.argv` list-এর মধ্যে মোট কতগুলো item আছে তা জানার জন্য ব্যবহার করা হয়।
+
+এখানে script-এর নামও count হয়।
+
+---
+
+## Q8. কেন `len(sys.argv)` check করা উচিত?
+
+প্রয়োজনীয় arguments user দিয়েছে কি না তা নিশ্চিত করার জন্য।
+
+এটি এমন error প্রতিরোধ করতে সাহায্য করে:
+
+```text
+IndexError
+```
+
+---
+
+## Q9. `sys.exit()` কী?
+
+`sys.exit()` Python program বন্ধ করার জন্য ব্যবহার করা হয়।
+
+Example:
+
+```python
+sys.exit(1)
+```
+
+---
+
+## Q10. Command line arguments-এর সাথে `try-except` কেন ব্যবহার করা হয়?
+
+কারণ কোনো invalid string-কে number-এ convert করলে `ValueError` হতে পারে।
+
+Example:
+
+```python
+float("abc")
+```
+
+এটি তৈরি করবে:
+
+```text
+ValueError
+```
+
+---
+
+# ২৫. Final Summary
+
+### Command Line Arguments
+
+**Command Line Arguments** হলো এমন value যা terminal থেকে Python program run করার সময় program-কে দেওয়া হয়।
+
+Python-এ এগুলো access করার জন্য `sys` module ব্যবহার করা যায়।
+
+```python
+import sys
+```
+
+এর প্রধান variable হলো:
+
+```python
+sys.argv
+```
+
+`sys.argv` হলো একটি **list of strings**।
+
+### Example
+
+Command:
+
+```bash
+python main.py 10 20 hello
+```
+
+তাহলে `sys.argv` হবে:
+
+```python
+['main.py', '10', '20', 'hello']
+```
+
+অর্থাৎ:
+
+```text
+sys.argv[0] → main.py
+sys.argv[1] → 10
+sys.argv[2] → 20
+sys.argv[3] → hello
+```
+
+### এই ৬টি বিষয় মনে রাখুন
+
+```text
+1. sys import করুন
+       ↓
+   import sys
+
+2. sys.argv ব্যবহার করুন
+       ↓
+   sys.argv
+
+3. সাধারণত script name থাকে argv[0]-এ
+       ↓
+   sys.argv[0]
+
+4. প্রথম user argument হলো argv[1]
+       ↓
+   sys.argv[1]
+
+5. Arguments শুরুতে string
+       ↓
+   int() / float() প্রয়োজন অনুযায়ী ব্যবহার করুন
+
+6. Error handle করুন
+       ↓
+   len(sys.argv)
+   try-except
+   sys.exit()
+```
+
+# Final Mental Model
+
+```text
+             COMMAND LINE
+                  │
+                  ▼
+     python main.py 10 20 hello
+                  │
+                  ▼
+              sys.argv
+                  │
+                  ▼
+   ['main.py', '10', '20', 'hello']
+                  │
+        ┌─────────┼─────────┐
+        ▼         ▼         ▼
+      [1]       [2]       [3]
+       10        20       hello
+        │
+        ▼
+  প্রয়োজন হলে Convert
+        │
+        ▼
+   int() / float()
+        │
+        ▼
+   Data Process করা
+        │
+        ▼
+      Output
+```
+
+### এক লাইনের সংজ্ঞা
+
+> **Command Line Arguments হলো terminal থেকে Python program-এ পাঠানো value, আর Python-এ এগুলো access করার জন্য `sys.argv` ব্যবহার করা হয়।**

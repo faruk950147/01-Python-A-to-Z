@@ -1,0 +1,1375 @@
+# Python Async and Await
+
+## 1. Asynchronous Programming কী?
+
+**Asynchronous Programming** হলো এমন একটি programming approach যেখানে একটি task কোনো কাজের জন্য অপেক্ষা করার সময় program অন্য কাজ করতে পারে।
+
+এটি বিশেষভাবে useful যখন program-কে অপেক্ষা করতে হয়:
+
+* Network requests
+* API responses
+* Database operations
+* File I/O
+* Timers
+
+তিনটি গুরুত্বপূর্ণ concept হলো:
+
+```text
+async   → একটি asynchronous function তৈরি করে
+await   → একটি awaitable operation-এর জন্য অপেক্ষা করে
+asyncio → asynchronous programming-এর tools দেয়
+```
+
+### সহজে মনে রাখার উপায়
+
+> **async = Async function Define করে**
+
+> **await = Async operation-এর জন্য Wait করে**
+
+> **asyncio = Async programming-এর Tools**
+
+---
+
+# Part 1: `async`
+
+## 2. `async` কী?
+
+`async` হলো Python-এর একটি **keyword**, যা ব্যবহার করে একটি asynchronous function define করা হয়।
+
+এই asynchronous function-কে **coroutine function**-ও বলা হয়।
+
+### Example
+
+```python
+async def main():
+    print("Hello World")
+```
+
+এখানে:
+
+```python
+async def
+```
+
+এর অর্থ হলো `main()` একটি asynchronous function।
+
+### সহজ সংজ্ঞা
+
+> **`async` ব্যবহার করে একটি coroutine function define করা হয়।**
+
+---
+
+## 3. Simple Example
+
+```python
+import asyncio
+
+
+async def main(name):
+    print(f"Hello World {name}")
+
+
+asyncio.run(main("Faruk"))
+```
+
+### Output
+
+```text
+Hello World Faruk
+```
+
+### কী ঘটে?
+
+```text
+async def main()
+       ↓
+Coroutine Function
+       ↓
+main("Faruk")
+       ↓
+Coroutine Object
+       ↓
+asyncio.run()
+       ↓
+Execution
+```
+
+গুরুত্বপূর্ণ বিষয়:
+
+যখন আমরা লিখি:
+
+```python
+main("Faruk")
+```
+
+তখন একটি **coroutine object** তৈরি হয়।
+
+সাধারণ function call-এর মতো সঙ্গে সঙ্গে coroutine-এর body execute হয় না।
+
+---
+
+# Part 2: `await`
+
+## 4. `await` কী?
+
+`await` হলো Python-এর একটি keyword, যা asynchronous function-এর ভিতরে কোনো **awaitable operation**-এর জন্য অপেক্ষা করতে ব্যবহার করা হয়।
+
+### Example
+
+```python
+import asyncio
+
+
+async def main():
+    print("Start")
+
+    await asyncio.sleep(1)
+
+    print("End")
+
+
+asyncio.run(main())
+```
+
+### Output
+
+```text
+Start
+End
+```
+
+এখানে:
+
+```python
+await asyncio.sleep(1)
+```
+
+asynchronous sleep operation শেষ হওয়ার জন্য অপেক্ষা করে।
+
+### সহজ সংজ্ঞা
+
+> **`await` ব্যবহার করে একটি async function-এর ভিতরে awaitable operation-এর জন্য অপেক্ষা করা হয়।**
+
+---
+
+# Part 3: `asyncio`
+
+## 5. `asyncio` কী?
+
+`asyncio` হলো Python-এর একটি **standard library module**, যা asynchronous programming-এর জন্য ব্যবহার করা হয়।
+
+এটি বিভিন্ন কাজের জন্য tools প্রদান করে:
+
+* Coroutine run করা
+* Task তৈরি করা
+* Async operation-এর জন্য অপেক্ষা করা
+* Event loop manage করা
+* একাধিক async operation চালানো
+
+Import করার জন্য:
+
+```python
+import asyncio
+```
+
+### সহজ সংজ্ঞা
+
+> **`asyncio` হলো asynchronous programming-এর জন্য Python-এর standard library।**
+
+---
+
+# Part 4: `asyncio.run()`
+
+## 6. `asyncio.run()` কী?
+
+`asyncio.run()` সাধারণত একটি **top-level coroutine** run করার জন্য ব্যবহার করা হয়।
+
+Example:
+
+```python
+import asyncio
+
+
+async def main():
+    print("Hello")
+
+
+asyncio.run(main())
+```
+
+Conceptually:
+
+```text
+Coroutine
+    ↓
+asyncio.run()
+    ↓
+Event Loop
+    ↓
+Coroutine Execution
+```
+
+### সহজ সংজ্ঞা
+
+> **`asyncio.run()` normal synchronous code থেকে একটি coroutine শুরু ও run করে।**
+
+---
+
+# Part 5: `async` + `await`
+
+## 7. Simple Example
+
+```python
+import asyncio
+
+
+async def main(name):
+    print(f"Hello World {name}")
+
+    await asyncio.sleep(1)
+
+    print(f"Hello Again {name}")
+
+
+asyncio.run(main("Faruk"))
+```
+
+### Output
+
+```text
+Hello World Faruk
+Hello Again Faruk
+```
+
+### Step-by-step
+
+প্রথমে:
+
+```python
+async def main(name):
+```
+
+একটি coroutine function define করে।
+
+তারপর:
+
+```python
+asyncio.run(main("Faruk"))
+```
+
+coroutine-টি run করে।
+
+এরপর:
+
+```python
+print(f"Hello World {name}")
+```
+
+প্রথম message print করে।
+
+তারপর:
+
+```python
+await asyncio.sleep(1)
+```
+
+এক second-এর জন্য asynchronously অপেক্ষা করে।
+
+শেষে:
+
+```python
+print(f"Hello Again {name}")
+```
+
+দ্বিতীয় message print করে।
+
+### Flow
+
+```text
+Start
+  ↓
+Print "Hello World Faruk"
+  ↓
+await asyncio.sleep(1)
+  ↓
+1 second অপেক্ষা
+  ↓
+Print "Hello Again Faruk"
+  ↓
+End
+```
+
+---
+
+# Part 6: কেন Async Programming ব্যবহার করব?
+
+## 8. Asynchronous Programming কেন প্রয়োজন?
+
+Async programming বিশেষভাবে **I/O-bound tasks**-এর জন্য useful।
+
+Examples:
+
+```text
+Network Requests
+API Requests
+Database Operations
+File I/O
+Timers
+```
+
+ধরুন একটি program একটি network request পাঠালো।
+
+Program-কে server-এর response-এর জন্য অপেক্ষা করতে হতে পারে।
+
+### Synchronous
+
+```text
+Task A
+  ↓
+Wait
+  ↓
+Task A Complete
+  ↓
+Task B
+```
+
+এখানে Task A শেষ না হওয়া পর্যন্ত program Task B-তে যায় না।
+
+### Asynchronous
+
+```text
+Task A
+  ↓
+Waiting
+  ↓
+Task B starts
+  ↓
+Task B works
+  ↓
+Task A completes
+```
+
+Task A যখন অপেক্ষা করছে, তখন অন্য asynchronous task কাজ করতে পারে।
+
+### গুরুত্বপূর্ণ
+
+Async programming-এর অর্থ **automatically parallel execution নয়**।
+
+**Asynchronous programming** এবং **parallelism** দুটি আলাদা concept।
+
+---
+
+# Part 7: `asyncio.sleep()`
+
+## 9. `asyncio.sleep()` কী?
+
+`asyncio.sleep()` একটি asynchronous delay তৈরি করে।
+
+Example:
+
+```python
+import asyncio
+
+
+async def main():
+    print("Start")
+
+    await asyncio.sleep(2)
+
+    print("End")
+
+
+asyncio.run(main())
+```
+
+### Flow
+
+```text
+Start
+  ↓
+2 seconds অপেক্ষা
+  ↓
+End
+```
+
+গুরুত্বপূর্ণ অংশ:
+
+```python
+await asyncio.sleep(2)
+```
+
+`asyncio.sleep()` একটি awaitable return করে, তাই সাধারণত এর সাথে `await` ব্যবহার করা হয়।
+
+---
+
+# Part 8: Multiple Async Tasks
+
+## 10. একাধিক Coroutine Run করা
+
+Async programming-এর একটি গুরুত্বপূর্ণ সুবিধা হলো, একটি coroutine অপেক্ষা করার সময় অন্য coroutine কাজ করতে পারে।
+
+Example:
+
+```python
+import asyncio
+
+
+async def task1():
+    print("Task 1 started")
+
+    await asyncio.sleep(2)
+
+    print("Task 1 completed")
+
+
+async def task2():
+    print("Task 2 started")
+
+    await asyncio.sleep(1)
+
+    print("Task 2 completed")
+
+
+async def main():
+    await asyncio.gather(
+        task1(),
+        task2()
+    )
+
+
+asyncio.run(main())
+```
+
+Conceptually:
+
+```text
+Task 1 → Start → Wait 2s → Complete
+Task 2 → Start → Wait 1s → Complete
+```
+
+Task 1 যখন অপেক্ষা করছে, তখন Task 2 কাজ করতে পারে।
+
+### সাধারণ Output
+
+```text
+Task 1 started
+Task 2 started
+Task 2 completed
+Task 1 completed
+```
+
+---
+
+# Part 9: `asyncio.gather()`
+
+## 11. `asyncio.gather()` কী?
+
+`asyncio.gather()` ব্যবহার করে একাধিক awaitable run করা যায় এবং সবগুলো শেষ হওয়া পর্যন্ত অপেক্ষা করা যায়।
+
+Example:
+
+```python
+import asyncio
+
+
+async def task1():
+    await asyncio.sleep(2)
+    return "Task 1 completed"
+
+
+async def task2():
+    await asyncio.sleep(1)
+    return "Task 2 completed"
+
+
+async def main():
+    results = await asyncio.gather(
+        task1(),
+        task2()
+    )
+
+    print(results)
+
+
+asyncio.run(main())
+```
+
+### Output
+
+```text
+['Task 1 completed', 'Task 2 completed']
+```
+
+এখানে একটি গুরুত্বপূর্ণ বিষয় আছে।
+
+যদিও `task2()` আগে শেষ হয়, তারপরও result list-এ **`gather()`-এ awaitable যেই order-এ দেওয়া হয়েছিল সেই order-ই থাকে।**
+
+আমরা দিয়েছিলাম:
+
+```python
+task1(),
+task2()
+```
+
+তাই result:
+
+```python
+[
+    "Task 1 completed",
+    "Task 2 completed"
+]
+```
+
+### Visual Flow
+
+```text
+              main()
+                │
+        ┌───────┴───────┐
+        ↓               ↓
+     task1()          task2()
+        ↓               ↓
+    sleep 2s          sleep 1s
+        ↓               ↓
+    completed        completed
+        └───────┬───────┘
+                ↓
+           gather()
+                ↓
+             results
+```
+
+---
+
+# Part 10: `async` vs `await`
+
+## 12. `async` এবং `await`-এর পার্থক্য
+
+### `async`
+
+একটি asynchronous function **define** করতে ব্যবহার করা হয়।
+
+```python
+async def main():
+    pass
+```
+
+### `await`
+
+একটি awaitable-এর জন্য **wait** করতে ব্যবহার করা হয়।
+
+```python
+await asyncio.sleep(1)
+```
+
+### সহজ Table
+
+| `async`                       | `await`                       |
+| ----------------------------- | ----------------------------- |
+| Coroutine function define করে | Awaitable-এর জন্য অপেক্ষা করে |
+| `def`-এর আগে ব্যবহার হয়       | Awaitable-এর আগে ব্যবহার হয়   |
+| `async def main()`            | `await asyncio.sleep(1)`      |
+
+মনে রাখুন:
+
+```text
+async  → Define
+await  → Wait
+```
+
+---
+
+# Part 11: `async` vs `asyncio`
+
+## 13. `async` এবং `asyncio`-এর পার্থক্য
+
+### `async`
+
+`async` হলো Python-এর একটি **keyword**।
+
+```python
+async def main():
+    pass
+```
+
+### `asyncio`
+
+`asyncio` হলো Python-এর একটি **standard library module**।
+
+```python
+import asyncio
+```
+
+তাই:
+
+```text
+async
+→ Keyword
+
+asyncio
+→ Standard Library Module
+```
+
+---
+
+# Part 12: Coroutine
+
+## 14. Coroutine কী?
+
+একটি **coroutine** হলো `async def` function থেকে তৈরি asynchronous computation।
+
+Example:
+
+```python
+async def main():
+    print("Hello")
+```
+
+এটি একটি coroutine function define করে।
+
+যখন আমরা লিখি:
+
+```python
+main()
+```
+
+তখন একটি **coroutine object** পাওয়া যায়।
+
+এটি run করা যায়:
+
+```python
+asyncio.run(main())
+```
+
+### Simple Flow
+
+```text
+async def main()
+       ↓
+Coroutine Function
+       ↓
+main()
+       ↓
+Coroutine Object
+       ↓
+asyncio.run()
+       ↓
+Execution
+```
+
+---
+
+# Part 13: Synchronous vs Asynchronous
+
+## 15. Synchronous Programming
+
+Example:
+
+```python
+import time
+
+
+def task1():
+    print("Task 1 started")
+
+    time.sleep(2)
+
+    print("Task 1 completed")
+
+
+def task2():
+    print("Task 2 started")
+
+    time.sleep(1)
+
+    print("Task 2 completed")
+
+
+task1()
+task2()
+```
+
+Flow:
+
+```text
+Task 1 starts
+    ↓
+2 seconds Wait
+    ↓
+Task 1 completes
+    ↓
+Task 2 starts
+    ↓
+1 second Wait
+    ↓
+Task 2 completes
+```
+
+Total waiting time approximately:
+
+```text
+2 + 1 = 3 seconds
+```
+
+---
+
+# Part 14: Asynchronous Programming
+
+## 16. Asynchronous Example
+
+```python
+import asyncio
+
+
+async def task1():
+    print("Task 1 started")
+
+    await asyncio.sleep(2)
+
+    print("Task 1 completed")
+
+
+async def task2():
+    print("Task 2 started")
+
+    await asyncio.sleep(1)
+
+    print("Task 2 completed")
+
+
+async def main():
+    await asyncio.gather(
+        task1(),
+        task2()
+    )
+
+
+asyncio.run(main())
+```
+
+Conceptually:
+
+```text
+Task 1 → Start → Wait ─────────→ Complete
+              ↘
+Task 2 → Start → Wait → Complete
+```
+
+দুইটি waiting period overlap করতে পারে।
+
+তাই মোট waiting time প্রায় **2 seconds**, 3 seconds নয়।
+
+### গুরুত্বপূর্ণ
+
+এটি সম্ভব হয় কারণ দুইটি task asynchronous waiting করছে।
+
+---
+
+# Part 15: সহজ Mental Model
+
+## 17. Restaurant Waiter Example
+
+ধরুন আপনি একটি restaurant-এর waiter।
+
+### Synchronous
+
+```text
+Customer A-এর order নেওয়া
+        ↓
+Kitchen-এ order দেওয়া
+        ↓
+A-এর খাবারের জন্য অপেক্ষা
+        ↓
+Food ready
+        ↓
+A-কে serve করা
+        ↓
+Customer B-এর order নেওয়া
+```
+
+Waiter Customer A-এর কাজ শেষ হওয়ার জন্য অপেক্ষা করছে।
+
+### Asynchronous
+
+```text
+Customer A-এর order নেওয়া
+        ↓
+Kitchen-এ order দেওয়া
+        ↓
+সেখানে দাঁড়িয়ে অপেক্ষা না করা
+        ↓
+Customer B-এর order নেওয়া
+        ↓
+Customer C-এর order নেওয়া
+        ↓
+A-এর food ready
+        ↓
+Customer A-কে serve করা
+```
+
+### মূল ধারণা
+
+> **একটি task যখন অপেক্ষা করছে, তখন program অন্য available asynchronous task-এর কাজ করতে পারে।**
+
+---
+
+# Part 16: Important Rules
+
+## 18. Rule 1 — `await` সাধারণত `async def`-এর ভিতরে ব্যবহার করা হয়
+
+Correct:
+
+```python
+async def main():
+    await asyncio.sleep(1)
+```
+
+Incorrect:
+
+```python
+def main():
+    await asyncio.sleep(1)
+```
+
+সাধারণ Python code-এ `await` একটি উপযুক্ত asynchronous context-এর ভিতরে ব্যবহার করতে হয়।
+
+---
+
+## 19. Rule 2 — `async def` একটি Coroutine Function তৈরি করে
+
+Example:
+
+```python
+async def main():
+    print("Hello")
+```
+
+এটি একটি coroutine function define করে।
+
+যখন:
+
+```python
+main()
+```
+
+call করা হয়, তখন একটি coroutine object তৈরি হয়।
+
+Normal top-level code থেকে এটি run করতে:
+
+```python
+asyncio.run(main())
+```
+
+ব্যবহার করা যায়।
+
+---
+
+# Part 17: Common Mistakes
+
+## Mistake 1: `async` এবং `await` গুলিয়ে ফেলা
+
+ভুল ধারণা:
+
+```text
+await = async function
+```
+
+সঠিক:
+
+```text
+async → Coroutine function Define করে
+await → Awaitable-এর জন্য Wait করে
+```
+
+---
+
+## Mistake 2: `async` মানেই Parallel ভাবা
+
+এটি ভুল:
+
+```text
+async = parallel
+```
+
+Async programming মূলত **cooperative concurrency** নিয়ে কাজ করে।
+
+Parallelism-এর অর্থ একাধিক computation একই সময়ে execute হওয়া, সাধারণত একাধিক CPU core বা worker ব্যবহার করে।
+
+তাই:
+
+```text
+Concurrency ≠ Parallelism
+```
+
+`asyncio` মূলত অনেকগুলো **I/O-bound** operation efficiently handle করার জন্য useful।
+
+---
+
+## Mistake 3: Normal Function-এর মধ্যে `await` ব্যবহার করা
+
+Wrong:
+
+```python
+def main():
+    await asyncio.sleep(1)
+```
+
+Correct:
+
+```python
+async def main():
+    await asyncio.sleep(1)
+```
+
+---
+
+## Mistake 4: `asyncio`-কে Keyword মনে করা
+
+Incorrect:
+
+```text
+asyncio = keyword
+```
+
+Correct:
+
+```text
+asyncio = standard library module
+```
+
+---
+
+# Part 18: Complete Example
+
+## 20. Full Example
+
+```python
+import asyncio
+
+
+async def main(name):
+    print(f"Hello World {name}")
+
+    await asyncio.sleep(1)
+
+    print(f"Hello Again {name}")
+
+
+asyncio.run(main("Faruk"))
+```
+
+### Output
+
+```text
+Hello World Faruk
+Hello Again Faruk
+```
+
+### Explanation
+
+```text
+async def
+    ↓
+Coroutine function define করে
+
+main("Faruk")
+    ↓
+Coroutine object তৈরি করে
+
+asyncio.run()
+    ↓
+Coroutine run করে
+
+await asyncio.sleep(1)
+    ↓
+Asynchronously অপেক্ষা করে
+
+Next statement
+    ↓
+Execute হয়
+```
+
+---
+
+# Part 19: Real-Life Example
+
+ধরুন আপনাকে তিনটি API call করতে হবে:
+
+```text
+API 1 → 2 seconds
+API 2 → 1 second
+API 3 → 3 seconds
+```
+
+### Synchronous approach
+
+```text
+API 1 → Wait 2s
+API 2 → Wait 1s
+API 3 → Wait 3s
+
+Total ≈ 6s
+```
+
+### Asynchronous approach
+
+```text
+API 1 ─────── Wait 2s ─── Complete
+API 2 ── Wait 1s ── Complete
+API 3 ───────────── Wait 3s ───────── Complete
+```
+
+Waiting periods overlap করতে পারে।
+
+তাই মোট সময় প্রায়:
+
+```text
+3 seconds
+```
+
+হতে পারে, 6 seconds-এর পরিবর্তে।
+
+এই কারণেই অনেকগুলো I/O-bound task-এর জন্য async programming খুব useful।
+
+---
+
+# Part 20: Important Terms
+
+## 21. Awaitable
+
+**Awaitable** হলো এমন একটি object যাকে `await` দিয়ে ব্যবহার করা যায়।
+
+Common examples:
+
+* Coroutine objects
+* `asyncio.Task`
+* `asyncio.Future`
+
+Example:
+
+```python
+await asyncio.sleep(1)
+```
+
+এখানে `asyncio.sleep(1)`-এর return করা object হলো awaitable।
+
+---
+
+## 22. Event Loop
+
+**Event loop** হলো এমন একটি mechanism যা asynchronous task manage এবং run করে।
+
+সহজভাবে:
+
+```text
+Event Loop
+    ↓
+Tasks check করে
+    ↓
+একটি task run করে
+    ↓
+Task অপেক্ষা করে
+    ↓
+অন্য ready task run করে
+    ↓
+আগের task ready হয়
+    ↓
+Task আবার continue করে
+```
+
+Event loop-কে আপনি **async tasks-এর manager** হিসেবে ভাবতে পারেন।
+
+---
+
+# Part 21: Interview Questions
+
+## Q1. `async` কী?
+
+### Answer
+
+> **`async` হলো Python-এর একটি keyword, যা asynchronous function বা coroutine function define করতে ব্যবহার করা হয়।**
+
+Example:
+
+```python
+async def main():
+    pass
+```
+
+---
+
+## Q2. `await` কী?
+
+### Answer
+
+> **`await` হলো Python-এর একটি keyword, যা asynchronous context-এর ভিতরে একটি awaitable operation-এর জন্য অপেক্ষা করতে ব্যবহার করা হয়।**
+
+Example:
+
+```python
+await asyncio.sleep(1)
+```
+
+---
+
+## Q3. `asyncio` কী?
+
+### Answer
+
+> **`asyncio` হলো Python-এর standard library module, যা asynchronous programming-এর জন্য ব্যবহার করা হয়।**
+
+Example:
+
+```python
+import asyncio
+```
+
+---
+
+## Q4. Coroutine কী?
+
+### Answer
+
+Coroutine হলো `async def` দিয়ে define করা asynchronous computation।
+
+Example:
+
+```python
+async def main():
+    print("Hello")
+```
+
+যখন:
+
+```python
+main()
+```
+
+call করা হয়, তখন একটি coroutine object তৈরি হয়।
+
+---
+
+## Q5. `asyncio.run()` কী করে?
+
+### Answer
+
+`asyncio.run()` একটি top-level coroutine run করে এবং সেটি execute করার জন্য প্রয়োজনীয় event loop manage করে।
+
+Example:
+
+```python
+asyncio.run(main())
+```
+
+---
+
+## Q6. Async function-এর বাইরে কি `await` ব্যবহার করা যায়?
+
+### Answer
+
+সাধারণ Python code-এ `await` একটি উপযুক্ত asynchronous context-এর মধ্যে ব্যবহার করতে হয়, সাধারণত `async def` function-এর ভিতরে।
+
+Example:
+
+```python
+async def main():
+    await asyncio.sleep(1)
+```
+
+---
+
+## Q7. Synchronous এবং asynchronous programming-এর মধ্যে পার্থক্য কী?
+
+### Answer
+
+### Synchronous
+
+```text
+Task A
+  ↓
+Wait
+  ↓
+Task A Complete
+  ↓
+Task B
+```
+
+### Asynchronous
+
+```text
+Task A
+  ↓
+Wait
+  ↓
+Task B কাজ করতে পারে
+  ↓
+Task A complete
+```
+
+Async programming বিশেষভাবে I/O-bound কাজের জন্য useful।
+
+---
+
+## Q8. Async কি Parallelism বোঝায়?
+
+### Answer
+
+**না।**
+
+Asynchronous programming এবং parallelism আলাদা concept।
+
+```text
+Async
+→ I/O-এর জন্য block না করে একাধিক task progress করতে পারে
+
+Parallelism
+→ Multiple computation একই সময়ে execute হয়
+```
+
+---
+
+## Q9. `asyncio.gather()` কী?
+
+### Answer
+
+`asyncio.gather()` ব্যবহার করে একাধিক awaitable run করা এবং সবগুলো finish হওয়া পর্যন্ত অপেক্ষা করা যায়।
+
+Example:
+
+```python
+results = await asyncio.gather(
+    task1(),
+    task2()
+)
+```
+
+---
+
+## Q10. Event loop কী?
+
+### Answer
+
+> **Event loop asynchronous task manage এবং execute করে এবং কোন ready task পরবর্তী সময়ে run করবে তা পরিচালনা করে।**
+
+---
+
+# Part 22: Main Comparison Table
+
+| Concept            | Type              | Main Purpose                    | Example                     |
+| ------------------ | ----------------- | ------------------------------- | --------------------------- |
+| `async`            | Keyword           | Coroutine function define করা   | `async def main()`          |
+| `await`            | Keyword           | Awaitable-এর জন্য অপেক্ষা করা   | `await asyncio.sleep(1)`    |
+| `asyncio`          | Module            | Async programming-এর tools      | `import asyncio`            |
+| Coroutine          | Async computation | Async কাজকে represent করা       | `main()`                    |
+| Awaitable          | Object/protocol   | `await` দিয়ে ব্যবহার করা যায়    | `asyncio.sleep(1)`          |
+| Event Loop         | Async mechanism   | Async execution manage করা      | `asyncio.run()`             |
+| `asyncio.run()`    | Function          | Top-level coroutine run করা     | `asyncio.run(main())`       |
+| `asyncio.gather()` | Function          | Multiple awaitable run/wait করা | `await asyncio.gather(...)` |
+
+---
+
+# Part 23: Quick Revision
+
+```text
+async
+↓
+একটি asynchronous/coroutine function define করে
+```
+
+```text
+await
+↓
+একটি awaitable-এর জন্য অপেক্ষা করে
+```
+
+```text
+asyncio
+↓
+Asynchronous programming-এর জন্য Python standard library
+```
+
+```text
+asyncio.run()
+↓
+একটি top-level coroutine run করে
+```
+
+```text
+asyncio.gather()
+↓
+Multiple awaitable run করে এবং তাদের জন্য অপেক্ষা করে
+```
+
+```text
+Coroutine
+↓
+Asynchronous computation
+```
+
+```text
+Event Loop
+↓
+Asynchronous execution manage করে
+```
+
+---
+
+# Part 24: Final Cheat Sheet
+
+```text
+┌──────────────────────────────────────────────┐
+│       PYTHON ASYNCHRONOUS PROGRAMMING        │
+├──────────────────────────────────────────────┤
+│                                              │
+│ async                                        │
+│ → Coroutine function define করে             │
+│                                              │
+│ await                                        │
+│ → Awaitable-এর জন্য অপেক্ষা করে              │
+│                                              │
+│ asyncio                                      │
+│ → Standard library module                    │
+│ → Async programming-এর tools দেয়             │
+│                                              │
+│ Coroutine                                    │
+│ → Asynchronous computation                   │
+│                                              │
+│ asyncio.run()                                │
+│ → Top-level coroutine run করে                │
+│                                              │
+│ asyncio.gather()                             │
+│ → Multiple awaitable run/wait করে            │
+│                                              │
+│ Event Loop                                   │
+│ → Asynchronous execution manage করে          │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
+# One-Line Summary
+
+```text
+async   → Asynchronous function Define করে
+await   → Awaitable-এর জন্য Wait করে
+asyncio → Async programming-এর Tools
+```
+
+### সবচেয়ে সহজে মনে রাখুন
+
+> **async = Define**
+
+> **await = Wait**
+
+> **asyncio = Async tools**
+
+> **asyncio.run() = একটি coroutine Run করে**
+
+> **asyncio.gather() = Multiple async operation Run/Wait করে**
+
+### সবচেয়ে গুরুত্বপূর্ণ বিষয়
+
+```text
+Async programming মূলত তখন বেশি useful যখন task-কে
+I/O-এর জন্য অপেক্ষা করতে হয়, যেমন network requests,
+APIs, databases, files এবং timers।
+```
