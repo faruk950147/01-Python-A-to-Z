@@ -766,6 +766,20 @@ t1.join()
 t2.join()
 
 print(counter)
+
+Output:
+1
+
+Why is the output 1 instead of 2?
+- Thread 1 reads counter = 0.
+- Thread 2 also reads counter = 0.
+- The barrier makes both threads wait until they have read the value.
+- Both threads calculate 0 + 1 and write 1.
+One increment is lost. This is called a Race Condition, specifically a lost update.
+Remember: A Race Condition does not necessarily produce an incorrect result every 
+time. The threading.Lock() protects shared data from concurrent modifications when
+used correctly.
+
 ### Solution
 
 Use a synchronization mechanism:

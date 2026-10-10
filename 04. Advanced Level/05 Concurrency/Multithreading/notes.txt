@@ -722,6 +722,18 @@ t2.join()
 
 print(counter)
 
+Output:
+1
+
+কেন 1, 2 নয়?
+- Thread 1 counter থেকে 0 পড়ে।
+- Thread 2-ও counter থেকে 0 পড়ে।
+- Barrier নিশ্চিত করে যে দুজনেই মান পড়ার পর সামনে এগোবে।
+- দুজনেই counter = 1 লেখে।
+দুটি increment করার কথা ছিল, কিন্তু শেষ মান হলো 1। এটাই একটি Lost Update, যা Race Condition-এর উদাহরণ।
+মূল কথা: তোমার প্রথম কোডে 10 আসা স্বাভাবিক। তার মানে এই নয় যে Lock ছাড়াই shared variable সব সময় নিরাপদ।
+
+
 ### Solution
 
 ```python
