@@ -697,6 +697,31 @@ Expected:
 
 কারণ দুই Thread একই shared data synchronization ছাড়া access করেছে।
 
+import threading
+
+counter = 0
+barrier = threading.Barrier(2)
+
+
+def increment():
+    global counter
+
+    value = counter
+    barrier.wait()  # দুই Thread-ই মান পড়ার পর এগোবে synchronizely
+    counter = value + 1
+
+
+t1 = threading.Thread(target=increment)
+t2 = threading.Thread(target=increment)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+print(counter)
+
 ### Solution
 
 ```python

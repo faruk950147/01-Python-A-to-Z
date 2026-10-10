@@ -742,6 +742,30 @@ Possible result:
 
 This can happen because both threads access shared data without proper synchronization.
 
+import threading
+
+counter = 0
+barrier = threading.Barrier(2)
+
+
+def increment():
+    global counter
+
+    value = counter
+    barrier.wait()  # two threads wait here to synchronize
+    counter = value + 1
+
+
+t1 = threading.Thread(target=increment)
+t2 = threading.Thread(target=increment)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+print(counter)
 ### Solution
 
 Use a synchronization mechanism:
