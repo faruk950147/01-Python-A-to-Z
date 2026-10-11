@@ -1,36 +1,38 @@
 """
-# Python Processing & Multiprocessing — Easy English Notes
+# Python Processing & Multiprocessing — Complete Notes (Easy English)
 
-## 1. What is Processing?
+## 1. What Is Processing?
 
-**Processing** means doing some work on input/data to produce useful output.
+**Processing** means performing operations on data to produce a result.
 
-In Python, we can process tasks in different ways:
+In Python, tasks can be performed using different execution models:
 
-* Single Processing
-* Multithreading
-* Multiprocessing
-* Asynchronous Programming
+- **Sequential Processing:** Tasks execute one after another.
+- **Multithreading:** Multiple threads make progress concurrently within a process.
+- **Multiprocessing:** Multiple processes perform tasks independently.
+- **Asynchronous Programming:** Tasks can suspend while waiting for operations and allow other tasks to progress.
+
+The best approach depends on the type of task and the application's requirements.
 
 ---
 
-# 2. What is Multiprocessing?
+## 2. What Is Multiprocessing?
 
-**Multiprocessing** means using multiple **processes** to perform tasks.
+**Multiprocessing** means using multiple processes to perform tasks.
 
-Each process usually has its **own memory space**.
+A process is an independent running instance of a program. Each process normally has its own memory space and Python interpreter.
 
-Multiprocessing is very useful for **CPU-heavy tasks** because different processes can run on different CPU cores.
+Multiprocessing is particularly useful for **CPU-bound tasks** because multiple processes can execute on different CPU cores simultaneously, when the system and workload permit it.
 
 ### Examples
 
-* Image Processing
-* Video Processing
-* Large Mathematical Calculations
-* Scientific Calculations
-* Data Processing
-* Machine Learning Computation
-* CPU-heavy Algorithms
+- Image processing
+- Video processing
+- Large mathematical calculations
+- Scientific computations
+- Data processing
+- Machine learning computations
+- CPU-intensive algorithms
 
 ### Basic Example
 
@@ -51,15 +53,25 @@ if __name__ == "__main__":
     print("Main process finished")
 ```
 
+### Explanation
+
+1. `multiprocessing.Process()` creates a process object.
+2. `target=task` specifies the function to execute.
+3. `start()` starts the child process.
+4. `join()` waits for the child process to finish.
+5. The main process continues after `join()` returns.
+
+The `if __name__ == "__main__":` guard is important for portable multiprocessing code, especially on systems using the `spawn` start method.
+
 ---
 
-# 3. What is a Process?
+## 3. What Is a Process?
 
 A **process** is a running instance of a program.
 
-When we run a Python program, the operating system creates a process for it.
+When we run a Python program, the operating system creates a process to execute it.
 
-One program can create multiple child processes.
+A process can create additional processes called child processes.
 
 ```text
 Python Program
@@ -74,11 +86,17 @@ Main Process
       +------ Child Process 3
 ```
 
+Each process normally has its own memory space, process ID, and execution state.
+
+Processes can communicate through mechanisms such as queues, pipes, shared memory, and other inter-process communication tools.
+
 ---
 
-# 4. Main Process
+## 4. Main Process
 
-The process where the Python program starts is called the **Main Process**.
+The **main process** is the process in which the program initially starts.
+
+We can inspect the current process using `multiprocessing.current_process()`.
 
 ```python
 import multiprocessing
@@ -94,53 +112,67 @@ Possible output:
 <_MainProcess name='MainProcess' parent=None started>
 ```
 
+The exact representation may differ between Python versions and environments.
+
 ---
 
-# 5. `multiprocessing.current_process()`
+## 5. `multiprocessing.current_process()`
 
-This function returns the process that is currently running the code.
-
-```python
-multiprocessing.current_process()
-```
+The `current_process()` function returns the process object representing the process that is currently executing the code.
 
 ### Example
 
 ```python
 import multiprocessing
 
-process = multiprocessing.current_process()
 
-print(process)
+def task():
+    process = multiprocessing.current_process()
+    print("Current Process:", process.name)
+
+
+if __name__ == "__main__":
+    print("Main Process:", multiprocessing.current_process().name)
+
+    process = multiprocessing.Process(target=task)
+    process.start()
+    process.join()
 ```
+
+Possible output:
+
+```text
+Main Process: MainProcess
+Current Process: Process-1
+```
+
+The child process name is automatically assigned unless you specify a custom name.
 
 ---
 
-# 6. Process Name
+## 6. Process Name
 
-To get the name of a process:
-
-```python
-process.name
-```
+Every `multiprocessing.Process` object has a `name` attribute.
 
 ### Example
 
 ```python
 import multiprocessing
 
-process = multiprocessing.current_process()
 
-print(process.name)
+if __name__ == "__main__":
+    process = multiprocessing.current_process()
+
+    print("Process Name:", process.name)
 ```
 
 Output:
 
 ```text
-MainProcess
+Process Name: MainProcess
 ```
 
-Child processes may have names like:
+Child processes commonly receive names such as:
 
 ```text
 Process-1
@@ -148,19 +180,15 @@ Process-2
 Process-3
 ```
 
+You can also assign your own process name.
+
 ---
 
-# 7. Process ID — PID
+## 7. Process ID (PID)
 
-Every running process has a unique **Process ID**, called **PID**.
+Every running operating-system process has a **Process ID**, or PID.
 
-Python can get the PID using:
-
-```python
-import os
-
-print(os.getpid())
-```
+Python provides `os.getpid()` to get the PID of the current process.
 
 ### Example
 
@@ -168,51 +196,60 @@ print(os.getpid())
 import multiprocessing
 import os
 
-process = multiprocessing.current_process()
 
-print("Process Name:", process.name)
-print("PID:", os.getpid())
+def task():
+    print("Child PID:", os.getpid())
+
+
+if __name__ == "__main__":
+    print("Main PID:", os.getpid())
+
+    process = multiprocessing.Process(target=task)
+    process.start()
+    process.join()
 ```
 
----
-
-# 8. Process `ident`
-
-The `ident` attribute gives the identifier of a `multiprocessing.Process` object.
-
-```python
-import multiprocessing
-
-process = multiprocessing.current_process()
-
-print(process.ident)
-```
-
-### Important
-
-`ident` and OS-level PID are related but are not exactly the same concept.
-
-For the OS process ID, use:
-
-```python
-os.getpid()
-```
-
-You can also get a process's PID using:
+You can also obtain a started process's PID using:
 
 ```python
 process.pid
 ```
 
+A process's PID identifies it at the operating-system level while that process exists. PIDs may be reused after processes exit.
+
 ---
 
-# 9. `is_alive()`
+## 8. Process `ident` vs. PID
 
-The `is_alive()` method checks whether a process is currently running.
+A common mistake is assuming that every `multiprocessing.Process` object has an `ident` attribute.
+
+The standard `multiprocessing.Process` API provides `pid`, not the `ident` attribute used by `threading.Thread`.
+
+To get the current process's operating-system ID, use:
 
 ```python
-process.is_alive()
+import os
+
+print(os.getpid())
 ```
+
+To get a child process's PID, use:
+
+```python
+process.pid
+```
+
+**Remember:**
+
+- `os.getpid()` returns the current process's OS PID.
+- `process.pid` returns the PID associated with a process object, once assigned.
+- `threading.Thread.ident` is a thread identifier, not a multiprocessing process identifier.
+
+---
+
+## 9. `is_alive()`
+
+The `is_alive()` method checks whether a process has started and has not yet finished.
 
 ### Example
 
@@ -230,25 +267,31 @@ if __name__ == "__main__":
 
     process.start()
 
-    print(process.is_alive())
+    print("Before join:", process.is_alive())
 
     process.join()
 
-    print(process.is_alive())
+    print("After join:", process.is_alive())
 ```
 
-Possible output:
+Typical output:
 
 ```text
-True
-False
+Before join: True
+After join: False
 ```
+
+The first result is expected because the task sleeps for three seconds, although exact timing can vary.
+
+`is_alive()` returns `False` before a process starts and after it finishes.
 
 ---
 
-# 10. Child Process
+## 10. Child Process
 
-A process created by another process is called a **Child Process**.
+A **child process** is a process created by another process.
+
+The process that creates it is called the parent process.
 
 ```text
 Parent Process
@@ -274,15 +317,13 @@ if __name__ == "__main__":
     process.join()
 ```
 
+The parent can manage the child using the process object.
+
 ---
 
-# 11. `multiprocessing.Process()`
+## 11. `multiprocessing.Process()`
 
-To create a new process, use:
-
-```python
-multiprocessing.Process()
-```
+Use `multiprocessing.Process()` to create a process object.
 
 ### Basic Syntax
 
@@ -298,35 +339,44 @@ multiprocessing.Process(
     target=None,
     name=None,
     args=(),
-    kwargs={},
+    kwargs=None,
     daemon=None
 )
 ```
 
-The most important parameters are:
+Important parameters:
 
-```text
-target
-args
-kwargs
-name
-daemon
-```
+- `target`: The callable to execute.
+- `args`: Positional arguments for the target.
+- `kwargs`: Keyword arguments for the target.
+- `name`: A custom process name.
+- `daemon`: Specifies whether the process is a daemon process.
+
+`group` is reserved for future use and should normally remain `None`.
+
+The process is not started until you call `start()`.
 
 ---
 
-# 12. `target`
+## 12. `target`
 
-`target` tells the child process **which function to run**.
+The `target` parameter specifies the function or callable that the child process should execute.
 
 ### Example
 
 ```python
+import multiprocessing
+
+
 def task():
     print("Hello from child process")
 
 
-process = multiprocessing.Process(target=task)
+if __name__ == "__main__":
+    process = multiprocessing.Process(target=task)
+
+    process.start()
+    process.join()
 ```
 
 Here:
@@ -335,13 +385,13 @@ Here:
 target=task
 ```
 
-means the child process will run the `task()` function.
+passes the function itself as the target.
 
 ---
 
-# 13. `target=task` vs `target=task()`
+## 13. `target=task` vs. `target=task()`
 
-This is very important.
+This is an important concept.
 
 ### Correct
 
@@ -349,41 +399,35 @@ This is very important.
 process = multiprocessing.Process(target=task)
 ```
 
-Here, we pass the function itself.
+The function is passed as the target to execute later.
 
-### Incorrect
+### Incorrect for this purpose
 
 ```python
 process = multiprocessing.Process(target=task())
 ```
 
-Here, `task()` runs immediately.
+Here, `task()` executes immediately in the current process while the `Process` object is being created.
 
-Its return value is then given to `target`.
+Its return value is passed to `target`, which is usually not what we want.
 
-So normally use:
-
-```python
-target=task
-```
-
-Think:
+Remember:
 
 ```text
 target=task
-      ↓
-"Run this function later"
+      |
+      v
+Pass the function itself
+      |
+      v
+Execute it in the child process
 ```
 
 ---
 
-# 14. `start()`
+## 14. `start()`
 
 The `start()` method starts a new process.
-
-```python
-process.start()
-```
 
 ### Example
 
@@ -399,19 +443,20 @@ if __name__ == "__main__":
     process = multiprocessing.Process(target=task)
 
     process.start()
+    process.join()
 ```
 
-After `start()` is called, the child process starts running the target function.
+Calling `start()` launches the process according to the selected multiprocessing start method.
+
+The child process executes the target callable through its `run()` method.
+
+A `Process` object can normally be started only once.
 
 ---
 
-# 15. `join()`
+## 15. `join()`
 
-The `join()` method makes the calling process **wait until another process finishes**.
-
-```python
-process.join()
-```
+The `join()` method makes the calling process wait for another process to finish.
 
 ### Example
 
@@ -434,17 +479,28 @@ if __name__ == "__main__":
     print("Main finished")
 ```
 
-Here:
+Output:
 
-```python
-process.join()
+```text
+Child finished
+Main finished
 ```
 
-makes the main process wait for the child process.
+Here, the main process waits for the child process.
+
+**Important:** `join()` does not stop the child process. It waits for the process to finish.
+
+You can also use a timeout:
+
+```python
+process.join(timeout=2)
+```
+
+This waits for at most two seconds. The child may still be running after the timeout.
 
 ---
 
-# 16. `start()` vs `join()`
+## 16. `start()` vs. `join()`
 
 ### `start()`
 
@@ -452,11 +508,7 @@ makes the main process wait for the child process.
 process.start()
 ```
 
-Purpose:
-
-```text
-Starts the process
-```
+Purpose: Starts the process.
 
 ### `join()`
 
@@ -464,11 +516,7 @@ Starts the process
 process.join()
 ```
 
-Purpose:
-
-```text
-Waits for the process to finish
-```
+Purpose: Waits for the process to finish.
 
 Easy way to remember:
 
@@ -478,11 +526,13 @@ start() = Start the process
 join() = Wait for the process
 ```
 
+The methods perform different operations and are commonly used together.
+
 ---
 
-# 17. Windows and Main Guard
+## 17. Windows and the Main Guard
 
-When using multiprocessing, especially on **Windows**, use:
+When writing multiprocessing programs, use:
 
 ```python
 if __name__ == "__main__":
@@ -505,21 +555,19 @@ if __name__ == "__main__":
     process.join()
 ```
 
+This structure is particularly important on Windows, where `spawn` is the default start method.
+
+It is also good practice for portable multiprocessing programs on other platforms.
+
 ---
 
-# 18. Why is the Main Guard Important?
+## 18. Why Is the Main Guard Important?
 
-On systems using the `spawn` start method, a child process starts a fresh Python interpreter.
+With the `spawn` start method, a child process starts a fresh Python interpreter and imports the main module.
 
-Without the main guard, the child may run the process-creation code again.
+Without the main guard, top-level process-creation code may execute again when the module is imported by the child.
 
-This can create unwanted new processes repeatedly.
-
-Therefore, use:
-
-```python
-if __name__ == "__main__":
-```
+This can cause recursive process creation or a multiprocessing bootstrap error.
 
 ### Incorrect
 
@@ -552,9 +600,11 @@ if __name__ == "__main__":
     process.join()
 ```
 
+For reusable multiprocessing code, keep worker functions at module scope when possible. This helps the `spawn` method locate and import them.
+
 ---
 
-# 19. Complete Basic Multiprocessing Program
+## 19. Complete Basic Multiprocessing Program
 
 ```python
 import multiprocessing
@@ -565,10 +615,7 @@ def task():
 
 
 if __name__ == "__main__":
-
-    process = multiprocessing.Process(
-        target=task
-    )
+    process = multiprocessing.Process(target=task)
 
     process.start()
     process.join()
@@ -579,37 +626,35 @@ if __name__ == "__main__":
 ### Program Flow
 
 ```text
-Program Start
-     ↓
+Program Starts
+      |
+      v
 Main Process
-     ↓
-Create Process
-     ↓
+      |
+      v
+Create Process Object
+      |
+      v
 start()
-     ↓
-Child Process
-     ↓
-task()
-     ↓
-Child Finished
-     ↓
-join() returns
-     ↓
-Main Process continues
+      |
+      v
+Child Executes task()
+      |
+      v
+Child Finishes
+      |
+      v
+join() Returns
+      |
+      v
+Main Process Continues
 ```
 
 ---
 
-# 20. Parent and Child Process
+## 20. Parent and Child Process IDs
 
-When one process creates another process:
-
-```text
-Parent Process
-       |
-       v
-Child Process
-```
+Use `os.getpid()` to obtain the current process's PID and `os.getppid()` to obtain its parent process's PID.
 
 ### Example
 
@@ -632,29 +677,15 @@ if __name__ == "__main__":
     process.join()
 ```
 
-### Important Functions
+On typical systems, the child's reported parent PID matches the main process's PID.
 
-```python
-os.getpid()
-```
-
-Returns the PID of the current process.
-
-```python
-os.getppid()
-```
-
-Returns the PID of the parent process.
+Operating-system behavior may differ if the parent exits or the child becomes reparented.
 
 ---
 
-# 21. Child Process Name
+## 21. Child Process Name
 
-A child process may have a default name like:
-
-```text
-Process-1
-```
+A child process usually receives an automatically generated name.
 
 ### Example
 
@@ -675,18 +706,19 @@ if __name__ == "__main__":
     process.join()
 ```
 
+Possible output:
+
+```text
+Child Name: Process-1
+```
+
+The automatically assigned name may differ depending on how many processes have been created.
+
 ---
 
-# 22. Custom Process Name
+## 22. Custom Process Name
 
-We can give a process our own name.
-
-```python
-process = multiprocessing.Process(
-    target=task,
-    name="Worker-1"
-)
-```
+You can assign a meaningful name to a process.
 
 ### Example
 
@@ -716,11 +748,15 @@ Output:
 Process Name: Worker-1
 ```
 
+Custom names are useful for debugging and identifying workers in logs.
+
 ---
 
-# 23. Multiple Child Processes
+## 23. Multiple Child Processes
 
-We can create multiple child processes.
+You can create several child processes to perform independent tasks.
+
+### Example
 
 ```python
 import multiprocessing
@@ -731,7 +767,6 @@ def task(number):
 
 
 if __name__ == "__main__":
-
     p1 = multiprocessing.Process(
         target=task,
         args=(1,)
@@ -756,7 +791,7 @@ if __name__ == "__main__":
     p3.join()
 ```
 
-The output order is **not fixed**.
+The output order is not guaranteed.
 
 For example:
 
@@ -766,7 +801,7 @@ Task: 1
 Task: 3
 ```
 
-or:
+Or:
 
 ```text
 Task: 1
@@ -774,17 +809,13 @@ Task: 3
 Task: 2
 ```
 
-The operating system decides which process gets CPU time.
+The operating system and process scheduling determine when each process runs.
 
 ---
 
-# 24. `args`
+## 24. `args`
 
-Use `args` to pass **positional arguments** to a child process.
-
-```python
-args=
-```
+Use `args` to pass positional arguments to the target function.
 
 ### Example
 
@@ -812,35 +843,26 @@ Output:
 Hello Faruk
 ```
 
-### Important
-
-For one argument, we need a comma:
+For one positional argument, use a one-element tuple:
 
 ```python
 args=("Faruk",)
 ```
 
-Because:
+Compare:
 
 ```python
-("Faruk")
+("Faruk")   # A string
+("Faruk",)  # A tuple
 ```
-
-is a string.
-
-But:
-
-```python
-("Faruk",)
-```
-
-is a tuple.
 
 ---
 
-# 25. Multiple Arguments
+## 25. Passing Multiple Arguments
 
-We can pass multiple positional arguments.
+You can pass multiple positional arguments using a tuple.
+
+### Example
 
 ```python
 import multiprocessing
@@ -861,11 +883,18 @@ if __name__ == "__main__":
     process.join()
 ```
 
+Output:
+
+```text
+Name: Faruk
+Age: 25
+```
+
 ---
 
-# 26. `kwargs`
+## 26. `kwargs`
 
-Use `kwargs` to pass **keyword arguments**.
+Use `kwargs` to pass keyword arguments.
 
 ### Example
 
@@ -879,7 +908,6 @@ def task(name, age):
 
 
 if __name__ == "__main__":
-
     process = multiprocessing.Process(
         target=task,
         kwargs={
@@ -892,17 +920,20 @@ if __name__ == "__main__":
     process.join()
 ```
 
----
+Output:
 
-# 27. `terminate()`
-
-Use:
-
-```python
-process.terminate()
+```text
+Name: Faruk
+Age: 25
 ```
 
-to request termination of a running process.
+With the `spawn` start method, the target and its arguments generally need to be picklable. Top-level functions and simple data types are usually good choices.
+
+---
+
+## 27. `terminate()`
+
+The `terminate()` method requests immediate termination of a child process using the operating system's termination mechanism.
 
 ### Example
 
@@ -918,14 +949,14 @@ def task():
 
 
 if __name__ == "__main__":
-
     process = multiprocessing.Process(target=task)
 
     process.start()
-
     time.sleep(3)
 
-    process.terminate()
+    if process.is_alive():
+        process.terminate()
+
     process.join()
 
     print("Process terminated")
@@ -933,50 +964,41 @@ if __name__ == "__main__":
 
 ### Important
 
-`terminate()` does not give the process a normal cleanup opportunity.
+`terminate()` does not provide a normal cleanup opportunity to the child process.
 
-So be careful if the process is using:
+If the child is using files, locks, queues, database connections, or other resources, forced termination may leave resources or shared state in an inconsistent condition.
 
-* Files
-* Locks
-* Database connections
-* Other resources
+When possible, use a cooperative shutdown mechanism, such as an event or a message sent through a queue.
 
 ---
 
-# 28. `kill()`
+## 28. `kill()`
 
-Use:
-
-```python
-process.kill()
-```
-
-to forcefully stop a process.
+The `kill()` method forcefully terminates a process using a stronger operating-system mechanism where available.
 
 ### Example
 
 ```python
-process.kill()
+if process.is_alive():
+    process.kill()
+
+process.join()
 ```
 
-### `terminate()` vs `kill()`
+Use `kill()` only when necessary.
 
-```text
-terminate() → Stops the process
+### `terminate()` vs. `kill()`
 
-kill() → Forcefully stops the process
-```
+- `terminate()`: Requests termination using the platform's termination mechanism.
+- `kill()`: Uses a forceful kill mechanism where supported.
+
+The exact behavior depends on the operating system. Neither method should be treated as a safe cleanup mechanism.
 
 ---
 
-# 29. `exitcode`
+## 29. `exitcode`
 
-After a process finishes, we can check its exit status using:
-
-```python
-process.exitcode
-```
+The `exitcode` attribute reports the process's exit status after it terminates.
 
 ### Example
 
@@ -989,7 +1011,6 @@ def task():
 
 
 if __name__ == "__main__":
-
     process = multiprocessing.Process(target=task)
 
     process.start()
@@ -998,21 +1019,27 @@ if __name__ == "__main__":
     print("Exit Code:", process.exitcode)
 ```
 
-Normally:
+Typical output:
 
 ```text
-0
+Child process
+Exit Code: 0
 ```
 
-means the process finished successfully.
+Common interpretations:
 
-A non-zero exit code usually means that the process ended because of an error or another abnormal condition.
+- `0`: The process finished successfully.
+- A positive nonzero value: Often indicates an error or explicit nonzero exit status.
+- A negative value on POSIX systems: Commonly indicates termination by a signal.
+- `None`: The process has not started or has not yet terminated.
+
+An exit code of `0` does not necessarily prove that every intended business operation succeeded. Applications may need additional result verification.
 
 ---
 
-# 30. Process Lifecycle
+## 30. Process Lifecycle
 
-The basic lifecycle is:
+A simplified process lifecycle looks like this:
 
 ```text
 Process Object Created
@@ -1024,31 +1051,24 @@ Process Object Created
        Running
           |
           v
-       Finished
+   Process Terminates
           |
           v
-       join() returns
+       join() Returns
 ```
 
-Easy version:
+Important distinction:
 
-```text
-Process()
-   ↓
-start()
-   ↓
-Running
-   ↓
-Finished
-   ↓
-join()
-```
+- Creating a `Process` object does not start a new process.
+- `start()` starts it.
+- `join()` waits for its termination.
+- `exitcode` can be inspected after it terminates.
 
 ---
 
-# 31. `start()` Can Normally Be Used Only Once
+## 31. A Process Object Can Normally Be Started Only Once
 
-A `Process` object can normally be started only once.
+You cannot restart the same `Process` object after it has been started.
 
 ### Incorrect
 
@@ -1057,162 +1077,200 @@ process.start()
 process.start()
 ```
 
-You cannot restart the same `Process` object.
+This raises an error.
 
-If you need another process, create a new `Process` object.
+### Correct
+
+Create a new process object when you need another execution.
+
+```python
+import multiprocessing
+
+
+def task(number):
+    print("Task:", number)
+
+
+if __name__ == "__main__":
+    for i in range(2):
+        process = multiprocessing.Process(
+            target=task,
+            args=(i,)
+        )
+
+        process.start()
+        process.join()
+```
+
+For many repeated tasks, a process pool is usually more convenient.
 
 ---
 
-# 32. `join()` Does Not Stop a Process
+## 32. `join()` Does Not Stop a Process
 
-This is very important.
+This is a common interview question.
 
 ```python
 process.join()
 ```
 
-does **not** stop the process.
+does not stop or terminate the process.
 
-It only makes the calling process wait until the target process finishes.
+It waits for the process to finish naturally or otherwise terminate.
 
 Remember:
 
 ```text
-start() → Starts the process
-
-join() → Waits for the process to finish
+start()     → Starts the process
+join()      → Waits for the process
+terminate() → Requests process termination
+kill()      → Forcefully terminates the process
 ```
 
 ---
 
-# 33. CPU-Bound Task
+## 33. CPU-Bound Tasks
 
-A **CPU-bound task** spends most of its time doing calculations.
+A **CPU-bound task** spends most of its time performing calculations.
 
-### Examples
+Examples:
 
-* Large mathematical calculations
-* Image processing
-* Video encoding
-* Scientific calculations
-* Complex algorithms
-* CPU-heavy data processing
+- Large mathematical calculations
+- Image processing
+- Video encoding
+- Scientific computations
+- Complex algorithms
+- CPU-intensive data processing
 
-Multiprocessing is often a good choice for these tasks.
+Multiprocessing can improve performance when tasks can be divided into independent computations and the overhead is justified.
 
 ---
 
-# 34. I/O-Bound Task
+## 34. I/O-Bound Tasks
 
 An **I/O-bound task** spends much of its time waiting for input/output operations.
 
-### Examples
+Examples:
 
-* Reading/writing files
-* Network requests
-* Database queries
-* API requests
-* Waiting for external services
+- Reading and writing files
+- Network requests
+- Database queries
+- API requests
+- Waiting for external services
 
-For many I/O-bound tasks:
+For many I/O-bound workloads, threading or asynchronous programming may be more efficient than creating multiple processes.
 
-```text
-Threading
-Asyncio
-```
-
-may be better choices.
-
-But multiprocessing can also be used for I/O-bound tasks in some situations.
+Multiprocessing can still be appropriate for some I/O-bound workloads, depending on isolation, libraries, and application design.
 
 ---
 
-# 35. Why Use Multiprocessing?
+## 35. Why Use Multiprocessing?
 
-Multiprocessing is especially useful for **CPU-bound work**.
+Multiprocessing is especially useful when:
+
+- Tasks are CPU-intensive.
+- Tasks can run independently.
+- Multiple CPU cores are available.
+- The workload benefits from parallel execution.
+- The computation is large enough to justify process overhead.
 
 Examples:
 
 ```text
 Image Processing
 Video Processing
-Large Mathematical Calculations
 Scientific Computation
-Machine Learning Computation
-CPU-heavy Algorithms
-Data Processing
+Large Mathematical Operations
+CPU-Intensive Data Processing
 ```
+
+Multiprocessing is a tool, not a guarantee of faster execution. Measure performance with representative workloads.
 
 ---
 
-# 36. Multiprocessing and Python GIL
+## 36. Multiprocessing and the GIL
 
-In **CPython**, the **GIL (Global Interpreter Lock)** prevents multiple threads in the same process from executing Python bytecode at the same time in the usual way.
+GIL stands for **Global Interpreter Lock**.
 
-Multiprocessing uses separate processes.
+In traditional GIL-enabled CPython builds, the GIL generally prevents multiple threads in the same interpreter from executing Python bytecode simultaneously.
 
-Each process has its own Python interpreter and normally its own memory space.
+Multiprocessing uses separate processes. Each process normally has its own Python interpreter and its own GIL in traditional builds.
 
-Therefore, CPU-bound programs can use multiple CPU cores through multiple processes.
+Therefore, CPU-bound Python programs can use multiple CPU cores through multiple processes.
 
-### Easy Idea
-
-```text
-Multithreading
-      ↓
-Same Process
-      ↓
-Shared Memory
-      ↓
-GIL matters in CPython
-```
+### Multithreading
 
 ```text
-Multiprocessing
-      ↓
-Multiple Processes
-      ↓
-Separate Memory
-      ↓
-Can use multiple CPU cores
+One Process
+     |
+     +--- Thread 1
+     |
+     +--- Thread 2
+     |
+     +--- Thread 3
+
+Traditional CPython:
+The GIL can limit parallel execution of Python bytecode.
 ```
+
+### Multiprocessing
+
+```text
+Main Process
+     |
+     +--- Process 1
+     |
+     +--- Process 2
+     |
+     +--- Process 3
+
+Traditional CPython:
+Separate processes can execute Python code in parallel.
+```
+
+Modern Python also offers free-threaded CPython builds that can run without the GIL. Performance and behavior depend on the Python build, libraries, and workload.
 
 ---
 
-# 37. Multiprocessing vs Multithreading
+## 37. Multiprocessing vs. Multithreading
 
-| Feature           | Multiprocessing     | Multithreading            |
-| ----------------- | ------------------- | ------------------------- |
-| Unit              | Process             | Thread                    |
-| Memory            | Separate            | Shared within a process   |
-| CPU-bound         | Often a good choice | GIL limitation in CPython |
-| I/O-bound         | Possible            | Often suitable            |
-| Communication     | More complex        | Easier                    |
-| Memory usage      | Higher              | Lower                     |
-| Isolation         | Higher              | Lower                     |
-| Creation overhead | Higher              | Lower                     |
+| Feature | Multiprocessing | Multithreading |
+|---|---|---|
+| Basic unit | Process | Thread |
+| Memory | Separate process memory by default | Shared memory within the process |
+| CPU-bound pure Python | Often useful in traditional CPython | Usually limited by the GIL in traditional CPython |
+| I/O-bound tasks | Can be useful | Often suitable |
+| Communication | Often requires IPC | Shared data is readily accessible |
+| Memory overhead | Usually higher | Usually lower |
+| Isolation | Stronger process isolation | Threads share process resources |
+| Creation overhead | Usually higher | Usually lower |
+| Failure isolation | A child crash need not crash the parent | An unhandled thread exception does not automatically terminate the whole process |
 
 ### General Rule
 
 ```text
-CPU-bound
-    ↓
-Multiprocessing
-
-I/O-bound
-    ↓
-Threading / Asyncio
+CPU-bound pure-Python tasks
+             |
+             v
+Consider Multiprocessing
 ```
 
-This is a general rule, not a strict rule.
+```text
+I/O-bound tasks
+       |
+       v
+Consider Threading or Asyncio
+```
+
+These are guidelines, not absolute rules. Benchmark your application and consider its architecture.
 
 ---
 
-# 38. Separate Memory in Processes
+## 38. Separate Memory in Processes
 
 Processes normally have separate memory spaces.
 
-Example:
+### Example
 
 ```python
 import multiprocessing
@@ -1222,6 +1280,9 @@ number = 10
 
 
 def task():
+    global number
+
+    number = 20
     print("Child:", number)
 
 
@@ -1230,19 +1291,28 @@ if __name__ == "__main__":
 
     process.start()
     process.join()
+
+    print("Parent:", number)
 ```
 
-The child process gets its own process-specific view/copy of ordinary Python data.
+Typical output:
 
-If the child changes a normal Python variable, that change does not directly change the parent's variable.
+```text
+Child: 20
+Parent: 10
+```
+
+The child modifies its own process-local variable. The parent's ordinary Python variable remains unchanged.
+
+The exact process-start mechanism affects how initial state is obtained, but changing a normal Python variable in the child does not directly update the parent's variable.
 
 ---
 
-# 39. Sharing Data Between Processes
+## 39. Sharing Data Between Processes
 
-Because processes normally have separate memory spaces, ordinary Python variables are not directly shared.
+Because processes normally have separate memory spaces, ordinary Python variables are not automatically shared.
 
-The `multiprocessing` module provides different ways to communicate and share data:
+Python provides several communication and sharing mechanisms:
 
 ```text
 Queue
@@ -1253,15 +1323,13 @@ Manager
 Shared Memory
 ```
 
+Choose the mechanism based on the data size, communication pattern, and synchronization requirements.
+
 ---
 
-# 40. `multiprocessing.Queue`
+## 40. `multiprocessing.Queue`
 
-A `Queue` can be used to send messages/data between processes.
-
-```python
-multiprocessing.Queue()
-```
+A multiprocessing queue allows processes to exchange messages and data safely.
 
 ### Example
 
@@ -1274,7 +1342,6 @@ def worker(queue):
 
 
 if __name__ == "__main__":
-
     queue = multiprocessing.Queue()
 
     process = multiprocessing.Process(
@@ -1284,9 +1351,12 @@ if __name__ == "__main__":
 
     process.start()
 
-    print(queue.get())
+    message = queue.get()
+    print(message)
 
     process.join()
+    queue.close()
+    queue.join_thread()
 ```
 
 Output:
@@ -1295,35 +1365,33 @@ Output:
 Hello from child
 ```
 
-### Easy Idea
+### How It Works
 
 ```text
 Process A
-    ↓
-Queue
-    ↓
+    |
+    v
+  Queue
+    |
+    v
 Process B
 ```
+
+Important methods:
+
+- `put()`: Adds an item.
+- `get()`: Retrieves an item.
+- `empty()`: Provides an unreliable snapshot for coordination; do not use it to decide whether a queue will remain empty.
+- `close()`: Closes the queue's local resources.
+- `join_thread()`: Waits for the queue's feeder thread to finish flushing buffered data.
+
+For more complex programs, coordinate queue shutdown carefully to avoid blocking or waiting indefinitely.
 
 ---
 
-# 41. `multiprocessing.Pipe`
+## 41. `multiprocessing.Pipe`
 
-A `Pipe` provides communication between processes.
-
-```python
-multiprocessing.Pipe()
-```
-
-### Basic Idea
-
-```text
-Process A
-    |
-    | Pipe
-    |
-Process B
-```
+A pipe provides a communication channel between processes.
 
 ### Example
 
@@ -1337,7 +1405,6 @@ def worker(connection):
 
 
 if __name__ == "__main__":
-
     parent_conn, child_conn = multiprocessing.Pipe()
 
     process = multiprocessing.Process(
@@ -1346,10 +1413,12 @@ if __name__ == "__main__":
     )
 
     process.start()
+    child_conn.close()
 
     print(parent_conn.recv())
 
     process.join()
+    parent_conn.close()
 ```
 
 Output:
@@ -1358,13 +1427,23 @@ Output:
 Hello from child
 ```
 
+### Important Methods
+
+- `send()`: Sends an object through the connection.
+- `recv()`: Receives an object.
+- `close()`: Closes the connection.
+
+Objects sent through a pipe are generally serialized. A pipe created without `duplex=False` is bidirectional.
+
+Use queues for convenient multi-producer or multi-consumer communication. Pipes can be useful for direct communication between processes.
+
 ---
 
-# 42. `multiprocessing.Pool`
+## 42. `multiprocessing.Pool`
 
-A `Pool` is useful when we have many similar tasks.
+A process pool manages a group of worker processes.
 
-It creates a group of worker processes and distributes tasks among them.
+It is useful when you have many similar tasks to distribute among workers.
 
 ### Example
 
@@ -1377,9 +1456,7 @@ def square(number):
 
 
 if __name__ == "__main__":
-
-    with multiprocessing.Pool() as pool:
-
+    with multiprocessing.Pool(processes=3) as pool:
         results = pool.map(
             square,
             [1, 2, 3, 4, 5]
@@ -1394,9 +1471,13 @@ Output:
 [1, 4, 9, 16, 25]
 ```
 
+Here, `processes=3` requests a pool of three worker processes.
+
+The number of workers should be chosen based on available resources and the workload.
+
 ---
 
-# 43. `Pool.map()`
+## 43. `Pool.map()`
 
 Use:
 
@@ -1404,93 +1485,101 @@ Use:
 pool.map(function, iterable)
 ```
 
-to apply the same function to every item.
+to apply a function to each item in an iterable.
 
-Example:
+### Example
 
 ```python
-results = pool.map(
-    square,
-    [1, 2, 3, 4, 5]
-)
+results = pool.map(square, [1, 2, 3, 4, 5])
 ```
 
 Conceptually:
 
 ```text
-1 → square()
-2 → square()
-3 → square()
-4 → square()
-5 → square()
+1 → square(1)
+2 → square(2)
+3 → square(3)
+4 → square(4)
+5 → square(5)
 ```
 
-The results are returned as a list.
+The returned list preserves the input order, even if tasks complete in a different order.
+
+`map()` waits for the results and returns them together.
 
 ---
 
-# 44. Why Use a Pool?
+## 44. Why Use a Process Pool?
 
-Without a pool, we may need to manually create many processes:
+Without a pool, you may need to manage many processes manually.
 
 ```python
-p1 = Process(...)
-p2 = Process(...)
-p3 = Process(...)
-p4 = Process(...)
+p1 = multiprocessing.Process(...)
+p2 = multiprocessing.Process(...)
+p3 = multiprocessing.Process(...)
 ```
 
-A `Pool` makes this easier.
+A process pool simplifies task distribution and worker management.
 
 ```text
 Many Tasks
-    ↓
+    |
+    v
 Process Pool
-    ↓
-Worker Processes
-    ↓
+    |
+    +--- Worker 1
+    |
+    +--- Worker 2
+    |
+    +--- Worker 3
+    |
+    v
 Results
 ```
 
+A pool can also reduce the repeated cost of creating a new process for every task.
+
+**Important:** The `Pool` context manager terminates the pool when its context exits. Ensure required work has completed and results have been collected before leaving the context.
+
 ---
 
-# 45. Advantages of Multiprocessing
+## 45. Advantages of Multiprocessing
 
-### 1. Good for CPU-heavy Work
+### 1. CPU-Heavy Work
 
-It can run CPU-intensive tasks using multiple processes.
+Multiple processes can improve performance for CPU-intensive tasks.
 
-### 2. Multiple CPU Cores
+### 2. Multi-Core Execution
 
-Different processes can run on different CPU cores.
+Independent processes can run on separate CPU cores simultaneously.
 
 ### 3. Process Isolation
 
-Each process normally has separate memory.
+Each process normally has its own memory space.
 
-### 4. Fault Isolation
+### 4. Failure Isolation
 
-If a child process crashes, the parent process does not automatically have to crash.
+A child process can fail without automatically terminating the parent process.
 
 ### 5. Parallel Execution
 
-Independent tasks can run at the same time.
+Independent tasks can execute in parallel when sufficient resources are available.
 
 ---
 
-# 46. Disadvantages of Multiprocessing
+## 46. Disadvantages of Multiprocessing
 
 ### 1. Higher Memory Usage
 
-Each process normally has its own memory space.
+Each process usually requires its own interpreter and process memory.
 
-### 2. More Process Creation Overhead
+### 2. Process Creation Overhead
 
-Creating a process is usually more expensive than creating a thread.
+Creating processes is generally more expensive than creating threads.
 
-### 3. Communication is More Complex
+### 3. More Complex Communication
 
-Processes need IPC mechanisms such as:
+Processes often need IPC mechanisms such as:
 
 ```text
 Queue
@@ -1501,26 +1590,30 @@ Shared Memory
 
 ### 4. Serialization Overhead
 
-Data sent between processes may need to be serialized/pickled.
+Objects passed between processes often need to be serialized and deserialized.
 
-This can take extra time.
+This adds processing time and may increase memory usage.
 
-### 5. Debugging is More Difficult
+### 5. More Complex Debugging
 
-Multiple processes make debugging more complex.
+Debugging, logging, exception handling, and lifecycle management can be more complicated with multiple processes.
+
+### 6. Synchronization Challenges
+
+Shared memory and coordinated access may require locks or other synchronization mechanisms.
 
 ---
 
-# 47. When Should You Use Multiprocessing?
+## 47. When Should You Use Multiprocessing?
 
 Consider multiprocessing when:
 
 ```text
-✓ The task is CPU-intensive
-✓ Tasks are mostly independent
-✓ Multiple CPU cores are available
-✓ Parallel execution can help
-✓ The calculation is large enough to justify the overhead
+✓ The task is CPU-intensive.
+✓ Tasks are mostly independent.
+✓ Multiple CPU cores are available.
+✓ Parallel execution can improve performance.
+✓ The workload justifies process overhead.
 ```
 
 Examples:
@@ -1530,16 +1623,16 @@ Image Processing
 Video Processing
 Scientific Computation
 Large Mathematical Operations
-CPU-heavy Data Processing
+CPU-Intensive Data Processing
 ```
 
 ---
 
-# 48. When Should You Avoid Multiprocessing?
+## 48. When Should You Avoid Multiprocessing?
 
 Multiprocessing is not always faster.
 
-If the task is very small, process creation and communication overhead may be larger than the actual work.
+The overhead of creating processes, transferring data, and collecting results may outweigh the benefits.
 
 Examples:
 
@@ -1547,47 +1640,75 @@ Examples:
 Very Small Calculations
 Simple Print Operations
 Tiny Tasks
-Tasks with frequent shared-state communication
+Tasks with Frequent Data Transfer
+Tasks with Heavy Synchronization
 ```
 
-For such tasks, multiprocessing may make the program slower.
+For small tasks, sequential execution or threading may be simpler and faster.
+
+Measure performance instead of assuming that more processes always mean better performance.
 
 ---
 
-# 49. Important Process Methods
+## 49. Important Process Methods
 
-| Method              | Purpose                                               |
-| ------------------- | ----------------------------------------------------- |
-| `start()`           | Starts the process                                    |
-| `join()`            | Waits for the process to finish                       |
-| `is_alive()`        | Checks whether the process is running                 |
-| `terminate()`       | Terminates the process                                |
-| `kill()`            | Forcefully terminates the process                     |
-| `close()`           | Releases resources associated with the Process object |
-| `run()`             | Runs the target callable                              |
-| `current_process()` | Returns the current process object                    |
+| Method | Purpose |
+|---|---|
+| `start()` | Starts the process |
+| `join()` | Waits for the process to terminate |
+| `is_alive()` | Checks whether the process is running |
+| `terminate()` | Requests termination using the platform's termination mechanism |
+| `kill()` | Forcefully terminates the process using the platform's kill mechanism |
+| `close()` | Releases resources associated with a finished process object |
+| `run()` | Executes the target callable when called directly or by the process startup mechanism |
+| `multiprocessing.current_process()` | Returns the current process object |
+
+### Important Notes
+
+- Calling `run()` directly does not create a new process.
+- `close()` should generally be called only after the process has stopped. Calling it while the process is still running raises an error.
+- A process object cannot normally be restarted after `start()` has been called.
 
 ---
 
-# 50. Important Process Attributes
+## 50. Important Process Attributes
 
-| Attribute  | Purpose                                       |
-| ---------- | --------------------------------------------- |
-| `name`     | Process name                                  |
-| `pid`      | OS process ID                                 |
-| `ident`    | Process identifier                            |
-| `exitcode` | Process exit status                           |
-| `daemon`   | Shows whether the process is a daemon process |
+| Attribute | Purpose |
+|---|---|
+| `name` | Process name |
+| `pid` | Operating-system process ID |
+| `exitcode` | Exit status after termination |
+| `daemon` | Indicates whether the process is a daemon process |
+| `sentinel` | An OS handle or file descriptor that becomes ready when the process exits |
 
-To get the PID:
+The standard `multiprocessing.Process` API does not provide the `ident` attribute used by `threading.Thread`.
+
+### Examples
 
 ```python
+process.name
 process.pid
+process.exitcode
+process.daemon
+```
+
+To get the current process ID:
+
+```python
+import os
+
+print(os.getpid())
+```
+
+To get the parent process ID:
+
+```python
+print(os.getppid())
 ```
 
 ---
 
-# 51. Complete Multiprocessing Example
+## 51. Complete Multiprocessing Example
 
 ```python
 import multiprocessing
@@ -1596,7 +1717,6 @@ import time
 
 
 def worker(number):
-
     process = multiprocessing.current_process()
 
     print(
@@ -1611,11 +1731,9 @@ def worker(number):
 
 
 if __name__ == "__main__":
-
     processes = []
 
     for i in range(3):
-
         process = multiprocessing.Process(
             target=worker,
             args=(i,),
@@ -1637,21 +1755,21 @@ Possible output:
 Name: Worker-0, PID: 1234, Task: 0
 Name: Worker-1, PID: 1235, Task: 1
 Name: Worker-2, PID: 1236, Task: 2
-
-Task 0 finished
 Task 1 finished
+Task 0 finished
 Task 2 finished
-
 All processes finished
 ```
 
-The exact order is **not guaranteed**.
+The PIDs and output order are illustrative. Actual values and ordering vary between runs.
+
+The final message appears after all three child processes have terminated because the parent joins every process.
 
 ---
 
-# 52. Multiprocessing Mental Model
+## 52. Multiprocessing Mental Model
 
-The easiest way to understand multiprocessing:
+The easiest way to understand multiprocessing is to think of independent processes working on separate tasks.
 
 ```text
                  Python Program
@@ -1664,8 +1782,11 @@ The easiest way to understand multiprocessing:
           v            v            v
        Process 1    Process 2    Process 3
           |            |            |
-          v            v            v
-       CPU Core     CPU Core     CPU Core
+          +------------+------------+
+                       |
+                       v
+              Operating System
+             Schedules CPU Time
 ```
 
 Each process normally has:
@@ -1676,35 +1797,39 @@ Its own execution
 Its own memory space
        +
 Its own process ID
+       +
+Its own Python interpreter
 ```
+
+Processes can execute simultaneously on different CPU cores, but actual parallelism depends on the operating system, hardware, and workload.
 
 ---
 
-# 53. Short Revision
+## 53. Short Revision
 
-### What is a Process?
+### What is a process?
 
 A process is a running instance of a program.
 
-### What is Multiprocessing?
+### What is multiprocessing?
 
 Multiprocessing means using multiple processes to perform tasks.
 
 ### What is `Process()`?
 
-It creates a new process.
+It creates a process object.
 
 ### What is `start()`?
 
-It starts the process.
+It starts a new process.
 
 ### What is `join()`?
 
-It waits for the process to finish.
+It waits for a process to terminate.
 
 ### What is `target`?
 
-The function/callable that the child process executes.
+The callable that the child process executes.
 
 ### What is `args`?
 
@@ -1716,7 +1841,7 @@ It passes keyword arguments.
 
 ### What is `terminate()`?
 
-It terminates a process.
+It requests termination of a process.
 
 ### What is `kill()`?
 
@@ -1728,31 +1853,35 @@ It checks whether a process is currently running.
 
 ### What is `exitcode`?
 
-It tells how the process ended.
+It reports the process's exit status after termination.
 
 ### What is `pid`?
 
-The OS-level Process ID.
+The operating-system Process ID.
 
 ### What is `current_process()`?
 
 It returns the current process object.
 
-### What is `Queue`?
+### What is a Queue?
 
-It allows processes to exchange data/messages.
+It allows processes to exchange data and messages.
 
-### What is `Pipe`?
+### What is a Pipe?
 
-It provides communication between processes.
+It provides a communication channel between processes.
 
-### What is `Pool`?
+### What is a Pool?
 
-It distributes many tasks among worker processes.
+It manages worker processes and distributes tasks among them.
+
+### What is the main guard?
+
+`if __name__ == "__main__":` prevents top-level process-creation code from being executed again when the main module is imported by a spawned child process.
 
 ---
 
-# 54. Most Important Exam & Interview Topics
+## 54. Most Important Exam and Interview Topics
 
 Focus on these topics:
 
@@ -1772,64 +1901,193 @@ Focus on these topics:
 13. PID
 14. current_process()
 15. Process Lifecycle
-16. Multiprocessing vs Multithreading
-17. CPU-bound vs I/O-bound
+16. Multiprocessing vs. Multithreading
+17. CPU-bound vs. I/O-bound
 18. GIL
 19. Queue
 20. Pipe
 21. Pool
-22. Process Memory
-23. if __name__ == "__main__":
+22. Separate Process Memory
+23. if __name__ == "__main__"
+24. Process Exit Codes
+25. Process Start Methods
+26. Inter-Process Communication
+27. Serialization and Pickling
+28. Process Synchronization
 ```
 
-# Final Quick Revision
+---
+
+## 55. Bonus: Process Start Methods
+
+Python multiprocessing supports different ways of starting child processes.
+
+The main start methods are:
+
+- **`spawn`:** Starts a fresh Python interpreter.
+- **`fork`:** Creates a child by forking the parent process. Available on supported POSIX systems.
+- **`forkserver`:** Uses a separate server process to create child processes. Available on supported POSIX systems.
+
+Availability and defaults depend on the operating system and Python version.
+
+You can inspect the available methods:
+
+```python
+import multiprocessing
+
+print(multiprocessing.get_all_start_methods())
+print(multiprocessing.get_start_method())
+```
+
+You can choose a start method explicitly when appropriate:
+
+```python
+import multiprocessing
+
+
+def task():
+    print("Child process is running")
+
+
+if __name__ == "__main__":
+    ctx = multiprocessing.get_context("spawn")
+
+    process = ctx.Process(target=task)
+
+    process.start()
+    process.join()
+```
+
+Using a context is useful when you want predictable behavior across environments.
+
+With `spawn`, the target function and its arguments generally need to be picklable, and the main module must be safely importable.
+
+---
+
+## 56. Bonus: Process Synchronization
+
+Processes sometimes need to coordinate their work or access shared resources safely.
+
+Python provides synchronization tools such as:
+
+```text
+Lock
+RLock
+Semaphore
+Event
+Condition
+Barrier
+```
+
+These tools are available through `multiprocessing` and are designed for synchronization between processes.
+
+### Example: Process Lock
+
+```python
+import multiprocessing
+
+
+def worker(lock, number):
+    with lock:
+        print(f"Worker {number} entered")
+
+
+if __name__ == "__main__":
+    lock = multiprocessing.Lock()
+
+    processes = []
+
+    for i in range(3):
+        process = multiprocessing.Process(
+            target=worker,
+            args=(lock, i)
+        )
+
+        processes.append(process)
+        process.start()
+
+    for process in processes:
+        process.join()
+```
+
+The lock ensures that only one process at a time holds the lock while executing the protected section.
+
+However, the order in which workers acquire the lock is not guaranteed.
+
+---
+
+## 57. Final Quick Revision
 
 ### Multiprocessing
 
 ```text
 Multiprocessing
-       ↓
+       |
+       v
 Multiple Processes
-       ↓
-Separate Memory
-       ↓
-Can use Multiple CPU Cores
-       ↓
-Good for CPU-bound Tasks
+       |
+       v
+Separate Process Memory
+       |
+       v
+Possible Multi-Core Execution
+       |
+       v
+Useful for CPU-Bound Tasks
 ```
 
 ### Process Lifecycle
 
 ```text
 Process()
-    ↓
+    |
+    v
 start()
-    ↓
-Running
-    ↓
+    |
+    v
 Task Execution
-    ↓
-Finished
-    ↓
-join()
+    |
+    v
+Process Terminates
+    |
+    v
+join() Returns
 ```
 
-### CPU vs I/O
+### CPU-Bound vs. I/O-Bound
 
 ```text
-CPU-bound
-    ↓
-Multiprocessing
+CPU-Bound
+    |
+    v
+Consider Multiprocessing
 ```
 
 ```text
-I/O-bound
-    ↓
-Threading / Asyncio
+I/O-Bound
+    |
+    v
+Consider Threading or Asyncio
 ```
 
 ## One-Line Memory Rule
 
-> **Multiprocessing = multiple processes working independently, usually with separate memory, and it is especially useful for CPU-bound tasks.**
+> **Multiprocessing uses multiple independent processes, normally with separate memory spaces, and is especially useful for CPU-bound tasks when the benefits of parallel execution outweigh the overhead.**
 
+## Recommended Practice Order
+
+1. Create a process using `multiprocessing.Process()`.
+2. Understand `target`, `args`, and `kwargs`.
+3. Practice `start()` and `join()`.
+4. Learn process names, PIDs, and `is_alive()`.
+5. Understand the main guard and the `spawn` start method.
+6. Practice creating multiple processes.
+7. Learn `terminate()`, `kill()`, and `exitcode`.
+8. Exchange data using `Queue` and `Pipe`.
+9. Process multiple tasks using `Pool`.
+10. Understand the GIL and compare multiprocessing with multithreading.
+11. Practice process synchronization.
+12. Measure performance using CPU-bound examples.
+
+**Final advice:** Start with simple child-process programs, then practice `Queue`, `Pool`, and process synchronization. Once you understand process creation and communication, multiprocessing becomes much easier to use in real Python applications.
 """

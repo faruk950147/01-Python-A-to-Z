@@ -1,36 +1,15 @@
 """
-# Python Threading & Multithreading — Easy English Notes
+# Python Threading & Multithreading — Full Notes
 
----
+## 1. What Is a Thread?
 
-# 1. What is a Thread?
+A **Thread** is a separate path of execution within a process. A process can contain one or more threads.
 
-A **thread** is a small unit of execution inside a process.
+Threads within the same process generally share memory and resources.
 
-A process can have one or many threads.
+## 2. What Is Threading?
 
-When a Python program starts, it normally has a **Main Thread**.
-
-```text
-Process
-│
-├── Main Thread
-├── Worker Thread 1 → Task A
-├── Worker Thread 2 → Task B
-└── Worker Thread 3 → Task C
-```
-
-Threads inside the same process usually share the same memory and resources.
-
-### Simple Definition
-
-> A thread is an execution path inside a process.
-
----
-
-# 2. What is Threading?
-
-**Threading** means using multiple threads in one process so that multiple tasks can make progress at the same time.
+**Threading** is a technique for allowing multiple threads to make progress concurrently within a process.
 
 Python provides the built-in `threading` module.
 
@@ -38,307 +17,135 @@ Python provides the built-in `threading` module.
 import threading
 ```
 
-Threading is especially useful for **I/O-bound tasks**.
+Threading is particularly useful for I/O-bound tasks, such as:
 
-Examples:
+- API requests
+- Network requests
+- File operations
+- Database operations
+- Web scraping
 
-```text
-API Requests
-Network Requests
-File Operations
-Database Operations
-Web Scraping
-HTTP Requests
-Waiting for External Services
-```
+## 3. Concurrency vs. Parallelism
 
----
+**Concurrency:** Multiple tasks make progress during overlapping periods. When one task waits for I/O, another task can make progress.
 
-# 3. What is Concurrency?
+**Parallelism:** Multiple tasks execute at the same time, such as on separate CPU cores.
 
-**Concurrency** means handling multiple tasks so their execution can overlap in time.
+Concurrency does not necessarily mean parallelism.
 
-Example:
+## 4. Why Use Threading?
 
-```text
-Task A ─────────────
-Task B ─────────
-Task C ────────────
-```
+Suppose three I/O tasks each require approximately three seconds of waiting.
 
-The tasks can make progress during overlapping time periods.
-
-### Concurrency vs Parallelism
-
-**Concurrency**
-
-> Multiple tasks make progress during overlapping time periods.
-
-**Parallelism**
-
-> Multiple tasks actually execute at the same time, usually on different CPU cores.
-
-So:
-
-```text
-Concurrency
-→ Tasks overlap in progress.
-
-Parallelism
-→ Tasks execute simultaneously.
-```
-
-Concurrency does not always mean that tasks run at exactly the same moment.
-
----
-
-# 4. Why Use Threading?
-
-Suppose we have three I/O tasks:
+**Sequential execution:**
 
 ```text
 Task A → 3 seconds
 Task B → 3 seconds
 Task C → 3 seconds
+Total ≈ 9 seconds
 ```
 
-Without concurrency:
+**Concurrent execution:**
 
 ```text
-Task A → 3 sec
-Task B → 3 sec
-Task C → 3 sec
+Task A ──────────────┐
+Task B ──────────────┼── Progress concurrently
+Task C ──────────────┘
 
-Total ≈ 9 sec
+Total ≈ 3 seconds
 ```
 
-With suitable concurrency:
+This is an approximation. Actual execution time depends on I/O behavior, network conditions, scheduling, and thread overhead.
 
-```text
-Task A ─────────
-Task B ─────────
-Task C ─────────
-
-Total may be closer to ≈ 3 sec
-```
-
-This is only an example.
-
-Actual performance depends on:
-
-* Network speed
-* Server response time
-* Operating system
-* Number of threads
-* I/O speed
-* CPU overhead
-* Application design
-
-Threading does **not guarantee** a specific speed improvement.
-
----
-
-# 5. The `threading` Module
-
-Python has a built-in module called `threading`.
+## 5. Creating a Thread
 
 ```python
 import threading
-```
-
-It provides classes and functions for creating and controlling threads.
-
----
-
-# 6. Creating a Basic Thread
-
-```python
-import threading
-
 
 def task():
     print("Task is running")
 
-
 thread = threading.Thread(target=task)
-
 thread.start()
 ```
 
-Here:
+- `threading.Thread()` creates a thread object.
+- `target=task` specifies the function to execute.
+- `start()` starts the new thread.
+
+**Correct:**
 
 ```python
-threading.Thread(target=task)
-```
-
-creates a thread object.
-
-And:
-
-```python
-thread.start()
-```
-
-starts the thread.
-
-### Important
-
-Use:
-
-```python
-target=task
-```
-
-Not:
-
-```python
-target=task()
-```
-
-Why?
-
-Because:
-
-```python
-task()
-```
-
-calls the function immediately.
-
-But:
-
-```python
-target=task
-```
-
-passes the function to the thread.
-
----
-
-# 7. `start()` vs `run()`
-
-## `start()`
-
-```python
-thread.start()
-```
-
-`start()` starts a new thread of execution.
-
-It causes the thread's `run()` method to execute in that new thread.
-
-A thread can normally be started only once.
-
----
-
-## `run()`
-
-```python
-thread.run()
-```
-
-`run()` contains the actual work performed by the thread.
-
-But if you call `run()` directly, it does **not** create a new thread.
-
-The target function runs in the current thread.
-
-Example:
-
-```python
-import threading
-
-
-def task():
-    print("Task is running")
-
-
 thread = threading.Thread(target=task)
-
-thread.run()
 ```
 
-Here, no new thread is created.
+**Incorrect:**
 
-Normally use:
+```python
+thread = threading.Thread(target=task())
+```
+
+Calling `task()` executes the function immediately and passes its return value to `target`. Using `target=task` passes the function itself.
+
+## 6. start() vs. run()
+
+**start():**
 
 ```python
 thread.start()
 ```
 
-instead of:
+Starts a new thread and arranges for its `run()` method to execute in that thread.
+
+**run():**
 
 ```python
 thread.run()
 ```
 
-### Easy Rule
+Calling `run()` directly does not create a new thread. It executes in the current execution context.
 
-```text
-start()
-→ Creates/starts a new thread
+A thread object can normally be started only once.
 
-run()
-→ Runs the thread's work directly in the current execution context
-```
+## 7. join()
 
----
-
-# 8. `join()`
-
-`join()` makes the current thread wait until another thread finishes.
-
-Example:
+The `join()` method makes the calling thread wait until another thread finishes.
 
 ```python
 import threading
 import time
 
-
 def task():
     time.sleep(2)
     print("Task completed")
 
-
 thread = threading.Thread(target=task)
-
 thread.start()
 thread.join()
 
 print("Main thread finished")
 ```
 
-Here:
+**Output:**
 
-```python
-thread.join()
+```text
+Task completed
+Main thread finished
 ```
 
-makes the Main Thread wait for `thread`.
+`join()` does not stop a thread. It waits for that thread to finish.
 
-### Important
-
-`join()` does **not stop** the thread.
-
-It only waits for the thread to finish.
-
----
-
-# 9. Multiple Threads
+## 8. Multiple Threads
 
 ```python
 import threading
 import time
 
-
 def task(name):
-
     print(f"{name} started")
-
     time.sleep(2)
-
     print(f"{name} finished")
-
 
 t1 = threading.Thread(
     target=task,
@@ -355,54 +162,28 @@ t3 = threading.Thread(
     args=("Thread 3",)
 )
 
-
 t1.start()
 t2.start()
 t3.start()
-
 
 t1.join()
 t2.join()
 t3.join()
 
-
 print("All tasks completed")
 ```
 
-The three threads can make progress concurrently.
+The threads can make progress concurrently. Their completion order is not guaranteed.
 
-### Important
+## 9. args and kwargs
 
-The output order is **not guaranteed**.
-
-For example:
-
-```text
-Thread 1 started
-Thread 2 started
-Thread 3 started
-Thread 2 finished
-Thread 1 finished
-Thread 3 finished
-```
-
-Another execution may have a different order.
-
-This happens because thread scheduling is controlled by the operating system and Python runtime.
-
----
-
-# 10. Passing Arguments with `args`
-
-The `args` parameter is used to pass positional arguments to a thread's target function.
+`args` passes positional arguments to the target function.
 
 ```python
 import threading
 
-
 def greet(name):
     print(f"Hello {name}")
-
 
 thread = threading.Thread(
     target=greet,
@@ -413,75 +194,35 @@ thread.start()
 thread.join()
 ```
 
-Output:
+The trailing comma is necessary when creating a tuple with one element.
 
-```text
-Hello Faruk
-```
-
-### Why is there a comma?
-
-This:
-
-```python
-("Faruk",)
-```
-
-is a tuple with one element.
-
-But:
-
-```python
-("Faruk")
-```
-
-is just a string inside parentheses.
-
-So this is correct:
-
-```python
-args=("Faruk",)
-```
-
----
-
-# 11. Using `kwargs`
-
-`kwargs` is used to pass keyword arguments.
+`kwargs` passes keyword arguments.
 
 ```python
 import threading
 
-
 def student(name, age):
     print(name, age)
 
-
 thread = threading.Thread(
     target=student,
-    kwargs={
-        "name": "Faruk",
-        "age": 25
-    }
+    kwargs={"name": "Faruk", "age": 25}
 )
 
 thread.start()
 thread.join()
 ```
 
----
-
-# 12. Thread Name
-
-We can give a custom name to a thread.
+## 10. Thread Names and Information
 
 ```python
 import threading
 
-
 def task():
-    print(threading.current_thread().name)
+    current = threading.current_thread()
 
+    print("Name:", current.name)
+    print("ID:", current.ident)
 
 thread = threading.Thread(
     target=task,
@@ -492,199 +233,66 @@ thread.start()
 thread.join()
 ```
 
-Possible output:
+- `current_thread()`: Returns the current thread object.
+- `name`: The thread's name.
+- `ident`: The thread identifier.
+- `is_alive()`: Checks whether the thread is alive.
+- `threading.active_count()`: Returns the number of active thread objects.
 
-```text
-Worker-1
-```
-
----
-
-# 13. `current_thread()`
-
-We can get the currently running thread using:
-
-```python
-threading.current_thread()
-```
-
-Example:
-
-```python
-import threading
-
-
-def task():
-
-    current = threading.current_thread()
-
-    print("Name:", current.name)
-    print("ID:", current.ident)
-
-
-thread = threading.Thread(target=task)
-
-thread.start()
-thread.join()
-```
-
-Useful attributes:
-
-```python
-current.name
-current.ident
-```
-
----
-
-# 14. `active_count()`
-
-To get the approximate number of active threads:
-
-```python
-threading.active_count()
-```
-
-Example:
-
-```python
-import threading
-
-print(threading.active_count())
-```
-
-The result includes the current thread and other active threads managed by the threading system.
-
----
-
-# 15. Thread Lifecycle
-
-A simple thread lifecycle is:
+## 11. Thread Lifecycle
 
 ```text
 Thread Object Created
-        │
-        ▼
+        ↓
       start()
-        │
-        ▼
- Runnable / Running
-        │
-        ▼
+        ↓
+Runnable / Running
+        ↓
      Finished
 ```
 
-Example:
+This is a simplified conceptual lifecycle.
+
+## 12. Daemon Thread
+
+A **daemon thread** is a thread that does not keep the Python process alive by itself.
 
 ```python
-thread = threading.Thread(target=task)
-```
-
-Then:
-
-```python
-thread.start()
-```
-
-Then the thread runs the target function.
-
-Finally, the thread finishes.
-
-This is a simplified model. Real operating-system thread states are more detailed.
-
----
-
-# 16. Daemon Threads
-
-A **daemon thread** is a background thread that does not keep the Python program alive when no non-daemon threads remain.
-
-Example: Sending Email Using a Daemon Thread
-Suppose you are building a Django application. When a user registers, you want to send a welcome email in the background.
-
-Daemon Thread — Use Cases
-Common Use Cases:
-1. Background Monitoring
-2. Periodic Status Checking
-3. Non-Critical Logging
-4. System Health Monitoring
-5. Temporary Background Tasks
-6. GUI Background Tasks
-7. Progress Monitoring
-8. Debugging Information Collection
-9. Temporary Statistics Collection
-10. Non-Critical Notifications
-Tasks Where Daemon Threads Should Be Avoided:
-1. Payment Processing
-2. Important Email Sending
-3. Database Transactions
-4. Order Processing
-5. File Uploads
-6. Important Data Saving
-7. Critical Background Jobs
-Note: Daemon threads are suitable for non-critical 
-background tasks that do not need to finish before the Python program exits.
-
-import threading
-import time
-def send_email():    
-    print("Email sending started...")    
-    time.sleep(5)    
-    print("Email sent successfully!")
-thread = threading.Thread(target=send_email,daemon=True)
-thread.start()
-print("User registration completed!")
-
-
-
-Possible Output
-Email sending started...
-User registration completed!
-
-
-The program may exit before the email task finishes.
-Why use a Daemon Thread?
-- It runs a task in the background.
-- It does not prevent the Python program from exiting.
-- It is useful for background tasks that can safely stop when the program exits.
-Important: Do not rely on a daemon thread for important tasks like password-reset
-emails or OTP delivery, because the task may be interrupted before completion. 
-For reliable background email delivery in Django, consider using Celery with Redis.
-Do you like this personality?
-
-
-Example:
-
-```python
-import threading
-import time
-
-Perfect for background tasks like:
-
-def send_email():
-    print("Email sending started...")
-    time.sleep(5)
-    print("Email sent successfully!")
-
-
 thread = threading.Thread(
-    target=send_email,
+    target=task,
     daemon=True
 )
+```
 
-thread.start()
+When all non-daemon threads finish, the Python process can exit even if daemon threads have unfinished work.
 
-print("User registration completed!")
+### Common Use Cases
 
+Daemon threads may be appropriate for non-critical background tasks, including:
+
+1. Background monitoring
+2. Periodic status checking
+3. Non-critical logging
+4. System health monitoring
+5. Temporary background tasks
+6. GUI background tasks
+7. Progress monitoring
+8. Debugging information collection
+9. Temporary statistics collection
+10. Non-critical notifications
+
+Use daemon threads only when abruptly abandoning the work is acceptable.
+
+### Example
+
+```python
 import threading
 import time
 
-
 def background_task():
-
     while True:
         print("Background running...")
         time.sleep(1)
-
 
 thread = threading.Thread(
     target=background_task,
@@ -694,392 +302,254 @@ thread = threading.Thread(
 thread.start()
 
 time.sleep(3)
-
 print("Main program finished")
 ```
 
-When the Python process exits, daemon threads are **not guaranteed to finish** their work.
+When the main thread finishes and no non-daemon threads remain, the process may exit and the daemon thread may stop before completing its work.
 
-### Do not use daemon threads for important work
+Daemon threads do not guarantee that important data will be saved or cleanup will finish.
 
-For example:
-
-```text
-Important Database Update
-Important File Write
-Financial Transaction
-Critical Data Processing
-```
-
-For important work, use a controlled shutdown method.
-
----
-
-# 17. Non-Daemon Threads
-
-Threads are normally **non-daemon** by default.
-
-Example:
+## 13. Sending Email with a Daemon Thread
 
 ```python
-thread = threading.Thread(target=task)
+import threading
+import time
+
+def send_email():
+    print("Email sending started...")
+    time.sleep(5)
+    print("Email sent successfully!")
+
+thread = threading.Thread(
+    target=send_email,
+    daemon=True
+)
+
+thread.start()
+
+print("User registration completed!")
 ```
 
-A non-daemon thread can keep the Python program alive until it finishes.
-
-Conceptually:
+Possible output:
 
 ```text
-Main Thread finishes
-        │
-        ▼
-Non-daemon thread still running?
-        │
-       Yes
-        │
-        ▼
-Process remains alive
+Email sending started...
+User registration completed!
 ```
 
----
+The process may exit before the email is sent.
 
-# 18. Shared Resources
+Therefore, do not rely solely on daemon threads for important operations such as password reset emails, OTP delivery, or registration confirmation.
 
-A **shared resource** is data or a resource that multiple threads can access.
+For production applications, a durable task queue or background job system is often a better choice.
 
-Examples:
+## 14. Non-Daemon Thread
 
-```text
-Shared Resource
-│
-├── Counter
-├── Bank Balance
-├── Available Seats
-├── File
-├── Database Record
-└── Shared Data Structure
-```
+A **non-daemon thread** generally keeps the Python process alive until its execution finishes.
 
-Example:
+The default is `daemon=False`.
 
 ```python
-counter = 0
+thread = threading.Thread(
+    target=task,
+    daemon=False
+)
 ```
 
-If multiple threads change the same data, synchronization may be needed.
-
----
-
-# 19. Race Condition
-
-A **race condition** happens when the result of a program depends on the timing or order of concurrent operations.
-
-Example:
+### Example
 
 ```python
-counter += 1
+import threading
+import time
+
+def save_data():
+    print("Saving important data...")
+    time.sleep(3)
+    print("Data saved successfully!")
+
+thread = threading.Thread(
+    target=save_data,
+    daemon=False
+)
+
+thread.start()
+
+print("Main task completed!")
 ```
 
-Conceptually, this means:
+Possible output:
 
 ```text
-Read counter
-      ↓
-Calculate new value
-      ↓
-Write new value
+Saving important data...
+Main task completed!
+Data saved successfully!
 ```
 
-Suppose:
+### Common Use Cases
+
+Non-daemon threads can be useful for:
+
+1. Important email sending
+2. Database operations
+3. Order processing
+4. File uploads
+5. Data saving
+6. Background jobs that must finish before normal process exit
+
+A non-daemon thread provides an opportunity for work to finish, but it does not guarantee success. Error handling, transaction management, and verification are still necessary.
+
+## 15. Daemon vs. Non-Daemon
+
+**Daemon thread:**
+
+- Does not keep the process alive by itself.
+- May be abandoned when the process exits.
+- Can be suitable for non-critical background work.
+
+**Non-daemon thread:**
+
+- Normally keeps the process alive while running.
+- Allows work to finish before normal process exit.
+- Is the default thread type.
+
+A background thread can be either daemon or non-daemon.
+
+## 16. Shared Resources
+
+A **shared resource** is data or a resource accessed by multiple threads.
+
+Examples include:
+
+- Bank balances
+- Available seats
+- Shared files
+- Database records
+- Shared data structures
+
+Synchronization may be necessary when multiple threads modify the same data.
+
+## 17. Race Condition
+
+A **race condition** occurs when the result of concurrent operations depends on their timing or execution order.
+
+Suppose `counter = 0`.
 
 ```text
-Initial counter = 0
-
 Thread 1 → Read 0
 Thread 2 → Read 0
-
 Thread 1 → Write 1
 Thread 2 → Write 1
 ```
 
-Expected:
+Two increments should produce `2`, but the final result can be `1`. This is called a lost update.
 
-```text
-2
-```
-
-Possible result:
-
-```text
-1
-```
-
-This can happen because both threads access shared data without proper synchronization.
-
-import threading
-
-counter = 0
-barrier = threading.Barrier(2)
-
-
-def increment():
-    global counter
-
-    value = counter
-    barrier.wait()  # two threads wait here to synchronize
-    counter = value + 1
-
-
-t1 = threading.Thread(target=increment)
-t2 = threading.Thread(target=increment)
-
-t1.start()
-t2.start()
-
-t1.join()
-t2.join()
-
-print(counter)
-
-Output:
-1
-
-Why is the output 1 instead of 2?
-- Thread 1 reads counter = 0.
-- Thread 2 also reads counter = 0.
-- The barrier makes both threads wait until they have read the value.
-- Both threads calculate 0 + 1 and write 1.
-One increment is lost. This is called a Race Condition, specifically a lost update.
-Remember: A Race Condition does not necessarily produce an incorrect result every 
-time. The threading.Lock() protects shared data from concurrent modifications when
-used correctly.
-
-### Solution
-
-Use a synchronization mechanism:
-
-```python
-with lock:
-    counter += 1
-```
-
----
-
-# 20. Critical Section
-
-A **critical section** is a part of code that accesses or changes shared data and may need synchronization.
-
-Example:
-
-```python
-with lock:
-    counter += 1
-```
-
-Here:
-
-```python
-counter += 1
-```
-
-is the critical operation.
-
-The goal is to protect shared data from conflicting access.
-
----
-
-# 21. Lock
-
-A `Lock` is used to protect a critical section.
+## 18. Solving a Race Condition with Lock
 
 ```python
 import threading
-
-lock = threading.Lock()
-```
-
-Only one thread can hold a normal `Lock` at a time.
-
-If another thread tries to acquire the same locked lock, it waits.
-
----
-
-# 22. `acquire()` and `release()`
-
-A lock can be controlled manually:
-
-```python
-lock.acquire()
-
-# Critical Section
-
-lock.release()
-```
-
-`acquire()` gets the lock.
-
-`release()` gives the lock back.
-
-### Problem
-
-If an exception happens before `release()`, the lock may remain locked.
-
-So manual lock management can be risky.
-
----
-
-# 23. Safe Manual Lock Management
-
-Use `try/finally` when manually managing a lock:
-
-```python
-lock.acquire()
-
-try:
-    counter += 1
-
-finally:
-    lock.release()
-```
-
-Even if an error occurs, the `finally` block releases the lock.
-
----
-
-# 24. `with lock` — Recommended
-
-A cleaner method is:
-
-```python
-with lock:
-    counter += 1
-```
-
-Python automatically handles acquiring and releasing the lock.
-
-Complete example:
-
-```python
-import threading
-
 
 counter = 0
 lock = threading.Lock()
 
-
 def increment():
-
     global counter
 
     for _ in range(100000):
-
         with lock:
             counter += 1
-
 
 t1 = threading.Thread(target=increment)
 t2 = threading.Thread(target=increment)
 
-
 t1.start()
 t2.start()
-
 
 t1.join()
 t2.join()
 
-
 print(counter)
 ```
 
-Expected result:
+Expected output:
 
 ```text
 200000
 ```
 
-Because the shared update is protected by the lock.
+The lock protects the increment operation so that only one thread at a time can execute that protected section.
 
----
+## 19. Critical Section
 
-# 25. Real-Life Lock Example
+A **critical section** is a section of code that accesses or modifies shared resources and may require synchronization.
 
-Imagine a bathroom with only one key:
-
-```text
-Bathroom
-   │
-  LOCK
-   │
-Person A → Inside
-Person B → Waiting
-Person C → Waiting
+```python
+with lock:
+    counter += 1
 ```
 
-The same idea applies to threads:
+Here, `counter += 1` is the critical section.
 
-```text
-Thread A → Lock → Critical Section
-Thread B → Wait
-Thread C → Wait
+## 20. Lock
+
+A lock provides mutual exclusion, allowing only one thread at a time to hold the lock.
+
+```python
+import threading
+
+lock = threading.Lock()
 ```
 
-A lock provides **mutual exclusion**.
+- `acquire()`: Acquires the lock.
+- `release()`: Releases the lock.
 
-That means only one thread can enter the protected section at a time.
+```python
+lock.acquire()
 
----
+try:
+    # Critical section
+    pass
+finally:
+    lock.release()
+```
 
-# 26. RLock
+**Recommended approach:**
 
-`RLock` means **Reentrant Lock**.
+```python
+with lock:
+    counter += 1
+```
 
-A thread that already owns an `RLock` can acquire the same lock again.
+The context manager handles acquiring and releasing the lock.
 
-Example:
+## 21. RLock
+
+`RLock` stands for **Reentrant Lock**.
+
+The thread that owns an RLock can acquire it again without blocking itself.
 
 ```python
 import threading
 
 lock = threading.RLock()
 
-
 def function_a():
-
     with lock:
         function_b()
 
-
 def function_b():
-
     with lock:
         print("Running")
-
 
 function_a()
 ```
 
-This works because the same thread can acquire the `RLock` again.
+With a regular `Lock`, attempting to acquire the same lock again from the same thread can cause that thread to block. An RLock allows re-entry by its owning thread.
 
-### Lock vs RLock
+An RLock must be released as many times as it has been acquired.
 
-```text
-Lock
-→ Normal mutual-exclusion lock.
+## 22. Semaphore
 
-RLock
-→ The same thread can acquire it repeatedly.
-```
-
-An `RLock` keeps track of how many times the owning thread acquired it.
-
-Therefore, it must be released the same number of times.
-
----
-
-# 27. Semaphore
-
-A **Semaphore** controls how many threads can use a resource at the same time.
+A semaphore limits how many threads can acquire a resource at the same time.
 
 ```python
 import threading
@@ -1087,34 +557,25 @@ import threading
 semaphore = threading.Semaphore(3)
 ```
 
-This allows up to **3 threads** to acquire it at the same time.
+Here, up to three threads can acquire the semaphore simultaneously.
 
-Example:
+### Example
 
 ```python
 import threading
 import time
 
-
 semaphore = threading.Semaphore(2)
 
-
 def task(number):
-
     with semaphore:
-
         print(f"Thread {number} entered")
-
         time.sleep(2)
-
         print(f"Thread {number} leaving")
-
 
 threads = []
 
-
 for i in range(5):
-
     t = threading.Thread(
         target=task,
         args=(i,)
@@ -1123,135 +584,52 @@ for i in range(5):
     threads.append(t)
     t.start()
 
-
 for t in threads:
     t.join()
 ```
 
-At most two threads can be inside the protected section at the same time.
+Five threads are created, but at most two can enter the protected section simultaneously.
 
----
+## 23. Lock vs. Semaphore
 
-# 28. Lock vs Semaphore
+**Lock:**
 
-## Lock
+- Provides mutual exclusion.
+- Typically allows one thread at a time to hold the lock.
+- Useful for protecting critical sections.
 
-```python
-lock = threading.Lock()
-```
+**Semaphore(3):**
 
-Usually:
+- Allows up to three threads to acquire it simultaneously.
+- Useful for limiting concurrent access to a resource.
 
-```text
-Maximum 1 thread
-```
+## 24. Event
 
-## Semaphore
-
-```python
-semaphore = threading.Semaphore(3)
-```
-
-Means:
-
-```text
-Maximum 3 threads
-```
-
-Easy rule:
-
-```text
-Lock
-↓
-1 thread at a time
-
-Semaphore(3)
-↓
-Maximum 3 threads at a time
-```
-
----
-
-# 29. Event
-
-`Event` is a simple way for threads to communicate using a signal.
+An `Event` is a simple signaling mechanism between threads.
 
 ```python
 event = threading.Event()
 ```
 
-One thread can wait:
+Methods:
 
-```python
-event.wait()
-```
+- `set()`: Sets the event.
+- `clear()`: Clears the event.
+- `wait()`: Waits until the event is set.
+- `is_set()`: Checks whether the event is set.
 
-Another thread can send a signal:
-
-```python
-event.set()
-```
-
-Useful when one thread needs to wait until another thread says that something has happened.
-
----
-
-# 30. Event Methods
-
-### `set()`
-
-```python
-event.set()
-```
-
-Sets the event.
-
-Waiting threads can continue.
-
-### `clear()`
-
-```python
-event.clear()
-```
-
-Clears the event.
-
-### `wait()`
-
-```python
-event.wait()
-```
-
-Waits until the event is set.
-
-### `is_set()`
-
-```python
-event.is_set()
-```
-
-Checks whether the event is set.
-
----
-
-# 31. Event Example
+### Example
 
 ```python
 import threading
 import time
 
-
 def worker(event):
-
     print("Thread is waiting...")
-
     event.wait()
-
     print("Thread received the signal!")
 
-
 event = threading.Event()
-
 
 thread = threading.Thread(
     target=worker,
@@ -1259,11 +637,9 @@ thread = threading.Thread(
 )
 
 thread.start()
-
 time.sleep(2)
 
 print("Sending signal...")
-
 event.set()
 
 thread.join()
@@ -1273,85 +649,62 @@ Flow:
 
 ```text
 Worker Thread
-      │
-      ▼
- event.wait()
-      │
-      │ Waiting
-      ▼
- event.set()
-      │
-      ▼
+      ↓
+  event.wait()
+      ↓
+    Waiting
+      ↓
+   event.set()
+      ↓
 Continue Execution
 ```
 
----
+## 25. Condition
 
-# 32. Condition
-
-`Condition` is useful when threads need to wait for a particular state.
-
-One thread waits, and another thread sends a notification.
+A `Condition` is useful when a thread needs to wait until a particular state becomes true.
 
 ```python
 condition = threading.Condition()
 ```
 
-Common methods:
+Methods:
 
-```python
-condition.wait()
-condition.notify()
-condition.notify_all()
-```
+- `wait()`
+- `notify()`
+- `notify_all()`
 
-Example:
+### Example
 
 ```python
 import threading
 import time
 
-
 condition = threading.Condition()
 
-
 def consumer():
-
     with condition:
-
         print("Consumer waiting...")
-
         condition.wait()
-
         print("Consumer received signal")
 
-
 def producer():
-
     time.sleep(2)
 
     with condition:
-
         print("Producer sending signal")
-
         condition.notify()
-
 
 t1 = threading.Thread(target=consumer)
 t2 = threading.Thread(target=producer)
 
-
 t1.start()
 t2.start()
-
 
 t1.join()
 t2.join()
 ```
 
-### Important
-
-In real producer-consumer code, normally check the required state in a loop:
+In production code, check the required condition in a loop. Receiving a notification does not guarantee that the desired state is true.
 
 ```python
 with condition:
@@ -1359,71 +712,29 @@ with condition:
         condition.wait()
 ```
 
-This is safer because a thread can wake up even when the required state is not actually ready.
+The shared state must be checked and modified using appropriate synchronization.
 
----
+## 26. Event vs. Condition
 
-# 33. Event vs Condition
+**Event:**
 
-## Event
+- Provides simple signaling.
+- Uses `set()` to signal.
+- Uses `wait()` to wait for the signal.
+- Remains set until cleared.
 
-Used for simple signaling:
+**Condition:**
 
-```text
-"Something happened."
-```
+- Supports waiting for a state and notifying waiters.
+- Uses `notify()` or `notify_all()`.
+- Is useful when threads coordinate around shared state.
 
-## Condition
+## 27. Queue
 
-Used when a thread needs to wait for a specific state:
-
-```text
-"Tell me when data is available."
-```
-
-Easy rule:
-
-```text
-Event
-→ Simple signaling
-
-Condition
-→ Wait for a condition + notification
-```
-
----
-
-# 34. Queue
-
-Python provides a thread-safe queue:
+Python's `queue` module provides thread-safe queues for communication between threads.
 
 ```python
 from queue import Queue
-```
-
-Create a queue:
-
-```python
-queue = Queue()
-```
-
-Add data:
-
-```python
-queue.put("Task 1")
-```
-
-Get data:
-
-```python
-queue.get()
-```
-
-Example:
-
-```python
-from queue import Queue
-
 
 queue = Queue()
 
@@ -1441,83 +752,44 @@ Task 1
 Task 2
 ```
 
-`Queue` is very useful for communication between producer and consumer threads.
+Important methods:
 
----
+- `put()`: Adds an item to the queue.
+- `get()`: Retrieves an item.
+- `task_done()`: Signals that a retrieved task has been processed.
+- `join()`: Waits until all queued tasks have been marked as complete.
 
-# 35. Producer-Consumer Pattern
+`queue.join()` and `thread.join()` are different operations.
 
-The **Producer-Consumer pattern** is a common concurrency design.
+## 28. Producer-Consumer Pattern
 
-The producer creates tasks.
-
-The consumer processes tasks.
-
-```text
-Producer
-    │
-    │ Creates Task
-    ▼
-  Queue
-    │
-    │ Gets Task
-    ▼
-Consumer
-```
-
-Example:
+The producer creates tasks, the queue stores them, and consumers retrieve and process them.
 
 ```text
-Customer Order
-      ↓
-Producer
-      ↓
-Queue
-      ↓
-Worker
-      ↓
-Process Order
+Producer → Queue → Consumer → Process Task
 ```
 
-This pattern is useful in:
+Common applications:
 
-* Backend systems
-* Web applications
-* Task processing
-* Data pipelines
+- Backend systems
+- Web applications
+- Task processing
+- Data pipelines
 
----
+## 29. ThreadPoolExecutor
 
-# 36. ThreadPoolExecutor
-
-When there are many small or similar tasks, manually creating many threads can be difficult.
-
-`ThreadPoolExecutor` provides an easier way to manage a group of worker threads.
-
-```python
-from concurrent.futures import ThreadPoolExecutor
-```
-
-Example:
+`ThreadPoolExecutor` manages a pool of worker threads.
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
 import time
 
-
 def task(number):
-
     time.sleep(1)
-
     return number * number
 
-
 with ThreadPoolExecutor(max_workers=3) as executor:
-
-    results = executor.map(
-        task,
-        [1, 2, 3, 4, 5]
-    )
+    results = executor.map(task, [1, 2, 3, 4, 5])
 
     for result in results:
         print(result)
@@ -1533,42 +805,26 @@ Output:
 25
 ```
 
-Here:
+`max_workers=3` means that at most three worker threads can execute tasks concurrently.
 
-```python
-max_workers=3
-```
+## 30. submit() and Future
 
-means the executor can use up to 3 worker threads at the same time.
-
----
-
-# 37. `submit()` and `Future`
-
-`submit()` sends a task to the thread pool.
-
-It returns a `Future`.
+`submit()` schedules a task and returns a `Future` object.
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
 import time
 
-
 def task(x):
-
     time.sleep(2)
-
     return x * x
 
-
 with ThreadPoolExecutor(max_workers=3) as executor:
-
     future = executor.submit(task, 5)
 
     print("Task submitted")
 
     result = future.result()
-
     print(result)
 ```
 
@@ -1579,49 +835,26 @@ Task submitted
 25
 ```
 
-A `Future` represents the result of an asynchronous task.
+A Future represents the eventual result of an asynchronous computation.
 
-Useful methods:
+Important methods:
 
-```python
-future.result()
-future.done()
-future.exception()
-future.cancel()
-```
+- `result()`: Returns the result, waiting if necessary.
+- `done()`: Checks whether the task has finished.
+- `exception()`: Returns the task's exception, if any.
+- `cancel()`: Attempts to cancel a task that has not started.
 
-### Important
-
-```python
-future.result()
-```
-
-waits until the task is finished if the result is not ready yet.
-
----
-
-# 38. Thread Exception Handling
-
-Exceptions inside threads should be handled properly.
-
-Example:
+## 31. Thread Exception Handling
 
 ```python
 import threading
 
-
 def task():
-
     try:
-
         result = 10 / 0
-
         print(result)
-
     except Exception as e:
-
         print("Error:", e)
-
 
 thread = threading.Thread(target=task)
 
@@ -1635,61 +868,24 @@ Output:
 Error: division by zero
 ```
 
-### Important
+If an exception escapes a normal thread's target function, Python reports the exception for that thread. It is not automatically propagated to the thread that called `start()`.
 
-If an exception escapes from a normal `Thread` target, Python reports the exception for that thread.
+With `ThreadPoolExecutor`, an exception is stored in the Future and can be raised when `future.result()` is called.
 
-It does **not automatically send the exception** to the thread that called `start()`.
+## 32. Returning a Value from a Thread
 
-With `ThreadPoolExecutor`, the exception is stored in the `Future` and is raised when:
+A regular `threading.Thread` does not directly expose the target function's return value.
 
-```python
-future.result()
-```
-
-is called.
-
----
-
-# 39. Getting a Return Value from a Thread
-
-A normal `threading.Thread` does not directly provide the return value of its target function.
-
-Example:
-
-```python
-def task():
-    return 100
-```
-
-If we create:
-
-```python
-thread = threading.Thread(target=task)
-```
-
-we cannot do:
-
-```python
-result = thread.result()
-```
-
-because `Thread` does not have a `result()` method.
-
-A convenient solution is `ThreadPoolExecutor`:
+One convenient solution is `ThreadPoolExecutor`.
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
 
-
 def task():
     return 100
 
-
 with ThreadPoolExecutor(max_workers=1) as executor:
-
     future = executor.submit(task)
-
     result = future.result()
 
     print(result)
@@ -1701,208 +897,69 @@ Output:
 100
 ```
 
-Other solutions include:
+## 33. Thread-Safe Code
 
-* `queue.Queue`
-* Shared data with synchronization
-* Callback functions
-* Custom thread classes
-
----
-
-# 40. Thread Information
-
-We can get information about a thread using:
-
-```python
-import threading
-
-
-current = threading.current_thread()
-
-print(current.name)
-print(current.ident)
-print(current.is_alive())
-```
-
-Important:
-
-```python
-threading.current_thread()
-```
-
-Returns the current thread.
-
-```python
-current.name
-```
-
-Returns the thread name.
-
-```python
-current.ident
-```
-
-Returns the thread ID.
-
-It can be `None` before a thread starts.
-
-```python
-current.is_alive()
-```
-
-Checks whether the thread is currently running/alive.
-
----
-
-# 41. Thread-Safe
-
-Code or a resource is **thread-safe** when it works correctly when multiple threads access it concurrently according to its synchronization guarantees.
-
-Example:
+Code or a resource is **thread-safe** when concurrent access is handled correctly according to its synchronization requirements.
 
 ```python
 with lock:
     shared_data.append(item)
 ```
 
-The lock can protect the shared operation.
+Thread safety does not necessarily mean high performance. Synchronization introduces overhead but helps preserve correctness.
 
-### Important
+## 34. Deadlock
 
-Thread-safe does not mean "fast".
-
-Synchronization can add some overhead, but it helps keep the program correct.
-
----
-
-# 42. Deadlock
-
-A **deadlock** happens when two or more threads wait forever for resources held by each other.
+A **deadlock** occurs when two or more threads wait indefinitely for resources held by one another, preventing progress.
 
 Example:
 
 ```text
-Thread A
-   │
-   ├── Lock 1 ✓
-   │
-   └── Waiting for Lock 2
+Thread A:
+    Acquires Lock 1
+    Waits for Lock 2
 
-
-Thread B
-   │
-   ├── Lock 2 ✓
-   │
-   └── Waiting for Lock 1
+Thread B:
+    Acquires Lock 2
+    Waits for Lock 1
 ```
 
-Result:
+Neither thread can proceed.
 
-```text
-Thread A waits for Thread B
-Thread B waits for Thread A
-```
+## 35. Deadlock Prevention
 
-Neither can continue.
-
----
-
-# 43. How to Prevent Deadlocks
-
-## 1. Use the Same Lock Order
-
-Make all threads acquire multiple locks in the same order.
-
-For example:
-
-```text
-Lock A
-   ↓
-Lock B
-```
-
-Do not let another thread do:
-
-```text
-Lock B
-   ↓
-Lock A
-```
-
----
-
-## 2. Keep Lock Scope Small
-
-Hold a lock only for the time you really need it.
-
-Bad:
-
-```python
-with lock:
-    perform_expensive_network_request()
-    perform_large_computation()
-    update_shared_data()
-```
-
-Better:
-
-```python
-data = perform_expensive_operation()
-
-with lock:
-    update_shared_data(data)
-```
-
-The exact design depends on the application.
-
----
-
-## 3. Avoid Unnecessary Locks
-
-Do not use synchronization when it is not needed.
-
----
-
-## 4. Use Timeouts
-
-Some synchronization operations support timeouts.
-
-Example:
+1. Acquire locks in a consistent order.
+2. Keep critical sections small.
+3. Avoid unnecessary locks.
+4. Use timeouts where appropriate.
+5. Avoid calling unknown or blocking code while holding locks.
 
 ```python
 if lock.acquire(timeout=2):
-
     try:
         # Critical section
         pass
-
     finally:
         lock.release()
-
 else:
     print("Could not acquire lock")
 ```
 
-Timeouts do not solve every deadlock, but they can prevent waiting forever in some situations.
+A timeout does not solve every deadlock, but it can prevent indefinite waiting at that acquisition point.
 
----
-
-# 44. Web Request Example
-
-Threading is often useful for independent I/O-bound requests.
+## 36. Web Request Example
 
 ```python
 import threading
 import requests
 
-
 def download(url):
+    try:
+        response = requests.get(url, timeout=10)
+        print(url, response.status_code)
 
-    response = requests.get(url)
-
-    print(url, response.status_code)
-
+    except requests.RequestException as e:
+        print(f"Request failed for {url}: {e}")
 
 urls = [
     "https://example.com",
@@ -1910,73 +967,48 @@ urls = [
     "https://github.com"
 ]
 
-
 threads = []
 
-
 for url in urls:
-
     thread = threading.Thread(
         target=download,
         args=(url,)
     )
 
     threads.append(thread)
-
     thread.start()
 
-
 for thread in threads:
-
     thread.join()
 ```
 
-Each URL is handled by a separate thread.
+Threading can improve performance for independent I/O-bound requests.
 
-### Production considerations
+Production applications should consider connection pooling, request timeouts, exception handling, rate limits, and bounded thread pools.
 
-For real applications, consider:
+Install the third-party dependency if necessary:
 
-* Connection pooling
-* Request timeouts
-* Exception handling
-* Rate limits
-* Resource limits
-* Thread pools
-
-For example:
-
-```python
-requests.get(url, timeout=10)
+```bash
+pip install requests
 ```
 
-is safer than making a request without a timeout.
+## 37. Custom Thread Class
 
----
-
-# 45. Creating a Thread Using a Class
-
-We can create a custom thread class by inheriting from `threading.Thread`.
+You can create a custom thread class by inheriting from `threading.Thread`.
 
 ```python
 import threading
 import time
 
-
 class VideoUploader(threading.Thread):
-
     def __init__(self, video):
         super().__init__()
         self.video = video
 
     def run(self):
-
         print(f"Started uploading {self.video}")
-
         time.sleep(1)
-
         print(f"Video uploaded: {self.video}")
-
 
 thread = VideoUploader("video1.mp4")
 
@@ -1984,302 +1016,130 @@ thread.start()
 thread.join()
 ```
 
-The main work is written inside:
+The `run()` method contains the thread's work. Calling `start()` executes it in the new thread.
+
+## 38. CPU-Bound vs. I/O-Bound Tasks
+
+**CPU-bound tasks:**
+
+- Large mathematical calculations
+- Image processing
+- Heavy computation
+- CPU-intensive algorithms
+
+**I/O-bound tasks:**
+
+- API requests
+- Network requests
+- Database operations
+- File I/O
+- Web scraping
+
+In traditional GIL-enabled CPython, ordinary threading usually does not provide multi-core parallelism for pure-Python CPU-bound tasks. Multiprocessing may be more appropriate.
+
+Threading is often beneficial for I/O-bound workloads.
+
+## 39. GIL
+
+GIL stands for **Global Interpreter Lock**.
+
+In traditional CPython builds, the GIL generally allows only one thread at a time to execute Python bytecode within an interpreter.
+
+As a result, adding threads does not necessarily provide multi-core parallelism for CPU-bound pure-Python code.
+
+Threading can still be useful for I/O-bound work.
+
+Modern Python also offers free-threaded CPython builds that can run without the GIL. Therefore, consider the Python implementation and build when reasoning about performance.
+
+## 40. Threading vs. Multiprocessing
+
+| Feature | Threading | Multiprocessing |
+|---|---|---|
+| Basic unit | Thread | Process |
+| Memory | Shared within a process | Generally separate address spaces |
+| Creation overhead | Usually lower | Usually higher |
+| I/O-bound tasks | Often useful | Can be useful |
+| CPU-bound pure Python | Limited by the GIL in traditional CPython | Can use multiple CPU cores |
+| Communication | Shared data and synchronization | IPC and process-safe communication |
+| Isolation | Threads share process resources | Processes provide stronger isolation |
+
+**General guideline:**
+
+- I/O-bound tasks → Consider threading.
+- CPU-bound pure-Python tasks in traditional CPython → Consider multiprocessing.
+
+The best choice depends on the workload, runtime, and implementation requirements.
+
+## 41. Important Threading Methods
+
+- `start()`: Starts a new thread.
+- `run()`: Contains the thread's execution logic.
+- `join()`: Waits for a thread to finish.
+- `is_alive()`: Checks whether a thread is alive.
+- `acquire()`: Acquires a lock.
+- `release()`: Releases a lock.
+- `wait()`: Waits for an event or condition notification.
+- `set()`: Sets an event.
+- `clear()`: Clears an event.
+- `is_set()`: Checks whether an event is set.
+
+## 42. Important Threading Classes
 
 ```python
-run()
-```
-
-When we call:
-
-```python
-thread.start()
-```
-
-Python runs `run()` in the new thread.
-
----
-
-# 46. Multiple Threads with a Custom Class
-
-```python
-import threading
-import time
-
-
-class VideoUploader(threading.Thread):
-
-    def __init__(self, video):
-        super().__init__()
-        self.video = video
-
-    def run(self):
-
-        print(f"Started uploading {self.video}")
-
-        time.sleep(1)
-
-        print(f"Video uploaded: {self.video}")
-
-
-videos = [
-    "video1.mp4",
-    "video2.mp4",
-    "video3.mp4"
-]
-
-
-threads = []
-
-
-for video in videos:
-
-    thread = VideoUploader(video)
-
-    thread.start()
-
-    threads.append(thread)
-
-
-for thread in threads:
-
-    thread.join()
-
-
-print("All videos uploaded!")
-```
-
-The three uploader threads can make progress concurrently.
-
----
-
-# 47. CPU-Bound vs I/O-Bound
-
-## CPU-Bound Tasks
-
-A CPU-bound task spends most of its time doing calculations.
-
-Examples:
-
-```text
-Large Mathematical Calculations
-Image Processing
-Heavy Computation
-Data Processing
-CPU-intensive Algorithms
-```
-
-In traditional CPython, normal Python threads generally cannot execute Python bytecode on multiple CPU cores at the same time because of the GIL.
-
-For these tasks, `multiprocessing` or other parallel-computation methods may be better.
-
----
-
-# 48. I/O-Bound Tasks
-
-An I/O-bound task spends a lot of time waiting for external operations.
-
-Examples:
-
-```text
-API Requests
-Network Requests
-Database Operations
-File I/O
-Web Scraping
-HTTP Requests
-```
-
-While one thread waits for I/O, another thread can often continue working.
-
-Therefore, threading is often very useful for I/O-bound tasks.
-
----
-
-# 49. What is the GIL?
-
-**GIL = Global Interpreter Lock**
-
-In traditional CPython, the GIL is a mechanism that protects the interpreter's internal state and allows only one thread at a time to execute Python bytecode within an interpreter.
-
-Because of this, CPU-bound pure-Python code usually does not get true multi-core parallelism simply by creating more threads.
-
-Conceptually:
-
-```text
-CPU-bound Python code
-        ↓
-Traditional CPython GIL
-        ↓
-Threads do not normally give
-multi-core Python-bytecode execution
-        ↓
-Multiprocessing may be better
-```
-
-For I/O-bound tasks:
-
-```text
-I/O-bound
-    ↓
-Thread waits for I/O
-    ↓
-Another thread can make progress
-    ↓
-Threading can be useful
-```
-
-### Modern Python Note
-
-Modern Python also has free-threaded CPython builds that can run without the traditional GIL.
-
-So the statement:
-
-> "Python has a GIL"
-
-is mainly a statement about traditional CPython execution.
-
-For ordinary CPython builds, the GIL is still an important concept.
-
----
-
-# 50. Threading vs Multiprocessing
-
-| Feature               | Threading                                                         | Multiprocessing                |
-| --------------------- | ----------------------------------------------------------------- | ------------------------------ |
-| Basic unit            | Thread                                                            | Process                        |
-| Memory                | Threads share process memory                                      | Processes have separate memory |
-| Creation cost         | Usually lower                                                     | Usually higher                 |
-| I/O-bound tasks       | Often very useful                                                 | Can also be useful             |
-| CPU-bound Python code | Limited by traditional CPython GIL                                | Can use multiple CPU cores     |
-| Communication         | Often easier through shared memory, but synchronization is needed | Usually uses IPC mechanisms    |
-| Synchronization       | Locks, Events, Conditions, etc.                                   | Process synchronization / IPC  |
-| Memory usage          | Usually lower                                                     | Usually higher                 |
-| Isolation             | Lower                                                             | Higher                         |
-
-### Simple Starting Rule
-
-```text
-I/O-bound
-    ↓
-Threading
-
-CPU-bound
-    ↓
-Multiprocessing
-```
-
-This is only a starting rule.
-
-The best choice depends on:
-
-* Workload
-* Python implementation
-* Deployment environment
-* Memory requirements
-* Communication needs
-* CPU count
-* External services
-* Application architecture
-
----
-
-# 51. Important Threading Methods
-
-| Method       | Purpose                         |
-| ------------ | ------------------------------- |
-| `start()`    | Start a thread                  |
-| `run()`      | Execute thread logic            |
-| `join()`     | Wait for a thread               |
-| `is_alive()` | Check whether a thread is alive |
-| `acquire()`  | Acquire a lock                  |
-| `release()`  | Release a lock                  |
-| `wait()`     | Wait for an Event or Condition  |
-| `set()`      | Set an Event                    |
-| `clear()`    | Clear an Event                  |
-| `is_set()`   | Check whether an Event is set   |
-
----
-
-# 52. Important Threading Classes and Tools
-
-Important classes include:
-
-```text
-Thread
-Lock
-RLock
-Semaphore
-BoundedSemaphore
-Event
-Condition
-Barrier
-Timer
+threading.Thread
+threading.Lock
+threading.RLock
+threading.Semaphore
+threading.BoundedSemaphore
+threading.Event
+threading.Condition
+threading.Barrier
+threading.Timer
 ```
 
 Higher-level tools:
 
-```text
+```python
 ThreadPoolExecutor
 Future
-```
-
-Thread-safe communication:
-
-```text
 Queue
 ```
 
----
+`Queue` is provided by the separate `queue` module, while `ThreadPoolExecutor` and `Future` are provided by `concurrent.futures`.
 
-# 53. Lock vs RLock vs Semaphore vs Event vs Condition vs Queue
+## 43. Synchronization Tools Summary
 
-| Tool        | Main Purpose                                         |
-| ----------- | ---------------------------------------------------- |
-| `Lock`      | Protect a critical section                           |
-| `RLock`     | Allow the same thread to acquire the lock repeatedly |
-| `Semaphore` | Limit the number of concurrent users                 |
-| `Event`     | Simple communication/signaling                       |
-| `Condition` | Wait for a state and notify waiting threads          |
-| `Queue`     | Thread-safe communication and task exchange          |
+- **Lock:** Protects a critical section.
+- **RLock:** Allows the owning thread to acquire the same lock recursively.
+- **Semaphore:** Limits concurrent access.
+- **Event:** Provides simple signaling.
+- **Condition:** Supports waiting for a state and notifying waiters.
+- **Queue:** Provides thread-safe communication.
 
----
-
-# 54. Complete Threading Example
+## 44. Complete Threading Example
 
 ```python
 import threading
 import time
 
-
 def task(name):
-
     print(f"{name} started")
-
     time.sleep(2)
-
     print(f"{name} finished")
-
 
 threads = []
 
-
 for i in range(3):
-
     thread = threading.Thread(
         target=task,
         args=(f"Thread-{i}",)
     )
 
     threads.append(thread)
-
     thread.start()
 
-
 for thread in threads:
-
     thread.join()
-
 
 print("All threads completed")
 ```
@@ -2288,23 +1148,15 @@ Flow:
 
 ```text
 Main Thread
-    │
-    ├── Thread-0
-    │
-    ├── Thread-1
-    │
-    └── Thread-2
-           │
-           ▼
-       Complete
-           │
-           ▼
-    Main Thread continues
+    ↓
+Thread-0, Thread-1, Thread-2
+    ↓
+All Tasks Complete
+    ↓
+Main Thread Continues
 ```
 
----
-
-# 55. Threading Concept Map
+## 45. Threading Concept Map
 
 ```text
 Python Threading
@@ -2338,7 +1190,8 @@ Python Threading
 │   └── Queue
 │
 ├── Background Work
-│   └── daemon=True
+│   ├── Daemon Thread
+│   └── Non-Daemon Thread
 │
 ├── Thread Pools
 │   ├── ThreadPoolExecutor
@@ -2348,615 +1201,164 @@ Python Threading
 │   ├── Race Condition
 │   └── Deadlock
 │
-└── CPU / I/O
+└── CPU and I/O
     ├── GIL
     ├── I/O-bound
     └── CPU-bound
 ```
 
----
+## 46. Interview Questions and Answers
 
-# 56. Interview Questions
+**Q1. What is a thread?**
 
-## Q1. What is a Thread?
+A thread is a path of execution within a process.
 
-A thread is an execution path inside a process.
+**Q2. What is threading?**
 
----
+Threading allows multiple threads to make progress concurrently.
 
-## Q2. What is Threading?
-
-Threading means using multiple threads in a process so that multiple tasks can make progress concurrently.
-
----
-
-## Q3. How do you create a thread in Python?
+**Q3. How do you create a thread in Python?**
 
 ```python
 import threading
 
 thread = threading.Thread(target=function)
-```
-
-Then:
-
-```python
 thread.start()
 ```
 
-starts the thread.
+**Q4. What does `start()` do?**
 
----
+It starts a new thread and arranges for its `run()` method to execute there.
 
-## Q4. What does `start()` do?
+**Q5. What does `run()` do?**
 
-`start()` starts a new thread of execution and causes its `run()` method to execute.
+It contains the thread's execution logic. Calling it directly does not create a new thread.
 
-A thread can normally be started only once.
+**Q6. What does `join()` do?**
 
----
+It makes the calling thread wait for another thread to finish.
 
-## Q5. What does `run()` do?
+**Q7. What is a race condition?**
 
-`run()` contains the work performed by the thread.
+It occurs when concurrent operations produce results that depend on their timing or execution order.
 
-Calling it directly does not create a new thread.
+**Q8. How can you prevent race conditions?**
 
----
+Use appropriate synchronization mechanisms, such as locks, semaphores, or other thread-safe operations.
 
-## Q6. What does `join()` do?
+**Q9. What is a critical section?**
 
-`join()` makes the calling thread wait until the target thread finishes.
+A section of code that accesses or modifies shared resources and may require synchronization.
 
----
+**Q10. What is a lock?**
 
-## Q7. What is a Race Condition?
+A synchronization primitive that provides mutual exclusion.
 
-A race condition occurs when the result of concurrent operations depends on their timing or order.
+**Q11. What is the difference between Lock and RLock?**
 
----
+A regular Lock is non-reentrant, while an RLock allows its owning thread to acquire it multiple times.
 
-## Q8. How can Race Conditions be prevented?
+**Q12. What is a semaphore?**
 
-Use appropriate synchronization tools such as:
+A synchronization primitive that limits the number of simultaneous acquisitions.
 
-```python
-threading.Lock()
-```
+**Q13. What is an event?**
 
-Other tools include:
+A simple mechanism for signaling between threads.
 
-```text
-RLock
-Semaphore
-Condition
-Event
-Queue
-```
+**Q14. What is a condition?**
 
-depending on the problem.
+A synchronization mechanism that supports waiting for a state and notifying waiting threads.
 
----
+**Q15. Why use a queue?**
 
-## Q9. What is a Critical Section?
+A queue provides thread-safe communication and supports producer-consumer patterns.
 
-A critical section is a part of code that accesses or changes shared data and may need synchronization.
+**Q16. What is a daemon thread?**
 
----
+A thread that does not keep the Python process alive by itself.
 
-## Q10. What is a Lock?
+**Q17. What is a non-daemon thread?**
 
-A lock provides mutual exclusion.
+A thread that normally keeps the process alive while it is running.
 
-It allows only one thread to hold the lock at a time.
+**Q18. Is a daemon thread suitable for sending important emails?**
 
----
+Not by itself. The process may exit before the email is sent.
 
-## Q11. What is the difference between Lock and RLock?
+**Q19. What is the GIL?**
 
-```text
-Lock
-→ Normal mutual-exclusion lock.
+The Global Interpreter Lock, which limits simultaneous Python bytecode execution in traditional GIL-enabled CPython.
 
-RLock
-→ The same thread can acquire it repeatedly.
-```
+**Q20. When should you use threading?**
 
----
+Threading is often useful for I/O-bound work, including network requests, file I/O, and web scraping.
 
-## Q12. What is a Semaphore?
+**Q21. Is threading ideal for CPU-bound tasks?**
 
-A semaphore limits how many threads can use a resource at the same time.
+In traditional GIL-enabled CPython, multiprocessing is often more appropriate for CPU-bound pure-Python work.
 
-Example:
+**Q22. What is a deadlock?**
 
-```python
-threading.Semaphore(3)
-```
+A situation in which threads wait for resources held by one another and cannot make progress.
 
-allows up to three threads to acquire it simultaneously.
+**Q23. What is thread-safe code?**
 
----
+Code that behaves correctly under concurrent access according to its synchronization requirements.
 
-## Q13. What is an Event?
+**Q24. Does `join()` stop a thread?**
 
-An Event is a simple signaling mechanism between threads.
+No. It waits for the thread to finish.
 
----
+**Q25. Can a thread object be started multiple times?**
 
-## Q14. What is a Condition?
+Normally, no. Create a new thread object for another execution.
 
-A Condition allows threads to wait for a particular state and allows another thread to notify them.
+**Q26. Does a normal Thread return the target function's result?**
 
----
+Not directly. You can use `ThreadPoolExecutor` and `Future.result()` to retrieve a return value.
 
-## Q15. Why is Queue used?
+## 47. Quick Revision
 
-`Queue` provides thread-safe communication.
-
-It is commonly used for producer-consumer systems.
-
----
-
-## Q16. What is a Daemon Thread?
-
-A daemon thread is a background thread that does not keep the Python process alive when no non-daemon threads remain.
-
----
-
-## Q17. What is the GIL?
-
-GIL means **Global Interpreter Lock**.
-
-In traditional CPython, it allows only one thread at a time to execute Python bytecode within an interpreter.
-
-It limits multi-core parallelism for CPU-bound pure-Python code.
-
----
-
-## Q18. When should Threading be used?
-
-Threading is often useful for I/O-bound tasks:
-
-```text
-Network Requests
-API Calls
-File I/O
-Database Operations
-Web Scraping
-```
-
----
-
-## Q19. Is Threading ideal for CPU-bound tasks?
-
-Usually not for CPU-bound pure-Python code in traditional CPython because of the GIL.
-
-`multiprocessing` may be more suitable.
-
----
-
-## Q20. What is Deadlock?
-
-Deadlock happens when threads wait forever for resources held by each other.
-
----
-
-## Q21. What is Thread-Safe Code?
-
-Thread-safe code behaves correctly when multiple threads access it concurrently according to its intended synchronization guarantees.
-
----
-
-## Q22. Does `join()` stop a thread?
-
-No.
-
-```python
-thread.join()
-```
-
-only waits for the thread to finish.
-
----
-
-## Q23. Does calling `run()` create a new thread?
-
-No.
-
-```python
-thread.run()
-```
-
-runs the target in the current execution context.
-
-Use:
-
-```python
-thread.start()
-```
-
-to start a new thread.
-
----
-
-## Q24. Can a Thread be started more than once?
-
-No.
-
-A `Thread` object can normally be started only once.
-
-This is invalid:
-
-```python
-thread.start()
-thread.start()
-```
-
-Create a new thread object instead.
-
----
-
-## Q25. Does a normal Thread return the target function's result?
-
-No.
-
-For easy result handling, use:
-
-```python
-ThreadPoolExecutor
-```
-
-with:
-
-```python
-Future
-```
-
----
-
-# 57. Quick Revision
-
-```text
-Thread
-  ↓
-Execution path inside a Process
-
-Threading
-  ↓
-Using multiple threads concurrently
-
-start()
-  ↓
-Start a new thread
-
-run()
-  ↓
-Run thread logic directly when called
-
-join()
-  ↓
-Wait for a thread to finish
-
-Shared Resource
-  ↓
-Data/resource used by multiple threads
-
-Race Condition
-  ↓
-Result depends on concurrent timing/order
-
-Critical Section
-  ↓
-Code that accesses shared data
-
-Lock
-  ↓
-Mutual exclusion
-
-RLock
-  ↓
-Same thread can acquire the lock again
-
-Semaphore
-  ↓
-Limit concurrent access
-
-Event
-  ↓
-Simple signal
-
-Condition
-  ↓
-Wait for a state + notify
-
-Queue
-  ↓
-Thread-safe Producer → Consumer communication
-
-ThreadPoolExecutor
-  ↓
-Manage a pool of worker threads
-
-Future
-  ↓
-Represent an asynchronous result
-
-Daemon
-  ↓
-Background thread that does not keep the process alive
-
-GIL
-  ↓
-Traditional CPython limitation on Python-bytecode execution
-
-I/O-bound
-  ↓
-Threading is often useful
-
-CPU-bound
-  ↓
-Multiprocessing is often useful in traditional CPython
-```
-
----
-
-# 58. Final Important Topics
-
-When learning Python Threading, understand these topics:
-
-```text
-1. Process
-2. Thread
-3. Threading
-4. threading.Thread
-5. start()
-6. run()
-7. join()
-8. args
-9. kwargs
-10. Thread Name
-11. current_thread()
-12. active_count()
-13. is_alive()
-14. Shared Resource
-15. Race Condition
-16. Critical Section
-17. Lock
-18. acquire()
-19. release()
-20. with lock
-21. RLock
-22. Semaphore
-23. Event
-24. Condition
-25. Queue
-26. Producer-Consumer
-27. Daemon Thread
-28. Thread Exception Handling
-29. ThreadPoolExecutor
-30. Future
-31. GIL
-32. I/O-bound
-33. CPU-bound
-34. Threading vs Multiprocessing
-35. Deadlock
-36. Thread-Safe Code
-37. Lock Ordering
-38. Timeouts
-39. Custom Thread Class
-40. Thread Lifecycle
-```
-
----
-
-# Final Mental Model
-
-```text
-                     Python Threading
-                           │
-             ┌─────────────┴─────────────┐
-             ↓                           ↓
-      Thread Creation              Thread Control
-             │                           │
-      Thread() / Class             start() / join()
-             │                           │
-             └─────────────┬─────────────┘
-                           ↓
-                    Shared Resources
-                           │
-                           ↓
-                     Race Condition
-                           │
-                           ↓
-                    Synchronization
-                  ┌────────┼────────┐
-                  ↓        ↓        ↓
-                Lock     RLock   Semaphore
-                  │
-                  ↓
-             Communication
-             ┌────┼────┐
-             ↓    ↓    ↓
-           Event Condition Queue
-                           │
-                           ↓
-                  Producer → Consumer
-                           │
-                           ↓
-                   ThreadPoolExecutor
-                           │
-                           ↓
-                      I/O-bound
-                           │
-                           ↓
-                    Threading Useful
-```
-
----
-
-# One-Line Revision
-
-```text
-Thread
-→ Execution path inside a process
-
-Threading
-→ Concurrent task execution
-
-start()
-→ Start a new thread
-
-run()
-→ Execute thread logic in the current execution context when called directly
-
-join()
-→ Wait for a thread to finish
-
-Shared Resource
-→ Common data/resource
-
-Race Condition
-→ Timing-dependent unsafe concurrent access
-
-Critical Section
-→ Shared-state code requiring synchronization
-
-Lock
-→ Mutual exclusion
-
-RLock
-→ Same thread can acquire it again
-
-Semaphore
-→ Limit concurrent access
-
-Event
-→ Simple signal
-
-Condition
-→ Wait for a state + notify
-
-Queue
-→ Thread-safe Producer → Consumer communication
-
-Daemon
-→ Background thread that does not keep the process alive
-
-ThreadPoolExecutor
-→ Manage a pool of worker threads
-
-Future
-→ Represent an asynchronous result
-
-GIL
-→ Traditional CPython limitation on simultaneous Python-bytecode execution
-
-I/O-bound
-→ Threading is often useful
-
-CPU-bound
-→ Multiprocessing is often useful in traditional CPython
-```
-
----
-
-# Final Summary
-
-The main idea of Python threading is:
-
-```text
-Thread
-    ↓
-Multiple execution paths inside one process
-    ↓
-Shared memory/resources
-    ↓
-Possible synchronization problems
-    ↓
-Race Condition
-    ↓
-Lock / RLock / Semaphore
-    ↓
-Communication
-    ↓
-Event / Condition / Queue
-    ↓
-Thread Pool
-    ↓
-ThreadPoolExecutor / Future
-    ↓
-I/O-bound workloads
-    ↓
-Threading is often useful
-```
-
-The most important practical rule is:
-
-```text
-I/O-bound
-    ↓
-Consider Threading / ThreadPoolExecutor
-
-CPU-bound pure-Python code
-    ↓
-Traditional CPython
-    ↓
-Consider Multiprocessing or another
-parallel-computation approach
-```
-
-But this is only a starting rule.
-
-Always choose the concurrency method based on:
-
-* Actual workload
-* Performance requirements
-* Python implementation
-* Memory usage
-* Communication needs
-* CPU resources
-* External services
-* Application architecture
-
-## Most Important Things to Remember
-
-```text
-1. Thread = execution path inside a process.
-
-2. Threading = using multiple threads concurrently.
-
-3. start() = starts a new thread.
-
-4. run() = runs the thread's work directly if called manually.
-
-5. join() = waits for a thread to finish.
-
-6. Lock = protects shared data.
-
-7. Race Condition = unsafe result caused by concurrent access.
-
-8. RLock = same thread can acquire the lock again.
-
-9. Semaphore = allows a limited number of threads.
-
-10. Event = simple thread signaling.
-
-11. Condition = wait for a specific state.
-
-12. Queue = safe communication between threads.
-
-13. ThreadPoolExecutor = easier thread-pool management.
-
-14. Future = represents a task's eventual result.
-
-15. Daemon = background thread that does not keep the process alive.
-
-16. I/O-bound → Threading is often useful.
-
-17. CPU-bound pure Python → Multiprocessing is often better in traditional CPython.
-
-18. GIL is an important limitation of traditional CPython threading.
-```
-
+- **Thread:** A path of execution within a process.
+- **Threading:** Concurrent progress using multiple threads.
+- **start():** Starts a new thread.
+- **run():** Contains the thread's execution logic.
+- **join():** Waits for a thread to finish.
+- **Shared resource:** Data or resources used by multiple threads.
+- **Race condition:** An incorrect or unexpected result caused by execution timing or order.
+- **Critical section:** Protected code that accesses shared resources.
+- **Lock:** Provides mutual exclusion.
+- **RLock:** Allows recursive acquisition by the owning thread.
+- **Semaphore:** Limits concurrent access.
+- **Event:** Simple signaling mechanism.
+- **Condition:** Supports state-based waiting and notification.
+- **Queue:** Thread-safe communication mechanism.
+- **Daemon thread:** Does not keep the process alive by itself.
+- **Non-daemon thread:** Normally keeps the process alive while running.
+- **ThreadPoolExecutor:** Manages a pool of worker threads.
+- **Future:** Represents an asynchronous computation's result.
+- **GIL:** Limits simultaneous Python bytecode execution in traditional CPython.
+- **I/O-bound tasks:** Often benefit from threading.
+- **CPU-bound pure-Python tasks:** Often benefit from multiprocessing in traditional CPython.
+
+## 48. Practice Checklist
+
+1. Understand threads and processes.
+2. Create threads using `threading.Thread()`.
+3. Understand `start()` versus `run()`.
+4. Practice `join()` and multiple threads.
+5. Use `args` and `kwargs`.
+6. Compare daemon and non-daemon threads.
+7. Understand shared resources and race conditions.
+8. Practice Lock and RLock.
+9. Practice Semaphore.
+10. Understand Event and Condition.
+11. Implement Queue and producer-consumer patterns.
+12. Use ThreadPoolExecutor and Future.
+13. Handle thread exceptions.
+14. Understand and prevent deadlocks.
+15. Compare the GIL, threading, and multiprocessing.
+
+**Recommended learning order:** First master Thread, `start()`, `join()`, and daemon versus non-daemon threads. Then practice race conditions, locks, queues, and ThreadPoolExecutor with small Python programs.
 """

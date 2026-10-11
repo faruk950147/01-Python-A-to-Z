@@ -1,158 +1,210 @@
-Python Multiprocessing — বাংলা Notes
+# Python Multiprocessing — Complete বাংলা Notes
 
-১. Processing কী?
+## ১. Processing কী?
 
-Processing মানে হলো কোনো input/data নিয়ে কাজ করে useful output তৈরি করা।
+**Processing** বলতে input বা data নিয়ে কাজ করে useful output তৈরি করাকে বোঝায়।
 
-Python-এ কাজ করার কয়েকটি উপায়:
-- Single Processing
-- Multithreading
-- Multiprocessing
-- Asynchronous Programming
+Python-এ কাজ সম্পন্ন করার বিভিন্ন পদ্ধতি রয়েছে:
 
+- **Single Processing:** সাধারণত একটি process-এর মধ্যে কাজ সম্পন্ন করা।
+- **Multithreading:** একটি process-এর মধ্যে একাধিক thread ব্যবহার করা।
+- **Multiprocessing:** একাধিক process ব্যবহার করে কাজ সম্পন্ন করা।
+- **Asynchronous Programming:** কোনো কাজের জন্য অপেক্ষা করার সময় অন্য কাজ এগিয়ে নেওয়া।
 
-২. Multiprocessing কী?
+**মনে রাখুন:** Processing একটি সাধারণ ধারণা। অন্যদিকে, multiprocessing হলো একাধিক process ব্যবহার করার একটি নির্দিষ্ট পদ্ধতি।
 
-Multiprocessing হলো একাধিক process ব্যবহার করে কাজ সম্পন্ন করা।
+---
 
-প্রতিটি process-এর সাধারণত নিজস্ব memory space থাকে।
+## ২. Multiprocessing কী?
 
-CPU-heavy কাজের ক্ষেত্রে multiprocessing খুব উপকারী, কারণ একাধিক process আলাদা CPU core ব্যবহার করতে পারে।
+**Multiprocessing** হলো একাধিক process ব্যবহার করে কাজ সম্পন্ন করার পদ্ধতি।
 
-উদাহরণ:
+প্রতিটি process-এর সাধারণত নিজস্ব memory space এবং Python interpreter থাকে। তাই উপযুক্ত পরিস্থিতিতে একাধিক process একাধিক CPU core-এ একই সময়ে কাজ করতে পারে।
+
+### উদাহরণ
+
 - Image Processing
 - Video Processing
 - Large Mathematical Calculations
-- Scientific Calculations
-- Data Processing
-- Machine Learning Computation
+- Scientific Computation
+- CPU-intensive Data Processing
 - CPU-heavy Algorithms
 
+**মনে রাখুন:** Multiprocessing বিশেষভাবে CPU-bound কাজের জন্য উপকারী। তবে process তৈরি, data transfer এবং communication-এর overhead থাকায় এটি সব সময় faster নয়।
 
-৩. Process কী?
+---
 
-Process হলো কোনো program-এর running instance।
+## ৩. Process কী?
 
-যখন আমরা Python program চালাই, operating system সেই program-এর জন্য একটি process তৈরি করে।
+**Process** হলো একটি running program-এর instance।
 
-একটি process আবার একাধিক child process তৈরি করতে পারে।
+যখন আমরা Python program চালাই, operating system সেই program চালানোর জন্য একটি process তৈরি করে।
 
+একটি process অন্য process তৈরি করতে পারে। তৈরি করা process-কে child process এবং যে process তৈরি করে তাকে parent process বলা হয়।
+
+```text
 Python Program
       |
       ↓
- Main Process
+  Main Process
       |
       +------ Child Process 1
       |
       +------ Child Process 2
       |
       +------ Child Process 3
+```
 
+---
 
-৪. Main Process কী?
+## ৪. Main Process কী?
 
-যে process থেকে Python program-এর execution শুরু হয় তাকে Main Process বলে।
+যে process থেকে Python program-এর execution শুরু হয়, তাকে সাধারণভাবে **Main Process** বলা হয়।
 
-উদাহরণ:
+Python-এর `multiprocessing.current_process()` function দিয়ে বর্তমান process-এর object পাওয়া যায়।
 
+```python
 import multiprocessing
 
 process = multiprocessing.current_process()
 
 print(process)
+print(process.name)
+```
 
 সম্ভাব্য Output:
 
+```text
 <_MainProcess name='MainProcess' parent=None started>
-
-
-৫. multiprocessing.current_process()
-
-এই function বর্তমানে যে process code চালাচ্ছে সেই process-এর object return করে।
-
-উদাহরণ:
-
-import multiprocessing
-
-process = multiprocessing.current_process()
-
-print(process)
-
-
-৬. Process Name
-
-Process-এর নাম জানতে:
-
-process.name
-
-উদাহরণ:
-
-import multiprocessing
-
-process = multiprocessing.current_process()
-
-print(process.name)
-
-Output:
-
 MainProcess
+```
 
-Child process-এর নাম হতে পারে:
+Output-এর exact representation Python version ও environment অনুযায়ী ভিন্ন হতে পারে।
 
+---
+
+## ৫. `multiprocessing.current_process()`
+
+এই function বর্তমানে যে process code execute করছে, সেই process-এর object return করে।
+
+```python
+import multiprocessing
+
+process = multiprocessing.current_process()
+
+print("Process:", process)
+print("Name:", process.name)
+```
+
+Child process-এর ভেতরে `current_process()` ব্যবহার করলে child process-এর object পাওয়া যাবে।
+
+---
+
+## ৬. Process Name
+
+Process-এর নাম জানতে `.name` attribute ব্যবহার করা হয়।
+
+```python
+import multiprocessing
+
+process = multiprocessing.current_process()
+
+print("Process Name:", process.name)
+```
+
+Main process-এর default name সাধারণত:
+
+```text
+MainProcess
+```
+
+Child process-এর default name সাধারণত এমন হতে পারে:
+
+```text
 Process-1
 Process-2
 Process-3
+```
 
+নিজের পছন্দমতো নামও দেওয়া যায়।
 
-৭. PID — Process ID
+```python
+process = multiprocessing.Process(
+    target=task,
+    name="Worker-1"
+)
+```
 
-প্রতিটি running process-এর একটি unique Process ID থাকে, যাকে PID বলে।
+---
 
-PID পাওয়ার জন্য:
+## ৭. PID — Process ID
 
+**PID (Process ID)** হলো operating system-এর দেওয়া process identifier।
+
+বর্তমান process-এর PID পেতে `os.getpid()` ব্যবহার করা হয়।
+
+```python
 import os
-
-print(os.getpid())
-
-উদাহরণ:
-
 import multiprocessing
-import os
 
 process = multiprocessing.current_process()
 
 print("Process Name:", process.name)
 print("PID:", os.getpid())
+```
 
+`Process` object থেকেও child process-এর PID পাওয়া যায়:
 
-৮. ident
-
-ident attribute process object-এর identifier দেয়।
-
-process.ident
-
-OS-level PID পাওয়ার জন্য:
-
-os.getpid()
-
-Process object থেকেও PID পাওয়া যায়:
-
+```python
 process.pid
+```
 
 মনে রাখুন:
 
-pid   → OS Process ID
-ident → Process identifier
+- `os.getpid()` → বর্তমানে চলমান process-এর PID।
+- `process.pid` → সংশ্লিষ্ট `Process` object-এর PID; process শুরু হওয়ার আগে এটি `None` হতে পারে।
+- `os.getppid()` → বর্তমান process-এর parent process-এর PID।
 
+---
 
-৯. is_alive()
+## ৮. `ident` Attribute সম্পর্কে গুরুত্বপূর্ণ সংশোধন
 
-কোনো process বর্তমানে চলছে কিনা তা check করার জন্য is_alive() ব্যবহার করা হয়।
+`ident` সাধারণত `threading.Thread`-এর একটি attribute। এটি `multiprocessing.Process`-এর standard attribute নয়।
 
-process.is_alive()
+তাই multiprocessing-এর ক্ষেত্রে এইভাবে লিখবেন না:
 
-উদাহরণ:
+```python
+process.ident
+```
 
+এর পরিবর্তে ব্যবহার করুন:
+
+```python
+process.pid
+```
+
+অথবা:
+
+```python
+import os
+
+print(os.getpid())
+```
+
+মনে রাখুন:
+
+```text
+Multiprocessing.Process → pid
+threading.Thread        → ident
+```
+
+---
+
+## ৯. `is_alive()`
+
+কোনো process বর্তমানে চলমান কি না তা পরীক্ষা করতে `is_alive()` ব্যবহার করা হয়।
+
+```python
 import multiprocessing
 import time
 
@@ -169,132 +221,247 @@ if __name__ == "__main__":
     process.join()
 
     print(process.is_alive())
+```
 
 সম্ভাব্য Output:
 
+```text
 True
 False
+```
 
+ব্যাখ্যা:
 
-১০. Child Process
+- Process চলমান থাকলে `True` return করে।
+- Process শেষ হয়ে গেলে `False` return করে।
+- Process শুরু হওয়ার আগেও `False` return করে।
 
-যে process অন্য একটি process দ্বারা তৈরি হয় তাকে Child Process বলে।
+---
 
+## ১০. Parent Process এবং Child Process
+
+যে process অন্য একটি process তৈরি করে, সেটি parent process।
+
+যে process তৈরি হয়, সেটি child process।
+
+```text
 Parent Process
       |
       ↓
 Child Process
+```
 
+উদাহরণ:
 
-১১. multiprocessing.Process()
+```python
+import multiprocessing
+import os
 
-নতুন process তৈরি করার জন্য multiprocessing.Process() ব্যবহার করা হয়।
+def task():
+    print("Child PID:", os.getpid())
+    print("Parent PID:", os.getppid())
 
-Syntax:
+if __name__ == "__main__":
+    print("Main PID:", os.getpid())
 
-process = multiprocessing.Process(target=task)
+    process = multiprocessing.Process(target=task)
+
+    process.start()
+    process.join()
+```
+
+এখানে:
+
+- `os.getpid()` বর্তমান process-এর PID দেয়।
+- `os.getppid()` parent process-এর PID দেয়।
+
+---
+
+## ১১. `multiprocessing.Process()`
+
+নতুন process চালানোর জন্য `multiprocessing.Process()` ব্যবহার করা হয়।
+
+### Syntax
+
+```python
+process = multiprocessing.Process(
+    target=task
+)
+```
 
 গুরুত্বপূর্ণ parameter:
 
-target
-args
-kwargs
-name
-daemon
+| Parameter | কাজ |
+|---|---|
+| `target` | কোন callable execute হবে |
+| `args` | Positional arguments পাঠায় |
+| `kwargs` | Keyword arguments পাঠায় |
+| `name` | Process-এর নাম নির্ধারণ করে |
+| `daemon` | Process daemon হিসেবে চলবে কি না নির্ধারণ করে |
 
+**গুরুত্বপূর্ণ:** `Process()` object তৈরি করে, কিন্তু এটি নিজে থেকেই নতুন process চালু করে না। নতুন process চালু করতে `start()` ব্যবহার করতে হয়।
 
-১২. target
+---
 
-target বলে দেয় child process কোন function execute করবে।
+## ১২. `target`
 
-উদাহরণ:
+`target` দিয়ে নির্ধারণ করা হয় child process কোন function বা callable execute করবে।
+
+```python
+import multiprocessing
 
 def task():
     print("Hello from child process")
 
+if __name__ == "__main__":
+    process = multiprocessing.Process(target=task)
+
+    process.start()
+    process.join()
+```
+
+এখানে `target=task` অর্থ হলো child process-এ `task` function execute হবে।
+
+---
+
+## ১৩. `target=task` বনাম `target=task()`
+
+### সঠিক
+
+```python
 process = multiprocessing.Process(target=task)
+```
 
-এখানে:
+এখানে function-টিকে reference হিসেবে পাঠানো হয়েছে।
 
-target=task
+### ভুল
 
-এর অর্থ হলো child process task function execute করবে।
-
-
-১৩. target=task বনাম target=task()
-
-সঠিক:
-
-process = multiprocessing.Process(target=task)
-
-এখানে function-টিকে pass করা হয়েছে।
-
-ভুল:
-
+```python
 process = multiprocessing.Process(target=task())
+```
 
-এখানে task() function সাথে সাথে execute হয়ে যাবে।
+এখানে `task()` আগে execute হবে। তারপর function-এর return value `target` হিসেবে পাঠানো হবে, যা সাধারণত ভুল।
 
 মনে রাখুন:
 
+```text
 target=task
     ↓
-এই function পরে execute করো
+Function-টি পরে execute হবে
+```
 
+---
 
-১৪. start()
+## ১৪. `start()`
 
-start() method নতুন process শুরু করে।
+`start()` method নতুন child process শুরু করে। Child process-এর মধ্যে target callable execute হয়।
 
+```python
 process.start()
+```
 
-Flow:
+Process execution-এর ধারণাগত flow:
 
-Process তৈরি
-    ↓
-start()
-    ↓
+```text
+Process Object তৈরি
+        ↓
+     start()
+        ↓
 Child Process শুরু
-    ↓
-target function execute
+        ↓
+Target Callable Execute
+```
 
+একটি `Process` object সাধারণত একবারই start করা যায়।
 
-১৫. join()
+---
 
-join() calling process-কে অপেক্ষা করায় যতক্ষণ না child process শেষ হয়।
+## ১৫. `join()`
 
-process.join()
+`join()` method calling process-কে অপেক্ষা করায় যতক্ষণ না নির্দিষ্ট child process শেষ হয়।
 
-উদাহরণ:
-
+```python
 process.start()
 process.join()
 
-print("Main finished")
+print("Child process finished")
+```
 
 এখানে main process child process শেষ হওয়া পর্যন্ত অপেক্ষা করবে।
 
+### গুরুত্বপূর্ণ
 
-১৬. start() বনাম join()
+`join()` নিজে process বন্ধ করে না। এটি শুধু অপেক্ষা করে।
 
-start()
-→ Process শুরু করে
+```text
+start() → Process শুরু করে
+join()  → Process শেষ হওয়া পর্যন্ত অপেক্ষা করে
+```
 
-join()
-→ Process শেষ হওয়া পর্যন্ত অপেক্ষা করে
+`join(timeout=2)` ব্যবহার করলে সর্বোচ্চ নির্দিষ্ট সময় অপেক্ষা করা যায়। Timeout শেষ হলেও child process চলতে পারে।
 
-সহজভাবে:
+---
 
-start() = Start the process
-join() = Wait for the process
+## ১৬. `start()` বনাম `run()`
 
+`start()` এবং `run()` এক জিনিস নয়।
 
-১৭. if __name__ == "__main__":
+### `start()`
 
-Multiprocessing ব্যবহার করার সময় বিশেষ করে Windows-এ এই main guard ব্যবহার করা গুরুত্বপূর্ণ।
+```python
+process.start()
+```
+
+নতুন child process চালু করে এবং সেখানে target callable execute করায়।
+
+### `run()`
+
+```python
+process.run()
+```
+
+`run()` সরাসরি call করলে target callable বর্তমান process-এর মধ্যেই execute হয়। এটি নিজে থেকে নতুন process তৈরি করে না।
+
+সাধারণ multiprocessing ব্যবহারে `start()` ব্যবহার করুন।
+
+---
+
+## ১৭. `if __name__ == "__main__":`
+
+Multiprocessing program-এ main guard ব্যবহার করা গুরুত্বপূর্ণ, বিশেষ করে `spawn` start method-এর ক্ষেত্রে।
 
 সঠিক structure:
 
+```python
+import multiprocessing
+
+def task():
+    print("Child process is running")
+
+if __name__ == "__main__":
+    process = multiprocessing.Process(target=task)
+
+    process.start()
+    process.join()
+```
+
+Main guard কেন প্রয়োজন?
+
+`spawn` পদ্ধতিতে child process নতুন Python interpreter চালু করে এবং main module import করতে পারে। Process তৈরির কোড guard-এর বাইরে থাকলে অনিচ্ছাকৃতভাবে আবার process তৈরি হতে পারে।
+
+### গুরুত্বপূর্ণ নিয়ম
+
+- Process তৈরির কোড main guard-এর ভেতরে রাখুন।
+- Target function সাধারণত module-এর top level-এ সংজ্ঞায়িত করুন।
+- `spawn` ব্যবহার করলে target function ও পাঠানো arguments picklable হওয়া প্রয়োজন।
+
+Windows-এ এই বিষয়টি বিশেষভাবে গুরুত্বপূর্ণ। তবে ভালো portability-এর জন্য সব platform-এই main guard ব্যবহার করা উচিত।
+
+---
+
+## ১৮. Complete Basic Multiprocessing Program
+
+```python
 import multiprocessing
 
 def task():
@@ -306,34 +473,19 @@ if __name__ == "__main__":
     process.start()
     process.join()
 
-Main guard না থাকলে কিছু system-এ child process আবার process creation code execute করতে পারে।
-
-তাই multiprocessing-এর সময় সাধারণত ব্যবহার করুন:
-
-if __name__ == "__main__":
-
-
-১৮. Complete Basic Multiprocessing Program
-
-import multiprocessing
-
-def task():
-    print("Child process is running")
-
-if __name__ == "__main__":
-
-    process = multiprocessing.Process(
-        target=task
-    )
-
-    process.start()
-    process.join()
-
     print("Main process finished")
+```
 
+সম্ভাব্য Output:
 
-Program Flow:
+```text
+Child process is running
+Main process finished
+```
 
+### Program Flow
+
+```text
 Program Start
      ↓
 Main Process
@@ -351,55 +503,19 @@ Child Finished
 join() returns
      ↓
 Main Process continues
+```
 
+---
 
-১৯. Parent এবং Child Process
+## ১৯. Child Process Name
 
-যখন একটি process অন্য একটি process তৈরি করে:
+Child process-এর নাম জানতে `multiprocessing.current_process()` ব্যবহার করা যায়।
 
-Parent Process
-      |
-      ↓
-Child Process
-
-PID দেখার উদাহরণ:
-
-import multiprocessing
-import os
-
-def task():
-    print("Child PID:", os.getpid())
-    print("Parent PID:", os.getppid())
-
-if __name__ == "__main__":
-    print("Main PID:", os.getpid())
-
-    process = multiprocessing.Process(target=task)
-
-    process.start()
-    process.join()
-
-
-os.getpid()
-→ বর্তমান process-এর PID return করে।
-
-os.getppid()
-→ Parent process-এর PID return করে।
-
-
-২০. Child Process Name
-
-Child process-এর default name হতে পারে:
-
-Process-1
-
-উদাহরণ:
-
+```python
 import multiprocessing
 
 def task():
     process = multiprocessing.current_process()
-
     print("Child Name:", process.name)
 
 if __name__ == "__main__":
@@ -407,33 +523,58 @@ if __name__ == "__main__":
 
     process.start()
     process.join()
+```
 
+সম্ভাব্য Output:
 
-২১. Custom Process Name
+```text
+Child Name: Process-1
+```
 
-আমরা নিজের মতো process-এর নাম দিতে পারি।
+Default name environment ও তৈরি করা process-এর ক্রম অনুযায়ী ভিন্ন হতে পারে।
 
-process = multiprocessing.Process(
-    target=task,
-    name="Worker-1"
-)
+---
+
+## ২০. Custom Process Name
+
+`name` parameter দিয়ে process-এর নাম নির্ধারণ করা যায়।
+
+```python
+import multiprocessing
+
+def task():
+    process = multiprocessing.current_process()
+    print("Process Name:", process.name)
+
+if __name__ == "__main__":
+    process = multiprocessing.Process(
+        target=task,
+        name="Worker-1"
+    )
+
+    process.start()
+    process.join()
+```
 
 Output:
 
+```text
 Process Name: Worker-1
+```
 
+---
 
-২২. Multiple Child Processes
+## ২১. Multiple Child Processes
 
-একাধিক child process তৈরি করা যায়।
+একটি main process থেকে একাধিক child process তৈরি করা যায়।
 
+```python
 import multiprocessing
 
 def task(number):
     print("Task:", number)
 
 if __name__ == "__main__":
-
     p1 = multiprocessing.Process(
         target=task,
         args=(1,)
@@ -456,30 +597,33 @@ if __name__ == "__main__":
     p1.join()
     p2.join()
     p3.join()
+```
 
-Output order fixed নয়।
+সম্ভাব্য Output:
 
-যেমন:
-
+```text
 Task: 2
 Task: 1
 Task: 3
+```
 
 অথবা:
 
+```text
 Task: 1
 Task: 3
 Task: 2
+```
 
-Operating System ঠিক করে কোন process কখন CPU time পাবে।
+Output-এর order নিশ্চিত নয়। Operating system এবং process scheduling-এর কারণে execution order পরিবর্তিত হতে পারে।
 
+---
 
-২৩. args
+## ২২. `args`
 
-args দিয়ে child process-এর function-এ positional arguments পাঠানো হয়।
+`args` ব্যবহার করে target function-এ positional arguments পাঠানো হয়।
 
-উদাহরণ:
-
+```python
 import multiprocessing
 
 def task(name):
@@ -493,28 +637,43 @@ if __name__ == "__main__":
 
     process.start()
     process.join()
+```
 
 Output:
 
+```text
 Hello Faruk
+```
 
-একটি argument হলে comma দিতে হয়:
+### একটি argument হলে comma কেন প্রয়োজন?
 
-args=("Faruk",)
-
-কারণ:
-
+```python
 ("Faruk")
-→ String
+```
 
+এটি একটি string expression।
+
+কিন্তু:
+
+```python
 ("Faruk",)
-→ Tuple
+```
 
+এটি একটি single-element tuple।
 
-২৪. Multiple Arguments
+তাই একটি positional argument পাঠাতে লিখুন:
+
+```python
+args=("Faruk",)
+```
+
+---
+
+## ২৩. Multiple Positional Arguments
 
 একাধিক argument পাঠানো যায়।
 
+```python
 import multiprocessing
 
 def task(name, age):
@@ -529,14 +688,22 @@ if __name__ == "__main__":
 
     process.start()
     process.join()
+```
 
+Output:
 
-২৫. kwargs
+```text
+Name: Faruk
+Age: 25
+```
 
-kwargs দিয়ে keyword arguments পাঠানো হয়।
+---
 
-উদাহরণ:
+## ২৪. `kwargs`
 
+`kwargs` ব্যবহার করে keyword arguments পাঠানো হয়।
+
+```python
 import multiprocessing
 
 def task(name, age):
@@ -544,7 +711,6 @@ def task(name, age):
     print("Age:", age)
 
 if __name__ == "__main__":
-
     process = multiprocessing.Process(
         target=task,
         kwargs={
@@ -555,16 +721,17 @@ if __name__ == "__main__":
 
     process.start()
     process.join()
+```
 
+এখানে dictionary-এর key-গুলো function-এর parameter name-এর সঙ্গে মিলতে হবে।
 
-২৬. terminate()
+---
 
-চলমান process terminate করার জন্য:
+## ২৫. `terminate()`
 
-process.terminate()
+`terminate()` method দিয়ে একটি child process-কে জোরপূর্বক বন্ধ করার অনুরোধ করা যায়।
 
-উদাহরণ:
-
+```python
 import multiprocessing
 import time
 
@@ -574,7 +741,6 @@ def task():
         time.sleep(1)
 
 if __name__ == "__main__":
-
     process = multiprocessing.Process(target=task)
 
     process.start()
@@ -584,133 +750,145 @@ if __name__ == "__main__":
     process.terminate()
     process.join()
 
-    print("Process terminated")
+    print("Process stopped")
+```
 
-Important:
+### সতর্কতা
 
-terminate() process-কে normal cleanup করার সুযোগ নাও দিতে পারে।
+`terminate()` ব্যবহার করলে process স্বাভাবিকভাবে cleanup করার সুযোগ নাও পেতে পারে।
 
-তাই process যদি ব্যবহার করে:
-- Files
-- Locks
-- Database connections
-- Other resources
+উদাহরণ:
 
-তাহলে সতর্ক থাকতে হবে।
+- `finally` block execute নাও হতে পারে।
+- File বা resource সঠিকভাবে close নাও হতে পারে।
+- Lock, Queue বা Pipe-এর অবস্থা নষ্ট হতে পারে।
 
+তাই সম্ভব হলে আগে cooperative shutdown ব্যবহার করুন। যেমন, `multiprocessing.Event` দিয়ে worker-কে কাজ থামানোর signal দেওয়া।
 
-২৭. kill()
+---
 
-Process forcefully stop করার জন্য:
+## ২৬. `kill()`
 
+`kill()` method process-কে আরও জোরালোভাবে forcefully terminate করার জন্য ব্যবহার করা হয়।
+
+```python
 process.kill()
+process.join()
+```
 
-সহজভাবে:
+`terminate()` এবং `kill()`-এর সুনির্দিষ্ট আচরণ operating system অনুযায়ী কিছুটা ভিন্ন হতে পারে।
 
-terminate()
-→ Process বন্ধ করে
+মনে রাখুন:
 
-kill()
-→ Forcefully Process বন্ধ করে
+- `terminate()` → Process forcefully terminate করার অনুরোধ করে।
+- `kill()` → আরও জোরালো OS-level termination ব্যবহার করে।
+- কোনোটিই স্বাভাবিক cleanup নিশ্চিত করে না।
+- Process বন্ধ করার পর `join()` করে তার termination সম্পন্ন হয়েছে কি না নিশ্চিত হওয়া ভালো।
 
+---
 
-২৮. exitcode
+## ২৭. `exitcode`
 
-Process শেষ হওয়ার পরে process.exitcode দিয়ে process-এর exit status জানা যায়।
+Process শেষ হওয়ার পরে `exitcode` attribute দিয়ে তার exit status জানা যায়।
 
-process.exitcode
+```python
+import multiprocessing
 
-সাধারণত:
+def task():
+    print("Working")
 
-0
+if __name__ == "__main__":
+    process = multiprocessing.Process(target=task)
 
-মানে process সফলভাবে শেষ হয়েছে।
+    process.start()
+    process.join()
 
-Non-zero exit code সাধারণত error বা abnormal termination নির্দেশ করে।
+    print("Exit Code:", process.exitcode)
+```
 
+সাধারণ অর্থ:
 
-২৯. Process Lifecycle
+- `0` → সাধারণত সফলভাবে শেষ হয়েছে।
+- Non-zero → সাধারণত error বা abnormal termination নির্দেশ করে।
+- `None` → Process এখনও শেষ হয়নি, অথবা exit status এখনও পাওয়া যায়নি।
 
+POSIX system-এ signal-এর কারণে process শেষ হলে exit code negative-ও হতে পারে।
+
+---
+
+## ২৮. Process Lifecycle
+
+```text
 Process Object Created
           |
           ↓
         start()
           |
           ↓
-       Running
+    Child Process Runs
           |
           ↓
-       Finished
+   Target Function Executes
+          |
+          ↓
+    Process Terminates
           |
           ↓
       join() returns
+```
 
+মনে রাখুন, `join()` process-এর lifecycle-এর termination ঘটায় না। Process শেষ হওয়ার পরে `join()` return করে।
 
-সহজভাবে:
+---
 
-Process()
-   ↓
-start()
-   ↓
-Running
-   ↓
-Finished
-   ↓
-join()
+## ২৯. একটি Process Object একবারই Start করা যায়
 
-
-৩০. start() শুধুমাত্র একবার
-
-একটি Process object সাধারণত একবারই start করা যায়।
+একই `Process` object দ্বিতীয়বার start করা যায় না।
 
 ভুল:
 
+```python
 process.start()
-process.start()
-
-একই Process object আবার restart করা যায় না।
-
-আরেকটি process প্রয়োজন হলে নতুন Process object তৈরি করতে হবে।
-
-
-৩১. join() Process বন্ধ করে না
-
-এটি খুব গুরুত্বপূর্ণ।
-
 process.join()
 
-Process বন্ধ করে না।
+process.start()  # RuntimeError হতে পারে
+```
 
-এটি শুধু calling process-কে অপেক্ষা করায় যতক্ষণ না target process শেষ হয়।
+আরেকটি process চালাতে নতুন object তৈরি করুন।
 
-মনে রাখুন:
+```python
+p1 = multiprocessing.Process(target=task)
+p2 = multiprocessing.Process(target=task)
 
-start()
-→ Process শুরু করে
+p1.start()
+p2.start()
 
-join()
-→ Process শেষ হওয়া পর্যন্ত অপেক্ষা করে
+p1.join()
+p2.join()
+```
 
+---
 
-৩২. CPU-bound Task
+## ৩০. CPU-bound Task
 
-যে task-এ বেশিরভাগ সময় CPU calculation করে সেটি CPU-bound task।
+যে task-এ বেশিরভাগ সময় CPU calculation করতে হয়, তাকে **CPU-bound task** বলে।
 
 উদাহরণ:
 
 - Large Mathematical Calculations
 - Image Processing
 - Video Encoding
-- Scientific Calculations
+- Scientific Computation
 - Complex Algorithms
-- CPU-heavy Data Processing
+- CPU-intensive Data Processing
 
-CPU-bound কাজের জন্য multiprocessing ভালো choice হতে পারে।
+এই ধরনের কাজের জন্য multiprocessing উপকারী হতে পারে, যদি কাজগুলো parallelভাবে ভাগ করা যায় এবং overhead-এর তুলনায় যথেষ্ট computation থাকে।
 
+---
 
-৩৩. I/O-bound Task
+## ৩১. I/O-bound Task
 
-যে task-এ বেশিরভাগ সময় input/output-এর জন্য অপেক্ষা করতে হয় সেটি I/O-bound task।
+যে task-এ বেশিরভাগ সময় input/output operation-এর জন্য অপেক্ষা করতে হয়, তাকে **I/O-bound task** বলে।
 
 উদাহরণ:
 
@@ -718,104 +896,80 @@ CPU-bound কাজের জন্য multiprocessing ভালো choice হ�
 - Network Requests
 - Database Queries
 - API Requests
-- External Service-এর জন্য অপেক্ষা
+- External Service-এর response-এর জন্য অপেক্ষা
 
-অনেক I/O-bound task-এর জন্য:
+অনেক I/O-bound কাজের জন্য threading বা `asyncio` ভালো পছন্দ হতে পারে। তবে প্রয়োজন অনুযায়ী multiprocessing-ও ব্যবহার করা যায়।
 
-Threading
-Asyncio
+---
 
-ভালো choice হতে পারে।
+## ৩২. Multiprocessing এবং GIL
 
+**GIL (Global Interpreter Lock)** হলো standard GIL-enabled CPython-এর একটি mechanism, যা একই interpreter-এর একাধিক thread-এর Python bytecode একই সময়ে execute করার ক্ষেত্রে সীমাবদ্ধতা তৈরি করে।
 
-৩৪. কেন Multiprocessing ব্যবহার করব?
+Multiprocessing-এ আলাদা process ব্যবহার করা হয়। প্রতিটি process-এর নিজস্ব Python interpreter থাকে। তাই CPU-bound কাজকে একাধিক process-এ ভাগ করে একাধিক CPU core-এ parallel execution সম্ভব হতে পারে।
 
-Multiprocessing বিশেষভাবে CPU-bound কাজের জন্য useful।
+### সহজ ধারণা
 
-উদাহরণ:
-
-Image Processing
-Video Processing
-Large Mathematical Calculations
-Scientific Computation
-Machine Learning Computation
-CPU-heavy Algorithms
-Data Processing
-
-
-৩৫. Multiprocessing এবং GIL
-
-CPython-এ GIL অর্থাৎ Global Interpreter Lock একই process-এর একাধিক thread-এর Python bytecode একই সময়ে execute করার ক্ষেত্রে limitation তৈরি করে।
-
-Multiprocessing আলাদা process ব্যবহার করে।
-
-প্রতিটি process-এর নিজস্ব Python interpreter এবং সাধারণত আলাদা memory space থাকে।
-
-তাই CPU-bound program একাধিক process ব্যবহার করে multiple CPU core ব্যবহার করতে পারে।
-
-সহজভাবে:
-
+```text
 Multithreading
-    ↓
+      ↓
 Same Process
-    ↓
-Shared Memory
-    ↓
-GIL matters
+      ↓
+Threads share process memory
+      ↓
+GIL can limit parallel Python bytecode execution
+```
 
-
+```text
 Multiprocessing
-    ↓
+      ↓
 Multiple Processes
-    ↓
-Separate Memory
-    ↓
-Multiple CPU Cores
+      ↓
+Separate process memory
+      ↓
+Parallel execution may use multiple CPU cores
+```
 
+**নোট:** এই GIL ব্যাখ্যা standard GIL-enabled CPython-এর জন্য। Python-এর free-threaded build-ও রয়েছে, তাই GIL-এর প্রভাব সব Python configuration-এ একই নয়।
 
-৩৬. Multiprocessing বনাম Multithreading
+---
 
-Multiprocessing:
-- Unit → Process
-- Memory → Separate
-- CPU-bound → ভালো choice
-- I/O-bound → ব্যবহার করা যায়
-- Communication → বেশি complex
-- Memory usage → বেশি
-- Isolation → বেশি
-- Creation overhead → বেশি
+## ৩৩. Multiprocessing বনাম Multithreading
 
-Multithreading:
-- Unit → Thread
-- Memory → Same process-এর মধ্যে shared
-- CPU-bound → CPython-এ GIL limitation
-- I/O-bound → সাধারণত ভালো
-- Communication → সহজ
-- Memory usage → কম
-- Isolation → কম
-- Creation overhead → কম
+| বিষয় | Multiprocessing | Multithreading |
+|---|---|---|
+| Execution unit | Process | Thread |
+| Memory | সাধারণত আলাদা | একই process-এর মধ্যে shared |
+| CPU-bound task | ভালো choice হতে পারে | Standard CPython-এ GIL limitation থাকতে পারে |
+| I/O-bound task | ব্যবহার করা যায় | প্রায়ই ভালো choice |
+| Communication | তুলনামূলক জটিল | সাধারণত সহজ |
+| Memory overhead | সাধারণত বেশি | সাধারণত কম |
+| Isolation | তুলনামূলক বেশি | তুলনামূলক কম |
+| Startup overhead | সাধারণত বেশি | সাধারণত কম |
 
+### General Rule
 
-General Rule:
+```text
+CPU-bound Task
+       ↓
+Multiprocessing বিবেচনা করুন
+```
 
-CPU-bound
-    ↓
-Multiprocessing
+```text
+I/O-bound Task
+       ↓
+Threading / Asyncio বিবেচনা করুন
+```
 
+এটি সাধারণ নিয়ম, কঠোর নিয়ম নয়। Task-এর ধরন, data size, platform এবং overhead বিবেচনা করতে হবে।
 
-I/O-bound
-    ↓
-Threading / Asyncio
+---
 
-এটি একটি general rule, strict rule নয়।
+## ৩৪. Process-এর Separate Memory
 
+প্রতিটি process-এর সাধারণত নিজস্ব memory space থাকে।
 
-৩৭. Process-এর Separate Memory
-
-Process-এর সাধারণত আলাদা memory space থাকে।
-
-উদাহরণ:
-
+```python
 import multiprocessing
 
 number = 10
@@ -829,48 +983,92 @@ if __name__ == "__main__":
     process.start()
     process.join()
 
-Child process সাধারণ Python data-এর নিজের process-specific view/copy পায়।
+    print("Parent:", number)
+```
 
-Child যদি normal Python variable পরিবর্তন করে, সেই পরিবর্তন সরাসরি parent-এর variable পরিবর্তন করে না।
+সম্ভাব্য Output:
 
+```text
+Child: 10
+Parent: 10
+```
 
-৩৮. Process-এর মধ্যে Data Share
+Child process-এ সাধারণ Python variable পরিবর্তন করলেও parent-এর variable স্বয়ংক্রিয়ভাবে পরিবর্তিত হয় না।
 
-Process-এর memory আলাদা হওয়ায় ordinary Python variable সরাসরি share করা যায় না।
+```python
+import multiprocessing
 
-Communication এবং data sharing-এর জন্য ব্যবহার করা যায়:
+number = 10
 
-Queue
-Pipe
-Value
-Array
-Manager
-Shared Memory
+def task():
+    global number
+    number = 50
+    print("Child:", number)
 
+if __name__ == "__main__":
+    process = multiprocessing.Process(target=task)
 
-৩৯. multiprocessing.Queue
+    process.start()
+    process.join()
 
-Queue ব্যবহার করে process-এর মধ্যে message/data পাঠানো যায়।
+    print("Parent:", number)
+```
 
-multiprocessing.Queue()
+সম্ভাব্য Output:
 
-সহজভাবে:
+```text
+Child: 50
+Parent: 10
+```
 
+এখানে child process-এর পরিবর্তন parent process-এর variable-এ প্রতিফলিত হয়নি।
+
+**নোট:** `fork` start method-এ child শুরুতে parent-এর memory-এর copy-on-write view পেতে পারে। তবুও সাধারণ Python variable-এর পরিবর্তন সাধারণত parent-এ ফিরে আসে না।
+
+---
+
+## ৩৫. Process-এর মধ্যে Data Share
+
+Process-এর memory আলাদা হওয়ায় সাধারণ Python variable সরাসরি share করা যায় না।
+
+Process-এর মধ্যে data পাঠানো বা share করার জন্য ব্যবহার করা যায়:
+
+- `multiprocessing.Queue`
+- `multiprocessing.Pipe`
+- `multiprocessing.Value`
+- `multiprocessing.Array`
+- `multiprocessing.Manager`
+- `multiprocessing.shared_memory`
+
+একাধিক process একই shared data পরিবর্তন করলে synchronization প্রয়োজন হতে পারে।
+
+সাধারণভাবে message পাঠানোর জন্য `Queue` এবং `Pipe` ব্যবহার করা সহজ ও নিরাপদ পদ্ধতি।
+
+---
+
+## ৩৬. `multiprocessing.Queue`
+
+`Queue` ব্যবহার করে process-এর মধ্যে data বা message পাঠানো যায়।
+
+```text
 Process A
+    |
     ↓
   Queue
+    |
     ↓
 Process B
+```
 
 উদাহরণ:
 
+```python
 import multiprocessing
 
 def worker(queue):
     queue.put("Hello from child")
 
 if __name__ == "__main__":
-
     queue = multiprocessing.Queue()
 
     process = multiprocessing.Process(
@@ -880,31 +1078,47 @@ if __name__ == "__main__":
 
     process.start()
 
-    print(queue.get())
+    message = queue.get()
+    print(message)
 
     process.join()
+    queue.close()
+```
 
 Output:
 
+```text
 Hello from child
+```
 
+### গুরুত্বপূর্ণ বিষয়
 
-৪০. multiprocessing.Pipe
+- `put()` দিয়ে data পাঠানো হয়।
+- `get()` দিয়ে data গ্রহণ করা হয়।
+- Queue-তে data পাঠানোর সময় সাধারণত pickle ব্যবহার করে serialize করা হয়।
+- পাঠানো object-টি picklable হতে হয়।
 
-Pipe process-এর মধ্যে communication করার জন্য ব্যবহার করা হয়।
+বড় data Queue-তে পাঠানোর সময় আগে producer process-কে `join()` করে বসে থাকলে deadlock হতে পারে, যদি Queue-এর buffer পূর্ণ হয়ে যায়। তাই data গ্রহণের order সঠিকভাবে পরিচালনা করা জরুরি।
 
-multiprocessing.Pipe()
+---
 
-সহজভাবে:
+## ৩৭. `multiprocessing.Pipe`
 
+`Pipe` দুইটি process-এর মধ্যে communication করার জন্য ব্যবহার করা যায়।
+
+```text
 Process A
     |
+    ↓
    Pipe
     |
+    ↓
 Process B
+```
 
 উদাহরণ:
 
+```python
 import multiprocessing
 
 def worker(connection):
@@ -912,7 +1126,6 @@ def worker(connection):
     connection.close()
 
 if __name__ == "__main__":
-
     parent_conn, child_conn = multiprocessing.Pipe()
 
     process = multiprocessing.Process(
@@ -926,75 +1139,114 @@ if __name__ == "__main__":
 
     process.join()
 
+    parent_conn.close()
+```
+
 Output:
 
+```text
 Hello from child
+```
 
+### গুরুত্বপূর্ণ Method
 
-৪১. multiprocessing.Pool
+- `send()` → Data পাঠায়।
+- `recv()` → Data গ্রহণ করে।
+- `close()` → Connection বন্ধ করে।
 
-অনেকগুলো similar task থাকলে Pool ব্যবহার করা সুবিধাজনক।
+Default `Pipe()` duplex connection তৈরি করে, অর্থাৎ দুই দিকেই data পাঠানো সম্ভব। One-way connection-ও তৈরি করা যায়।
 
-Pool worker process-এর একটি group তৈরি করে এবং task-গুলো তাদের মধ্যে distribute করে।
+---
+
+## ৩৮. `multiprocessing.Pool`
+
+অনেকগুলো একই ধরনের task থাকলে `Pool` ব্যবহার করা সুবিধাজনক।
+
+`Pool` worker process-এর একটি group তৈরি করে এবং তাদের মধ্যে কাজ distribute করে।
 
 উদাহরণ:
 
+```python
 import multiprocessing
 
 def square(number):
     return number * number
 
 if __name__ == "__main__":
-
     with multiprocessing.Pool() as pool:
-
         results = pool.map(
             square,
             [1, 2, 3, 4, 5]
         )
 
     print(results)
+```
 
 Output:
 
+```text
 [1, 4, 9, 16, 25]
+```
 
+এখানে:
 
-৪২. Pool.map()
+1. `Pool()` worker process তৈরি করে।
+2. `map()` প্রতিটি input-এর জন্য `square()` execute করায়।
+3. Return value-গুলো list হিসেবে পাওয়া যায়।
+4. `with` block শেষ হলে pool-এর worker process-গুলো বন্ধ করার ব্যবস্থা করা হয়।
+
+---
+
+## ৩৯. `Pool.map()`
 
 Syntax:
 
+```python
 pool.map(function, iterable)
+```
 
 উদাহরণ:
 
-results = pool.map(
-    square,
-    [1, 2, 3, 4, 5]
-)
+```python
+results = pool.map(square, [1, 2, 3, 4, 5])
+```
 
-Conceptually:
+এটি conceptually নিচের কাজগুলো করে:
 
-1 → square()
-2 → square()
-3 → square()
-4 → square()
-5 → square()
+```text
+1 → square(1)
+2 → square(2)
+3 → square(3)
+4 → square(4)
+5 → square(5)
+```
 
-Result list হিসেবে পাওয়া যায়।
+Result list-এ input-এর order বজায় থাকে, যদিও worker-গুলো কাজের জন্য ভিন্ন সময়ে শুরু বা শেষ হতে পারে।
 
+### গুরুত্বপূর্ণ
 
-৪৩. Pool কেন ব্যবহার করব?
+`Pool` ব্যবহার করার সময়:
 
-Pool না ব্যবহার করলে অনেকগুলো process manually তৈরি করতে হতে পারে:
+- Worker function সাধারণত module-এর top level-এ সংজ্ঞায়িত করুন।
+- Function ও argument-গুলো picklable হতে হবে।
+- Pool তৈরির কোড main guard-এর ভেতরে রাখুন।
+- `map()` একাধিক input-এর result সংগ্রহ করে list return করে।
 
-p1 = Process(...)
-p2 = Process(...)
-p3 = Process(...)
-p4 = Process(...)
+---
 
-Pool ব্যবহার করলে কাজটি সহজ হয়।
+## ৪০. `Pool` কেন ব্যবহার করব?
 
+Pool ছাড়া অনেকগুলো process নিজে তৈরি ও পরিচালনা করতে হতে পারে।
+
+```python
+p1 = multiprocessing.Process(...)
+p2 = multiprocessing.Process(...)
+p3 = multiprocessing.Process(...)
+```
+
+অনেকগুলো independent task থাকলে `Pool` worker process-গুলো পুনরায় ব্যবহার করতে পারে এবং কাজ পরিচালনা সহজ করে।
+
+```text
 Many Tasks
     ↓
 Process Pool
@@ -1002,120 +1254,182 @@ Process Pool
 Worker Processes
     ↓
 Results
+```
 
+Pool-এর worker সংখ্যা `processes` parameter দিয়ে নির্ধারণ করা যায়।
 
-৪৪. Multiprocessing-এর সুবিধা
+```python
+with multiprocessing.Pool(processes=4) as pool:
+    results = pool.map(square, [1, 2, 3, 4, 5])
+```
 
-১. CPU-heavy কাজের জন্য ভালো
+এখানে চারটি worker process নির্ধারণ করা হয়েছে। তবে worker সংখ্যা বাড়ালেই সব program দ্রুত হবে না।
 
-২. Multiple CPU cores ব্যবহার করতে পারে
+---
 
-৩. Process Isolation বেশি
+## ৪১. `daemon` Process
 
-৪. একটি child process crash করলেও parent process স্বয়ংক্রিয়ভাবে crash করতেই হবে এমন নয়
+`daemon` attribute দিয়ে process daemon process কি না বোঝা যায়।
 
-৫. Independent task parallelভাবে চালানো যায়
+```python
+process = multiprocessing.Process(
+    target=task,
+    daemon=True
+)
+```
 
+Multiprocessing-এর daemon process সম্পর্কে গুরুত্বপূর্ণ বিষয়:
 
-৪৫. Multiprocessing-এর অসুবিধা
+- Parent process শেষ হলে daemon child process-কে terminate করা হয়।
+- Daemon process নিজে নতুন child process তৈরি করতে পারে না।
+- গুরুত্বপূর্ণ কাজের জন্য daemon process-এর ওপর নির্ভর করা উচিত নয়, কারণ parent শেষ হলে কাজটি মাঝপথে বন্ধ হতে পারে।
 
-১. Memory usage বেশি
+Daemon process এবং সাধারণ process-এর আচরণ বুঝে ব্যবহার করুন।
 
-২. Process creation overhead বেশি
+---
 
-৩. Communication বেশি complex
+## ৪২. `close()`
 
-৪. Data serialization/pickling-এর overhead থাকতে পারে
+`Process` object-এর সঙ্গে যুক্ত কিছু resource release করতে `close()` ব্যবহার করা হয়।
 
-৫. Debugging তুলনামূলক কঠিন
+```python
+import multiprocessing
 
+def task():
+    print("Working")
 
-৪৬. কখন Multiprocessing ব্যবহার করব?
+if __name__ == "__main__":
+    process = multiprocessing.Process(target=task)
 
-যখন:
+    process.start()
+    process.join()
 
-✓ Task CPU-intensive
-✓ Tasks mostly independent
-✓ Multiple CPU cores available
-✓ Parallel execution সাহায্য করবে
-✓ কাজটি যথেষ্ট বড় যাতে multiprocessing overhead justify হয়
+    process.close()
+```
+
+### গুরুত্বপূর্ণ
+
+- `close()` process-কে terminate করার method নয়।
+- Process এখনও চলমান থাকলে `close()` সাধারণত `ValueError` raise করে।
+- `close()` করার পরে ওই `Process` object আবার ব্যবহার বা start করা যায় না।
+
+মনে রাখুন:
+
+```text
+join()  → Process শেষ হওয়া পর্যন্ত অপেক্ষা
+close() → Process object-এর resource release
+```
+
+---
+
+## ৪৩. Multiprocessing-এর সুবিধা
+
+১. CPU-intensive কাজের জন্য কার্যকর হতে পারে।
+
+২. একাধিক CPU core ব্যবহার করে parallel execution সম্ভব।
+
+৩. Process-গুলোর memory আলাদা থাকায় isolation তুলনামূলক বেশি।
+
+৪. একটি child process ব্যর্থ হলে parent process স্বয়ংক্রিয়ভাবে ব্যর্থ হতেই হবে এমন নয়।
+
+৫. Independent task একাধিক process-এ ভাগ করা যায়।
+
+৬. উপযুক্ত task-এর ক্ষেত্রে মোট execution time কমানো সম্ভব।
+
+---
+
+## ৪৪. Multiprocessing-এর অসুবিধা
+
+১. Memory usage সাধারণত বেশি।
+
+২. Process তৈরি ও পরিচালনায় overhead থাকে।
+
+৩. Process-এর মধ্যে communication তুলনামূলক জটিল।
+
+৪. Data serialization বা pickling-এর overhead হতে পারে।
+
+৫. Debugging ও error handling কঠিন হতে পারে।
+
+৬. Shared data ব্যবহার করলে synchronization প্রয়োজন হতে পারে।
+
+৭. ছোট task-এর ক্ষেত্রে multiprocessing ধীরও হতে পারে।
+
+---
+
+## ৪৫. কখন Multiprocessing ব্যবহার করব?
+
+Multiprocessing বিবেচনা করুন যখন:
+
+- Task CPU-intensive।
+- কাজগুলো একে অপরের থেকে যথেষ্ট independent।
+- কাজগুলো parallelভাবে ভাগ করা যায়।
+- একাধিক CPU core ব্যবহার করলে উপকার পাওয়া যায়।
+- Parallel execution-এর সুবিধা overhead-এর চেয়ে বেশি।
 
 উদাহরণ:
 
-Image Processing
-Video Processing
-Scientific Computation
-Large Mathematical Operations
-CPU-heavy Data Processing
+- Image Processing
+- Video Processing
+- Scientific Computation
+- Large Mathematical Operations
+- CPU-intensive Data Processing
 
+---
 
-৪৭. কখন Multiprocessing Avoid করব?
+## ৪৬. কখন Multiprocessing এড়িয়ে চলব?
 
 Multiprocessing সবসময় faster নয়।
 
-যদি task খুব ছোট হয়, তাহলে process creation এবং communication overhead actual কাজের চেয়ে বেশি হতে পারে।
+যদি কাজ খুব ছোট হয়, তাহলে process creation, communication ও serialization-এর overhead actual calculation-এর চেয়ে বেশি হতে পারে।
 
 উদাহরণ:
 
-Very Small Calculations
-Simple Print Operations
-Tiny Tasks
-Frequent Shared-state Communication
+- Very Small Calculations
+- Simple Print Operations
+- Tiny Tasks
+- ঘন ঘন process-এর মধ্যে data পাঠানো
+- এমন I/O-bound কাজ, যা threading বা `asyncio` দিয়ে সহজে করা যায়
 
+সঠিক পদ্ধতি বেছে নেওয়ার আগে প্রয়োজনে benchmark করুন।
 
-৪৮. Important Process Methods
+---
 
-start()
-→ Process শুরু করে
+## ৪৭. Important Process Methods
 
-join()
-→ Process শেষ হওয়া পর্যন্ত অপেক্ষা করে
+| Method / Function | কাজ |
+|---|---|
+| `start()` | Child process শুরু করে |
+| `run()` | Target callable execute করে; সরাসরি call করলে নতুন process শুরু হয় না |
+| `join()` | Process শেষ হওয়া পর্যন্ত অপেক্ষা করে |
+| `is_alive()` | Process চলছে কি না জানায় |
+| `terminate()` | Process forcefully terminate করার অনুরোধ করে |
+| `kill()` | Process-কে আরও জোরালোভাবে terminate করে |
+| `close()` | Process object-এর associated resources release করে |
+| `current_process()` | বর্তমান process-এর object দেয় |
 
-is_alive()
-→ Process চলছে কিনা check করে
+---
 
-terminate()
-→ Process terminate করে
+## ৪৮. Important Process Attributes
 
-kill()
-→ Process forcefully terminate করে
+| Attribute | কাজ |
+|---|---|
+| `name` | Process-এর নাম |
+| `pid` | Process-এর OS-level ID |
+| `exitcode` | Process-এর exit status |
+| `daemon` | Process daemon কি না |
 
-close()
-→ Process object-এর associated resources release করে
+**মনে রাখুন:** `multiprocessing.Process`-এর standard attribute হিসেবে `ident` ব্যবহার করবেন না। `ident` হলো `threading.Thread`-এর attribute।
 
-run()
-→ Target callable run করে
+---
 
-current_process()
-→ Current process object return করে
+## ৪৯. Complete Multiprocessing Example
 
-
-৪৯. Important Process Attributes
-
-name
-→ Process name
-
-pid
-→ OS Process ID
-
-ident
-→ Process identifier
-
-exitcode
-→ Process exit status
-
-daemon
-→ Process daemon process কিনা
-
-
-৫০. Complete Multiprocessing Example
-
+```python
 import multiprocessing
 import os
 import time
 
 def worker(number):
-
     process = multiprocessing.current_process()
 
     print(
@@ -1130,11 +1444,9 @@ def worker(number):
 
 
 if __name__ == "__main__":
-
     processes = []
 
     for i in range(3):
-
         process = multiprocessing.Process(
             target=worker,
             args=(i,),
@@ -1148,10 +1460,11 @@ if __name__ == "__main__":
         process.join()
 
     print("All processes finished")
-
+```
 
 সম্ভাব্য Output:
 
+```text
 Name: Worker-0, PID: 1234, Task: 0
 Name: Worker-1, PID: 1235, Task: 1
 Name: Worker-2, PID: 1236, Task: 2
@@ -1161,158 +1474,189 @@ Task 1 finished
 Task 2 finished
 
 All processes finished
+```
 
-Output-এর exact order guaranteed নয়।
+এখানে PID এবং output-এর exact order তোমার system-এ ভিন্ন হতে পারে।
 
+---
 
-৫১. Multiprocessing Mental Model
+## ৫০. Multiprocessing Mental Model
 
+```text
 Python Program
        |
        ↓
- Main Process
+  Main Process
        |
        +------------+------------+
        |            |            |
        ↓            ↓            ↓
- Process 1      Process 2     Process 3
+   Process 1    Process 2    Process 3
        |            |            |
        ↓            ↓            ↓
-   CPU Core     CPU Core     CPU Core
-
+   Task A       Task B       Task C
+```
 
 প্রতিটি process-এর সাধারণত থাকে:
 
-নিজস্ব execution
-+
-নিজস্ব memory space
-+
-নিজস্ব Process ID
+- নিজস্ব execution flow
+- নিজস্ব memory space
+- নিজস্ব PID
+- নিজস্ব Python interpreter
 
+একাধিক process একাধিক CPU core ব্যবহার করতে পারে, তবে operating system, hardware এবং workload-এর ওপর প্রকৃত parallelism নির্ভর করে।
 
-৫২. Short Revision
+---
 
-Process কী?
-→ একটি running program instance।
+## ৫১. Short Revision
 
-Multiprocessing কী?
-→ Multiple process ব্যবহার করে কাজ করা।
+**Process কী?**
 
-Process() কী?
-→ নতুন process তৈরি করে।
+একটি running program-এর instance।
 
-start() কী?
-→ Process শুরু করে।
+**Multiprocessing কী?**
 
-join() কী?
-→ Process শেষ হওয়া পর্যন্ত অপেক্ষা করে।
+একাধিক process ব্যবহার করে কাজ সম্পন্ন করা।
 
-target কী?
-→ Child process কোন function execute করবে।
+**`Process()` কী?**
 
-args কী?
-→ Positional arguments পাঠায়।
+একটি process object তৈরি করে।
 
-kwargs কী?
-→ Keyword arguments পাঠায়।
+**`start()` কী?**
 
-terminate() কী?
-→ Process terminate করে।
+নতুন child process শুরু করে।
 
-kill() কী?
-→ Process forcefully terminate করে।
+**`join()` কী?**
 
-is_alive() কী?
-→ Process বর্তমানে চলছে কিনা check করে।
+Process শেষ হওয়া পর্যন্ত অপেক্ষা করে।
 
-exitcode কী?
-→ Process কীভাবে শেষ হয়েছে তার status।
+**`target` কী?**
 
-pid কী?
-→ OS-level Process ID।
+কোন callable execute হবে তা নির্ধারণ করে।
 
-current_process() কী?
-→ Current process object return করে।
+**`args` কী?**
 
-Queue কী?
-→ Process-এর মধ্যে data/message exchange করতে ব্যবহার হয়।
+Positional arguments পাঠায়।
 
-Pipe কী?
-→ Process-এর মধ্যে communication করতে ব্যবহার হয়।
+**`kwargs` কী?**
 
-Pool কী?
-→ অনেক task worker process-এর মধ্যে distribute করতে ব্যবহার হয়।
+Keyword arguments পাঠায়।
 
+**`terminate()` কী?**
 
-৫৩. Interview ও Exam-এর জন্য Important Topics
+Process forcefully terminate করার অনুরোধ করে।
 
-১. Process
-২. Main Process
-৩. Child Process
-৪. multiprocessing.Process
-৫. target
-৬. args
-৭. kwargs
-৮. start()
-৯. join()
-১০. is_alive()
-১১. terminate()
-১২. kill()
-১৩. PID
-১৪. current_process()
-১৫. Process Lifecycle
-১৬. Multiprocessing vs Multithreading
-১৭. CPU-bound vs I/O-bound
-১৮. GIL
-১৯. Queue
-২০. Pipe
-২১. Pool
-২২. Process Memory
-২৩. if __name__ == "__main__":
+**`kill()` কী?**
 
+Process-কে আরও জোরালোভাবে terminate করে।
 
-Final Revision:
+**`is_alive()` কী?**
 
+Process বর্তমানে চলছে কি না জানায়।
+
+**`exitcode` কী?**
+
+Process-এর exit status।
+
+**`pid` কী?**
+
+Process-এর OS-level ID।
+
+**`current_process()` কী?**
+
+বর্তমান process-এর object return করে।
+
+**`Queue` কী?**
+
+Process-এর মধ্যে message বা data পাঠানোর মাধ্যম।
+
+**`Pipe` কী?**
+
+Process-এর মধ্যে communication-এর মাধ্যম।
+
+**`Pool` কী?**
+
+একাধিক task worker process-এ distribute করতে সাহায্য করে।
+
+**`ident` কি `multiprocessing.Process`-এর attribute?**
+
+না। `ident` হলো `threading.Thread`-এর attribute।
+
+---
+
+## ৫২. Interview ও Exam-এর জন্য Important Topics
+
+১. Process ও Multiprocessing  
+২. Main Process ও Child Process  
+৩. `multiprocessing.Process()`  
+৪. `target`  
+৫. `args` ও `kwargs`  
+৬. `start()` ও `join()`  
+৭. `run()` ও `start()`-এর পার্থক্য  
+৮. `is_alive()`  
+৯. `terminate()` ও `kill()`  
+১০. PID ও `current_process()`  
+১১. Process Lifecycle  
+১২. `if __name__ == "__main__":`  
+১৩. Multiprocessing বনাম Multithreading  
+১৪. CPU-bound বনাম I/O-bound  
+১৫. GIL  
+১৬. Process Memory  
+১৭. `Queue` ও `Pipe`  
+১৮. `Pool` ও `Pool.map()`  
+১৯. `daemon` process  
+২০. `exitcode` ও `close()`  
+২১. Pickling ও Process Communication  
+২২. Multiprocessing-এর সুবিধা ও অসুবিধা  
+
+---
+
+## ৫৩. Final Revision
+
+### Multiprocessing
+
+```text
 Multiprocessing
       ↓
 Multiple Processes
       ↓
-Separate Memory
+Separate Process Memory
       ↓
 Multiple CPU Cores ব্যবহার করতে পারে
       ↓
-CPU-bound Tasks-এর জন্য ভালো
+CPU-bound Tasks-এর জন্য উপকারী হতে পারে
+```
 
+### Process Lifecycle
 
-Process Lifecycle:
-
+```text
 Process()
     ↓
 start()
     ↓
-Running
+Child Process Runs
     ↓
-Task Execution
+Target Callable Executes
     ↓
-Finished
+Process Finishes
     ↓
-join()
+join() returns
+```
 
+### CPU-bound বনাম I/O-bound
 
-CPU vs I/O:
-
+```text
 CPU-bound
     ↓
-Multiprocessing
+Multiprocessing বিবেচনা করুন
+```
 
-
+```text
 I/O-bound
     ↓
-Threading / Asyncio
+Threading / Asyncio বিবেচনা করুন
+```
 
+### One-Line Memory Rule
 
-One-Line Memory Rule:
-
-Multiprocessing = একাধিক process independently কাজ করে,
-সাধারণত আলাদা memory ব্যবহার করে এবং CPU-bound task-এর
-জন্য বিশেষভাবে useful।
+**Multiprocessing হলো একাধিক process ব্যবহার করে কাজ সম্পন্ন করার পদ্ধতি। প্রতিটি process-এর সাধারণত আলাদা memory থাকে এবং উপযুক্ত CPU-bound task-এর ক্ষেত্রে একাধিক CPU core ব্যবহার করে parallel execution সম্ভব হয়।**
