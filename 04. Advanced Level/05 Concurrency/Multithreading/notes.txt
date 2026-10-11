@@ -565,6 +565,26 @@ thread.start()
 2. User-কে welcome email পাঠানো।
 তুমি চাইছ, email পাঠানোর জন্য user-কে অপেক্ষা করতে হবে না।
 এখানে background task ব্যবহার করা যায়। কিন্তু গুরুত্বপূর্ণ email পাঠানোর কাজের জন্য Daemon Thread সবসময় ভালো সমাধান নয়।
+Daemon Thread — Use Cases
+1. Background Monitoring
+2. Periodic Status Checking
+3. Non-Critical Logging
+4. System Health Monitoring
+5. Temporary Background Tasks
+6. GUI Background Tasks
+7. Progress Monitoring
+8. Debugging Information Collection
+9. Temporary Statistics Collection
+10. Non-Critical Notifications
+যেসব কাজে Daemon Thread ব্যবহার করা উচিত নয়:
+1. Payment Processing
+2. Important Email Sending
+3. Database Transactions
+4. Order Processing
+5. File Upload
+6. Important Data Saving
+7. Critical Background Jobs
+মনে রাখবে: Daemon Thread মূলত এমন background task-এর জন্য উপযোগী, যেগুলো program বন্ধ হওয়ার সময় অসম্পূর্ণ থাকলেও বড় সমস্যা হয় না।
 
 ২. Daemon Thread দিয়ে Email Send
 import threading

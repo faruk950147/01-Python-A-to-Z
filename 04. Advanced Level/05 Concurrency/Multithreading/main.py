@@ -600,7 +600,39 @@ A **daemon thread** is a background thread that does not keep the Python program
 
 Example: Sending Email Using a Daemon Thread
 Suppose you are building a Django application. When a user registers, you want to send a welcome email in the background.
-import threadingimport timedef send_email():    print("Email sending started...")    time.sleep(5)    print("Email sent successfully!")thread = threading.Thread(    target=send_email,    daemon=True)thread.start()print("User registration completed!")
+
+Daemon Thread — Use Cases
+Common Use Cases:
+1. Background Monitoring
+2. Periodic Status Checking
+3. Non-Critical Logging
+4. System Health Monitoring
+5. Temporary Background Tasks
+6. GUI Background Tasks
+7. Progress Monitoring
+8. Debugging Information Collection
+9. Temporary Statistics Collection
+10. Non-Critical Notifications
+Tasks Where Daemon Threads Should Be Avoided:
+1. Payment Processing
+2. Important Email Sending
+3. Database Transactions
+4. Order Processing
+5. File Uploads
+6. Important Data Saving
+7. Critical Background Jobs
+Note: Daemon threads are suitable for non-critical 
+background tasks that do not need to finish before the Python program exits.
+
+import threading
+import time
+def send_email():    
+    print("Email sending started...")    
+    time.sleep(5)    
+    print("Email sent successfully!")
+thread = threading.Thread(target=send_email,daemon=True)
+thread.start()
+print("User registration completed!")
 
 
 
