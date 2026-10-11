@@ -559,9 +559,72 @@ thread.start()
 
 **Daemon Thread** হলো একটি background Thread, যা কোনো non-daemon Thread বাকি না থাকলে Python process-কে alive রাখে না।
 
+১. ধরো, তুমি Django দিয়ে Email Send করছ
+কোনো user তোমার website-এ registration করল। তখন দুটি কাজ করতে হবে:
+1. User-এর registration সম্পন্ন করা।
+2. User-কে welcome email পাঠানো।
+তুমি চাইছ, email পাঠানোর জন্য user-কে অপেক্ষা করতে হবে না।
+এখানে background task ব্যবহার করা যায়। কিন্তু গুরুত্বপূর্ণ email পাঠানোর কাজের জন্য Daemon Thread সবসময় ভালো সমাধান নয়।
+২. Daemon Thread দিয়ে Email Send
+import threadingimport timedef send_email():    print("Email sending started...")    time.sleep(5)    print("Email sent successfully!")thread = threading.Thread(    target=send_email,    daemon=True)thread.start()print("User registration completed!")
+
+
+
+সম্ভাব্য Output
+Email sending started...
+User registration completed!
+
+
+এরপর program শেষ হয়ে যেতে পারে। ফলে ৫ সেকেন্ড পর Email sent successfully! প্রিন্ট নাও হতে পারে।
+কেন? কারণ daemon thread email পাঠানো শেষ করার আগেই Python program বন্ধ হয়ে যেতে পারে।
+৩. তাহলে Email Send করার জন্য কী ব্যবহার করব?
+Daemon Thread
+এমন background কাজ, যা বন্ধ হয়ে গেলেও সমস্যা নেই। যেমন অপ্রয়োজনীয় status monitoring।
+
+
+
+Non-Daemon Thread
+Thread-এর কাজ শেষ না হওয়া পর্যন্ত Python program চালু রাখতে চাইলে।
+
+
+
+Celery + Redis
+Django application-এ নির্ভরযোগ্য background email task, retry এবং queue পরিচালনার জন্য উপযোগী।
+
+
+
+৪. সহজ উদাহরণ
+- Email পাঠানো শুরু হলো।
+- Main program শেষ হয়ে গেল।
+- Daemon Thread বন্ধ হয়ে গেল।
+- Email অসম্পূর্ণ থেকে যেতে পারে।
+তাই registration confirmation, password reset email বা OTP পাঠানোর মতো গুরুত্বপূর্ণ কাজে শুধু daemon thread-এর ওপর নির্ভর করবে না।
+মনে রাখবে: Background Thread মানেই Daemon Thread নয়। Background Thread daemon অথবা non-daemon—দুই ধরনেরই হতে পারে।
+
 Example:
 
 ```python
+Perfact for background tasks like:
+
+import threading
+import time
+
+
+def send_email():
+    print("Email sending started...")
+    time.sleep(5)
+    print("Email sent successfully!")
+
+
+thread = threading.Thread(
+    target=send_email,
+    daemon=True
+)
+
+thread.start()
+
+print("User registration completed!")
+
 import threading
 import time
 
