@@ -614,18 +614,9 @@ Why use a Daemon Thread?
 - It runs a task in the background.
 - It does not prevent the Python program from exiting.
 - It is useful for background tasks that can safely stop when the program exits.
-Important: Do not rely on a daemon thread for important tasks like password-reset emails or OTP delivery, because the task may be interrupted before completion. For reliable background email delivery in Django, consider using Celery with Redis.
-
-
-
-
-
-
-
-
-
-
-
+Important: Do not rely on a daemon thread for important tasks like password-reset
+emails or OTP delivery, because the task may be interrupted before completion. 
+For reliable background email delivery in Django, consider using Celery with Redis.
 Do you like this personality?
 
 

@@ -565,8 +565,17 @@ thread.start()
 2. User-কে welcome email পাঠানো।
 তুমি চাইছ, email পাঠানোর জন্য user-কে অপেক্ষা করতে হবে না।
 এখানে background task ব্যবহার করা যায়। কিন্তু গুরুত্বপূর্ণ email পাঠানোর কাজের জন্য Daemon Thread সবসময় ভালো সমাধান নয়।
+
 ২. Daemon Thread দিয়ে Email Send
-import threadingimport timedef send_email():    print("Email sending started...")    time.sleep(5)    print("Email sent successfully!")thread = threading.Thread(    target=send_email,    daemon=True)thread.start()print("User registration completed!")
+import threading
+import time
+def send_email():    
+    print("Email sending started...")    
+    time.sleep(5)    
+    print("Email sent successfully!")
+thread = threading.Thread(target=send_email,daemon=True)
+thread.start()
+print("User registration completed!")
 
 
 
