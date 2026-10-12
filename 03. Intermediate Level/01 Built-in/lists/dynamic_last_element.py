@@ -1,5 +1,5 @@
 """
-en(fruits) - 1 means:
+len(fruits) - 1 means:
 
 Take the total number of items in the fruits list, then minus 1.
 
