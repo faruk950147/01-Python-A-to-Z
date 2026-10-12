@@ -76,30 +76,28 @@ Python দিয়ে সাধারণত নিচের কাজগুলো 
 # ============================================================
 # 4. PYTHON AUTOMATION LIBRARIES
 # ============================================================
-
-| কাজ | Library | ব্যবহার |
-|---|---|---|
-| File operation | os | rename, delete, list |
-| File operation | shutil | copy, move, delete |
-| File path | pathlib | path management |
-| Web automation | Selenium | browser control |
-| Web automation | Playwright | modern browser automation |
-| HTTP | requests | API/web request |
-| Scraping | BeautifulSoup | HTML parsing |
-| Scraping | Scrapy | large-scale scraping |
-| Data | pandas | CSV/data processing |
-| Excel | openpyxl | XLSX read/write |
-| GUI | pyautogui | mouse/keyboard |
-| Email | smtplib | email send |
-| Email | imaplib | email read |
-| Scheduling | schedule | scheduled task |
-| File monitoring | watchdog | file change detection |
-| PDF | reportlab | PDF generation |
-| PDF | pdfplumber | PDF extraction |
-| Image | Pillow | image processing |
-| Database | sqlite3 | SQLite |
-| Database | SQLAlchemy | database abstraction |
-| Async | asyncio | asynchronous programming |
+কাজ                 Library          ব্যবহার
+File operation      os               rename, delete, list
+File operation      shutil           copy, move, delete
+File path           pathlib          path management
+Web automation      Selenium         browser control
+Web automation      Playwright       modern browser automation
+HTTP                requests         API/web request
+Web scraping        BeautifulSoup    HTML parsing
+Web scraping        Scrapy           large-scale web scraping
+Data processing     pandas           CSV/data processing
+Excel               openpyxl         XLSX read/write
+GUI automation      pyautogui        mouse/keyboard automation
+Email sending       smtplib          send email
+Email reading       imaplib          read/access email
+Scheduling          schedule         scheduled task
+File monitoring     watchdog         file change detection
+PDF generation      reportlab        PDF generation
+PDF extraction      pdfplumber       PDF text/table extraction
+Image processing    Pillow           image processing
+Database            sqlite3          SQLite database
+Database ORM        SQLAlchemy       database interaction
+Async programming   asyncio          asynchronous programming
 
 
 # ============================================================
