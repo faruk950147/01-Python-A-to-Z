@@ -1,7 +1,7 @@
 ============================================================
 AI-POWERED BACKEND DEVELOPER + SAAS + AWS ROADMAP
 ============================================================
-
+setup.exe /configure Configuration.xml # ofice download
 TARGET:
 AI-Powered Backend Developer / SaaS Developer
 
