@@ -61,7 +61,7 @@ mathematics-package/
     └── mathematics.py
 ```
 
-## 4. Create the Calculator Module
+## 4. Create the mathematics Module
 
 File: `mathematics/mathematics.py`
 
