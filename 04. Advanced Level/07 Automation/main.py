@@ -75,6 +75,16 @@ Python can be used for:
 10. API Automation
 11. Image Automation
 12. Testing Automation
+13. Auto File Organizer
+14. Auto Backup System
+15. Excel Report Generator
+16. Daily Email Reporter
+17. Web Scraper
+18. Price Tracker
+19. Auto Form Filler
+20. Website Testing System
+21. Database Backup System
+22. Django Automation System
 
 ---
 
@@ -288,23 +298,6 @@ Learn:
 * Retry systems
 * Configuration
 * Deployment
-
----
-
-## Level 10 — Real Projects
-
-Build:
-
-1. Auto File Organizer
-2. Auto Backup System
-3. Excel Report Generator
-4. Daily Email Reporter
-5. Web Scraper
-6. Price Tracker
-7. Auto Form Filler
-8. Website Testing System
-9. Database Backup System
-10. Django Automation System
 
 ---
 
