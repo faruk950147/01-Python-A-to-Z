@@ -59,7 +59,7 @@ Python script তৈরি করি
 
 Python দিয়ে সাধারণত নিচের কাজগুলো automate করা যায়:
 
-1. File & Folder Automation
+1. File and Folder Automation
 2. Excel / CSV Automation
 3. Web Automation
 4. Web Scraping
@@ -71,6 +71,16 @@ Python দিয়ে সাধারণত নিচের কাজগুলো 
 10. API Automation
 11. Image Automation
 12. Testing Automation
+13. Auto File Organizer
+14. Auto Backup System
+15. Excel Report Generator
+16. Daily Email Reporter
+17. Web Scraper
+18. Price Tracker
+19. Auto Form Filler
+20. Website Testing System
+21. Database Backup System
+22. Django Automation System
 
 
 # ============================================================
