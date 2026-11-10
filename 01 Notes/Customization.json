@@ -1,50 +1,63 @@
 {
+  // ==========================================
+  // FILE MANAGEMENT
+  // ==========================================
   "files.autoSave": "afterDelay",
-  "workbench.iconTheme": "material-icon-theme",
-  "database-client.autoSync": true,
-  "redhat.telemetry.enabled": true,
-  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "git.openRepositoryInParentFolders": "always",
-  "editor.formatOnPaste": true,
+  "files.autoSaveDelay": 1000,
+  "files.eol": "\n",
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.venv/**": true,
+    "**/venv/**": true,
+    "**/__pycache__/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.ruff_cache/**": true,
+    "**/node_modules/**": true,
+    "**/staticfiles/**": true,
+    "**/media/**": true
+  },
+  "search.exclude": {
+    "**/.venv": true,
+    "**/venv": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/node_modules": true,
+    "**/staticfiles": true,
+    "**/media": true
+  },
+  // ==========================================
+  // EDITOR PERFORMANCE
+  // ==========================================
+  "editor.fontSize": 30,
+  "editor.minimap.enabled": false,
+  "editor.largeFileOptimizations": true,
   "editor.formatOnSave": true,
-  "editor.formatOnType": true,
-  "terminal.integrated.profiles.windows": {
-    "PowerShell": {
-      "source": "PowerShell",
-      "icon": "terminal-powershell"
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.linkedEditing": true,
+  "editor.accessibilitySupport": "auto",
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "editor.unicodeHighlight.includeComments": true,
+  "editor.rulers": [
+    {
+      "column": 80,
+      "color": "#00FF0010"
+    },
+    {
+      "column": 100,
+      "color": "#BDB76B15"
+    },
+    {
+      "column": 120,
+      "color": "#FA807219"
     }
-  },
-  "terminal.integrated.defaultProfile.windows": "Command Prompt",
-  "totalTypeScript.hideAllTips": false,
-  "totalTypeScript.hideBasicTips": false,
-  "editor.largeFileOptimizations": false,
-  "workbench.editorAssociations": {
-    "*.jar": "default"
-  },
-  "[dockercompose]": {
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2,
-    "editor.autoIndent": "advanced",
-    "editor.quickSuggestions": {
-      "other": true,
-      "comments": false,
-      "strings": true
-    }
-  },
-  "editor.fontSize": 21,
-  "cSpell.userWords": [
-    "Omar-Faruk"
   ],
-  "workbench.colorTheme": "Shades of Purple",
-  "workbench.colorCustomizations": {
-    "editor.foreground": "#fff",
-    "editor.background": "#2e2e4a",
-    "sideBar.background": "#2e2e4a",
-    "sideBar.foreground": "#fff",
-    "sideBar.border": "#2e2e4a",
-    "sideBarTitle.foreground": "#2e2e4a",
-    "sideBarSectionHeader.background": "#2e2e4a"
-  },
   "editor.tokenColorCustomizations": {
     "comments": "#A3CB38",
     "keywords": "#ffa801",
@@ -61,11 +74,124 @@
       }
     ]
   },
-  "gitlens.mode.active": "review",
-  "editor.minimap.enabled": false,
+  // ==========================================
+  // PYTHON / DJANGO
+  // ==========================================
   "python.defaultInterpreterPath": "C:\\Python-3",
+  "python.createEnvironment.trigger": "off",
+  "python.analysis.exclude": [
+    "**/.venv",
+    "**/venv",
+    "**/__pycache__",
+    "**/staticfiles",
+    "**/media"
+  ],
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.indexing": true,
+  // ==========================================
+  // TERMINAL - WINDOWS
+  // ==========================================
+  "terminal.integrated.defaultProfile.windows": "Windows PowerShell",
+  "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.tabs.hideCondition": "never",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash",
+      "icon": "terminal-git-bash"
+    },
+    "Cmder": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": [
+        "/K",
+        "C:\\cmder\\vendor\\bin\\vscode_init.cmd"
+      ]
+    },
+    "Windows PowerShell": {
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  },
+  // ==========================================
+  // GIT
+  // ==========================================
+  "git.openRepositoryInParentFolders": "always",
+  "gitlens.mode.active": "review",
+  // ==========================================
+  // DATABASE CLIENT
+  // ==========================================
+  "database-client.autoSync": true,
+  // ==========================================
+  // HTML / EMMET / DJANGO TEMPLATES
+  // ==========================================
   "emmet.includeLanguages": {
     "javascript": "javascript",
     "django-html": "html"
-  }
+  },
+  "emmet.variables": {
+    "lang": "en"
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    }
+  },
+  "[bat]": {
+    "files.eol": "\r\n"
+  },
+  // ==========================================
+  // WORKBENCH / THEME
+  // ==========================================
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Shades of Purple",
+  "workbench.colorCustomizations": {
+    "editor.foreground": "#fff",
+    "editor.background": "#2e2e4a",
+    "sideBar.background": "#2e2e4a",
+    "sideBar.foreground": "#fff",
+    "sideBar.border": "#2e2e4a",
+    "sideBarTitle.foreground": "#2e2e4a",
+    "sideBarSectionHeader.background": "#2e2e4a"
+  },
+  "workbench.editor.revealIfOpen": true,
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.jar": "default",
+    "*.pdf": "pdf.view"
+  },
+  // ==========================================
+  // EXTENSIONS
+  // ==========================================
+  "totalTypeScript.hideAllTips": false,
+  "totalTypeScript.hideBasicTips": false,
+  "cSpell.userWords": [
+    "Omar-Faruk"
+  ],
+  "cSpell.diagnosticLevel": "Hint",
+  "trailing-spaces.backgroundColor": "rgba(255,0,0,0.1)",
+  "trailing-spaces.includeEmptyLines": false,
+  // ==========================================
+  // SECURITY / TELEMETRY
+  // ==========================================
+  "redhat.telemetry.enabled": false,
+  "security.allowedUNCHosts": [
+    "wsl.localhost"
+  ],
+  // ==========================================
+  // JAVA
+  // ==========================================
+  "java.debug.settings.hotCodeReplace": "auto",
+  "java.dependency.packagePresentation": "hierarchical"
 }
